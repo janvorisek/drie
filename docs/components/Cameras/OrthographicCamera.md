@@ -1,0 +1,15 @@
+# OrthographicCamera
+
+## Props
+
+| Prop name | Description | Type   | Values | Default |
+| --------- | ----------- | ------ | ------ | ------- |
+| name      |             | string | -      |         |
+
+## Slots
+
+| Name    | Description | Bindings |
+| ------- | ----------- | -------- |
+| default |             |          |
+
+---
