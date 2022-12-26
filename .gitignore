@@ -43,3 +43,6 @@ yarn-error.log
 
 # DB config data
 /backend/config/options.js
+
+# vuepress
+docs/.vitepress/cache
