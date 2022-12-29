@@ -17,8 +17,9 @@ const ut = /* @__PURE__ */ P({
   props: {
     camera: null,
     autoResize: { type: Boolean, default: !0 },
-    onBeforeRender: null,
-    antialias: { type: Boolean }
+    onBeforeRender: { type: Function, default: () => {
+    } },
+    antialias: { type: Boolean, default: !1 }
   },
   setup(s, { expose: l }) {
     const n = s;
@@ -181,7 +182,7 @@ class ft extends nt {
       const t = new S(), i = new we().setFromUnitVectors(l.up, new S(0, 1, 0)), d = i.clone().invert(), y = new S(), O = new we(), I = 2 * Math.PI;
       return function() {
         const Pe = e.object.position;
-        t.copy(Pe).sub(e.target), t.applyQuaternion(i), c.setFromVector3(t), e.autoRotate && a === o.NONE && B(ke()), e.enableDamping ? (c.theta += p.theta * e.dampingFactor, c.phi += p.phi * e.dampingFactor) : (c.theta += p.theta, c.phi += p.phi);
+        t.copy(Pe).sub(e.target), t.applyQuaternion(i), c.setFromVector3(t), e.autoRotate && a === o.NONE && F(ke()), e.enableDamping ? (c.theta += p.theta * e.dampingFactor, c.phi += p.phi * e.dampingFactor) : (c.theta += p.theta, c.phi += p.phi);
         let L = e.minAzimuthAngle, R = e.maxAzimuthAngle;
         return isFinite(L) && isFinite(R) && (L < -Math.PI ? L += I : L > Math.PI && (L -= I), R < -Math.PI ? R += I : R > Math.PI && (R -= I), L <= R ? c.theta = Math.max(L, Math.min(R, c.theta)) : c.theta = c.theta > (L + R) / 2 ? Math.max(L, c.theta) : Math.min(R, c.theta)), c.phi = Math.max(e.minPolarAngle, Math.min(e.maxPolarAngle, c.phi)), c.makeSafe(), c.radius *= b, c.radius = Math.max(e.minDistance, Math.min(e.maxDistance, c.radius)), e.enableDamping === !0 ? e.target.addScaledVector(h, e.dampingFactor) : e.target.add(h), t.setFromSpherical(c), t.applyQuaternion(d), Pe.copy(e.target).add(t), e.object.lookAt(e.target), e.enableDamping === !0 ? (p.theta *= 1 - e.dampingFactor, p.phi *= 1 - e.dampingFactor, h.multiplyScalar(1 - e.dampingFactor)) : (p.set(0, 0, 0), h.set(0, 0, 0)), b = 1, _ || y.distanceToSquared(e.object.position) > r || 8 * (1 - O.dot(e.object.quaternion)) > r ? (e.dispatchEvent(Oe), y.copy(e.object.position), O.copy(e.object.quaternion), _ = !1, !0) : !1;
       };
@@ -203,14 +204,14 @@ class ft extends nt {
     let b = 1;
     const h = new S();
     let _ = !1;
-    const M = new T(), k = new T(), m = new T(), g = new T(), f = new T(), x = new T(), z = new T(), N = new T(), $ = new T(), u = [], F = {};
+    const M = new T(), k = new T(), m = new T(), g = new T(), f = new T(), x = new T(), z = new T(), N = new T(), $ = new T(), u = [], B = {};
     function ke() {
       return 2 * Math.PI / 60 / 60 * e.autoRotateSpeed;
     }
     function K() {
       return Math.pow(0.95, e.zoomSpeed);
     }
-    function B(t) {
+    function F(t) {
       p.theta -= t;
     }
     function U(t) {
@@ -257,7 +258,7 @@ class ft extends nt {
     function Ce(t) {
       k.set(t.clientX, t.clientY), m.subVectors(k, M).multiplyScalar(e.rotateSpeed);
       const i = e.domElement;
-      B(2 * Math.PI * m.x / i.clientHeight), U(2 * Math.PI * m.y / i.clientHeight), M.copy(k), e.update();
+      F(2 * Math.PI * m.x / i.clientHeight), U(2 * Math.PI * m.y / i.clientHeight), M.copy(k), e.update();
     }
     function ze(t) {
       N.set(t.clientX, t.clientY), $.subVectors(N, z), $.y > 0 ? X(K()) : $.y < 0 && se(K()), z.copy(N), e.update();
@@ -278,10 +279,10 @@ class ft extends nt {
           t.ctrlKey || t.metaKey || t.shiftKey ? U(-2 * Math.PI * e.rotateSpeed / e.domElement.clientHeight) : j(0, -e.keyPanSpeed), i = !0;
           break;
         case e.keys.LEFT:
-          t.ctrlKey || t.metaKey || t.shiftKey ? B(2 * Math.PI * e.rotateSpeed / e.domElement.clientHeight) : j(e.keyPanSpeed, 0), i = !0;
+          t.ctrlKey || t.metaKey || t.shiftKey ? F(2 * Math.PI * e.rotateSpeed / e.domElement.clientHeight) : j(e.keyPanSpeed, 0), i = !0;
           break;
         case e.keys.RIGHT:
-          t.ctrlKey || t.metaKey || t.shiftKey ? B(-2 * Math.PI * e.rotateSpeed / e.domElement.clientHeight) : j(-e.keyPanSpeed, 0), i = !0;
+          t.ctrlKey || t.metaKey || t.shiftKey ? F(-2 * Math.PI * e.rotateSpeed / e.domElement.clientHeight) : j(-e.keyPanSpeed, 0), i = !0;
           break;
       }
       i && (t.preventDefault(), e.update());
@@ -321,7 +322,7 @@ class ft extends nt {
       }
       m.subVectors(k, M).multiplyScalar(e.rotateSpeed);
       const i = e.domElement;
-      B(2 * Math.PI * m.x / i.clientHeight), U(2 * Math.PI * m.y / i.clientHeight), M.copy(k);
+      F(2 * Math.PI * m.x / i.clientHeight), U(2 * Math.PI * m.y / i.clientHeight), M.copy(k);
     }
     function me(t) {
       if (u.length === 1)
@@ -339,11 +340,11 @@ class ft extends nt {
     function $e(t) {
       e.enableZoom && he(t), e.enablePan && me(t);
     }
-    function Be(t) {
+    function Fe(t) {
       e.enableZoom && he(t), e.enableRotate && pe(t);
     }
     function fe(t) {
-      e.enabled !== !1 && (u.length === 0 && (e.domElement.setPointerCapture(t.pointerId), e.domElement.addEventListener("pointermove", G), e.domElement.addEventListener("pointerup", V)), Xe(t), t.pointerType === "touch" ? Ue(t) : Fe(t));
+      e.enabled !== !1 && (u.length === 0 && (e.domElement.setPointerCapture(t.pointerId), e.domElement.addEventListener("pointermove", G), e.domElement.addEventListener("pointerup", V)), Xe(t), t.pointerType === "touch" ? Ue(t) : Be(t));
     }
     function G(t) {
       e.enabled !== !1 && (t.pointerType === "touch" ? Ze(t) : Ke(t));
@@ -354,7 +355,7 @@ class ft extends nt {
     function de(t) {
       _e(t);
     }
-    function Fe(t) {
+    function Be(t) {
       let i;
       switch (t.button) {
         case 0:
@@ -486,7 +487,7 @@ class ft extends nt {
         case o.TOUCH_DOLLY_ROTATE:
           if (e.enableZoom === !1 && e.enableRotate === !1)
             return;
-          Be(t), e.update();
+          Fe(t), e.update();
           break;
         default:
           a = o.NONE;
@@ -499,7 +500,7 @@ class ft extends nt {
       u.push(t);
     }
     function _e(t) {
-      delete F[t.pointerId];
+      delete B[t.pointerId];
       for (let i = 0; i < u.length; i++)
         if (u[i].pointerId == t.pointerId) {
           u.splice(i, 1);
@@ -507,12 +508,12 @@ class ft extends nt {
         }
     }
     function Ee(t) {
-      let i = F[t.pointerId];
-      i === void 0 && (i = new T(), F[t.pointerId] = i), i.set(t.pageX, t.pageY);
+      let i = B[t.pointerId];
+      i === void 0 && (i = new T(), B[t.pointerId] = i), i.set(t.pageX, t.pageY);
     }
     function W(t) {
       const i = t.pointerId === u[0].pointerId ? u[1] : u[0];
-      return F[i.pointerId];
+      return B[i.pointerId];
     }
     e.domElement.addEventListener("contextmenu", be), e.domElement.addEventListener("pointerdown", fe), e.domElement.addEventListener("pointercancel", de), e.domElement.addEventListener("wheel", ge, { passive: !1 }), this.update();
   }

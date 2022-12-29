@@ -1,0 +1,16 @@
+:root {
+  --vp-c-brand: #ff6464;
+  --vp-c-brand-light: #ff7474;
+}
+
+.example {
+  width: 100%;
+  height: 240px;
+  box-shadow: 0 0 5px #eee;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.example canvas {
+  border-radius: 8px;
+}

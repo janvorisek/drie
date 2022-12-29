@@ -14,3 +14,13 @@
 | default |             |          |
 
 ---
+
+<script setup>
+  import PerspectiveCamera from '../../examples/PerspectiveCamera.vue'
+  </script>
+
+## Example
+
+  <ClientOnly>
+  <PerspectiveCamera />
+  </ClientOnly>

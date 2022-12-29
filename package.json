@@ -65,6 +65,6 @@
     "vue-tsc": "^1.0.18"
   },
   "dependencies": {
-    "three": "^0.148.0"
+    "three": "github:mrdoob/three.js#dev"
   }
 }

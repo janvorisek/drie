@@ -1,28 +1,13 @@
-<script setup>
-import Test from './examples/Welcome.vue'
-</script>
-
-# Drie
-
-Drie is a Vue 3 component library for THREE.js made with TypeScript and Composition API.
-
-
-## Example
-
-<ClientOnly>
-<Test />
-</ClientOnly>
-
-### Code
-
-```vue
 <template>
-  <div class="rendererParent">
-    <Renderer ref="renderer" :antialias="true">
-      <PerspectiveCamera :up="[0, 0, 1]">
+  <div class="example">
+    <Renderer ref="renderer" :camera="camera" :antialias="true">
+      <PerspectiveCamera name="cam1" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>
-      <Scene background="#eeeeee">
+      <OrthographicCamera name="cam2">
+        <OrbitControls />
+      </OrthographicCamera>
+      <Scene background="#f9f9f9">
         <Points :position="posV">
           <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
           <SphereGeometry :radius="radius" :width-segments="12" :height-segments="12" />
@@ -42,18 +27,19 @@ Drie is a Vue 3 component library for THREE.js made with TypeScript and Composit
 </template>
 
 <script setup lang="ts">
-import { Renderer } from "drie";
-import { Scene } from "drie";
-import { Mesh } from "drie";
-import { Points } from "drie";
-import { BoxGeometry } from "drie";
-import { BufferGeometry } from "drie";
-import { SphereGeometry } from "drie";
-import { MeshBasicMaterial } from "drie";
-import { PointsMaterial } from "drie";
-import { PerspectiveCamera } from "drie";
-import { OrbitControls } from "drie";
-import { AxesHelper } from "drie";
+import { Renderer } from "../../src";
+import { Scene } from "../../src";
+import { Mesh } from "../../src";
+import { Points } from "../../src";
+import { BoxGeometry } from "../../src";
+import { BufferGeometry } from "../../src";
+import { SphereGeometry } from "../../src";
+import { MeshBasicMaterial } from "../../src";
+import { PointsMaterial } from "../../src";
+import { PerspectiveCamera } from "../../src";
+import { OrthographicCamera } from "../../src";
+import { OrbitControls } from "../../src";
+import { AxesHelper } from "../../src";
 
 import { ref, onMounted } from "vue";
 import { DoubleSide, Vector3 } from "three";
@@ -102,6 +88,6 @@ window.setInterval(() => {
   rot.value = [Math.cos(angle) * Math.PI, 0, 0];
 }, 10);
 
+const camera = ref("cam1");
 const renderer = ref({});
 </script>
-```

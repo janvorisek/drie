@@ -8,6 +8,18 @@ export default {
 };
 </script>
 
+<docs>
+  <script setup>
+  import PerspectiveCamera from '../../examples/PerspectiveCamera.vue'
+  </script>
+
+  ## Example
+
+  <ClientOnly>
+  <PerspectiveCamera />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
 import { PerspectiveCamera } from "three";
 import { onMounted, inject, type Ref, provide, watch } from "vue";

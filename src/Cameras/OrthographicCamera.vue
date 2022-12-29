@@ -8,6 +8,18 @@ export default {
 };
 </script>
 
+<docs>
+  <script setup>
+  import OrthographicCamera from '../../examples/OrthographicCamera.vue'
+  </script>
+
+  ## Example
+
+  <ClientOnly>
+  <OrthographicCamera />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
 import { OrthographicCamera } from "three";
 import { inject, onMounted, provide } from "vue";
