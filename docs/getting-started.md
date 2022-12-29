@@ -5,7 +5,7 @@
 Drie can be installed from npm and always supports the latest THREE.js version.
 
 ```shell
-npm install drie three #latest Drie & THREE.js
+npm install @janvorisek/drie three #latest Drie & THREE.js
 ```
 
 ## Usage
