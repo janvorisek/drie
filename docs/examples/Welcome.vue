@@ -1,6 +1,6 @@
 <template>
-  <div class="example">
-    <Renderer ref="renderer" :camera="camera" :antialias="true">
+  <div class="example" style="height: 400px">
+    <Renderer ref="renderer" :camera="camera" :antialias="true" shadow-map-enabled>
       <PerspectiveCamera name="cam1" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>
@@ -8,17 +8,25 @@
         <OrbitControls />
       </OrthographicCamera>
       <Scene background="#f9f9f9">
+        <PointLight :position="[0, 0, 10]" :intensity="0.25" :cast-shadow="true" />
+        <AmbientLight :color="0xffffff" />
         <Points :position="posV">
           <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
           <SphereGeometry :radius="radius" :width-segments="12" :height-segments="12" />
         </Points>
-        <Mesh :position="pos" :rotation="rot">
-          <MeshBasicMaterial color="blue" />
+        <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
+          <MeshBasicMaterial>
+            <Texture url="https://threejs.org/examples/textures/crate.gif" />
+          </MeshBasicMaterial>
           <BoxGeometry :width="w + 1" :height="w * 2 + 1" />
         </Mesh>
         <Mesh :position="[-5, 0, 0]" :scale="[s, 1, 1]">
           <MeshBasicMaterial :color="color2" :side="DoubleSide" />
           <BufferGeometry :vertices="vertices" />
+        </Mesh>
+        <Mesh :position="[0, 0, -3]" :receive-shadow="true">
+          <MeshLambertMaterial color="#cccccc" :side="DoubleSide" />
+          <PlaneGeometry :width="20" :height="20" />
         </Mesh>
         <AxesHelper :size="3" />
       </Scene>
@@ -39,7 +47,7 @@ import { PointsMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrthographicCamera } from "../../src";
 import { OrbitControls } from "../../src";
-import { AxesHelper } from "../../src";
+import { AxesHelper, AmbientLight, PointLight, PlaneGeometry, MeshLambertMaterial, Texture } from "../../src";
 
 import { ref, onMounted } from "vue";
 import { DoubleSide, Vector3 } from "three";

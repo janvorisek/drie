@@ -5,6 +5,8 @@ import * as fs from "fs";
 
 const componentTree = {
   text: 'Components',
+  collapsible: true,
+  collapsed: true,
   items: [{text: 'Base', items: [{text: 'Renderer', link: '/components/Renderer'}]}]
 } as any
 
@@ -33,6 +35,9 @@ export default defineConfig( {
   title: 'Drie',
   description: 'Just playing around.',
   themeConfig: {
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/janvorisek/drie' }
+    ],
     sidebar: [
       {
         text: 'Guide',
@@ -42,8 +47,22 @@ export default defineConfig( {
           
         ]
       },
-      componentTree
-    ]
+      componentTree,
+      {
+        text: 'Examples',
+        collapsible: true,
+        collapsed: true,
+        items: []
+      }
+    ],
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2022-present Jan Vorisek'
+    }
+    /*editLink: {
+      pattern: 'https://github.com/janvorisek/drie/edit/master/docs/:path',
+      text: 'Edit this page on GitHub'
+    }*/
   },
   vite: {
     plugins: [vueDocsPlugin()]

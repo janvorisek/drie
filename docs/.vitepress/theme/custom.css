@@ -9,8 +9,14 @@
   box-shadow: 0 0 5px #eee;
   border: 1px solid #ccc;
   border-radius: 8px;
+  overflow: hidden;
 }
 
-.example canvas {
-  border-radius: 8px;
+.dark .example {
+  border-color: #333;
+  box-shadow: 0 0 5px #666;
+}
+
+canvas {
+  outline: none;
 }
