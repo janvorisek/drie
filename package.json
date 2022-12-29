@@ -1,6 +1,6 @@
 {
   "name": "drie",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "Drie is a Vue 3 component library for THREE.js made with TypeScript and Composition API",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
@@ -8,9 +8,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:demo": "vite build --config demo/vite.config.ts",
-    "deploy:demo": "pnpm build:demo && gh-pages -d docs && rimraf docs",
-    "preview": "vite dev --config demo/vite.config.ts",
+    "demo:build": "vite build --config demo/vite.config.ts",
+    "demo:dev": "vite dev --config demo/vite.config.ts",
     "lint": "eslint \"**/*.{vue,ts,js}\" --fix",
     "fix": "eslint --fix \"**/*.{vue,ts,js}\"",
     "release": "bumpp && npm publish",
