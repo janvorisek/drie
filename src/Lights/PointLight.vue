@@ -1,38 +1,38 @@
-<template>
-  <slot></slot>
-</template>
+<script lang="ts">
+export default {
+  name: "PointLight",
+  render: () => null,
+};
+</script>
 
 <script setup lang="ts">
-import { provide, inject, watch } from "vue";
+import { inject, watch } from "vue";
 
-import { BufferGeometry, Mesh, MeshBasicMaterial, Scene } from "three";
-import { Vector3Like } from "../types";
+import { Color, PointLight, Scene } from "three";
+import { type Vector3Like } from "../types";
 import { handlePositionProp, handleRotationProp, handleScaleProp } from "../utils";
 
 export interface Props {
   position?: Vector3Like;
   rotation?: Vector3Like;
   scale?: Vector3Like;
+  color?: string | number;
+  intensity?: number;
   castShadow?: boolean;
-  receiveShadow?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   position: () => [0, 0, 0],
   rotation: () => [0, 0, 0],
   scale: () => [1, 1, 1],
+  color: 0xffffff,
+  intensity: 1,
   castShadow: false,
-  receiveShadow: false,
 });
 
 const scene = inject("scene") as Scene;
 
-const geometry = new BufferGeometry();
-const material = new MeshBasicMaterial();
-
-const three = new Mesh(geometry, material);
-three.castShadow = true;
-three.receiveShadow = true;
+const three = new PointLight();
 scene.add(three);
 
 handlePositionProp(props, three);
@@ -40,14 +40,13 @@ handleRotationProp(props, three);
 handleScaleProp(props, three);
 
 function applyProps(props: Props) {
+  three.color = new Color(props.color);
+  three.intensity = props.intensity as number;
   three.castShadow = props.castShadow as boolean;
-  three.receiveShadow = props.receiveShadow as boolean;
 }
 
 applyProps(props);
 watch(props, () => applyProps(props));
-
-provide("mesh", three);
 
 defineExpose({ three });
 </script>

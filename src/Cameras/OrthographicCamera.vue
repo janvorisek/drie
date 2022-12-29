@@ -22,11 +22,19 @@ export default {
 
 <script setup lang="ts">
 import { OrthographicCamera } from "three";
-import { inject, onMounted, provide } from "vue";
+import { inject, onMounted, provide, watch } from "vue";
+import { Vector3Like } from "../types";
+import { vector3LikeToVector3 } from "../utils";
 
-const props = defineProps<{
+export interface Props {
   name?: string;
-}>();
+  up?: Vector3Like;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  name: "",
+  up: () => [0, 1, 0],
+});
 
 const three = new OrthographicCamera(-30, 30, 30, -30, 0.1, 1000);
 
@@ -39,6 +47,14 @@ three.updateProjectionMatrix();
 onMounted(() => {
   if (props.name) three.name = props.name;
 });
+
+function applyProps(props: any) {
+  const up = vector3LikeToVector3(props.up);
+  three.up.set(up.x, up.y, up.z);
+}
+
+applyProps(props);
+watch(props, () => applyProps(props));
 
 provide("parentCamera", three);
 

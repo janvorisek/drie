@@ -45,6 +45,7 @@ mesh.geometry = three.value;
 
 watch(props, () => {
   mesh.geometry = makeGeometry(props.vertices, []);
+  mesh.geometry.computeVertexNormals();
   three.value = mesh.geometry;
 });
 

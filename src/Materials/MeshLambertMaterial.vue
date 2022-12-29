@@ -1,37 +1,36 @@
+<template>
+  <slot></slot>
+</template>
+
 <script lang="ts">
 export default {
-  name: "PointsMaterial",
-  render: () => null,
+  name: "MeshLambertMaterial",
 };
 </script>
 
 <script setup lang="ts">
 import { inject, watch, provide } from "vue";
 
-import type { Mesh } from "three";
-import { Color, PointsMaterial } from "three";
+import { FrontSide, Mesh, type Side, Color, MeshLambertMaterial } from "three";
 
 export interface Props {
   color?: string | number;
-  sizeAttenuation?: boolean;
-  size?: number;
+  side?: Side;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   color: 0xffffff,
-  sizeAttenuation: true,
-  size: 1,
+  side: FrontSide,
 });
 
 const mesh = inject("mesh") as Mesh;
 
-const three = new PointsMaterial({ color: props.color, sizeAttenuation: props.sizeAttenuation, size: props.size });
+const three = new MeshLambertMaterial();
 mesh.material = three;
 
-function applyProps(props: any) {
+function applyProps(props: Props) {
   if (props.color) three.color = new Color(props.color);
-  if (props.size) three.size = props.size;
-  if (props.sizeAttenuation !== undefined) three.sizeAttenuation = props.sizeAttenuation;
+  if (props.side) three.side = props.side;
 }
 
 applyProps(props);

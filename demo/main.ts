@@ -1,4 +1,9 @@
 import { createApp } from "vue";
+import { install } from "../src/index";
 import App from "./App.vue";
 
-createApp(App).mount("#app");
+const app = createApp(App);
+
+install(app);
+
+app.mount("#app");

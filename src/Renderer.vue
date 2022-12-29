@@ -14,12 +14,14 @@ export interface Props {
   onBeforeRender?: () => void;
   //Standard THREE.WebGLRenderer props
   antialias?: boolean;
+  shadowMapEnabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   autoResize: true,
   onBeforeRender: () => {},
   antialias: false,
+  shadowMapEnabled: false,
 });
 
 let renderer: WebGLRenderer | null = null;
@@ -32,6 +34,7 @@ const cameras = ref<Camera[]>([]);
 const controls = ref<Ref<{ update: () => void }>[]>([]);
 
 const canvas = ref<HTMLCanvasElement>();
+provide("canvas", canvas);
 
 let then = Date.now();
 const fpsInterval = 1000 / 30;
@@ -53,9 +56,17 @@ const setCamera = (newCamera?: string) => {
   }
 };
 
+function applyProps(props: any) {
+  if (renderer === null) return;
+
+  renderer.shadowMap.enabled = props.shadowMapEnabled;
+}
+
 onMounted(() => {
   renderer = new WebGLRenderer({ canvas: canvas.value, antialias: props.antialias });
   renderer.setSize(1, 1);
+
+  applyProps(props);
 
   // Check if camera set by name
   setCamera(props.camera);
@@ -100,14 +111,8 @@ function animate() {
   if (activeCamera && renderer) for (const scene of scenes) renderer.render(scene, activeCamera);
 }
 
-function applyProps(props: any) {
-  //
-}
-
 applyProps(props);
 watch(props, () => applyProps(props));
-
-provide("canvas", canvas);
 
 provide("addCamera", (c: Camera) => cameras.value.push(c));
 provide("addScene", (s: Scene) => scenes.push(s));

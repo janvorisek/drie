@@ -4,7 +4,7 @@
     <option value="cam2">OrthographicCamera</option>
   </select>
   <div class="rendererParent">
-    <Renderer ref="renderer" :camera="camera" :antialias="true">
+    <Renderer ref="renderer" :camera="camera" :antialias="true" :shadow-map-enabled="true">
       <PerspectiveCamera name="cam1" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>
@@ -12,17 +12,25 @@
         <OrbitControls />
       </OrthographicCamera>
       <Scene background="white">
+        <PointLight :position="[0, 0, 10]" :intensity="0.25" :cast-shadow="true" />
+        <AmbientLight :color="0xffffff" />
         <Points :position="posV">
           <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
           <SphereGeometry :radius="radius" :width-segments="12" :height-segments="12" />
         </Points>
-        <Mesh :position="pos" :rotation="rot">
-          <MeshBasicMaterial color="blue" />
+        <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
+          <MeshLambertMaterial>
+            <Texture url="https://threejs.org/examples/textures/crate.gif" />
+          </MeshLambertMaterial>
           <BoxGeometry :width="w + 1" :height="w * 2 + 1" />
         </Mesh>
         <Mesh :position="[-5, 0, 0]" :scale="[s, 1, 1]">
-          <MeshBasicMaterial :color="color2" :side="DoubleSide" />
+          <MeshLambertMaterial :color="color2" :side="DoubleSide" />
           <BufferGeometry :vertices="vertices" />
+        </Mesh>
+        <Mesh :position="[0, 0, -3]" :receive-shadow="true">
+          <MeshLambertMaterial color="#cccccc" :side="DoubleSide" />
+          <PlaneGeometry :width="20" :height="20" />
         </Mesh>
         <AxesHelper :size="3" />
       </Scene>
@@ -31,20 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import { Renderer } from "../src";
-import { Scene } from "../src";
-import { Mesh } from "../src";
-import { Points } from "../src";
-import { BoxGeometry } from "../src";
-import { BufferGeometry } from "../src";
-import { SphereGeometry } from "../src";
-import { MeshBasicMaterial } from "../src";
-import { PointsMaterial } from "../src";
-import { PerspectiveCamera } from "../src";
-import { OrthographicCamera } from "../src";
-import { OrbitControls } from "../src";
-import { AxesHelper } from "../src";
-
 import { ref, onMounted } from "vue";
 import { DoubleSide, Vector3 } from "three";
 
