@@ -1,4 +1,4 @@
-# MeshBasicMaterial
+# MeshLambertMaterial
 
 ## Props
 

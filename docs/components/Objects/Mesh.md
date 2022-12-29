@@ -2,11 +2,13 @@
 
 ## Props
 
-| Prop name | Description | Type        | Values | Default            |
-| --------- | ----------- | ----------- | ------ | ------------------ |
-| position  |             | Vector3Like | -      | () =&gt; [0, 0, 0] |
-| rotation  |             | Vector3Like | -      | () =&gt; [0, 0, 0] |
-| scale     |             | Vector3Like | -      | () =&gt; [1, 1, 1] |
+| Prop name     | Description | Type        | Values | Default            |
+| ------------- | ----------- | ----------- | ------ | ------------------ |
+| position      |             | Vector3Like | -      | () =&gt; [0, 0, 0] |
+| rotation      |             | Vector3Like | -      | () =&gt; [0, 0, 0] |
+| scale         |             | Vector3Like | -      | () =&gt; [1, 1, 1] |
+| castShadow    |             | boolean     | -      | false              |
+| receiveShadow |             | boolean     | -      | false              |
 
 ## Slots
 
