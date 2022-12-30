@@ -16,9 +16,9 @@ The preffered way is to import the components as needed in the single file compo
 <script setup lang="ts">
 import { ref } from "vue";
 
-import { Renderer, Scene } from "drie"; // always needed
-import { Mesh, BoxGeometry, MeshBasicMaterial } from "drie"; // mesh
-import { PerspectiveCamera, OrbitControls } from "drie"; // camera
+import { Renderer, Scene } from "@janvorisek/drie"; // always needed
+import { Mesh, BoxGeometry, MeshBasicMaterial } from "@janvorisek/drie"; // mesh
+import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie"; // camera
 
 const rot = ref<[number, number, number]>([0, 0, 0]);
 
