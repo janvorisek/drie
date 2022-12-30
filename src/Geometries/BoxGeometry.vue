@@ -65,6 +65,7 @@ const three = ref<BufferGeometry>(
 mesh.geometry = three.value;
 
 watch(props, () => {
+  mesh.geometry.dispose();
   mesh.geometry = makeBox(
     props.width,
     props.height,

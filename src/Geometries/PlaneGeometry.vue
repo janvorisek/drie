@@ -54,6 +54,7 @@ const three = ref<BufferGeometry>(makePlane(props.width, props.height, props.wid
 mesh.geometry = three.value;
 
 watch(props, () => {
+  mesh.geometry.dispose();
   mesh.geometry = makePlane(props.width, props.height, props.widthSegments, props.heightSegments);
   three.value = mesh.geometry;
 });

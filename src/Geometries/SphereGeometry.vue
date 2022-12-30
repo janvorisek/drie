@@ -62,6 +62,7 @@ const three = ref<BufferGeometry>(
 mesh.geometry = three.value;
 
 watch(props, () => {
+  mesh.geometry.dispose();
   mesh.geometry = makeSphere(
     props.radius,
     props.widthSegments,

@@ -44,6 +44,7 @@ const three = ref<BufferGeometry>(makeGeometry(props.vertices, props.faces));
 mesh.geometry = three.value;
 
 watch(props, () => {
+  mesh.geometry.dispose();
   mesh.geometry = makeGeometry(props.vertices, []);
   mesh.geometry.computeVertexNormals();
   three.value = mesh.geometry;
