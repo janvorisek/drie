@@ -7,7 +7,14 @@ const componentTree = {
   text: 'Components',
   collapsible: true,
   collapsed: true,
-  items: [{text: 'Base', items: [{text: 'Renderer', link: '/components/Renderer'}]}]
+  items: [
+    {
+      text: 'Base', items: [
+       { text: 'Renderer', link: '/components/Renderer' },
+       { text: 'Scene', link: '/components/Scene' }
+      ]
+    }
+  ]
 } as any
 
 fs.readdirSync(testFolder).forEach(file=> {
