@@ -10,7 +10,7 @@ const members = [
     title: 'Creator',
     links: [
       { icon: 'github', link: 'https://github.com/janvorisek' },
-      { icon: 'twitter', link: 'https://twitter.com/janvorisekdev' }
+      { icon: 'twitter', link: 'https://twitter.com/janvorisekdev' },
     ]
   },
   
@@ -21,6 +21,10 @@ const members = [
 
 Drie is a Vue 3 component library for THREE.js made with TypeScript and Composition API.
 
+::: warning
+Drie is under heavy development. The API may change in any time. Only basic components are supported now and the examples may be outdated.
+:::
+
 ## Example
 
 <ClientOnly>
@@ -28,7 +32,5 @@ Drie is a Vue 3 component library for THREE.js made with TypeScript and Composit
 </ClientOnly>
 
 ## The Authors
-
-Say hello to our awesome team.
 
 <VPTeamMembers size="small" :members="members" />

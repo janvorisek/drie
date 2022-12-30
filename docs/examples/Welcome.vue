@@ -1,7 +1,7 @@
 <template>
   <div class="example" style="height: 400px">
     <Renderer ref="renderer" :camera="camera" :antialias="true" shadow-map-enabled>
-      <PerspectiveCamera name="cam1" :up="[0, 0, 1]">
+      <PerspectiveCamera name="cam1" :position="[10,10,10]" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>
       <OrthographicCamera name="cam2">

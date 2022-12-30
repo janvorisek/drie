@@ -14,18 +14,9 @@ The preffered way is to import the components as needed in the single file compo
 
 ```vue
 <script setup lang="ts">
-import { ref } from "vue";
-
 import { Renderer, Scene } from "@janvorisek/drie"; // always needed
 import { Mesh, BoxGeometry, MeshBasicMaterial } from "@janvorisek/drie"; // mesh
 import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie"; // camera
-
-const rot = ref<[number, number, number]>([0, 0, 0]);
-
-window.setInterval(() => {
-  const angle = Date.now() / 1000;
-  rot.value = [Math.cos(angle), 0, 0];
-}, 10);
 </script>
 
 <template>
@@ -35,7 +26,7 @@ window.setInterval(() => {
         <OrbitControls />
       </PerspectiveCamera>
       <Scene background="#f9f9f9">
-        <Mesh :rotation="rot">
+        <Mesh>
           <MeshBasicMaterial color="blue" />
           <BoxGeometry :width="15" :height="10 " />
         </Mesh>

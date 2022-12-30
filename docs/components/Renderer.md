@@ -2,13 +2,13 @@
 
 ## Props
 
-| Prop name        | Description | Type           | Values | Default     |
-| ---------------- | ----------- | -------------- | ------ | ----------- |
-| camera           |             | string         | -      |             |
-| autoResize       |             | boolean        | -      | true        |
-| onBeforeRender   |             | TSFunctionType | -      | () =&gt; {} |
-| antialias        |             | boolean        | -      | false       |
-| shadowMapEnabled |             | boolean        | -      | false       |
+| Prop name        | Description                                                           | Type           | Values | Default     |
+| ---------------- | --------------------------------------------------------------------- | -------------- | ------ | ----------- |
+| camera           | Name of the active camera when using multiple cameras                 | string         | -      |             |
+| autoResize       | Flag marking whether renderer auto resizes to match parent dimensions | boolean        | -      | true        |
+| onBeforeRender   | Callback to fire before each animation frame is rendered              | TSFunctionType | -      | () =&gt; {} |
+| antialias        | Whether to perform antialiasing.                                      | boolean        | -      | false       |
+| shadowMapEnabled | If set, use shadow maps in the scene.                                 | boolean        | -      | false       |
 
 ## Slots
 

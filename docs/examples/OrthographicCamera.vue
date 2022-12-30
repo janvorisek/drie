@@ -1,7 +1,7 @@
 <template>
   <div class="example">
     <Renderer ref="renderer" :antialias="true">
-      <OrthographicCamera :up="[0, 0, 1]">
+      <OrthographicCamera :position="[10,10,10]" :up="[0, 0, 1]">
         <OrbitControls />
       </OrthographicCamera>
       <Scene background="#f9f9f9">
