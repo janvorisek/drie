@@ -2,9 +2,9 @@
 
 ## Props
 
-| Prop name  | Description | Type | Values | Default |
-| ---------- | ----------- | ---- | ------ | ------- |
-| background |             | any  | -      |         |
+| Prop name  | Description | Type  | Values | Default  |
+| ---------- | ----------- | ----- | ------ | -------- |
+| background |             | union | -      | 0xffffff |
 
 ## Slots
 
