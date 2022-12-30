@@ -40,7 +40,8 @@ const vueDocsPlugin = () => ({
 
 export default defineConfig( {
   title: 'Drie',
-  description: 'Just playing around.',
+  description: 'Drie is a Vue 3 component library for THREE.js made with TypeScript and Composition API.',
+  cleanUrls: 'with-subfolders',
   themeConfig: {
     socialLinks: [
       { icon: 'github', link: 'https://github.com/janvorisek/drie' }
@@ -49,9 +50,8 @@ export default defineConfig( {
       {
         text: 'Guide',
         items: [
-          { text: 'Introduction', link: '/' },
           { text: 'Getting Started', link: '/getting-started' },
-          
+          { text: 'Types', link: '/types'}
         ]
       },
       componentTree,
@@ -59,7 +59,12 @@ export default defineConfig( {
         text: 'Examples',
         collapsible: true,
         collapsed: true,
-        items: []
+        items: [
+          {
+            text: 'Basic setup',
+            link: '/examples/basic-setup'
+          }
+        ]
       }
     ],
     footer: {
@@ -73,5 +78,5 @@ export default defineConfig( {
   },
   vite: {
     plugins: [vueDocsPlugin()]
-  }
+  },
 })
