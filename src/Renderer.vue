@@ -9,16 +9,35 @@ import { onMounted, provide, type Ref, ref, watch } from "vue";
 import { Camera, Scene, WebGLRenderer } from "three";
 
 export interface Props {
+  /**
+   * Name of the active camera when using multiple cameras
+   */
   camera?: string;
+
+  /**
+   * Flag marking whether renderer auto resizes to match parent dimensions
+   */
   autoResize?: boolean;
+
+  /**
+   * Callback to fire before each animation frame is rendered
+   */
   onBeforeRender?: () => void;
-  //Standard THREE.WebGLRenderer props
+
+  /**
+   * Whether to perform antialiasing.
+   */
   antialias?: boolean;
+
+  /**
+   * If set, use shadow maps in the scene.
+   */
   shadowMapEnabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   autoResize: true,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onBeforeRender: () => {},
   antialias: false,
   shadowMapEnabled: false,
@@ -31,7 +50,7 @@ const scenes: Scene[] = [];
 let activeCamera: Camera | null = null;
 const cameras = ref<Camera[]>([]);
 
-const controls = ref<Ref<{ update: () => void }>[]>([]);
+const controls = ref<Ref<{ update: () => void; enabled: boolean; object: Camera }>[]>([]);
 
 const canvas = ref<HTMLCanvasElement>();
 provide("canvas", canvas);
@@ -50,16 +69,18 @@ const setCamera = (newCamera?: string) => {
     const findCamera = cameras.value.find((c) => c.name === newCamera);
     if (findCamera === undefined) activeCamera = null;
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     activeCamera = findCamera;
   } else {
     activeCamera = cameras.value[0];
   }
 };
 
-function applyProps(props: any) {
+function applyProps(props: Props) {
   if (renderer === null) return;
 
-  renderer.shadowMap.enabled = props.shadowMapEnabled;
+  renderer.shadowMap.enabled = props.shadowMapEnabled as boolean;
 }
 
 onMounted(() => {
@@ -77,7 +98,7 @@ onMounted(() => {
     });
   });
 
-  myObserver.observe(canvas!.value?.parentElement);
+  myObserver.observe(canvas.value!.parentElement as Element);
 
   animate();
 });

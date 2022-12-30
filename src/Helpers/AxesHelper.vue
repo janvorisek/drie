@@ -6,7 +6,7 @@
 import { provide, inject } from "vue";
 
 import { AxesHelper, Scene } from "three";
-import { handlePositionProp, handleRotationProp } from "../utils";
+import { handleVectorProp } from "../utils";
 import { Vector3Like } from "../types";
 
 export interface Props {
@@ -28,8 +28,9 @@ const scene = inject("scene") as Scene;
 const three = new AxesHelper(props.size);
 scene.add(three);
 
-handlePositionProp(props, three);
-handleRotationProp(props, three);
+handleVectorProp(props, "position", three);
+handleVectorProp(props, "rotation", three);
+handleVectorProp(props, "scale", three);
 
 provide("mesh", three);
 

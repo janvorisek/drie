@@ -16,56 +16,31 @@ export const vector3LikeToArray = (data?: Vector3Like) => {
   else return data;
 };
 
-// Handle position prop
-export const handlePositionProp = (props: any, obj: Object3D) => {
-  if (props.position) {
-    const position = vector3LikeToVector3(props.position);
-    obj.position.set(position.x, position.y, position.z);
+// Handle vector prop
+export const handleVectorProp = (props: { [key: string]: any }, prop: string, obj: Object3D) => {
+  if (props[prop] !== undefined) {
+    const position = vector3LikeToVector3(props[prop]);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (obj[prop].isVector3) (obj[prop] as Vector3).set(position.x, position.y, position.z);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    else if (typeof obj[prop] === "function") obj[prop](position.x, position.y, position.z);
   }
 
   watch(
-    () => props.position,
+    () => props[prop],
     () => {
-      if (props.position) {
-        const position = vector3LikeToVector3(props.position);
-        obj.position.set(position.x, position.y, position.z);
-      }
-    },
-  );
-};
+      if (props[prop] !== undefined) {
+        const position = vector3LikeToVector3(props[prop]);
 
-// Handle rotation prop
-export const handleRotationProp = (props: any, obj: Object3D) => {
-  if (props.rotation) {
-    const position = vector3LikeToVector3(props.rotation);
-    obj.rotation.setFromVector3(position);
-  }
-
-  watch(
-    () => props.rotation,
-    () => {
-      if (props.rotation) {
-        const position = vector3LikeToVector3(props.rotation);
-        obj.rotation.setFromVector3(position);
-        obj.updateMatrixWorld();
-      }
-    },
-  );
-};
-
-// Handle rotation prop
-export const handleScaleProp = (props: any, obj: Object3D) => {
-  if (props.scale) {
-    const position = vector3LikeToVector3(props.scale);
-    obj.scale.set(position.x, position.y, position.z);
-  }
-
-  watch(
-    () => props.scale,
-    () => {
-      if (props.scale) {
-        const position = vector3LikeToVector3(props.scale);
-        obj.scale.set(position.x, position.y, position.z);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        if (obj[prop].isVector3) (obj[prop] as Vector3).set(position.x, position.y, position.z);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        else if (typeof obj[prop] === "function") obj[prop](position.x, position.y, position.z);
       }
     },
   );

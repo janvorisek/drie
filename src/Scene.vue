@@ -8,6 +8,9 @@ import { provide, inject, watch } from "vue";
 import { Color, Scene } from "three";
 
 export interface Props {
+  /**
+   * Defines the background color of the scene.
+   */
   background?: string | number;
 }
 

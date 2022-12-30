@@ -7,7 +7,7 @@ import { provide, inject } from "vue";
 
 import { BufferGeometry, Points, PointsMaterial, Scene } from "three";
 import { Vector3Like } from "../types";
-import { handlePositionProp, handleRotationProp, handleScaleProp } from "../utils";
+import { handleVectorProp } from "../utils";
 
 export interface Props {
   position?: Vector3Like;
@@ -29,9 +29,9 @@ const material = new PointsMaterial({ color: "red", sizeAttenuation: false, size
 const three = new Points(geometry, material);
 scene.add(three);
 
-handlePositionProp(props, three);
-handleRotationProp(props, three);
-handleScaleProp(props, three);
+handleVectorProp(props, "position", three);
+handleVectorProp(props, "rotation", three);
+handleVectorProp(props, "scale", three);
 
 provide("mesh", three);
 

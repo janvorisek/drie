@@ -10,7 +10,7 @@ import { inject, watch } from "vue";
 
 import { Color, PointLight, Scene } from "three";
 import { type Vector3Like } from "../types";
-import { handlePositionProp, handleRotationProp, handleScaleProp } from "../utils";
+import { handleVectorProp } from "../utils";
 
 export interface Props {
   position?: Vector3Like;
@@ -35,9 +35,9 @@ const scene = inject("scene") as Scene;
 const three = new PointLight();
 scene.add(three);
 
-handlePositionProp(props, three);
-handleRotationProp(props, three);
-handleScaleProp(props, three);
+handleVectorProp(props, "position", three);
+handleVectorProp(props, "rotation", three);
+handleVectorProp(props, "scale", three);
 
 function applyProps(props: Props) {
   three.color = new Color(props.color);

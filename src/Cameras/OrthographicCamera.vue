@@ -8,10 +8,12 @@ export default {
 };
 </script>
 
-<docs>
+<docs>BEGIN_DOCS
   <script setup>
   import OrthographicCamera from '../../examples/OrthographicCamera.vue'
   </script>
+
+  This component manages [`THREE.OrthographicCamera`](https://threejs.org/docs/#api/en/cameras/OrthographicCamera).
 
   ## Example
 
@@ -24,21 +26,36 @@ export default {
 import { OrthographicCamera } from "three";
 import { inject, onMounted, provide, watch } from "vue";
 import { Vector3Like } from "../types";
-import { vector3LikeToVector3 } from "../utils";
+import { handleVectorProp } from "../utils";
 
 export interface Props {
+  /**
+   * Camera name
+   */
   name?: string;
+  /**
+   * Camera up vector
+   */
   up?: Vector3Like;
+  /**
+   * Camera position
+   */
+  position?: Vector3Like;
+  /**
+   * Camera target
+   */
+  lookAt?: Vector3Like;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   name: "",
   up: () => [0, 1, 0],
+  position: () => [0, 0, 0],
+  lookAt: () => [0, 0, 0],
 });
 
 const three = new OrthographicCamera(-30, 30, 30, -30, 0.1, 1000);
 
-three.position.set(10, 10, 10);
 three.lookAt(0, 0, 0);
 three.updateProjectionMatrix();
 
@@ -48,9 +65,12 @@ onMounted(() => {
   if (props.name) three.name = props.name;
 });
 
-function applyProps(props: any) {
-  const up = vector3LikeToVector3(props.up);
-  three.up.set(up.x, up.y, up.z);
+handleVectorProp(props, "position", three);
+handleVectorProp(props, "up", three);
+handleVectorProp(props, "lookAt", three);
+
+function applyProps(props: Props) {
+  //
 }
 
 applyProps(props);

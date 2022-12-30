@@ -12,27 +12,27 @@ import { BoxGeometry, BufferGeometry, Mesh } from "three";
 
 export interface Props {
   /**
-   * Width; that is, the length of the edges parallel to the X axis.
+   * Width along the X axis
    */
   width?: number;
   /**
-   * Height; that is, the length of the edges parallel to the Y axis.
+   * Height along the Y axis
    */
   height?: number;
   /**
-   * Depth; that is, the length of the edges parallel to the Z axis.
+   * Depth along the Z axis
    */
   depth?: number;
   /**
-   * Number of segmented rectangular faces along the width of the sides.
+   * Number of segments along the X axis.
    */
   widthSegments?: number;
   /**
-   * Number of segmented rectangular faces along the height of the sides
+   * Number of segments along the Y axis.
    */
   heightSegments?: number;
   /**
-   * Number of segmented rectangular faces along the depth of the sides.
+   * Number of segments along the Z axis.
    */
   depthSegments?: number;
 }
