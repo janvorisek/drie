@@ -7,9 +7,13 @@ import { provide, inject, watch } from "vue";
 
 import { Color, Scene } from "three";
 
-const props = defineProps<{
-  background?: any;
-}>();
+export interface Props {
+  background?: string | number;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  background: 0xffffff,
+});
 
 const three = new Scene();
 
@@ -17,7 +21,7 @@ provide("scene", three);
 
 (inject("addScene") as (s: Scene) => void)(three);
 
-function applyProps(props: any) {
+function applyProps(props: Props) {
   if (props.background) three.background = new Color(props.background);
 }
 
