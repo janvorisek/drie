@@ -39,6 +39,8 @@
   ],
   "author": "Jan Vorisek",
   "license": "MIT",
+  "homepage": "https://www.drie.dev",
+  "repository": "github:janvorisek/drie",
   "devDependencies": {
     "@types/node": "^18.11.17",
     "@types/three": "^0.146.0",
