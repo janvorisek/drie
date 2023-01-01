@@ -16,7 +16,7 @@
         </Points>
         <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
           <MeshBasicMaterial>
-            <Texture url="https://threejs.org/examples/textures/crate.gif" />
+            <TextureLoader url="https://threejs.org/examples/textures/crate.gif" />
           </MeshBasicMaterial>
           <BoxGeometry :width="w + 1" :height="w * 2 + 1" />
         </Mesh>
@@ -55,7 +55,7 @@ import { PointsMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrthographicCamera } from "../../src";
 import { OrbitControls, OBJLoader } from "../../src";
-import { AxesHelper, AmbientLight, PointLight, PlaneGeometry, MeshLambertMaterial, Texture } from "../../src";
+import { AxesHelper, AmbientLight, PointLight, PlaneGeometry, MeshLambertMaterial, TextureLoader } from "../../src";
 
 import { reactive, ref, onMounted } from "vue";
 import { DoubleSide, Vector3 } from "three";
