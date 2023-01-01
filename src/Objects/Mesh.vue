@@ -45,7 +45,16 @@ function applyProps(props: Props) {
 }
 
 applyProps(props);
-watch(props, () => applyProps(props));
+
+watch(
+  () => props.castShadow,
+  () => applyProps(props),
+);
+
+watch(
+  () => props.receiveShadow,
+  () => applyProps(props),
+);
 
 provide("mesh", three);
 

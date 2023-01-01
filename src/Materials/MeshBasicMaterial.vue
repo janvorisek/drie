@@ -34,7 +34,16 @@ function applyProps(props: any) {
 }
 
 applyProps(props);
-watch(props, () => applyProps(props));
+
+watch(
+  () => props.color,
+  () => applyProps(props),
+);
+
+watch(
+  () => props.side,
+  () => applyProps(props),
+);
 
 provide("material", three);
 

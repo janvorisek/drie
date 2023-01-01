@@ -11,6 +11,8 @@ import OrbitControls from "./Controls/OrbitControls.vue";
 import Mesh from "./Objects/Mesh.vue";
 import Points from "./Objects/Points.vue";
 
+import OBJLoader from "./Loaders/OBJLoader.vue";
+
 import AxesHelper from "./Helpers/AxesHelper.vue";
 
 import BoxGeometry from "./Geometries/BoxGeometry.vue";
@@ -39,7 +41,9 @@ function install(app: App) {
   // Objects
   app.component("Mesh", Mesh);
   app.component("Points", Points);
-  //Helpers
+  // Loaders
+  app.component("OBJLoader", OBJLoader);
+  // Helpers
   app.component("AxesHelper", AxesHelper);
   // Geometries
   app.component("BoxGeometry", BoxGeometry);
@@ -70,6 +74,8 @@ export {
   // Objects
   Mesh,
   Points,
+  // Loaders
+  OBJLoader,
   //Helpers
   AxesHelper,
   // Geometries

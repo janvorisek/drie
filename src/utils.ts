@@ -1,4 +1,4 @@
-import { Vector3, Object3D } from "three";
+import { Vector3, Object3D, Group } from "three";
 import { watch } from "vue";
 import { Vector3Like } from "./types";
 
@@ -16,18 +16,33 @@ export const vector3LikeToArray = (data?: Vector3Like) => {
   else return data;
 };
 
+export const setVectorProp = (prop: string, value: Vector3, obj: Object3D) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  if (obj[prop].isVector3) (obj[prop] as Vector3).set(value.x, value.y, value.z);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  else if ("isEuler" in obj[prop]) obj[prop].setFromVector3(value);
+};
+
 // Handle vector prop
-export const handleVectorProp = (props: { [key: string]: any }, prop: string, obj: Object3D) => {
+export const handleVectorProp = (
+  props: { [key: string]: any },
+  prop: string,
+  obj: Object3D | Group,
+  registerWatch = true,
+) => {
   if (props[prop] !== undefined) {
     const position = vector3LikeToVector3(props[prop]);
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    if (obj[prop].isVector3) (obj[prop] as Vector3).set(position.x, position.y, position.z);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    else if (typeof obj[prop] === "function") obj[prop](position.x, position.y, position.z);
+    if ("isGroup" in obj) {
+      for (const o of obj.children) handleVectorProp(props, prop, o, false);
+    } else {
+      setVectorProp(prop, position, obj);
+    }
   }
+
+  if (!registerWatch) return;
 
   watch(
     () => props[prop],
@@ -35,13 +50,19 @@ export const handleVectorProp = (props: { [key: string]: any }, prop: string, ob
       if (props[prop] !== undefined) {
         const position = vector3LikeToVector3(props[prop]);
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        if (obj[prop].isVector3) (obj[prop] as Vector3).set(position.x, position.y, position.z);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        else if (typeof obj[prop] === "function") obj[prop](position.x, position.y, position.z);
+        if ("isGroup" in obj) {
+          for (const o of obj.children) handleVectorProp(props, prop, o, false);
+        } else {
+          setVectorProp(prop, position, obj);
+        }
       }
     },
+  );
+};
+
+export const handlePropCallback = (props: { [key: string]: any }, prop: string, fn: () => void) => {
+  watch(
+    () => props[prop],
+    () => fn,
   );
 };

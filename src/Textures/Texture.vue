@@ -27,7 +27,10 @@ function applyProps(props: Props) {
 }
 
 applyProps(props);
-watch(props, () => applyProps(props));
+watch(
+  () => props.url,
+  () => applyProps(props),
+);
 
 defineExpose({ three });
 </script>

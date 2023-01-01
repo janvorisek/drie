@@ -133,7 +133,10 @@ function animate() {
 }
 
 applyProps(props);
-watch(props, () => applyProps(props));
+watch(
+  () => props.shadowMapEnabled,
+  () => applyProps(props),
+);
 
 provide("addCamera", (c: Camera) => cameras.value.push(c));
 provide("addScene", (s: Scene) => scenes.push(s));

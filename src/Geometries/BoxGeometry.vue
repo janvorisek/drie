@@ -9,6 +9,7 @@ export default {
 import { inject, watch, ref } from "vue";
 
 import { BoxGeometry, BufferGeometry, Mesh } from "three";
+import { handlePropCallback } from "../utils";
 
 export interface Props {
   /**
@@ -64,7 +65,7 @@ const three = ref<BufferGeometry>(
 );
 mesh.geometry = three.value;
 
-watch(props, () => {
+function redoGeometry() {
   mesh.geometry.dispose();
   mesh.geometry = makeBox(
     props.width,
@@ -75,7 +76,14 @@ watch(props, () => {
     props.depthSegments,
   );
   three.value = mesh.geometry;
-});
+}
+
+handlePropCallback(props, "width", redoGeometry);
+handlePropCallback(props, "height", redoGeometry);
+handlePropCallback(props, "depth", redoGeometry);
+handlePropCallback(props, "widthSegments", redoGeometry);
+handlePropCallback(props, "heightSegments", redoGeometry);
+handlePropCallback(props, "depthSegments", redoGeometry);
 
 defineExpose({ three });
 </script>

@@ -46,7 +46,21 @@ function applyProps(props: Props) {
 }
 
 applyProps(props);
-watch(props, () => applyProps(props));
+
+watch(
+  () => props.color,
+  () => applyProps(props),
+);
+
+watch(
+  () => props.intensity,
+  () => applyProps(props),
+);
+
+watch(
+  () => props.castShadow,
+  () => applyProps(props),
+);
 
 defineExpose({ three });
 </script>

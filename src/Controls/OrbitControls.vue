@@ -8,8 +8,6 @@ export default {
 <script setup lang="ts">
 import { Camera } from "three";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 import { inject, ref, watch, type Ref } from "vue";

@@ -29,7 +29,10 @@ function applyProps(props: Props) {
 }
 
 applyProps(props);
-watch(props, () => applyProps(props));
+watch(
+  () => props.background,
+  () => applyProps(props),
+);
 
 defineExpose({ three });
 </script>

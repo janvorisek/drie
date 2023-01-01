@@ -9,6 +9,7 @@ export default {
 import { inject, watch, ref } from "vue";
 
 import { BufferGeometry, Mesh, PlaneGeometry } from "three";
+import { handlePropCallback } from "../utils";
 
 export interface Props {
   /**
@@ -53,11 +54,16 @@ function makePlane(
 const three = ref<BufferGeometry>(makePlane(props.width, props.height, props.widthSegments, props.heightSegments));
 mesh.geometry = three.value;
 
-watch(props, () => {
+function redoGeometry() {
   mesh.geometry.dispose();
   mesh.geometry = makePlane(props.width, props.height, props.widthSegments, props.heightSegments);
   three.value = mesh.geometry;
-});
+}
+
+handlePropCallback(props, "width", redoGeometry);
+handlePropCallback(props, "height", redoGeometry);
+handlePropCallback(props, "widthSegments", redoGeometry);
+handlePropCallback(props, "heightSegments", redoGeometry);
 
 defineExpose({ three });
 </script>

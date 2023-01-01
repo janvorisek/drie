@@ -28,14 +28,28 @@ const mesh = inject("mesh") as Mesh;
 const three = new PointsMaterial({ color: props.color, sizeAttenuation: props.sizeAttenuation, size: props.size });
 mesh.material = three;
 
-function applyProps(props: any) {
+function applyProps(props: Props) {
   if (props.color) three.color = new Color(props.color);
   if (props.size) three.size = props.size;
   if (props.sizeAttenuation !== undefined) three.sizeAttenuation = props.sizeAttenuation;
 }
 
 applyProps(props);
-watch(props, () => applyProps(props));
+
+watch(
+  () => props.color,
+  () => applyProps(props),
+);
+
+watch(
+  () => props.size,
+  () => applyProps(props),
+);
+
+watch(
+  () => props.sizeAttenuation,
+  () => applyProps(props),
+);
 
 provide("material", three);
 

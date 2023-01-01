@@ -13,6 +13,7 @@ export default {
 import { inject, watch, ref } from "vue";
 
 import { SphereGeometry, BufferGeometry, Mesh } from "three";
+import { handlePropCallback } from "../utils";
 
 export interface Props {
   radius?: number;
@@ -59,9 +60,10 @@ const three = ref<BufferGeometry>(
     props.thetaLength,
   ),
 );
+
 mesh.geometry = three.value;
 
-watch(props, () => {
+function redoGeometry() {
   mesh.geometry.dispose();
   mesh.geometry = makeSphere(
     props.radius,
@@ -73,7 +75,15 @@ watch(props, () => {
     props.thetaLength,
   );
   three.value = mesh.geometry;
-});
+}
+
+handlePropCallback(props, "radius", redoGeometry);
+handlePropCallback(props, "widthSegments", redoGeometry);
+handlePropCallback(props, "heightSegments", redoGeometry);
+handlePropCallback(props, "phiStart", redoGeometry);
+handlePropCallback(props, "phiLength", redoGeometry);
+handlePropCallback(props, "thetaStart", redoGeometry);
+handlePropCallback(props, "thetaLength", redoGeometry);
 
 defineExpose({ three });
 </script>

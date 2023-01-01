@@ -9,11 +9,9 @@ export default {
 import { inject, watch, ref } from "vue";
 
 import { BufferAttribute, BufferGeometry, Mesh } from "three";
-import { type Vector3Like } from "../types";
-import { vector3LikeToArray } from "../utils";
 
 export interface Props {
-  vertices?: Vector3Like[];
+  vertices?: number[];
   faces?: number[];
 }
 
@@ -24,15 +22,17 @@ const props = withDefaults(defineProps<Props>(), {
 
 const mesh = inject("mesh") as Mesh;
 
-function makeGeometry(vertices: Vector3Like[], faces: number[]) {
+function makeGeometry(vertices: number[], faces: number[]) {
   const geometry = new BufferGeometry();
 
-  const vertArray = new Float32Array(vertices.length * 3);
+  const vertArray = new Float32Array(vertices.length);
   for (let v = 0; v < vertices.length; v++) {
-    const tmp = vector3LikeToArray(vertices[v]);
+    /*const tmp = vector3LikeToArray(vertices[v]);
     vertArray[v * 3] = tmp[0];
     vertArray[v * 3 + 1] = tmp[1];
-    vertArray[v * 3 + 2] = tmp[2];
+    vertArray[v * 3 + 2] = tmp[2];*/
+
+    vertArray[v] = vertices[v];
   }
 
   geometry.setAttribute("position", new BufferAttribute(vertArray, 3));
@@ -43,12 +43,20 @@ function makeGeometry(vertices: Vector3Like[], faces: number[]) {
 const three = ref<BufferGeometry>(makeGeometry(props.vertices, props.faces));
 mesh.geometry = three.value;
 
-watch(props, () => {
+function redoGeometry(vertices: number[]) {
   mesh.geometry.dispose();
-  mesh.geometry = makeGeometry(props.vertices, []);
+  mesh.geometry = makeGeometry(vertices, []);
   mesh.geometry.computeVertexNormals();
   three.value = mesh.geometry;
-});
+}
+
+watch(
+  () => props.vertices,
+  (vertices) => {
+    redoGeometry(vertices);
+  },
+  { deep: true, immediate: true },
+);
 
 defineExpose({ three });
 </script>
