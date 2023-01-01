@@ -2,8 +2,8 @@
 
 ## Props
 
-| Prop name | Description | Type   | Values | Default |
-| --------- | ----------- | ------ | ------ | ------- |
-| name      |             | string | -      |         |
+| Prop name | Description | Type   | Default |
+| --------- | ----------- | ------ | ------- |
+|` name      `|             | string |         |
 
 ---
