@@ -15,7 +15,7 @@ import { FrontSide, Mesh, type Side, MeshNormalMaterial } from "three";
 
 export interface Props {
   /**
-   * Defines which side of faces will be rendered - front, back or both.
+   * Defines which side of faces will be rendered - front, back or both. Represtented by `THREE.Side`.
    */
   side?: Side;
 

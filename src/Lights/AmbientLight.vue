@@ -11,7 +11,14 @@ import { inject, watch } from "vue";
 import { Color, AmbientLight, Scene } from "three";
 
 export interface Props {
+  /**
+   * Color of the light
+   */
   color?: string | number;
+
+  /**
+   * Numeric value of the light's strength/intensity.
+   */
   intensity?: number;
 }
 

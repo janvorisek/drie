@@ -12,8 +12,19 @@ import type { Mesh } from "three";
 import { Color, PointsMaterial } from "three";
 
 export interface Props {
+  /**
+   * Color of the material.
+   */
   color?: string | number;
+
+  /**
+   * Specify whether points' size is attenuated by the camera depth. (Perspective camera only)
+   */
   sizeAttenuation?: boolean;
+
+  /**
+   * Defines the size of the points in pixels.
+   */
   size?: number;
 }
 

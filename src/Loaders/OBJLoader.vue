@@ -12,6 +12,9 @@ import { Vector3Like } from "../types";
 import { handleVectorProp, vector3LikeToVector3 } from "../utils";
 
 export interface Props {
+  /**
+   * A string containing the path/URL of the `.obj` file.
+   */
   url: string;
   position?: Vector3Like;
   rotation?: Vector3Like;
@@ -50,7 +53,6 @@ function load() {
     function (object) {
       for (const o of object.children) {
         three.children.push(o);
-        //o.material
         (o as Mesh).material = three.material;
 
         handleVectorProp(props, "position", three, false);
@@ -77,5 +79,10 @@ watch(
 
 provide("mesh", three);
 
-defineExpose({ three });
+defineExpose({
+  /**
+   * Exposes `THREE.Group` entity containing Mesh[] loaded by the `OBJLoader`
+   */
+  three,
+});
 </script>

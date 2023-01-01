@@ -10,17 +10,17 @@ import { Camera, Scene, WebGLRenderer } from "three";
 
 export interface Props {
   /**
-   * Name of the active camera when using multiple cameras
+   * Name of the active camera when using multiple cameras.
    */
   camera?: string;
 
   /**
-   * Flag marking whether renderer auto resizes to match parent dimensions
+   * Flag marking whether renderer auto resizes to match parent dimensions.
    */
   autoResize?: boolean;
 
   /**
-   * Callback to fire before each animation frame is rendered
+   * Callback to fire before each animation frame is rendered.
    */
   onBeforeRender?: () => void;
 
@@ -28,6 +28,11 @@ export interface Props {
    * Whether to perform antialiasing.
    */
   antialias?: boolean;
+
+  /**
+   * Controls the default clear alpha value.
+   */
+  alpha?: boolean;
 
   /**
    * If set, use shadow maps in the scene.
@@ -40,6 +45,7 @@ const props = withDefaults(defineProps<Props>(), {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onBeforeRender: () => {},
   antialias: false,
+  alpha: false,
   shadowMapEnabled: false,
 });
 
@@ -84,7 +90,7 @@ function applyProps(props: Props) {
 }
 
 onMounted(() => {
-  renderer = new WebGLRenderer({ canvas: canvas.value, antialias: props.antialias });
+  renderer = new WebGLRenderer({ canvas: canvas.value, antialias: props.antialias, alpha: true });
   renderer.setSize(1, 1);
 
   applyProps(props);

@@ -16,21 +16,26 @@ export interface Props {
    * Width along the X axis
    */
   width?: number;
+
   /**
    * Height along the Y axis
    */
   height?: number;
+
   /**
    * Depth along the Z axis
    */
   depth?: number;
+
   /**
    * Number of segments along the X axis.
    */
   widthSegments?: number;
+
   /**
    * Number of segments along the Y axis.
    */
+
   heightSegments?: number;
   /**
    * Number of segments along the Z axis.

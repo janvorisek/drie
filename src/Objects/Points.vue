@@ -10,8 +10,19 @@ import { Vector3Like } from "../types";
 import { handleVectorProp } from "../utils";
 
 export interface Props {
+  /**
+   * A Vector3Like representing the object's local position.
+   */
   position?: Vector3Like;
+
+  /**
+   * A Vector3Like representing local rotation (see Euler angles), in radians.
+   */
   rotation?: Vector3Like;
+
+  /**
+   * A Vector3Like representing the object's local scale.
+   */
   scale?: Vector3Like;
 }
 
