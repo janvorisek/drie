@@ -23,6 +23,7 @@ import SphereGeometry from "./Geometries/SphereGeometry.vue";
 import MeshBasicMaterial from "./Materials/MeshBasicMaterial.vue";
 import MeshLambertMaterial from "./Materials/MeshLambertMaterial.vue";
 import PointsMaterial from "./Materials/PointsMaterial.vue";
+import MeshNormalMaterial from "./Materials/MeshNormalMaterial.vue";
 
 import AmbientLight from "./Lights/AmbientLight.vue";
 import PointLight from "./Lights/PointLight.vue";
@@ -54,6 +55,7 @@ function install(app: App) {
   app.component("MeshBasicMaterial", MeshBasicMaterial);
   app.component("MeshLambertMaterial", MeshLambertMaterial);
   app.component("PointsMaterial", PointsMaterial);
+  app.component("MeshNormalMaterial", MeshNormalMaterial);
   // Lights
   app.component("AmbientLight", AmbientLight);
   app.component("PointLight", PointLight);
@@ -87,6 +89,7 @@ export {
   MeshBasicMaterial,
   MeshLambertMaterial,
   PointsMaterial,
+  MeshNormalMaterial,
   // Lights
   AmbientLight,
   PointLight,
