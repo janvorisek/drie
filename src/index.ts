@@ -28,7 +28,7 @@ import MeshNormalMaterial from "./Materials/MeshNormalMaterial.vue";
 import AmbientLight from "./Lights/AmbientLight.vue";
 import PointLight from "./Lights/PointLight.vue";
 
-import Texture from "./Textures/Texture.vue";
+import TextureLoader from "./Textures/TextureLoader.vue";
 
 function install(app: App) {
   // Base entities
@@ -60,7 +60,7 @@ function install(app: App) {
   app.component("AmbientLight", AmbientLight);
   app.component("PointLight", PointLight);
   // Textures
-  app.component("Texture", Texture);
+  app.component("TextureLoader", TextureLoader);
 }
 
 export {
@@ -94,5 +94,5 @@ export {
   AmbientLight,
   PointLight,
   // Textures
-  Texture,
+  TextureLoader,
 };

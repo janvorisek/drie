@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "Texture",
+  name: "TextureLoader",
   render: () => null,
 };
 </script>
@@ -11,6 +11,9 @@ import { inject, ref, watch } from "vue";
 import { Texture, TextureLoader, Material } from "three";
 
 export interface Props {
+  /**
+   *  The path or URL to the texture file. This can also be a Data URI.
+   */
   url: string;
 }
 
