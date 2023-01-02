@@ -1,0 +1,35 @@
+<template>
+  <div class="example">
+    <Renderer ref="renderer" :antialias="true">
+      <PerspectiveCamera :position="[5, 5, 5]" :up="[0, 0, 1]">
+        <OrbitControls />
+      </PerspectiveCamera>
+      <Scene background="#f9f9f9">
+        <Mesh :rotation="rot">
+          <MeshNormalMaterial :side="DoubleSide" />
+          <PlaneGeometry :width="8" :height="6" />
+        </Mesh>
+      </Scene>
+    </Renderer>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { DoubleSide } from "three";
+import { ref } from "vue";
+
+import { Renderer } from "../../src";
+import { Scene } from "../../src";
+import { Mesh } from "../../src";
+import { PlaneGeometry } from "../../src";
+import { MeshNormalMaterial } from "../../src";
+import { PerspectiveCamera } from "../../src";
+import { OrbitControls } from "../../src";
+
+const rot = ref<[number, number, number]>([0, 0, 0]);
+
+window.setInterval(() => {
+  const angle = Date.now() / 1000;
+  rot.value = [Math.cos(angle), 0, 0];
+}, 10);
+</script>

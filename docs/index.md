@@ -31,6 +31,6 @@ Drie is under heavy development. The API may change in any time. Only basic comp
 <Test />
 </ClientOnly>
 
-## The Authors
+## Authors
 
 <VPTeamMembers size="small" :members="members" />

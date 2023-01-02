@@ -14,13 +14,13 @@
           <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
           <SphereGeometry :radius="radius" :width-segments="12" :height-segments="12" />
         </Points>
-        <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
+        <Mesh :position="pos" :rotation="rot" :scale="[s2,s2,s2]" :cast-shadow="true">
           <MeshBasicMaterial>
             <TextureLoader url="https://threejs.org/examples/textures/crate.gif" />
           </MeshBasicMaterial>
           <BoxGeometry :width="w + 1" :height="w * 2 + 1" />
         </Mesh>
-        <Mesh :position="[-5, 0, 0]" :scale="[s, 1, 1]">
+        <Mesh :position="[-5, 0, 0]" :scale="[s2+0.5, 1, s]" :cast-shadow="true">
           <MeshBasicMaterial :color="color2" :side="DoubleSide" />
           <BufferGeometry :vertices="vertices" />
         </Mesh>
@@ -66,6 +66,7 @@ const vertices = reactive<number[]>([]);
 
 const w = ref(1);
 const s = ref(1);
+const s2 = ref(1);
 const radius = ref(1);
 
 const posV = new Vector3(5, -1, 0);
@@ -85,7 +86,7 @@ onMounted(() => {
 
     vertices.push(x1, y1, 0);
     vertices.push(x2, y2, 0);
-    vertices.push(0, 0, 0);
+    vertices.push(0, 0, 1);
   }
 });
 
@@ -100,7 +101,8 @@ window.setInterval(() => {
   color3.value = `rgb(${Math.round(Math.cos(angle * 2) * 100 + 100)}, 50, ${Math.round(Math.sin(angle) * 50 + 100)})`;
   
   radius.value = Math.cos(angle) + 2;
-  s.value = Math.sin(angle * 5) * 0.5 + 1;
+  s.value = Math.sin(angle * 3) * 3;
+  s2.value = Math.sin(angle*2) * 0.5 + 1;
 
   w.value = Math.sin(angle) + 1;
   pos.value = [Math.cos(angle), Math.sin(angle), Math.sin(angle)];

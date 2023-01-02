@@ -2,10 +2,12 @@
 
 ## Installation
 
-Drie can be installed from npm and always supports the latest THREE.js version.
+Drie can be installed from npm and always supports the latest `three.js` version.
+
+Note that you are supposed to install `three.js` yourself.
 
 ```shell
-npm install @janvorisek/drie three #latest Drie & THREE.js
+npm install @janvorisek/drie three #latest Drie & three.js
 ```
 
 ## Usage

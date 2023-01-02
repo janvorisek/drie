@@ -5,6 +5,20 @@ export default {
 };
 </script>
 
+<docs>BEGIN_DOCS
+  <script setup>
+  import PlaneGeometry from '../../examples/PlaneGeometry.vue'
+  </script>
+
+  This component manages [`THREE.PlaneGeometry`](https://threejs.org/docs/#api/en/geometries/PlaneGeometry).
+
+  ## Example
+
+  <ClientOnly>
+  <PlaneGeometry />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
 import { inject, watch, ref } from "vue";
 

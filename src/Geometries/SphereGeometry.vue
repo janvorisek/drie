@@ -5,8 +5,18 @@ export default {
 };
 </script>
 
-<docs>
-  This works
+<docs>BEGIN_DOCS
+  <script setup>
+  import SphereGeometry from '../../examples/SphereGeometry.vue'
+  </script>
+
+  This component manages [`THREE.SphereGeometry`](https://threejs.org/docs/#api/en/geometries/SphereGeometry).
+
+  ## Example
+
+  <ClientOnly>
+  <SphereGeometry />
+  </ClientOnly>
 </docs>
 
 <script setup lang="ts">

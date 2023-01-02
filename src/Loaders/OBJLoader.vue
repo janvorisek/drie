@@ -31,6 +31,24 @@ const props = withDefaults(defineProps<Props>(), {
   receiveShadow: false,
 });
 
+const emit = defineEmits<{
+  /**
+   * Emitted when OBJ file is successfuly loaded, parsed and added to the scene.
+   * @arg {Group} group An instance of `THREE.Group`
+   */
+  (event: "load", group: Group): void;
+
+  /**
+   * Emmited on XHR progress
+   */
+  (event: "progress", xhr: ProgressEvent<EventTarget>): void;
+
+  /**
+   * Emitted on XHR error or OBJ parsing error
+   */
+  (event: "error", error: ErrorEvent): void;
+}>();
+
 const loader = new OBJLoader();
 
 const scene = inject("scene") as Scene;
@@ -59,14 +77,16 @@ function load() {
         handleVectorProp(props, "rotation", three, false);
         handleVectorProp(props, "scale", three, false);
       }
+
+      emit("load", object);
     },
     // called when loading is in progresses
     function (xhr) {
-      console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+      emit("progress", xhr);
     },
     // called when loading has errors
     function (error) {
-      console.log("ERROR: OBJ file could not be loaded");
+      emit("error", error);
     },
   );
 }

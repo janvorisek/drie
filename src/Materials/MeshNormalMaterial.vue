@@ -34,7 +34,6 @@ const props = withDefaults(defineProps<Props>(), {
   side: FrontSide,
   opacity: 1,
   transparent: false,
-  vertexColors: false,
 });
 
 const mesh = inject("mesh") as Mesh;

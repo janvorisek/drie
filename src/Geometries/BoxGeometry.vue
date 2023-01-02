@@ -5,6 +5,20 @@ export default {
 };
 </script>
 
+<docs>BEGIN_DOCS
+  <script setup>
+  import BoxGeometry from '../../examples/BoxGeometry.vue'
+  </script>
+
+  This component manages [`THREE.BoxGeometry`](https://threejs.org/docs/#api/en/geometries/BoxGeometry).
+
+  ## Example
+
+  <ClientOnly>
+  <BoxGeometry />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
 import { inject, watch, ref } from "vue";
 
