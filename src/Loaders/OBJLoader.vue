@@ -2,24 +2,60 @@
   <slot></slot>
 </template>
 
+<docs>BEGIN_DOCS
+  <script setup>
+  import OBJLoader from '../../examples/OBJLoader.vue'
+  </script>
+
+  This component manages [`THREE.OBJLoader`](https://threejs.org/docs/?q=objloader#examples/en/loaders/OBJLoader).
+
+  `<OBJLoader>` behaves as a [`<Group>`](/components/Objects/Group) containing meshes loaded from the `.obj` file.
+
+  ## Example
+
+  <ClientOnly>
+  <OBJLoader />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
 import { provide, inject, watch } from "vue";
 
-import { BufferGeometry, Group, Mesh, MeshBasicMaterial, Scene } from "three";
+import { Group, Mesh, Scene } from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
 import { Vector3Like } from "../types";
-import { handleVectorProp, vector3LikeToVector3 } from "../utils";
+import { handleVectorProp } from "../utils";
 
 export interface Props {
   /**
    * A string containing the path/URL of the `.obj` file.
    */
   url: string;
+
+  /**
+   * A [Vector3Like](/types#vector3like) representing the object's local position.
+   */
   position?: Vector3Like;
+
+  /**
+   * A [Vector3Like](/types#vector3like) representing local rotation (see Euler angles), in radians.
+   */
   rotation?: Vector3Like;
+
+  /**
+   * A [Vector3Like](/types#vector3like) representing the object's local scale.
+   */
   scale?: Vector3Like;
+
+  /**
+   * Whether the object gets rendered into shadow map.
+   */
   castShadow?: boolean;
+
+  /**
+   * Whether the material receives shadows.
+   */
   receiveShadow?: boolean;
 }
 
