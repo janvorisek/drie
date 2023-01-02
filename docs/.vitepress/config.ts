@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 
-const pkg = require('vitepress/package.json')
+const pkg = require('../../package.json')
 
 const testFolder = './docs/components';
 import * as fs from "fs";
