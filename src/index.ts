@@ -8,6 +8,7 @@ import OrthographicCamera from "./Cameras/OrthographicCamera.vue";
 
 import OrbitControls from "./Controls/OrbitControls.vue";
 
+import LineSegments from "./Objects/LineSegments.vue";
 import Mesh from "./Objects/Mesh.vue";
 import Points from "./Objects/Points.vue";
 
@@ -17,8 +18,10 @@ import AxesHelper from "./Helpers/AxesHelper.vue";
 
 import BoxGeometry from "./Geometries/BoxGeometry.vue";
 import BufferGeometry from "./Geometries/BufferGeometry.vue";
+import EdgesGeometry from "./Geometries/EdgesGeometry.vue";
 import PlaneGeometry from "./Geometries/PlaneGeometry.vue";
 import SphereGeometry from "./Geometries/SphereGeometry.vue";
+import WireframeGeometry from "./Geometries/WireframeGeometry.vue";
 
 import MeshBasicMaterial from "./Materials/MeshBasicMaterial.vue";
 import MeshLambertMaterial from "./Materials/MeshLambertMaterial.vue";
@@ -40,6 +43,7 @@ function install(app: App) {
   // Controls
   app.component("OrbitControls", OrbitControls);
   // Objects
+  app.component("LineSegments", LineSegments);
   app.component("Mesh", Mesh);
   app.component("Points", Points);
   // Loaders
@@ -49,8 +53,10 @@ function install(app: App) {
   // Geometries
   app.component("BoxGeometry", BoxGeometry);
   app.component("BufferGeometry", BufferGeometry);
+  app.component("EdgesGeometry", EdgesGeometry);
   app.component("PlaneGeometry", PlaneGeometry);
   app.component("SphereGeometry", SphereGeometry);
+  app.component("WireframeGeometry", WireframeGeometry);
   // Materials
   app.component("MeshBasicMaterial", MeshBasicMaterial);
   app.component("MeshLambertMaterial", MeshLambertMaterial);
@@ -74,6 +80,7 @@ export {
   // Controls
   OrbitControls,
   // Objects
+  LineSegments,
   Mesh,
   Points,
   // Loaders
@@ -83,8 +90,10 @@ export {
   // Geometries
   BoxGeometry,
   BufferGeometry,
+  EdgesGeometry,
   PlaneGeometry,
   SphereGeometry,
+  WireframeGeometry,
   // Materials
   MeshBasicMaterial,
   MeshLambertMaterial,

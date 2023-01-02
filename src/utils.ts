@@ -1,4 +1,4 @@
-import { Vector3, Object3D, Group } from "three";
+import { Vector3, Object3D, Group, BufferGeometry } from "three";
 import { watch } from "vue";
 import { Vector3Like } from "./types";
 
@@ -63,9 +63,30 @@ export const handleVectorProp = (
 export const handlePropCallback = (props: { [key: string]: any }, prop: string, fn: () => void) => {
   watch(
     () => props[prop],
-    () => fn,
+    () => {
+      fn();
+    },
   );
 };
+
+export function copyGeo(three: BufferGeometry, tmp: BufferGeometry) {
+  if (tmp.hasAttribute("position")) {
+    three.setAttribute("position", tmp.getAttribute("position"));
+    three.attributes.position.needsUpdate = true;
+  }
+
+  if (tmp.hasAttribute("normal")) {
+    three.setAttribute("normal", tmp.getAttribute("normal"));
+    three.attributes.normal.needsUpdate = true;
+  }
+
+  if (tmp.hasAttribute("uv")) {
+    three.setAttribute("uv", tmp.getAttribute("uv"));
+    three.attributes.uv.needsUpdate = true;
+  }
+
+  three.setIndex(tmp.getIndex());
+}
 
 export function disposeTHREEObject(obj: any) {
   if (obj.children.length > 0) {

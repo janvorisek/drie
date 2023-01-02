@@ -20,12 +20,17 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { inject, watch, ref } from "vue";
+import { inject, watch, ref, reactive } from "vue";
 
 import { BoxGeometry, BufferGeometry, Mesh } from "three";
-import { handlePropCallback } from "../utils";
+import { handlePropCallback, copyGeo } from "../utils";
 
 export interface Props {
+  /**
+   * Name of the geometry
+   */
+  name?: string;
+
   /**
    * Width along the X axis
    */
@@ -58,6 +63,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  name: "",
   width: 1,
   height: 1,
   depth: 1,
@@ -79,14 +85,16 @@ function makeBox(
   return new BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments);
 }
 
-const three = ref<BufferGeometry>(
-  makeBox(props.width, props.height, props.depth, props.widthSegments, props.heightSegments, props.depthSegments),
-);
-mesh.geometry = three.value;
+const three = reactive(new BufferGeometry());
+// eslint-disable-next-line vue/no-setup-props-destructure
+three.name = props.name;
+mesh.geometry = three;
+
+const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
+addGeometry(three);
 
 function redoGeometry() {
-  mesh.geometry.dispose();
-  mesh.geometry = makeBox(
+  const tmp = makeBox(
     props.width,
     props.height,
     props.depth,
@@ -94,8 +102,15 @@ function redoGeometry() {
     props.heightSegments,
     props.depthSegments,
   );
-  three.value = mesh.geometry;
+
+  copyGeo(three, tmp);
 }
+
+redoGeometry();
+
+handlePropCallback(props, "name", () => {
+  three.name = props.name;
+});
 
 handlePropCallback(props, "width", redoGeometry);
 handlePropCallback(props, "height", redoGeometry);

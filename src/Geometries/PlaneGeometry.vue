@@ -20,12 +20,17 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { inject, watch, ref } from "vue";
+import { inject, watch, ref, reactive } from "vue";
 
 import { BufferGeometry, Mesh, PlaneGeometry } from "three";
-import { handlePropCallback } from "../utils";
+import { handlePropCallback, copyGeo } from "../utils";
 
 export interface Props {
+  /**
+   * Name of the geometry
+   */
+  name?: string;
+
   /**
    * Width along the X axis.
    */
@@ -48,6 +53,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  name: "",
   width: 1,
   height: 1,
   widthSegments: 1,
@@ -65,14 +71,21 @@ function makePlane(
   return new PlaneGeometry(width, height, widthSegments, heightSegments);
 }
 
-const three = ref<BufferGeometry>(makePlane(props.width, props.height, props.widthSegments, props.heightSegments));
-mesh.geometry = three.value;
+const three = reactive(new BufferGeometry());
+// eslint-disable-next-line vue/no-setup-props-destructure
+three.name = props.name;
+mesh.geometry = three;
+
+const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
+addGeometry(three);
 
 function redoGeometry() {
-  mesh.geometry.dispose();
-  mesh.geometry = makePlane(props.width, props.height, props.widthSegments, props.heightSegments);
-  three.value = mesh.geometry;
+  const tmp = makePlane(props.width, props.height, props.widthSegments, props.heightSegments);
+
+  copyGeo(three, tmp);
 }
+
+redoGeometry();
 
 handlePropCallback(props, "width", redoGeometry);
 handlePropCallback(props, "height", redoGeometry);

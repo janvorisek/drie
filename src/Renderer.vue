@@ -4,9 +4,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, provide, type Ref, ref, watch, onUnmounted } from "vue";
+import { onMounted, provide, type Ref, ref, watch, onUnmounted, reactive } from "vue";
 
-import { Camera, Scene, WebGLRenderer } from "three";
+import { BufferGeometry, Camera, Scene, WebGLRenderer } from "three";
 import { disposeTHREEObject } from "./utils";
 
 export interface Props {
@@ -53,6 +53,7 @@ const props = withDefaults(defineProps<Props>(), {
 let renderer: WebGLRenderer | null = null;
 
 const scenes: Scene[] = [];
+const geometries = reactive<BufferGeometry[]>([]);
 
 let activeCamera: Camera | null = null;
 const cameras = ref<Camera[]>([]);
@@ -151,6 +152,9 @@ watch(
 
 provide("addCamera", (c: Camera) => cameras.value.push(c));
 provide("addScene", (s: Scene) => scenes.push(s));
+
+provide("addGeometry", (s: BufferGeometry) => geometries.push(s));
+provide("getGeometry", (c: string) => geometries.find((g) => g.name === c));
 
 //provide("controls", controls);
 provide("addControls", (controlsRef: any) => controls.value.push(controlsRef));

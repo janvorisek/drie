@@ -3,6 +3,12 @@
     <option value="cam1">PerspectiveCamera</option>
     <option value="cam2">OrthographicCamera</option>
   </select>
+  <select v-model="geoName" class="my-5">
+    <option value="plane">Plane</option>
+    <option value="test">Cube</option>
+    <option value="custom">Custom</option>
+    <option value="sphere">Sphere</option>
+  </select>
   <div class="rendererParent">
     <Renderer ref="renderer" :camera="camera" :antialias="true" :shadow-map-enabled="true">
       <PerspectiveCamera name="cam1" :position="[5, 5, 5]" :up="[0, 0, 1]">
@@ -16,22 +22,28 @@
         <AmbientLight :color="0xffffff" />
         <Points :position="posV" :scale="[s, s, s]">
           <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
-          <SphereGeometry :radius="radius" :width-segments="12" :height-segments="12" />
+          <SphereGeometry name="sphere" :radius="radius" :width-segments="12" :height-segments="12" />
         </Points>
         <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
           <MeshLambertMaterial transparent :opacity="opacity">
             <TextureLoader url="https://threejs.org/examples/textures/crate.gif" />
           </MeshLambertMaterial>
-          <BoxGeometry :width="w + 1" :height="w * 2 + 1" />
+          <BoxGeometry name="test" :width="w + 1" :height="w * 2 + 1" />
         </Mesh>
         <Mesh :position="[-5, 0, 0]" :scale="[s, 1, 1]">
           <MeshLambertMaterial :color="color2" :side="DoubleSide" />
-          <BufferGeometry :vertices="vertices" />
+          <BufferGeometry name="custom" :vertices="vertices" />
         </Mesh>
         <Mesh :position="[0, 0, -3]" :receive-shadow="true">
           <MeshLambertMaterial color="#cccccc" :side="DoubleSide" />
-          <PlaneGeometry :width="20" :height="20" />
+          <PlaneGeometry name="plane" :width="20" :height="20" />
         </Mesh>
+        <LineSegments :position="pos" :rotation="rot">
+          <EdgesGeometry geometry="test" />
+        </LineSegments>
+        <LineSegments>
+          <WireframeGeometry :geometry="geoName" />
+        </LineSegments>
         <OBJLoader
           :position="[3, 0, 0]"
           :rotation="[Math.PI / 2, Math.cos(Date.now() / 1000) * Math.PI, 0]"
@@ -116,6 +128,8 @@ const onLoad = () => {
 
 const camera = ref("cam1");
 const renderer = ref({});
+
+const geoName = ref("plane");
 </script>
 
 <style>

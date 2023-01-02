@@ -20,12 +20,17 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { inject, watch, ref } from "vue";
+import { inject, watch, ref, reactive } from "vue";
 
 import { SphereGeometry, BufferGeometry, Mesh } from "three";
-import { handlePropCallback } from "../utils";
+import { handlePropCallback, copyGeo } from "../utils";
 
 export interface Props {
+  /**
+   * Name of the geometry
+   */
+  name?: string;
+
   radius?: number;
   widthSegments?: number;
   heightSegments?: number;
@@ -36,6 +41,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  name: "",
   radius: 1,
   widthSegments: 8,
   heightSegments: 6,
@@ -59,23 +65,16 @@ function makeSphere(
   return new SphereGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength);
 }
 
-const three = ref<BufferGeometry>(
-  makeSphere(
-    props.radius,
-    props.widthSegments,
-    props.heightSegments,
-    props.phiStart,
-    props.phiLength,
-    props.thetaStart,
-    props.thetaLength,
-  ),
-);
+const three = reactive(new BufferGeometry());
+// eslint-disable-next-line vue/no-setup-props-destructure
+three.name = props.name;
+mesh.geometry = three;
 
-mesh.geometry = three.value;
+const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
+addGeometry(three);
 
 function redoGeometry() {
-  mesh.geometry.dispose();
-  mesh.geometry = makeSphere(
+  const tmp = makeSphere(
     props.radius,
     props.widthSegments,
     props.heightSegments,
@@ -84,7 +83,8 @@ function redoGeometry() {
     props.thetaStart,
     props.thetaLength,
   );
-  three.value = mesh.geometry;
+
+  copyGeo(three, tmp);
 }
 
 handlePropCallback(props, "radius", redoGeometry);

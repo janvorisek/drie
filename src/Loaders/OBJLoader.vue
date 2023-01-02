@@ -64,6 +64,7 @@ handleVectorProp(props, "scale", three);
 
 function load() {
   // load a resource
+  //return new Promise((resolve, reject) => {
   loader.load(
     // resource URL
     props.url,
@@ -79,6 +80,7 @@ function load() {
       }
 
       emit("load", object);
+      resolve(object);
     },
     // called when loading is in progresses
     function (xhr) {
@@ -89,6 +91,7 @@ function load() {
       emit("error", error);
     },
   );
+  //});
 }
 
 load();

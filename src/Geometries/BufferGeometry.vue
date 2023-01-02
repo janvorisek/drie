@@ -6,11 +6,17 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject, watch, ref } from "vue";
+import { inject, watch, ref, reactive } from "vue";
 
 import { BufferAttribute, BufferGeometry, Mesh } from "three";
+import { copyGeo } from "../utils";
 
 export interface Props {
+  /**
+   * Name of the geometry
+   */
+  name?: string;
+
   /**
    * Flat array of vertex coordinates
    */
@@ -23,6 +29,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  name: "",
   vertices: () => [],
   faces: () => [],
 });
@@ -44,17 +51,23 @@ function makeGeometry(vertices: number[], faces: number[]) {
 
   geometry.setAttribute("position", new BufferAttribute(vertArray, 3));
 
+  geometry.computeVertexNormals();
+
   return geometry;
 }
 
-const three = ref<BufferGeometry>(makeGeometry(props.vertices, props.faces));
-mesh.geometry = three.value;
+const three = reactive(makeGeometry(props.vertices, props.faces));
+// eslint-disable-next-line vue/no-setup-props-destructure
+three.name = props.name;
+mesh.geometry = three;
+
+const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
+addGeometry(three);
 
 function redoGeometry(vertices: number[]) {
-  mesh.geometry.dispose();
-  mesh.geometry = makeGeometry(vertices, []);
-  mesh.geometry.computeVertexNormals();
-  three.value = mesh.geometry;
+  const tmp = makeGeometry(vertices, []);
+
+  copyGeo(three, tmp);
 }
 
 watch(
