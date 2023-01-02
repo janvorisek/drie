@@ -1,6 +1,6 @@
 <template>
   <div class="example" style="height: 400px">
-    <Renderer ref="renderer" :camera="camera" :antialias="true" shadow-map-enabled>
+    <Renderer ref="renderer" :camera="camera" :antialias="true" :frame-limit="30" shadow-map-enabled>
       <PerspectiveCamera name="cam1" :position="[5,5,5]" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>

@@ -19,10 +19,10 @@ const members = [
 
 # Drie
 
-Drie is a Vue 3 component library for THREE.js made with TypeScript and Composition API.
+Drie is a Vue 3 component library for [`three.js`](https://threejs.org/) inspired by `react-three-fiber` and `TroisJS`. It is made with TypeScript and Composition API.
 
 ::: warning
-Drie is under heavy development. The API may change in any time. Only basic components are supported now and the examples may be outdated.
+Drie is under heavy development. The API may change in any time. Only some components are supported now and the examples may be outdated.
 :::
 
 ## Example
