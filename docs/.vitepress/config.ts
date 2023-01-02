@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress'
 
+const pkg = require('vitepress/package.json')
+
 const testFolder = './docs/components';
 import * as fs from "fs";
 
@@ -43,6 +45,15 @@ export default defineConfig( {
   description: 'Drie is a Vue 3 component library for THREE.js made with TypeScript and Composition API.',
   cleanUrls: 'with-subfolders',
   themeConfig: {
+    nav: [{
+      text: pkg.version,
+      items: [
+        {
+          text: 'Issues',
+          link: 'https://github.com/janvorisek/drie/issues'
+        }
+      ]
+    }],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/janvorisek/drie' }
     ],
