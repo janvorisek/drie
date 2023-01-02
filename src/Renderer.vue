@@ -4,9 +4,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, provide, type Ref, ref, watch } from "vue";
+import { onMounted, provide, type Ref, ref, watch, onUnmounted } from "vue";
 
 import { Camera, Scene, WebGLRenderer } from "three";
+import { disposeTHREEObject } from "./utils";
 
 export interface Props {
   /**
@@ -107,6 +108,10 @@ onMounted(() => {
   myObserver.observe(canvas.value!.parentElement as Element);
 
   animate();
+});
+
+onUnmounted(() => {
+  for (let scene of scenes) disposeTHREEObject(scene);
 });
 
 function animate() {

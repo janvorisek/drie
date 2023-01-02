@@ -66,3 +66,43 @@ export const handlePropCallback = (props: { [key: string]: any }, prop: string, 
     () => fn,
   );
 };
+
+export function disposeTHREEObject(obj: any) {
+  if (obj.children.length > 0) {
+    for (let x = obj.children.length - 1; x >= 0; x--) {
+      disposeTHREEObject(obj.children[x]);
+    }
+  }
+
+  if (obj.geometry) {
+    obj.geometry.dispose();
+  }
+
+  if (obj.material) {
+    if (obj.material.length) {
+      for (let i = 0; i < obj.material.length; ++i) {
+        if (obj.material[i].map) obj.material[i].map.dispose();
+        if (obj.material[i].lightMap) obj.material[i].lightMap.dispose();
+        if (obj.material[i].bumpMap) obj.material[i].bumpMap.dispose();
+        if (obj.material[i].normalMap) obj.material[i].normalMap.dispose();
+        if (obj.material[i].specularMap) obj.material[i].specularMap.dispose();
+        if (obj.material[i].envMap) obj.material[i].envMap.dispose();
+
+        obj.material[i].dispose();
+      }
+    } else {
+      if (obj.material.map) obj.material.map.dispose();
+      if (obj.material.lightMap) obj.material.lightMap.dispose();
+      if (obj.material.bumpMap) obj.material.bumpMap.dispose();
+      if (obj.material.normalMap) obj.material.normalMap.dispose();
+      if (obj.material.specularMap) obj.material.specularMap.dispose();
+      if (obj.material.envMap) obj.material.envMap.dispose();
+
+      obj.material.dispose();
+    }
+  }
+
+  obj.removeFromParent();
+
+  return true;
+}
