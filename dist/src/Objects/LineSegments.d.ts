@@ -1,4 +1,4 @@
-import { BufferGeometry, Points, PointsMaterial, Scene } from "three";
+import { BufferGeometry, LineBasicMaterial, LineSegments, Scene } from "three";
 import { Vector3Like } from "../types";
 export interface Props {
     /**
@@ -34,8 +34,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
     props: any;
     scene: Scene;
     geometry: BufferGeometry;
-    material: PointsMaterial;
-    three: Points<BufferGeometry, PointsMaterial>;
+    material: LineBasicMaterial;
+    three: LineSegments<BufferGeometry, LineBasicMaterial>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     position: {
         type: null;

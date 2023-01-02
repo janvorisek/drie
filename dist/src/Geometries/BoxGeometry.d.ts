@@ -1,6 +1,11 @@
-import { inject, watch, ref } from "vue";
+import { inject, watch, ref, reactive } from "vue";
 import { BoxGeometry, BufferGeometry, Mesh } from "three";
+import { copyGeo } from "../utils";
 export interface Props {
+    /**
+     * Name of the geometry
+     */
+    name?: string;
     /**
      * Width along the X axis
      */
@@ -27,6 +32,11 @@ export interface Props {
     depthSegments?: number;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
+    };
     width: {
         type: NumberConstructor;
         required: false;
@@ -61,7 +71,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     props: any;
     mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]>;
     makeBox: (width: number | undefined, height: number | undefined, depth: number | undefined, widthSegments: number | undefined, heightSegments: number | undefined, depthSegments: number | undefined) => BoxGeometry;
-    three: import("vue").Ref<{
+    three: {
         id: number;
         uuid: string;
         name: string;
@@ -487,18 +497,26 @@ declare const _sfc_main: import("vue").DefineComponent<{
         hasEventListener: <T_1 extends string>(type: T_1, listener: import("three").EventListener<import("three").Event, T_1, BufferGeometry>) => boolean;
         removeEventListener: <T_2 extends string>(type: T_2, listener: import("three").EventListener<import("three").Event, T_2, BufferGeometry>) => void;
         dispatchEvent: (event: import("three").Event) => void;
-    }>;
+    };
+    addGeometry: (g: BufferGeometry) => void;
     redoGeometry: () => void;
     inject: typeof inject;
     watch: typeof watch;
     ref: typeof ref;
+    reactive: typeof reactive;
     readonly BoxGeometry: typeof BoxGeometry;
     readonly BufferGeometry: typeof BufferGeometry;
     readonly Mesh: typeof Mesh;
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
+    readonly copyGeo: typeof copyGeo;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
+    };
     width: {
         type: NumberConstructor;
         required: false;
@@ -530,6 +548,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: number;
     };
 }>>, {
+    name: string;
     width: number;
     height: number;
     depth: number;

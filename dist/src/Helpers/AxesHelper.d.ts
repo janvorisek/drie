@@ -65,9 +65,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: () => number[];
     };
 }>>, {
+    scale: any;
     position: any;
     rotation: any;
-    scale: any;
     size: number;
 }>;
 export default _sfc_main;

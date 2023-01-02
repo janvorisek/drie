@@ -6,10 +6,25 @@ export interface Props {
      * A string containing the path/URL of the `.obj` file.
      */
     url: string;
+    /**
+     * A [Vector3Like](/types#vector3like) representing the object's local position.
+     */
     position?: Vector3Like;
+    /**
+     * A [Vector3Like](/types#vector3like) representing local rotation (see Euler angles), in radians.
+     */
     rotation?: Vector3Like;
+    /**
+     * A [Vector3Like](/types#vector3like) representing the object's local scale.
+     */
     scale?: Vector3Like;
+    /**
+     * Whether the object gets rendered into shadow map.
+     */
     castShadow?: boolean;
+    /**
+     * Whether the material receives shadows.
+     */
     receiveShadow?: boolean;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
@@ -88,9 +103,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
     onProgress?: ((...args: any[]) => any) | undefined;
     onError?: ((...args: any[]) => any) | undefined;
 }, {
+    scale: any;
     position: any;
     rotation: any;
-    scale: any;
     castShadow: boolean;
     receiveShadow: boolean;
 }>;

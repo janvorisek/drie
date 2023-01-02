@@ -68,8 +68,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }>>, {
     name: string;
+    lookAt: any;
     up: any;
     position: any;
-    lookAt: any;
 }>;
 export default _sfc_main;

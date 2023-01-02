@@ -82,9 +82,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
     };
 }>>, {
+    scale: any;
     position: any;
     rotation: any;
-    scale: any;
     castShadow: boolean;
     receiveShadow: boolean;
 }>;

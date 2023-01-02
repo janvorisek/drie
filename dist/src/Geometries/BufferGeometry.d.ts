@@ -1,6 +1,11 @@
-import { inject, watch, ref } from "vue";
+import { inject, watch, ref, reactive } from "vue";
 import { BufferAttribute, BufferGeometry, Mesh } from "three";
+import { copyGeo } from "../utils";
 export interface Props {
+    /**
+     * Name of the geometry
+     */
+    name?: string;
     /**
      * Flat array of vertex coordinates
      */
@@ -11,6 +16,11 @@ export interface Props {
     faces?: number[];
 }
 declare const _sfc_main: import("vue").DefineComponent<{
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
+    };
     vertices: {
         type: ArrayConstructor;
         required: false;
@@ -25,7 +35,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     props: any;
     mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]>;
     makeGeometry: (vertices: number[], faces: number[]) => BufferGeometry;
-    three: import("vue").Ref<{
+    three: {
         id: number;
         uuid: string;
         name: string;
@@ -451,15 +461,23 @@ declare const _sfc_main: import("vue").DefineComponent<{
         hasEventListener: <T_1 extends string>(type: T_1, listener: import("three").EventListener<import("three").Event, T_1, BufferGeometry>) => boolean;
         removeEventListener: <T_2 extends string>(type: T_2, listener: import("three").EventListener<import("three").Event, T_2, BufferGeometry>) => void;
         dispatchEvent: (event: import("three").Event) => void;
-    }>;
+    };
+    addGeometry: (g: BufferGeometry) => void;
     redoGeometry: (vertices: number[]) => void;
     inject: typeof inject;
     watch: typeof watch;
     ref: typeof ref;
+    reactive: typeof reactive;
     readonly BufferAttribute: typeof BufferAttribute;
     readonly BufferGeometry: typeof BufferGeometry;
     readonly Mesh: typeof Mesh;
+    readonly copyGeo: typeof copyGeo;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
+    };
     vertices: {
         type: ArrayConstructor;
         required: false;
@@ -471,6 +489,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: () => never[];
     };
 }>>, {
+    name: string;
     vertices: unknown[];
     faces: unknown[];
 }>;

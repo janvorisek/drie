@@ -1,6 +1,7 @@
 import { Camera } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { inject, ref, watch, type Ref } from "vue";
+import { type Vector3Like } from "../types";
 export interface Props {
     /**
      * Enable or disable camera panning.
@@ -55,6 +56,10 @@ export interface Props {
      * If set, the interval [min, max] must be a sub-interval of [-2π, 2π], with (max - min < 2π).
      */
     maxAzimuthAngle?: number;
+    /**
+     * The focus point of the controls.
+     */
+    target?: Vector3Like;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
     enablePan: {
@@ -111,6 +116,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: NumberConstructor;
         required: false;
         default: number;
+    };
+    target: {
+        type: null;
+        required: false;
+        default: () => number[];
     };
 }, {
     props: any;
@@ -3590,6 +3600,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
+    readonly handleVectorProp: (props: {
+        [key: string]: any;
+    }, prop: string, obj: import("three").Object3D<import("three").Event> | import("three").Group, registerWatch?: boolean) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     enablePan: {
         type: BooleanConstructor;
@@ -3646,6 +3659,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
+    target: {
+        type: null;
+        required: false;
+        default: () => number[];
+    };
 }>>, {
     enablePan: boolean;
     enableRotate: boolean;
@@ -3658,5 +3676,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     maxPolarAngle: number;
     minAzimuthAngle: number;
     maxAzimuthAngle: number;
+    target: any;
 }>;
 export default _sfc_main;

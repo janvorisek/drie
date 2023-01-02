@@ -1,64 +1,20 @@
-import { inject, watch, ref, reactive } from "vue";
-import { SphereGeometry, BufferGeometry, Mesh } from "three";
+import { inject, nextTick, watch, reactive } from "vue";
+import { BufferGeometry, EdgesGeometry, Mesh } from "three";
 import { copyGeo } from "../utils";
 export interface Props {
     /**
-     * Name of the geometry
+     * Target geometry name
      */
-    name?: string;
-    radius?: number;
-    widthSegments?: number;
-    heightSegments?: number;
-    phiStart?: number;
-    phiLength?: number;
-    thetaStart?: number;
-    thetaLength?: number;
+    geometry: string;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
-    name: {
+    geometry: {
         type: StringConstructor;
-        required: false;
-        default: string;
-    };
-    radius: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    widthSegments: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    heightSegments: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    phiStart: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    phiLength: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    thetaStart: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    thetaLength: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
+        required: true;
     };
 }, {
     props: any;
     mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]>;
-    makeSphere: (radius: number | undefined, widthSegments: number | undefined, heightSegments: number | undefined, phiStart: number | undefined, phiLength: number | undefined, thetaStart: number | undefined, thetaLength: number | undefined) => SphereGeometry;
     three: {
         id: number;
         uuid: string;
@@ -486,68 +442,26 @@ declare const _sfc_main: import("vue").DefineComponent<{
         removeEventListener: <T_2 extends string>(type: T_2, listener: import("three").EventListener<import("three").Event, T_2, BufferGeometry>) => void;
         dispatchEvent: (event: import("three").Event) => void;
     };
+    getGeometry: (g: string) => BufferGeometry;
     addGeometry: (g: BufferGeometry) => void;
     redoGeometry: () => void;
+    unwatch: import("vue").WatchStopHandle;
+    waitUntilGeometryChanged: () => void;
     inject: typeof inject;
+    nextTick: typeof nextTick;
     watch: typeof watch;
-    ref: typeof ref;
     reactive: typeof reactive;
-    readonly SphereGeometry: typeof SphereGeometry;
     readonly BufferGeometry: typeof BufferGeometry;
+    readonly EdgesGeometry: typeof EdgesGeometry;
     readonly Mesh: typeof Mesh;
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
     readonly copyGeo: typeof copyGeo;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    name: {
+    geometry: {
         type: StringConstructor;
-        required: false;
-        default: string;
+        required: true;
     };
-    radius: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    widthSegments: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    heightSegments: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    phiStart: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    phiLength: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    thetaStart: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    thetaLength: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-}>>, {
-    name: string;
-    widthSegments: number;
-    heightSegments: number;
-    radius: number;
-    phiStart: number;
-    phiLength: number;
-    thetaStart: number;
-    thetaLength: number;
-}>;
+}>>, {}>;
 export default _sfc_main;

@@ -1,4 +1,5 @@
 import { OrthographicCamera } from "three";
+import { type Ref } from "vue";
 import { Vector3Like } from "../types";
 export interface Props {
     /**
@@ -42,6 +43,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
 }, {
     props: any;
     three: OrthographicCamera;
+    canvas: Ref<HTMLCanvasElement> | undefined;
     applyProps: (props: Props) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     name: {
@@ -66,8 +68,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }>>, {
     name: string;
+    lookAt: any;
     up: any;
     position: any;
-    lookAt: any;
 }>;
 export default _sfc_main;
