@@ -1,6 +1,9 @@
 import { inject, ref, watch } from "vue";
 import { Texture, TextureLoader, Material } from "three";
 export interface Props {
+    /**
+     *  The path or URL to the texture file. This can also be a Data URI.
+     */
     url: string;
 }
 declare const _sfc_main: import("vue").DefineComponent<{

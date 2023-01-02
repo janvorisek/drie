@@ -2,6 +2,9 @@ import { Group, Scene } from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { Vector3Like } from "../types";
 export interface Props {
+    /**
+     * A string containing the path/URL of the `.obj` file.
+     */
     url: string;
     position?: Vector3Like;
     rotation?: Vector3Like;
@@ -41,11 +44,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     props: any;
+    emit: {
+        (event: "load", group: Group): void;
+        (event: "progress", xhr: ProgressEvent<EventTarget>): void;
+        (event: "error", error: ErrorEvent): void;
+    };
     loader: OBJLoader;
     scene: Scene;
     three: Group;
     load: () => void;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("load" | "progress" | "error")[], "load" | "progress" | "error", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     url: {
         type: StringConstructor;
         required: true;
@@ -75,7 +83,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: boolean;
     };
-}>>, {
+}>> & {
+    onLoad?: ((...args: any[]) => any) | undefined;
+    onProgress?: ((...args: any[]) => any) | undefined;
+    onError?: ((...args: any[]) => any) | undefined;
+}, {
     position: any;
     rotation: any;
     scale: any;

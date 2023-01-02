@@ -9,3 +9,4 @@ export declare const handleVectorProp: (props: {
 export declare const handlePropCallback: (props: {
     [key: string]: any;
 }, prop: string, fn: () => void) => void;
+export declare function disposeTHREEObject(obj: any): boolean;

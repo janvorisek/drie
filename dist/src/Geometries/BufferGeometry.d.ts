@@ -1,7 +1,13 @@
 import { inject, watch, ref } from "vue";
 import { BufferAttribute, BufferGeometry, Mesh } from "three";
 export interface Props {
+    /**
+     * Flat array of vertex coordinates
+     */
     vertices?: number[];
+    /**
+     * Flat array of triangular faces
+     */
     faces?: number[];
 }
 declare const _sfc_main: import("vue").DefineComponent<{

@@ -2,21 +2,25 @@ import { type Ref } from "vue";
 import { Camera, Scene, WebGLRenderer } from "three";
 export interface Props {
     /**
-     * Name of the active camera when using multiple cameras
+     * Name of the active camera when using multiple cameras.
      */
     camera?: string;
     /**
-     * Flag marking whether renderer auto resizes to match parent dimensions
+     * Flag marking whether renderer auto resizes to match parent dimensions.
      */
     autoResize?: boolean;
     /**
-     * Callback to fire before each animation frame is rendered
+     * Callback to fire before each animation frame is rendered.
      */
     onBeforeRender?: () => void;
     /**
      * Whether to perform antialiasing.
      */
     antialias?: boolean;
+    /**
+     * Controls the default clear alpha value.
+     */
+    alpha?: boolean;
     /**
      * If set, use shadow maps in the scene.
      */
@@ -38,6 +42,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: () => void;
     };
     antialias: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    alpha: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
@@ -3157,6 +3166,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: boolean;
     };
+    alpha: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
     shadowMapEnabled: {
         type: BooleanConstructor;
         required: false;
@@ -3166,6 +3180,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     autoResize: boolean;
     onBeforeRender: Function;
     antialias: boolean;
+    alpha: boolean;
     shadowMapEnabled: boolean;
 }>;
 export default _sfc_main;

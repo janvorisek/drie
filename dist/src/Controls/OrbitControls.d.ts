@@ -1,10 +1,116 @@
 import { Camera } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { inject, ref, watch, type Ref } from "vue";
+export interface Props {
+    /**
+     * Enable or disable camera panning.
+     */
+    enablePan?: boolean;
+    /**
+     * Enable or disable horizontal and vertical rotation of the camera.
+     * Note that it is possible to disable a single axis by setting the min and max of the polar angle or azimuth angle to the same value, which will cause the vertical or horizontal rotation to be fixed at that value.
+     */
+    enableRotate?: boolean;
+    /**
+     * Enable or disable zooming (dollying) of the camera.
+     */
+    enableZoom?: boolean;
+    /**
+     * How far you can zoom in.
+     * `OrthographicCamera` only.
+     */
+    minZoom?: number;
+    /**
+     * How far you can zoom out.
+     * `OrthographicCamera` only.
+     */
+    maxZoom?: number;
+    /**
+     * How far you can dolly in.
+     * `PerspectiveCamera` only.
+     */
+    minDistance?: number;
+    /**
+     * How far you can dolly out.
+     * `PerspectiveCamera` only.
+     */
+    maxDistance?: number;
+    /**
+     * How far you can orbit vertically, lower limit.
+     * Range is 0 to Math.PI radians
+     */
+    minPolarAngle?: number;
+    /**
+     * How far you can orbit vertically, upper limit.
+     * Range is 0 to Math.PI radians
+     */
+    maxPolarAngle?: number;
+    /**
+     * How far you can orbit horizontally, lower limit.
+     * If set, the interval [min, max] must be a sub-interval of [-2π, 2π], with (max - min < 2π).
+     */
+    minAzimuthAngle?: number;
+    /**
+     * How far you can orbit horizontally, upper limit.
+     * If set, the interval [min, max] must be a sub-interval of [-2π, 2π], with (max - min < 2π).
+     */
+    maxAzimuthAngle?: number;
+}
 declare const _sfc_main: import("vue").DefineComponent<{
-    name: {
-        type: StringConstructor;
+    enablePan: {
+        type: BooleanConstructor;
         required: false;
+        default: boolean;
+    };
+    enableRotate: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    enableZoom: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    minZoom: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    maxZoom: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    minDistance: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    maxDistance: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    minPolarAngle: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    maxPolarAngle: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    minAzimuthAngle: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    maxAzimuthAngle: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
     };
 }, {
     props: any;
@@ -3475,15 +3581,82 @@ declare const _sfc_main: import("vue").DefineComponent<{
     } | null>;
     camera: Camera | undefined;
     canvas: Ref<HTMLCanvasElement> | undefined;
+    applyProps: () => void;
     readonly Camera: typeof Camera;
     readonly OrbitControls: typeof OrbitControls;
     inject: typeof inject;
     ref: typeof ref;
     watch: typeof watch;
+    readonly handlePropCallback: (props: {
+        [key: string]: any;
+    }, prop: string, fn: () => void) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    name: {
-        type: StringConstructor;
+    enablePan: {
+        type: BooleanConstructor;
         required: false;
+        default: boolean;
     };
-}>>, {}>;
+    enableRotate: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    enableZoom: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    minZoom: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    maxZoom: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    minDistance: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    maxDistance: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    minPolarAngle: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    maxPolarAngle: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    minAzimuthAngle: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    maxAzimuthAngle: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+}>>, {
+    enablePan: boolean;
+    enableRotate: boolean;
+    enableZoom: boolean;
+    minZoom: number;
+    maxZoom: number;
+    minDistance: number;
+    maxDistance: number;
+    minPolarAngle: number;
+    maxPolarAngle: number;
+    minAzimuthAngle: number;
+    maxAzimuthAngle: number;
+}>;
 export default _sfc_main;
