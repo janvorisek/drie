@@ -1,30 +1,34 @@
 <template>
   <div class="example">
     <Renderer ref="renderer" :antialias="true">
-      <PerspectiveCamera :position="[5,5,5]" :up="[0, 0, 1]">
+      <PerspectiveCamera :position="[5, 5, 5]" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>
       <Scene background="#f9f9f9">
-        <OBJLoader
-          :position="[0, 0, -0.6]"
-          :rotation="[Math.PI / 2, Math.PI, 0]"
-          :scale="[20, 20, 20]"
-          url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
-        >
+        <Mesh :rotation="rot">
           <MeshNormalMaterial />
-        </OBJLoader>
-        <AxesHelper :size="3" />
+          <BoxGeometry :width="6" :height="4" :depth="2" />
+        </Mesh>
       </Scene>
     </Renderer>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+
 import { Renderer } from "../../src";
 import { Scene } from "../../src";
-import { OBJLoader } from "../../src";
-import { AxesHelper } from "../../src";
+import { Mesh } from "../../src";
+import { BoxGeometry } from "../../src";
 import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
+
+const rot = ref<[number, number, number]>([0, 0, 0]);
+
+window.setInterval(() => {
+  const angle = Date.now() / 1000;
+  rot.value = [Math.cos(angle), 0, 0];
+}, 10);
 </script>

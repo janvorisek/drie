@@ -1,15 +1,30 @@
 # OBJLoader
 
+  <script setup>
+  import OBJLoader from '../../examples/OBJLoader.vue'
+  </script>
+
+This component manages [`THREE.OBJLoader`](https://threejs.org/docs/?q=objloader#examples/en/loaders/OBJLoader).
+
+`<OBJLoader>` behaves as a [`<Group>`](/components/Objects/Group) containing meshes loaded from the `.obj` file.
+
+## Example
+
+  <ClientOnly>
+  <OBJLoader />
+  </ClientOnly>
+
+
 ## Props
 
-| Prop name     | Description                                          | Type        | Default            |
-| ------------- | ---------------------------------------------------- | ----------- | ------------------ |
-|` url           `| A string containing the path/URL of the `.obj` file. | string      |                    |
-|` position      `|                                                      | Vector3Like | [0, 0, 0] |
-|` rotation      `|                                                      | Vector3Like | [0, 0, 0] |
-|` scale         `|                                                      | Vector3Like | [1, 1, 1] |
-|` castShadow    `|                                                      | boolean     | false              |
-|` receiveShadow `|                                                      | boolean     | false              |
+| Prop name     | Description                                                                                     | Type        | Default            |
+| ------------- | ----------------------------------------------------------------------------------------------- | ----------- | ------------------ |
+|` url           `| A string containing the path/URL of the `.obj` file.                                            | string      |                    |
+|` position      `| A [Vector3Like](/types#vector3like) representing the object's local position.                   | Vector3Like | [0, 0, 0] |
+|` rotation      `| A [Vector3Like](/types#vector3like) representing local rotation (see Euler angles), in radians. | Vector3Like | [0, 0, 0] |
+|` scale         `| A [Vector3Like](/types#vector3like) representing the object's local scale.                      | Vector3Like | [1, 1, 1] |
+|` castShadow    `| Whether the object gets rendered into shadow map.                                               | boolean     | false              |
+|` receiveShadow `| Whether the material receives shadows.                                                          | boolean     | false              |
 
 ## Events
 
@@ -26,3 +41,4 @@
 | default |             |          |
 
 ---
+
