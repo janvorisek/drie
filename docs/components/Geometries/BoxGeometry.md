@@ -1,5 +1,18 @@
 # BoxGeometry
 
+  <script setup>
+  import BoxGeometry from '../../examples/BoxGeometry.vue'
+  </script>
+
+This component manages [`THREE.BoxGeometry`](https://threejs.org/docs/#api/en/geometries/BoxGeometry).
+
+## Example
+
+  <ClientOnly>
+  <BoxGeometry />
+  </ClientOnly>
+
+
 ## Props
 
 | Prop name      | Description                          | Type   | Default |
@@ -12,3 +25,4 @@
 |` depthSegments  `| Number of segments along the Z axis. | number | 1       |
 
 ---
+

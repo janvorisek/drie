@@ -11,6 +11,14 @@
 |` castShadow    `|                                                      | boolean     | false              |
 |` receiveShadow `|                                                      | boolean     | false              |
 
+## Events
+
+| Event name | Properties                                       | Description                                                                 |
+| ---------- | ------------------------------------------------ | --------------------------------------------------------------------------- |
+| load       | **group** `Group` - An instance of `THREE.Group` | Emitted when OBJ file is successfuly loaded, parsed and added to the scene. |
+| progress   |                                                  | Emmited on XHR progress                                                     |
+| error      |                                                  | Emitted on XHR error or OBJ parsing error                                   |
+
 ## Slots
 
 | Name    | Description | Bindings |

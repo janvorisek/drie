@@ -20,3 +20,7 @@
 canvas {
   outline: none;
 }
+
+table {
+  font-size: 0.875em;
+}

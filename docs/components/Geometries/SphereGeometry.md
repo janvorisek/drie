@@ -1,5 +1,18 @@
 # SphereGeometry
 
+  <script setup>
+  import SphereGeometry from '../../examples/SphereGeometry.vue'
+  </script>
+
+This component manages [`THREE.SphereGeometry`](https://threejs.org/docs/#api/en/geometries/SphereGeometry).
+
+## Example
+
+  <ClientOnly>
+  <SphereGeometry />
+  </ClientOnly>
+
+
 ## Props
 
 | Prop name      | Description | Type   | Default      |
@@ -14,4 +27,3 @@
 
 ---
 
-This works

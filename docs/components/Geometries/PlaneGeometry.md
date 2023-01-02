@@ -1,5 +1,18 @@
 # PlaneGeometry
 
+  <script setup>
+  import PlaneGeometry from '../../examples/PlaneGeometry.vue'
+  </script>
+
+This component manages [`THREE.PlaneGeometry`](https://threejs.org/docs/#api/en/geometries/PlaneGeometry).
+
+## Example
+
+  <ClientOnly>
+  <PlaneGeometry />
+  </ClientOnly>
+
+
 ## Props
 
 | Prop name      | Description                                                         | Type   | Default |
@@ -10,3 +23,4 @@
 |` heightSegments `| Number of segmented rectangular faces along the height of the sides | number | 1       |
 
 ---
+
