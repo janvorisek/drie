@@ -32,6 +32,8 @@ export const handleVectorProp = (
   obj: Object3D | Group,
   registerWatch = true,
 ) => {
+  if (obj === null) return;
+
   if (props[prop] !== undefined) {
     const position = vector3LikeToVector3(props[prop]);
 

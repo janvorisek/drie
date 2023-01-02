@@ -87,6 +87,8 @@ function redoGeometry() {
   copyGeo(three, tmp);
 }
 
+redoGeometry();
+
 handlePropCallback(props, "radius", redoGeometry);
 handlePropCallback(props, "widthSegments", redoGeometry);
 handlePropCallback(props, "heightSegments", redoGeometry);

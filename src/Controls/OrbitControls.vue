@@ -12,6 +12,8 @@ export default {
 
   This component manages [`THREE.OrbitControls`](https://threejs.org/docs/#examples/en/controls/OrbitControls).
 
+  `<OrbitControls>` must be passed to [`<PerspectiveCamera>`](/components/Cameras/PerspectiveCamera) or [`<OrthographicCamera>`](/components/Cameras/OrthographicCamera)
+
   ## Example
 
   <ClientOnly>
@@ -57,7 +59,8 @@ import { Camera } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 import { inject, ref, watch, type Ref } from "vue";
-import { handlePropCallback } from "../utils";
+import { handlePropCallback, handleVectorProp } from "../utils";
+import { type Vector3Like } from "../types";
 
 export interface Props {
   /**
@@ -123,6 +126,11 @@ export interface Props {
    * If set, the interval [min, max] must be a sub-interval of [-2π, 2π], with (max - min < 2π).
    */
   maxAzimuthAngle?: number;
+
+  /**
+   * The focus point of the controls.
+   */
+  target?: Vector3Like;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -137,6 +145,7 @@ const props = withDefaults(defineProps<Props>(), {
   maxPolarAngle: Math.PI,
   minAzimuthAngle: Infinity,
   maxAzimuthAngle: Infinity,
+  target: () => [0, 0, 0],
 });
 
 const three = ref<OrbitControls | null>(null);
@@ -164,6 +173,7 @@ function applyProps() {
 watch(canvas!, () => {
   three.value = new OrbitControls(camera, canvas!.value);
   applyProps();
+  handleVectorProp(props, "target", three.value, false);
 });
 
 applyProps();
@@ -179,6 +189,8 @@ handlePropCallback(props, "minPolarAngle", applyProps);
 handlePropCallback(props, "maxPolarAngle", applyProps);
 handlePropCallback(props, "minAzimuthAngle", applyProps);
 handlePropCallback(props, "maxAzimuthAngle", applyProps);
+
+handleVectorProp(props, "target", three.value);
 
 defineExpose({ three: three.value });
 </script>

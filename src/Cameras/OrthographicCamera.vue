@@ -24,7 +24,7 @@ export default {
 
 <script setup lang="ts">
 import { OrthographicCamera } from "three";
-import { inject, onMounted, provide, watch } from "vue";
+import { inject, onMounted, provide, type Ref, watch } from "vue";
 import { Vector3Like } from "../types";
 import { handleVectorProp } from "../utils";
 
@@ -54,15 +54,28 @@ const props = withDefaults(defineProps<Props>(), {
   lookAt: () => [0, 0, 0],
 });
 
-const three = new OrthographicCamera(-30, 30, 30, -30, 0.1, 1000);
+const three = new OrthographicCamera(-10, 10, 10, -10, 0.1, 1000);
 
 three.lookAt(0, 0, 0);
 three.updateProjectionMatrix();
 
 (inject("addCamera") as (c: OrthographicCamera) => void)(three);
 
+const canvas = inject<Ref<HTMLCanvasElement>>("canvas");
+
 onMounted(() => {
   if (props.name) three.name = props.name;
+
+  const myObserver = new ResizeObserver((entries) => {
+    entries.forEach((el) => {
+      const aspect = el.contentRect.width / el.contentRect.height;
+      three.left = three.bottom * aspect;
+      three.right = three.top * aspect;
+      three.updateProjectionMatrix();
+    });
+  });
+
+  myObserver.observe(canvas!.value);
 });
 
 handleVectorProp(props, "position", three);

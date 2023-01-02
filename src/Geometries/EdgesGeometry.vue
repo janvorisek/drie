@@ -5,6 +5,20 @@ export default {
 };
 </script>
 
+<docs>BEGIN_DOCS
+  <script setup>
+  import EdgesGeometry from '../../examples/EdgesGeometry.vue'
+  </script>
+
+  This component manages [`THREE.EdgesGeometry`](https://threejs.org/docs/#api/en/geometries/EdgesGeometry).
+
+  ## Example
+
+  <ClientOnly>
+  <EdgesGeometry />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
 import { inject, nextTick, watch, reactive } from "vue";
 
