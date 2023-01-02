@@ -19,8 +19,8 @@
           <SphereGeometry :radius="radius" :width-segments="12" :height-segments="12" />
         </Points>
         <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
-          <MeshLambertMaterial>
-            <Texture url="https://threejs.org/examples/textures/crate.gif" />
+          <MeshLambertMaterial transparent :opacity="opacity">
+            <TextureLoader url="https://threejs.org/examples/textures/crate.gif" />
           </MeshLambertMaterial>
           <BoxGeometry :width="w + 1" :height="w * 2 + 1" />
         </Mesh>
@@ -37,8 +37,17 @@
           :rotation="[Math.PI / 2, Math.cos(Date.now() / 1000) * Math.PI, 0]"
           :scale="[20, 20, 20]"
           url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
+          @load="onLoad"
         >
-          <MeshLambertMaterial :color="color3" :side="DoubleSide" />
+          <MeshBasicMaterial :color="color3" :side="DoubleSide" />
+        </OBJLoader>
+        <OBJLoader
+          :position="[-2, 2, 0]"
+          :rotation="[Math.PI / 2, 0, 0]"
+          :scale="[10, 10, 10]"
+          url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
+        >
+          <MeshNormalMaterial :side="DoubleSide" transparent :opacity="0.5" />
         </OBJLoader>
         <AxesHelper :size="3" />
       </Scene>
@@ -57,6 +66,8 @@ const vertices = reactive<number[]>([]);
 const w = ref(1);
 const s = ref(1);
 const radius = ref(1);
+
+const opacity = ref(1);
 
 const posV = new Vector3(5, -1, 0);
 const color = ref("rgb(255,0,0)");
@@ -83,6 +94,8 @@ onMounted(() => {
 window.setInterval(() => {
   const angle = Date.now() / 1000;
 
+  opacity.value = Math.sin(2 * angle) * 0.45 + 0.5;
+
   color.value = `rgb(${Math.round(Math.cos(angle) * 50 + 100)}, ${Math.round(
     ((Math.sin(angle) + 1) / 2) * 200 + 50,
   )}, 100)`;
@@ -96,6 +109,10 @@ window.setInterval(() => {
   pos.value = [Math.cos(angle), Math.sin(angle), Math.sin(angle)];
   rot.value = [Math.cos(angle) * Math.PI, 0, 0];
 }, 10);
+
+const onLoad = () => {
+  console.log("obj load event");
+};
 
 const camera = ref("cam1");
 const renderer = ref({});
