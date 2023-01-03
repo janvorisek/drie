@@ -30,34 +30,14 @@ import { type Vector3Like } from "../types";
 
 export interface Props {
   /**
-   * Camera name
+   * Camera frustum aspect ratio, usually the canvas width / canvas height.
    */
-  name?: string;
-
-  /**
-   * Camera up vector
-   */
-  up?: Vector3Like;
+  aspect?: number;
 
   /**
    * Flag marking whether camera aspect ration recalculates on renderer resize.
    */
   autoResize?: boolean;
-
-  /**
-   * Camera position
-   */
-  position?: Vector3Like;
-
-  /**
-   * Camera target
-   */
-  lookAt?: Vector3Like;
-
-  /**
-   * Camera frustum aspect ratio, usually the canvas width / canvas height.
-   */
-  aspect?: number;
 
   /**
    * Camera frustum far plane.
@@ -66,11 +46,31 @@ export interface Props {
   far?: number;
 
   /**
+   * Camera target
+   */
+  lookAt?: Vector3Like;
+
+  /**
+   * Camera name
+   */
+  name?: string;
+
+  /**
    * Camera frustum near plane.
    * The valid range is greater than 0 and less than the current value of the far plane.
    * Note that, unlike for the OrthographicCamera, 0 is not a valid value for a PerspectiveCamera's near plane.
    */
   near?: number;
+
+  /**
+   * Camera position
+   */
+  position?: Vector3Like;
+
+  /**
+   * Camera up vector
+   */
+  up?: Vector3Like;
 }
 
 const props = withDefaults(defineProps<Props>(), {

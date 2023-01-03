@@ -11,9 +11,19 @@ import { handleVectorProp } from "../utils";
 
 export interface Props {
   /**
+   * Whether the object gets rendered into shadow map.
+   */
+  castShadow?: boolean;
+
+  /**
    * A [Vector3Like](/types#vector3like) representing the object's local position.
    */
   position?: Vector3Like;
+
+  /**
+   * Whether the material receives shadows.
+   */
+  receiveShadow?: boolean;
 
   /**
    * A [Vector3Like](/types#vector3like) representing local rotation (see Euler angles), in radians.
@@ -24,16 +34,6 @@ export interface Props {
    * A [Vector3Like](/types#vector3like) representing the object's local scale.
    */
   scale?: Vector3Like;
-
-  /**
-   * Whether the object gets rendered into shadow map.
-   */
-  castShadow?: boolean;
-
-  /**
-   * Whether the material receives shadows.
-   */
-  receiveShadow?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {

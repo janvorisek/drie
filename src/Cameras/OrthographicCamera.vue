@@ -24,27 +24,43 @@ export default {
 
 <script setup lang="ts">
 import { OrthographicCamera } from "three";
-import { inject, onMounted, provide, type Ref, watch } from "vue";
+import { inject, onMounted, provide, type Ref } from "vue";
 import { Vector3Like } from "../types";
-import { handleVectorProp } from "../utils";
+import { handlePropCallback, handleVectorProp } from "../utils";
 
 export interface Props {
   /**
-   * Camera name
+   * Camera frustum far plane.
+   * Must be greater than the current value of near plane.
    */
-  name?: string;
-  /**
-   * Camera up vector
-   */
-  up?: Vector3Like;
-  /**
-   * Camera position
-   */
-  position?: Vector3Like;
+  far?: number;
+
   /**
    * Camera target
    */
   lookAt?: Vector3Like;
+
+  /**
+   * Camera name
+   */
+  name?: string;
+
+  /**
+   * Camera frustum near plane.
+   * The valid range is greater than 0 and less than the current value of the far plane.
+   * Note that, unlike for the OrthographicCamera, 0 is not a valid value for a PerspectiveCamera's near plane.
+   */
+  near?: number;
+
+  /**
+   * Camera position
+   */
+  position?: Vector3Like;
+
+  /**
+   * Camera up vector
+   */
+  up?: Vector3Like;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -52,6 +68,8 @@ const props = withDefaults(defineProps<Props>(), {
   up: () => [0, 1, 0],
   position: () => [0, 0, 0],
   lookAt: () => [0, 0, 0],
+  far: 2000,
+  near: 0.1,
 });
 
 const three = new OrthographicCamera(-10, 10, 10, -10, 0.1, 1000);
@@ -82,12 +100,17 @@ handleVectorProp(props, "position", three);
 handleVectorProp(props, "up", three);
 handleVectorProp(props, "lookAt", three);
 
-function applyProps(props: Props) {
-  //
+function applyProps() {
+  three.near = props.near;
+  three.far = props.far;
+
+  three.updateProjectionMatrix();
 }
 
-applyProps(props);
-//watch(props, () => applyProps(props));
+applyProps();
+
+handlePropCallback(props, "near", applyProps);
+handlePropCallback(props, "far", applyProps);
 
 provide("parentCamera", three);
 

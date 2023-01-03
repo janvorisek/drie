@@ -11,11 +11,6 @@ import { Vector3Like } from "../types";
 
 export interface Props {
   /**
-   * Size of the lines representing the axes.
-   */
-  size?: number;
-
-  /**
    * A [Vector3Like](/types#vector3like) representing the object's local position.
    */
   position?: Vector3Like;
@@ -24,6 +19,11 @@ export interface Props {
    * A [Vector3Like](/types#vector3like) representing local rotation (see Euler angles), in radians.
    */
   rotation?: Vector3Like;
+
+  /**
+   * Size of the lines representing the axes.
+   */
+  size?: number;
 
   /**
    * A [Vector3Like](/types#vector3like) representing the object's local scale.

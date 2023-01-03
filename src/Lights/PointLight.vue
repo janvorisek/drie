@@ -14,6 +14,21 @@ import { handleVectorProp } from "../utils";
 
 export interface Props {
   /**
+   * If set to true light will cast dynamic shadows.
+   */
+  castShadow?: boolean;
+
+  /**
+   * Color of the light
+   */
+  color?: string | number;
+
+  /**
+   * Numeric value of the light's strength/intensity.
+   */
+  intensity?: number;
+
+  /**
    * A Vector3Like representing the object's local position.
    */
   position?: Vector3Like;
@@ -27,21 +42,6 @@ export interface Props {
    * A Vector3Like representing the object's local scale.
    */
   scale?: Vector3Like;
-
-  /**
-   * Color of the light
-   */
-  color?: string | number;
-
-  /**
-   * Numeric value of the light's strength/intensity.
-   */
-  intensity?: number;
-
-  /**
-   * If set to true light will cast dynamic shadows.
-   */
-  castShadow?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -29,14 +29,19 @@ import { handleVectorProp } from "../utils";
 
 export interface Props {
   /**
-   * A string containing the path/URL of the `.obj` file.
+   * Whether the object gets rendered into shadow map.
    */
-  url: string;
+  castShadow?: boolean;
 
   /**
    * A [Vector3Like](/types#vector3like) representing the object's local position.
    */
   position?: Vector3Like;
+
+  /**
+   * Whether the material receives shadows.
+   */
+  receiveShadow?: boolean;
 
   /**
    * A [Vector3Like](/types#vector3like) representing local rotation (see Euler angles), in radians.
@@ -49,14 +54,9 @@ export interface Props {
   scale?: Vector3Like;
 
   /**
-   * Whether the object gets rendered into shadow map.
+   * A string containing the path/URL of the `.obj` file.
    */
-  castShadow?: boolean;
-
-  /**
-   * Whether the material receives shadows.
-   */
-  receiveShadow?: boolean;
+  url: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
