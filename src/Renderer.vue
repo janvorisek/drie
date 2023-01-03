@@ -31,6 +31,12 @@ export interface Props {
   antialias?: boolean;
 
   /**
+   * Set FPS limit for the renderer.
+   * Use `-1` to disable frame limitter.
+   */
+  frameLimit?: number;
+
+  /**
    * Controls the default clear alpha value.
    */
   alpha?: boolean;
@@ -46,6 +52,7 @@ const props = withDefaults(defineProps<Props>(), {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onBeforeRender: () => {},
   antialias: false,
+  frameLimit: 60,
   alpha: false,
   shadowMapEnabled: false,
 });
@@ -64,7 +71,7 @@ const canvas = ref<HTMLCanvasElement>();
 provide("canvas", canvas);
 
 let then = Date.now();
-const fpsInterval = 1000 / 30;
+let fpsInterval = 1000 / props.frameLimit;
 
 watch(
   () => props.camera,
@@ -89,6 +96,7 @@ function applyProps(props: Props) {
   if (renderer === null) return;
 
   renderer.shadowMap.enabled = props.shadowMapEnabled as boolean;
+  fpsInterval = 1000 / (props.frameLimit as number);
 }
 
 onMounted(() => {
@@ -121,7 +129,7 @@ function animate() {
   const now = Date.now();
   const elapsed = now - then;
 
-  if (elapsed < fpsInterval) {
+  if (fpsInterval > -1 && elapsed < fpsInterval) {
     return;
   }
 
@@ -145,8 +153,14 @@ function animate() {
 }
 
 applyProps(props);
+
 watch(
   () => props.shadowMapEnabled,
+  () => applyProps(props),
+);
+
+watch(
+  () => props.frameLimit,
   () => applyProps(props),
 );
 
