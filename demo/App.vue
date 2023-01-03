@@ -30,7 +30,7 @@
           </MeshLambertMaterial>
           <BoxGeometry name="test" :width="w + 1" :height="w * 2 + 1" />
         </Mesh>
-        <Mesh :position="[-5, 0, 0]" :scale="[s, 1, 1]">
+        <Mesh :position="[-5, 0, 0]" :scale="[s, 1, 1]" :cast-shadow="true">
           <MeshLambertMaterial :color="color2" :side="DoubleSide" />
           <BufferGeometry name="custom" :vertices="vertices" />
         </Mesh>
