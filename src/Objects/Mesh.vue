@@ -3,11 +3,11 @@
 </template>
 
 <script setup lang="ts">
-import { provide, inject, watch } from "vue";
+import { provide, inject, watch, onUnmounted } from "vue";
 
 import { BufferGeometry, Mesh, MeshBasicMaterial, Scene } from "three";
 import { Vector3Like } from "../types";
-import { handleVectorProp } from "../utils";
+import { handleVectorProp, disposeTHREEObject } from "../utils";
 
 export interface Props {
   /**
@@ -74,6 +74,12 @@ watch(
   () => props.receiveShadow,
   () => applyProps(props),
 );
+
+onUnmounted(() => {
+  scene.remove(three);
+
+  disposeTHREEObject(three);
+});
 
 provide("mesh", three);
 

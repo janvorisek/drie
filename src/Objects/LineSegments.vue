@@ -3,11 +3,11 @@
 </template>
 
 <script setup lang="ts">
-import { provide, inject } from "vue";
+import { provide, inject, onUnmounted } from "vue";
 
 import { BufferGeometry, LineBasicMaterial, LineSegments, Scene } from "three";
 import { Vector3Like } from "../types";
-import { handleVectorProp } from "../utils";
+import { disposeTHREEObject, handleVectorProp } from "../utils";
 
 export interface Props {
   /**
@@ -43,6 +43,12 @@ scene.add(three);
 handleVectorProp(props, "position", three);
 handleVectorProp(props, "rotation", three);
 handleVectorProp(props, "scale", three);
+
+onUnmounted(() => {
+  scene.remove(three);
+
+  disposeTHREEObject(three);
+});
 
 provide("mesh", three);
 
