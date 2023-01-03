@@ -6,7 +6,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject, watch, ref, reactive } from "vue";
+import { inject, watch, reactive } from "vue";
 
 import { BufferAttribute, BufferGeometry, Mesh } from "three";
 import { copyGeo } from "../utils";
@@ -50,7 +50,7 @@ function makeGeometry(vertices: number[], faces: number[]) {
   }
 
   geometry.setAttribute("position", new BufferAttribute(vertArray, 3));
-
+  geometry.setIndex(faces);
   geometry.computeVertexNormals();
 
   return geometry;
@@ -64,8 +64,8 @@ mesh.geometry = three;
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
 addGeometry(three);
 
-function redoGeometry(vertices: number[]) {
-  const tmp = makeGeometry(vertices, []);
+function redoGeometry(vertices: number[], faces: number[]) {
+  const tmp = makeGeometry(vertices, faces);
 
   copyGeo(three, tmp);
 }
@@ -73,7 +73,15 @@ function redoGeometry(vertices: number[]) {
 watch(
   () => props.vertices,
   (vertices) => {
-    redoGeometry(vertices);
+    redoGeometry(vertices, props.faces);
+  },
+  { deep: true, immediate: true },
+);
+
+watch(
+  () => props.faces,
+  (faces) => {
+    redoGeometry(props.vertices, faces);
   },
   { deep: true, immediate: true },
 );

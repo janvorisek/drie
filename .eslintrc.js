@@ -22,5 +22,5 @@ module.exports = {
     "no-unused-vars": "off",
     "vue/multi-word-component-names": "off",
   },
-  ignorePatterns: ["dist", "index.d.ts"],
+  ignorePatterns: ["dist", "src/shims-vue.d.ts"],
 };

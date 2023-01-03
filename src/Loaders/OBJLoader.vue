@@ -116,7 +116,7 @@ function load() {
       }
 
       emit("load", object);
-      resolve(object);
+      //resolve(object);
     },
     // called when loading is in progresses
     function (xhr) {

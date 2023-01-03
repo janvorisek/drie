@@ -1,4 +1,4 @@
-import { inject, watch, ref, reactive } from "vue";
+import { inject, watch, reactive } from "vue";
 import { BufferAttribute, BufferGeometry, Mesh } from "three";
 import { copyGeo } from "../utils";
 export interface Props {
@@ -463,10 +463,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         dispatchEvent: (event: import("three").Event) => void;
     };
     addGeometry: (g: BufferGeometry) => void;
-    redoGeometry: (vertices: number[]) => void;
+    redoGeometry: (vertices: number[], faces: number[]) => void;
     inject: typeof inject;
     watch: typeof watch;
-    ref: typeof ref;
     reactive: typeof reactive;
     readonly BufferAttribute: typeof BufferAttribute;
     readonly BufferGeometry: typeof BufferGeometry;
