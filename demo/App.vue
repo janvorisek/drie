@@ -9,6 +9,7 @@
     <option value="custom">Custom</option>
     <option value="sphere">Sphere</option>
   </select>
+  <input v-model.number="count" type="number" />
   <div class="rendererParent">
     <Renderer ref="renderer" :camera="camera" :antialias="true" :shadow-map-enabled="true">
       <PerspectiveCamera name="cam1" :position="[5, 5, 5]" :up="[0, 0, 1]">
@@ -61,6 +62,10 @@
         >
           <MeshNormalMaterial :side="DoubleSide" transparent :opacity="0.5" />
         </OBJLoader>
+        <Mesh v-for="i in count" :key="i" :position="[i * 1.5, 0, 0]">
+          <MeshBasicMaterial color="#aaa" />
+          <BufferGeometry :vertices="[0, 0, 0, 1, 0, 0, 1, 1, 0]" :faces="[0, 1, 2]" />
+        </Mesh>
         <AxesHelper :size="3" />
       </Scene>
     </Renderer>
@@ -71,6 +76,7 @@
 import { ref, onMounted, reactive } from "vue";
 import { DoubleSide, Vector3 } from "three";
 
+const count = ref(5);
 const pos = ref<[number, number, number]>([0, 0, 0]);
 const rot = ref<[number, number, number]>([0, 0, 0]);
 const vertices = reactive<number[]>([]);
