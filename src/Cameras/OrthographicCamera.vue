@@ -87,7 +87,7 @@ function applyProps(props: Props) {
 }
 
 applyProps(props);
-watch(props, () => applyProps(props));
+//watch(props, () => applyProps(props));
 
 provide("parentCamera", three);
 
