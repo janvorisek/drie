@@ -3,13 +3,17 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { Vector3Like } from "../types";
 export interface Props {
     /**
-     * A string containing the path/URL of the `.obj` file.
+     * Whether the object gets rendered into shadow map.
      */
-    url: string;
+    castShadow?: boolean;
     /**
      * A [Vector3Like](/types#vector3like) representing the object's local position.
      */
     position?: Vector3Like;
+    /**
+     * Whether the material receives shadows.
+     */
+    receiveShadow?: boolean;
     /**
      * A [Vector3Like](/types#vector3like) representing local rotation (see Euler angles), in radians.
      */
@@ -19,23 +23,25 @@ export interface Props {
      */
     scale?: Vector3Like;
     /**
-     * Whether the object gets rendered into shadow map.
+     * A string containing the path/URL of the `.obj` file.
      */
-    castShadow?: boolean;
-    /**
-     * Whether the material receives shadows.
-     */
-    receiveShadow?: boolean;
+    url: string;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
-    url: {
-        type: StringConstructor;
-        required: true;
+    castShadow: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
     };
     position: {
         type: null;
         required: false;
         default: () => number[];
+    };
+    receiveShadow: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
     };
     rotation: {
         type: null;
@@ -47,15 +53,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: () => number[];
     };
-    castShadow: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
-    };
-    receiveShadow: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
+    url: {
+        type: StringConstructor;
+        required: true;
     };
 }, {
     props: any;
@@ -69,14 +69,20 @@ declare const _sfc_main: import("vue").DefineComponent<{
     three: Group;
     load: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("load" | "progress" | "error")[], "load" | "progress" | "error", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    url: {
-        type: StringConstructor;
-        required: true;
+    castShadow: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
     };
     position: {
         type: null;
         required: false;
         default: () => number[];
+    };
+    receiveShadow: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
     };
     rotation: {
         type: null;
@@ -88,15 +94,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: () => number[];
     };
-    castShadow: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
-    };
-    receiveShadow: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
+    url: {
+        type: StringConstructor;
+        required: true;
     };
 }>> & {
     onLoad?: ((...args: any[]) => any) | undefined;

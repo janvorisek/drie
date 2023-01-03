@@ -1,75 +1,73 @@
-import { OrthographicCamera } from "three";
-import { type Ref } from "vue";
+import { AxesHelper, Scene } from "three";
 import { Vector3Like } from "../types";
 export interface Props {
     /**
-     * Camera name
-     */
-    name?: string;
-    /**
-     * Camera up vector
-     */
-    up?: Vector3Like;
-    /**
-     * Camera position
+     * A [Vector3Like](/types#vector3like) representing the object's local position.
      */
     position?: Vector3Like;
     /**
-     * Camera target
+     * A [Vector3Like](/types#vector3like) representing local rotation (see Euler angles), in radians.
      */
-    lookAt?: Vector3Like;
+    rotation?: Vector3Like;
+    /**
+     * Size of the lines representing the axes.
+     */
+    size?: number;
+    /**
+     * A [Vector3Like](/types#vector3like) representing the object's local scale.
+     */
+    scale?: Vector3Like;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
-    name: {
-        type: StringConstructor;
-        required: false;
-        default: string;
-    };
-    up: {
-        type: null;
-        required: false;
-        default: () => number[];
-    };
     position: {
         type: null;
         required: false;
         default: () => number[];
     };
-    lookAt: {
+    rotation: {
+        type: null;
+        required: false;
+        default: () => number[];
+    };
+    size: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    scale: {
         type: null;
         required: false;
         default: () => number[];
     };
 }, {
     props: any;
-    three: OrthographicCamera;
-    canvas: Ref<HTMLCanvasElement> | undefined;
-    applyProps: (props: Props) => void;
+    scene: Scene;
+    three: AxesHelper;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    name: {
-        type: StringConstructor;
-        required: false;
-        default: string;
-    };
-    up: {
-        type: null;
-        required: false;
-        default: () => number[];
-    };
     position: {
         type: null;
         required: false;
         default: () => number[];
     };
-    lookAt: {
+    rotation: {
+        type: null;
+        required: false;
+        default: () => number[];
+    };
+    size: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    scale: {
         type: null;
         required: false;
         default: () => number[];
     };
 }>>, {
-    name: string;
-    lookAt: any;
-    up: any;
+    scale: any;
     position: any;
+    rotation: any;
+    size: number;
 }>;
 export default _sfc_main;

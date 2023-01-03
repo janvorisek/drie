@@ -1,33 +1,33 @@
-import { watch as g, defineComponent as L, reactive as H, ref as te, provide as T, onMounted as pe, onUnmounted as ct, openBlock as ut, createElementBlock as mt, Fragment as dt, renderSlot as k, createElementVNode as ft, inject as _, nextTick as ie } from "vue";
-import { Vector3 as R, WebGLRenderer as ht, Scene as pt, Color as F, PerspectiveCamera as gt, OrthographicCamera as yt, EventDispatcher as bt, MOUSE as W, TOUCH as K, Quaternion as Ge, Spherical as Ie, Vector2 as $, BufferGeometry as j, LineBasicMaterial as ne, LineSegments as fe, MeshBasicMaterial as He, Mesh as he, PointsMaterial as J, Points as se, Loader as wt, FileLoader as _t, Group as Ye, Float32BufferAttribute as q, Material as ke, MeshPhongMaterial as vt, AxesHelper as Pt, BoxGeometry as Mt, BufferAttribute as At, EdgesGeometry as xt, PlaneGeometry as Et, SphereGeometry as Lt, WireframeGeometry as St, FrontSide as ge, MeshLambertMaterial as Ot, MeshNormalMaterial as Tt, AmbientLight as Ct, PointLight as zt, Texture as Rt, TextureLoader as Dt } from "three";
-const Ne = (i) => i === void 0 ? new R(0, 0, 0) : "x" in i ? new R(i.x, i.y, i.z) : new R(i[0], i[1], i[2]), Be = (i, a, t) => {
+import { watch as y, defineComponent as L, reactive as H, ref as te, provide as T, onMounted as pe, onUnmounted as ct, openBlock as ut, createElementBlock as mt, Fragment as dt, renderSlot as k, createElementVNode as ft, inject as v, nextTick as ie } from "vue";
+import { Vector3 as R, WebGLRenderer as ht, Scene as pt, Color as F, PerspectiveCamera as gt, OrthographicCamera as yt, EventDispatcher as bt, MOUSE as W, TOUCH as K, Quaternion as Ge, Spherical as Ie, Vector2 as $, BufferGeometry as B, LineBasicMaterial as ne, LineSegments as fe, MeshBasicMaterial as He, Mesh as he, PointsMaterial as J, Points as se, Loader as wt, FileLoader as _t, Group as Ye, Float32BufferAttribute as q, Material as ke, MeshPhongMaterial as vt, AxesHelper as Pt, BoxGeometry as Mt, BufferAttribute as xt, EdgesGeometry as At, PlaneGeometry as Et, SphereGeometry as Lt, WireframeGeometry as St, FrontSide as ge, MeshLambertMaterial as Ot, MeshNormalMaterial as Tt, AmbientLight as Ct, PointLight as zt, Texture as Rt, TextureLoader as Dt } from "three";
+const Ne = (i) => i === void 0 ? new R(0, 0, 0) : "x" in i ? new R(i.x, i.y, i.z) : new R(i[0], i[1], i[2]), je = (i, a, t) => {
   t[i].isVector3 ? t[i].set(a.x, a.y, a.z) : "isEuler" in t[i] && t[i].setFromVector3(a);
-}, A = (i, a, t, e = !0) => {
+}, x = (i, a, t, e = !0) => {
   if (t !== null) {
     if (i[a] !== void 0) {
       const n = Ne(i[a]);
       if ("isGroup" in t)
         for (const o of t.children)
-          A(i, a, o, !1);
+          x(i, a, o, !1);
       else
-        Be(a, n, t);
+        je(a, n, t);
     }
-    e && g(
+    e && y(
       () => i[a],
       () => {
         if (i[a] !== void 0) {
           const n = Ne(i[a]);
           if ("isGroup" in t)
             for (const o of t.children)
-              A(i, a, o, !1);
+              x(i, a, o, !1);
           else
-            Be(a, n, t);
+            je(a, n, t);
         }
       }
     );
   }
-}, M = (i, a, t) => {
-  g(
+}, b = (i, a, t) => {
+  y(
     () => i[a],
     () => {
       t();
@@ -57,6 +57,7 @@ const Gt = /* @__PURE__ */ L({
     onBeforeRender: { type: Function, default: () => {
     } },
     antialias: { type: Boolean, default: !1 },
+    frameLimit: { default: 60 },
     alpha: { type: Boolean, default: !1 },
     shadowMapEnabled: { type: Boolean, default: !1 }
   },
@@ -67,26 +68,25 @@ const Gt = /* @__PURE__ */ L({
     let s = null;
     const l = te([]), c = te([]), f = te();
     T("canvas", f);
-    let v = Date.now();
-    const y = 1e3 / 30;
-    g(
+    let P = Date.now(), g = 1e3 / t.frameLimit;
+    y(
       () => t.camera,
-      (d) => b(d)
+      (d) => w(d)
     );
-    const b = (d) => {
+    const w = (d) => {
       if (d) {
-        const P = l.value.find((w) => w.name === d);
-        P === void 0 && (s = null), s = P;
+        const M = l.value.find((_) => _.name === d);
+        M === void 0 && (s = null), s = M;
       } else
         s = l.value[0];
     };
     function u(d) {
-      e !== null && (e.shadowMap.enabled = d.shadowMapEnabled);
+      e !== null && (e.shadowMap.enabled = d.shadowMapEnabled, g = 1e3 / d.frameLimit);
     }
     pe(() => {
-      e = new ht({ canvas: f.value, antialias: t.antialias, alpha: !0 }), e.setSize(1, 1), u(t), b(t.camera), new ResizeObserver((P) => {
-        P.forEach((w) => {
-          e && t.autoResize && e.setSize(w.contentRect.width, w.contentRect.height);
+      e = new ht({ canvas: f.value, antialias: t.antialias, alpha: !0 }), e.setSize(1, 1), u(t), w(t.camera), new ResizeObserver((M) => {
+        M.forEach((_) => {
+          e && t.autoResize && e.setSize(_.contentRect.width, _.contentRect.height);
         });
       }).observe(f.value.parentElement), h();
     }), ct(() => {
@@ -95,20 +95,23 @@ const Gt = /* @__PURE__ */ L({
     });
     function h() {
       requestAnimationFrame(h);
-      const d = Date.now(), P = d - v;
-      if (!(P < y)) {
-        if (v = d - P % y, t.onBeforeRender && t.onBeforeRender(), c.value.length > 0 && s)
-          for (const w of c.value)
-            w.value !== null && (w.value.object.uuid === s.uuid ? (w.value.enabled = !0, w.value.update()) : w.value.enabled = !1);
+      const d = Date.now(), M = d - P;
+      if (!(g > -1 && M < g)) {
+        if (P = d - M % g, t.onBeforeRender && t.onBeforeRender(), c.value.length > 0 && s)
+          for (const _ of c.value)
+            _.value !== null && (_.value.object.uuid === s.uuid ? (_.value.enabled = !0, _.value.update()) : _.value.enabled = !1);
         if (s && e)
-          for (const w of n)
-            e.render(w, s);
+          for (const _ of n)
+            e.render(_, s);
       }
     }
-    return u(t), g(
+    return u(t), y(
       () => t.shadowMapEnabled,
       () => u(t)
-    ), T("addCamera", (d) => l.value.push(d)), T("addScene", (d) => n.push(d)), T("addGeometry", (d) => o.push(d)), T("getGeometry", (d) => o.find((P) => P.name === d)), T("addControls", (d) => c.value.push(d)), a({ three: e }), (d, P) => (ut(), mt(dt, null, [
+    ), y(
+      () => t.frameLimit,
+      () => u(t)
+    ), T("addCamera", (d) => l.value.push(d)), T("addScene", (d) => n.push(d)), T("addGeometry", (d) => o.push(d)), T("getGeometry", (d) => o.find((M) => M.name === d)), T("addControls", (d) => c.value.push(d)), a({ three: e }), (d, M) => (ut(), mt(dt, null, [
       k(d.$slots, "default"),
       ft("canvas", {
         ref_key: "canvas",
@@ -123,11 +126,11 @@ const Gt = /* @__PURE__ */ L({
   },
   setup(i, { expose: a }) {
     const t = i, e = new pt();
-    T("scene", e), _("addScene")(e);
+    T("scene", e), v("addScene")(e);
     function n(o) {
       o.background && (e.background = new F(o.background));
     }
-    return n(t), g(
+    return n(t), y(
       () => t.background,
       () => n(t)
     ), a({ three: e }), (o, s) => k(o.$slots, "default");
@@ -137,40 +140,47 @@ const Gt = /* @__PURE__ */ L({
 }, Nt = /* @__PURE__ */ L({
   ...kt,
   props: {
+    aspect: { default: 1 },
+    autoResize: { type: Boolean, default: !0 },
+    far: { default: 2e3 },
+    lookAt: { default: () => [0, 0, 0] },
     name: { default: "" },
-    up: { default: () => [0, 1, 0] },
+    near: { default: 0.1 },
     position: { default: () => [0, 0, 0] },
-    lookAt: { default: () => [0, 0, 0] }
+    up: { default: () => [0, 1, 0] }
   },
   setup(i, { expose: a }) {
     const t = i, e = new gt(75, window.innerWidth / window.innerHeight * 1e3, 0.1, 1e3);
-    _("addCamera")(e);
-    const n = _("canvas");
+    v("addCamera")(e);
+    const n = v("canvas");
     pe(() => {
       t.name && (e.name = t.name), new ResizeObserver((l) => {
         l.forEach((c) => {
-          e.aspect = c.contentRect.width / c.contentRect.height, e.updateProjectionMatrix();
+          t.autoResize && (e.aspect = c.contentRect.width / c.contentRect.height, e.updateProjectionMatrix());
         });
       }).observe(n.value);
-    }), A(t, "position", e), A(t, "up", e), A(t, "lookAt", e);
-    function o(s) {
+    }), x(t, "position", e), x(t, "up", e), x(t, "lookAt", e);
+    function o() {
+      t.autoResize || (e.aspect = t.aspect), e.near = t.near, e.far = t.far, e.updateProjectionMatrix();
     }
-    return g(t, () => void 0), T("parentCamera", e), a({ three: e }), (s, l) => k(s.$slots, "default");
+    return o(), b(t, "aspect", o), b(t, "near", o), b(t, "far", o), T("parentCamera", e), a({ three: e }), (s, l) => k(s.$slots, "default");
   }
-}), Bt = {
+}), jt = {
   name: "OrthographicCamera"
-}, jt = /* @__PURE__ */ L({
-  ...Bt,
+}, Bt = /* @__PURE__ */ L({
+  ...jt,
   props: {
+    far: { default: 2e3 },
+    lookAt: { default: () => [0, 0, 0] },
     name: { default: "" },
-    up: { default: () => [0, 1, 0] },
+    near: { default: 0.1 },
     position: { default: () => [0, 0, 0] },
-    lookAt: { default: () => [0, 0, 0] }
+    up: { default: () => [0, 1, 0] }
   },
   setup(i, { expose: a }) {
     const t = i, e = new yt(-10, 10, 10, -10, 0.1, 1e3);
-    e.lookAt(0, 0, 0), e.updateProjectionMatrix(), _("addCamera")(e);
-    const n = _("canvas");
+    e.lookAt(0, 0, 0), e.updateProjectionMatrix(), v("addCamera")(e);
+    const n = v("canvas");
     pe(() => {
       t.name && (e.name = t.name), new ResizeObserver((l) => {
         l.forEach((c) => {
@@ -178,12 +188,13 @@ const Gt = /* @__PURE__ */ L({
           e.left = e.bottom * f, e.right = e.top * f, e.updateProjectionMatrix();
         });
       }).observe(n.value);
-    }), A(t, "position", e), A(t, "up", e), A(t, "lookAt", e);
-    function o(s) {
+    }), x(t, "position", e), x(t, "up", e), x(t, "lookAt", e);
+    function o() {
+      e.near = t.near, e.far = t.far, e.updateProjectionMatrix();
     }
-    return g(t, () => void 0), T("parentCamera", e), a({ three: e }), (s, l) => k(s.$slots, "default");
+    return o(), b(t, "near", o), b(t, "far", o), T("parentCamera", e), a({ three: e }), (s, l) => k(s.$slots, "default");
   }
-}), je = { type: "change" }, me = { type: "start" }, $e = { type: "end" };
+}), Be = { type: "change" }, me = { type: "start" }, $e = { type: "end" };
 class $t extends bt {
   constructor(a, t) {
     super(), t === void 0 && console.warn('THREE.OrbitControls: The second parameter "domElement" is now mandatory.'), t === document && console.error('THREE.OrbitControls: "document" should not be used as the target "domElement". Please use "renderer.domElement" instead.'), this.object = a, this.domElement = t, this.domElement.style.touchAction = "none", this.enabled = !0, this.target = new R(), this.minDistance = 0, this.maxDistance = 1 / 0, this.minZoom = 0, this.maxZoom = 1 / 0, this.minPolarAngle = 0, this.maxPolarAngle = Math.PI, this.minAzimuthAngle = -1 / 0, this.maxAzimuthAngle = 1 / 0, this.enableDamping = !1, this.dampingFactor = 0.05, this.enableZoom = !0, this.zoomSpeed = 1, this.enableRotate = !0, this.rotateSpeed = 1, this.enablePan = !0, this.panSpeed = 1, this.screenSpacePanning = !0, this.keyPanSpeed = 7, this.autoRotate = !1, this.autoRotateSpeed = 2, this.keys = { LEFT: "ArrowLeft", UP: "ArrowUp", RIGHT: "ArrowRight", BOTTOM: "ArrowDown" }, this.mouseButtons = { LEFT: W.ROTATE, MIDDLE: W.DOLLY, RIGHT: W.PAN }, this.touches = { ONE: K.ROTATE, TWO: K.DOLLY_PAN }, this.target0 = this.target.clone(), this.position0 = this.object.position.clone(), this.zoom0 = this.object.zoom, this._domElementKeyEvents = null, this.getPolarAngle = function() {
@@ -197,14 +208,14 @@ class $t extends bt {
     }, this.saveState = function() {
       e.target0.copy(e.target), e.position0.copy(e.object.position), e.zoom0 = e.object.zoom;
     }, this.reset = function() {
-      e.target.copy(e.target0), e.object.position.copy(e.position0), e.object.zoom = e.zoom0, e.object.updateProjectionMatrix(), e.dispatchEvent(je), e.update(), o = n.NONE;
+      e.target.copy(e.target0), e.object.position.copy(e.position0), e.object.zoom = e.zoom0, e.object.updateProjectionMatrix(), e.dispatchEvent(Be), e.update(), o = n.NONE;
     }, this.update = function() {
-      const r = new R(), m = new Ge().setFromUnitVectors(a.up, new R(0, 1, 0)), C = m.clone().invert(), z = new R(), B = new Ge(), X = 2 * Math.PI;
+      const r = new R(), m = new Ge().setFromUnitVectors(a.up, new R(0, 1, 0)), C = m.clone().invert(), z = new R(), j = new Ge(), X = 2 * Math.PI;
       return function() {
         const De = e.object.position;
         r.copy(De).sub(e.target), r.applyQuaternion(m), l.setFromVector3(r), e.autoRotate && o === n.NONE && Y(ee()), e.enableDamping ? (l.theta += c.theta * e.dampingFactor, l.phi += c.phi * e.dampingFactor) : (l.theta += c.theta, l.phi += c.phi);
         let V = e.minAzimuthAngle, U = e.maxAzimuthAngle;
-        return isFinite(V) && isFinite(U) && (V < -Math.PI ? V += X : V > Math.PI && (V -= X), U < -Math.PI ? U += X : U > Math.PI && (U -= X), V <= U ? l.theta = Math.max(V, Math.min(U, l.theta)) : l.theta = l.theta > (V + U) / 2 ? Math.max(V, l.theta) : Math.min(U, l.theta)), l.phi = Math.max(e.minPolarAngle, Math.min(e.maxPolarAngle, l.phi)), l.makeSafe(), l.radius *= f, l.radius = Math.max(e.minDistance, Math.min(e.maxDistance, l.radius)), e.enableDamping === !0 ? e.target.addScaledVector(v, e.dampingFactor) : e.target.add(v), r.setFromSpherical(l), r.applyQuaternion(C), De.copy(e.target).add(r), e.object.lookAt(e.target), e.enableDamping === !0 ? (c.theta *= 1 - e.dampingFactor, c.phi *= 1 - e.dampingFactor, v.multiplyScalar(1 - e.dampingFactor)) : (c.set(0, 0, 0), v.set(0, 0, 0)), f = 1, y || z.distanceToSquared(e.object.position) > s || 8 * (1 - B.dot(e.object.quaternion)) > s ? (e.dispatchEvent(je), z.copy(e.object.position), B.copy(e.object.quaternion), y = !1, !0) : !1;
+        return isFinite(V) && isFinite(U) && (V < -Math.PI ? V += X : V > Math.PI && (V -= X), U < -Math.PI ? U += X : U > Math.PI && (U -= X), V <= U ? l.theta = Math.max(V, Math.min(U, l.theta)) : l.theta = l.theta > (V + U) / 2 ? Math.max(V, l.theta) : Math.min(U, l.theta)), l.phi = Math.max(e.minPolarAngle, Math.min(e.maxPolarAngle, l.phi)), l.makeSafe(), l.radius *= f, l.radius = Math.max(e.minDistance, Math.min(e.maxDistance, l.radius)), e.enableDamping === !0 ? e.target.addScaledVector(P, e.dampingFactor) : e.target.add(P), r.setFromSpherical(l), r.applyQuaternion(C), De.copy(e.target).add(r), e.object.lookAt(e.target), e.enableDamping === !0 ? (c.theta *= 1 - e.dampingFactor, c.phi *= 1 - e.dampingFactor, P.multiplyScalar(1 - e.dampingFactor)) : (c.set(0, 0, 0), P.set(0, 0, 0)), f = 1, g || z.distanceToSquared(e.object.position) > s || 8 * (1 - j.dot(e.object.quaternion)) > s ? (e.dispatchEvent(Be), z.copy(e.object.position), j.copy(e.object.quaternion), g = !1, !0) : !1;
       };
     }(), this.dispose = function() {
       e.domElement.removeEventListener("contextmenu", Ce), e.domElement.removeEventListener("pointerdown", Le), e.domElement.removeEventListener("pointercancel", Se), e.domElement.removeEventListener("wheel", Oe), e.domElement.removeEventListener("pointermove", le), e.domElement.removeEventListener("pointerup", ce), e._domElementKeyEvents !== null && e._domElementKeyEvents.removeEventListener("keydown", Te);
@@ -222,9 +233,9 @@ class $t extends bt {
     let o = n.NONE;
     const s = 1e-6, l = new Ie(), c = new Ie();
     let f = 1;
-    const v = new R();
-    let y = !1;
-    const b = new $(), u = new $(), h = new $(), d = new $(), P = new $(), w = new $(), O = new $(), x = new $(), S = new $(), p = [], D = {};
+    const P = new R();
+    let g = !1;
+    const w = new $(), u = new $(), h = new $(), d = new $(), M = new $(), _ = new $(), O = new $(), A = new $(), S = new $(), p = [], D = {};
     function ee() {
       return 2 * Math.PI / 60 / 60 * e.autoRotateSpeed;
     }
@@ -240,34 +251,34 @@ class $t extends bt {
     const N = function() {
       const r = new R();
       return function(C, z) {
-        r.setFromMatrixColumn(z, 0), r.multiplyScalar(-C), v.add(r);
+        r.setFromMatrixColumn(z, 0), r.multiplyScalar(-C), P.add(r);
       };
     }(), ye = function() {
       const r = new R();
       return function(C, z) {
-        e.screenSpacePanning === !0 ? r.setFromMatrixColumn(z, 1) : (r.setFromMatrixColumn(z, 0), r.crossVectors(e.object.up, r)), r.multiplyScalar(C), v.add(r);
+        e.screenSpacePanning === !0 ? r.setFromMatrixColumn(z, 1) : (r.setFromMatrixColumn(z, 0), r.crossVectors(e.object.up, r)), r.multiplyScalar(C), P.add(r);
       };
     }(), Z = function() {
       const r = new R();
       return function(C, z) {
-        const B = e.domElement;
+        const j = e.domElement;
         if (e.object.isPerspectiveCamera) {
           const X = e.object.position;
           r.copy(X).sub(e.target);
           let oe = r.length();
-          oe *= Math.tan(e.object.fov / 2 * Math.PI / 180), N(2 * C * oe / B.clientHeight, e.object.matrix), ye(2 * z * oe / B.clientHeight, e.object.matrix);
+          oe *= Math.tan(e.object.fov / 2 * Math.PI / 180), N(2 * C * oe / j.clientHeight, e.object.matrix), ye(2 * z * oe / j.clientHeight, e.object.matrix);
         } else
-          e.object.isOrthographicCamera ? (N(C * (e.object.right - e.object.left) / e.object.zoom / B.clientWidth, e.object.matrix), ye(z * (e.object.top - e.object.bottom) / e.object.zoom / B.clientHeight, e.object.matrix)) : (console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled."), e.enablePan = !1);
+          e.object.isOrthographicCamera ? (N(C * (e.object.right - e.object.left) / e.object.zoom / j.clientWidth, e.object.matrix), ye(z * (e.object.top - e.object.bottom) / e.object.zoom / j.clientHeight, e.object.matrix)) : (console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled."), e.enablePan = !1);
       };
     }();
     function re(r) {
-      e.object.isPerspectiveCamera ? f /= r : e.object.isOrthographicCamera ? (e.object.zoom = Math.max(e.minZoom, Math.min(e.maxZoom, e.object.zoom * r)), e.object.updateProjectionMatrix(), y = !0) : (console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled."), e.enableZoom = !1);
+      e.object.isPerspectiveCamera ? f /= r : e.object.isOrthographicCamera ? (e.object.zoom = Math.max(e.minZoom, Math.min(e.maxZoom, e.object.zoom * r)), e.object.updateProjectionMatrix(), g = !0) : (console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled."), e.enableZoom = !1);
     }
     function be(r) {
-      e.object.isPerspectiveCamera ? f *= r : e.object.isOrthographicCamera ? (e.object.zoom = Math.max(e.minZoom, Math.min(e.maxZoom, e.object.zoom / r)), e.object.updateProjectionMatrix(), y = !0) : (console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled."), e.enableZoom = !1);
+      e.object.isPerspectiveCamera ? f *= r : e.object.isOrthographicCamera ? (e.object.zoom = Math.max(e.minZoom, Math.min(e.maxZoom, e.object.zoom / r)), e.object.updateProjectionMatrix(), g = !0) : (console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled."), e.enableZoom = !1);
     }
     function we(r) {
-      b.set(r.clientX, r.clientY);
+      w.set(r.clientX, r.clientY);
     }
     function Xe(r) {
       O.set(r.clientX, r.clientY);
@@ -276,15 +287,15 @@ class $t extends bt {
       d.set(r.clientX, r.clientY);
     }
     function We(r) {
-      u.set(r.clientX, r.clientY), h.subVectors(u, b).multiplyScalar(e.rotateSpeed);
+      u.set(r.clientX, r.clientY), h.subVectors(u, w).multiplyScalar(e.rotateSpeed);
       const m = e.domElement;
-      Y(2 * Math.PI * h.x / m.clientHeight), E(2 * Math.PI * h.y / m.clientHeight), b.copy(u), e.update();
+      Y(2 * Math.PI * h.x / m.clientHeight), E(2 * Math.PI * h.y / m.clientHeight), w.copy(u), e.update();
     }
     function Ke(r) {
-      x.set(r.clientX, r.clientY), S.subVectors(x, O), S.y > 0 ? re(G()) : S.y < 0 && be(G()), O.copy(x), e.update();
+      A.set(r.clientX, r.clientY), S.subVectors(A, O), S.y > 0 ? re(G()) : S.y < 0 && be(G()), O.copy(A), e.update();
     }
     function qe(r) {
-      P.set(r.clientX, r.clientY), w.subVectors(P, d).multiplyScalar(e.panSpeed), Z(w.x, w.y), d.copy(P), e.update();
+      M.set(r.clientX, r.clientY), _.subVectors(M, d).multiplyScalar(e.panSpeed), Z(_.x, _.y), d.copy(M), e.update();
     }
     function Je(r) {
       r.deltaY < 0 ? be(G()) : r.deltaY > 0 && re(G()), e.update();
@@ -309,10 +320,10 @@ class $t extends bt {
     }
     function ve() {
       if (p.length === 1)
-        b.set(p[0].pageX, p[0].pageY);
+        w.set(p[0].pageX, p[0].pageY);
       else {
         const r = 0.5 * (p[0].pageX + p[1].pageX), m = 0.5 * (p[0].pageY + p[1].pageY);
-        b.set(r, m);
+        w.set(r, m);
       }
     }
     function Pe() {
@@ -333,35 +344,35 @@ class $t extends bt {
     function tt() {
       e.enableZoom && Me(), e.enableRotate && ve();
     }
-    function Ae(r) {
+    function xe(r) {
       if (p.length == 1)
         u.set(r.pageX, r.pageY);
       else {
-        const C = ue(r), z = 0.5 * (r.pageX + C.x), B = 0.5 * (r.pageY + C.y);
-        u.set(z, B);
+        const C = ue(r), z = 0.5 * (r.pageX + C.x), j = 0.5 * (r.pageY + C.y);
+        u.set(z, j);
       }
-      h.subVectors(u, b).multiplyScalar(e.rotateSpeed);
+      h.subVectors(u, w).multiplyScalar(e.rotateSpeed);
       const m = e.domElement;
-      Y(2 * Math.PI * h.x / m.clientHeight), E(2 * Math.PI * h.y / m.clientHeight), b.copy(u);
+      Y(2 * Math.PI * h.x / m.clientHeight), E(2 * Math.PI * h.y / m.clientHeight), w.copy(u);
     }
-    function xe(r) {
+    function Ae(r) {
       if (p.length === 1)
-        P.set(r.pageX, r.pageY);
+        M.set(r.pageX, r.pageY);
       else {
         const m = ue(r), C = 0.5 * (r.pageX + m.x), z = 0.5 * (r.pageY + m.y);
-        P.set(C, z);
+        M.set(C, z);
       }
-      w.subVectors(P, d).multiplyScalar(e.panSpeed), Z(w.x, w.y), d.copy(P);
+      _.subVectors(M, d).multiplyScalar(e.panSpeed), Z(_.x, _.y), d.copy(M);
     }
     function Ee(r) {
-      const m = ue(r), C = r.pageX - m.x, z = r.pageY - m.y, B = Math.sqrt(C * C + z * z);
-      x.set(0, B), S.set(0, Math.pow(x.y / O.y, e.zoomSpeed)), re(S.y), O.copy(x);
+      const m = ue(r), C = r.pageX - m.x, z = r.pageY - m.y, j = Math.sqrt(C * C + z * z);
+      A.set(0, j), S.set(0, Math.pow(A.y / O.y, e.zoomSpeed)), re(S.y), O.copy(A);
     }
     function nt(r) {
-      e.enableZoom && Ee(r), e.enablePan && xe(r);
+      e.enableZoom && Ee(r), e.enablePan && Ae(r);
     }
     function ot(r) {
-      e.enableZoom && Ee(r), e.enableRotate && Ae(r);
+      e.enableZoom && Ee(r), e.enableRotate && xe(r);
     }
     function Le(r) {
       e.enabled !== !1 && (p.length === 0 && (e.domElement.setPointerCapture(r.pointerId), e.domElement.addEventListener("pointermove", le), e.domElement.addEventListener("pointerup", ce)), lt(r), r.pointerType === "touch" ? it(r) : at(r));
@@ -493,12 +504,12 @@ class $t extends bt {
         case n.TOUCH_ROTATE:
           if (e.enableRotate === !1)
             return;
-          Ae(r), e.update();
+          xe(r), e.update();
           break;
         case n.TOUCH_PAN:
           if (e.enablePan === !1)
             return;
-          xe(r), e.update();
+          Ae(r), e.update();
           break;
         case n.TOUCH_DOLLY_PAN:
           if (e.enableZoom === !1 && e.enablePan === !1)
@@ -560,14 +571,14 @@ const Vt = {
   },
   setup(i, { expose: a }) {
     const t = i, e = te(null);
-    _("addControls")(e);
-    const n = _("parentCamera"), o = _("canvas");
+    v("addControls")(e);
+    const n = v("parentCamera"), o = v("canvas");
     function s() {
       e.value != null && (e.value.enablePan = t.enablePan, e.value.enableRotate = t.enableRotate, e.value.enableZoom = t.enableZoom, e.value.minZoom = t.minZoom, e.value.maxZoom = t.maxZoom, e.value.minDistance = t.minDistance, e.value.maxDistance = t.maxDistance, e.value.minPolarAngle = t.minPolarAngle, e.value.maxPolarAngle = t.maxPolarAngle, e.value.minAzimuthAngle = t.minAzimuthAngle, e.value.maxAzimuthAngle = t.maxAzimuthAngle);
     }
-    return g(o, () => {
-      e.value = new $t(n, o.value), s(), A(t, "target", e.value, !1);
-    }), s(), M(t, "enablePan", s), M(t, "enableRotate", s), M(t, "enableZoom", s), M(t, "minZoom", s), M(t, "maxZoom", s), M(t, "minDistance", s), M(t, "maxDistance", s), M(t, "minPolarAngle", s), M(t, "maxPolarAngle", s), M(t, "minAzimuthAngle", s), M(t, "maxAzimuthAngle", s), A(t, "target", e.value), a({ three: e.value }), { props: t, three: e, camera: n, canvas: o, applyProps: s };
+    return y(o, () => {
+      e.value = new $t(n, o.value), s(), x(t, "target", e.value, !1);
+    }), s(), b(t, "enablePan", s), b(t, "enableRotate", s), b(t, "enableZoom", s), b(t, "minZoom", s), b(t, "maxZoom", s), b(t, "minDistance", s), b(t, "maxDistance", s), b(t, "minPolarAngle", s), b(t, "maxPolarAngle", s), b(t, "minAzimuthAngle", s), b(t, "maxAzimuthAngle", s), x(t, "target", e.value), a({ three: e.value }), { props: t, three: e, camera: n, canvas: o, applyProps: s };
   }
 }), Ft = /* @__PURE__ */ L({
   __name: "LineSegments",
@@ -577,28 +588,28 @@ const Vt = {
     scale: { default: () => [1, 1, 1] }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("scene"), n = new j(), o = new ne({ color: "black" }), s = new fe(n, o);
-    return e.add(s), A(t, "position", s), A(t, "rotation", s), A(t, "scale", s), T("mesh", s), a({ three: s }), (l, c) => k(l.$slots, "default");
+    const t = i, e = v("scene"), n = new B(), o = new ne({ color: "black" }), s = new fe(n, o);
+    return e.add(s), x(t, "position", s), x(t, "rotation", s), x(t, "scale", s), T("mesh", s), a({ three: s }), (l, c) => k(l.$slots, "default");
   }
 }), Ht = /* @__PURE__ */ L({
   __name: "Mesh",
   props: {
-    position: { default: () => [0, 0, 0] },
-    rotation: { default: () => [0, 0, 0] },
-    scale: { default: () => [1, 1, 1] },
     castShadow: { type: Boolean, default: !1 },
-    receiveShadow: { type: Boolean, default: !1 }
+    position: { default: () => [0, 0, 0] },
+    receiveShadow: { type: Boolean, default: !1 },
+    rotation: { default: () => [0, 0, 0] },
+    scale: { default: () => [1, 1, 1] }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("scene"), n = new j(), o = new He(), s = new he(n, o);
-    s.castShadow = !0, s.receiveShadow = !0, e.add(s), A(t, "position", s), A(t, "rotation", s), A(t, "scale", s);
+    const t = i, e = v("scene"), n = new B(), o = new He(), s = new he(n, o);
+    s.castShadow = !0, s.receiveShadow = !0, e.add(s), x(t, "position", s), x(t, "rotation", s), x(t, "scale", s);
     function l(c) {
       s.castShadow = c.castShadow, s.receiveShadow = c.receiveShadow;
     }
-    return l(t), g(
+    return l(t), y(
       () => t.castShadow,
       () => l(t)
-    ), g(
+    ), y(
       () => t.receiveShadow,
       () => l(t)
     ), T("mesh", s), a({ three: s }), (c, f) => k(c.$slots, "default");
@@ -611,8 +622,8 @@ const Vt = {
     scale: { default: () => [1, 1, 1] }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("scene"), n = new j(), o = new J({ color: "red", sizeAttenuation: !1, size: 2 }), s = new se(n, o);
-    return e.add(s), A(t, "position", s), A(t, "rotation", s), A(t, "scale", s), T("mesh", s), a({ three: s }), (l, c) => k(l.$slots, "default");
+    const t = i, e = v("scene"), n = new B(), o = new J({ color: "red", sizeAttenuation: !1, size: 2 }), s = new se(n, o);
+    return e.add(s), x(t, "position", s), x(t, "rotation", s), x(t, "scale", s), T("mesh", s), a({ three: s }), (l, c) => k(l.$slots, "default");
   }
 }), Zt = /^[og]\s*(.+)?/, Xt = /^mtllib /, Wt = /^usemtl /, Kt = /^usemap /, Ve = new R(), de = new R(), Ue = new R(), Fe = new R(), I = new R(), ae = new F();
 function qt() {
@@ -743,16 +754,16 @@ function qt() {
       this.object.geometry.uvs.push(t[a + 0], t[a + 1]);
     },
     addFace: function(a, t, e, n, o, s, l, c, f) {
-      const v = this.vertices.length;
-      let y = this.parseVertexIndex(a, v), b = this.parseVertexIndex(t, v), u = this.parseVertexIndex(e, v);
-      if (this.addVertex(y, b, u), this.addColor(y, b, u), l !== void 0 && l !== "") {
+      const P = this.vertices.length;
+      let g = this.parseVertexIndex(a, P), w = this.parseVertexIndex(t, P), u = this.parseVertexIndex(e, P);
+      if (this.addVertex(g, w, u), this.addColor(g, w, u), l !== void 0 && l !== "") {
         const h = this.normals.length;
-        y = this.parseNormalIndex(l, h), b = this.parseNormalIndex(c, h), u = this.parseNormalIndex(f, h), this.addNormal(y, b, u);
+        g = this.parseNormalIndex(l, h), w = this.parseNormalIndex(c, h), u = this.parseNormalIndex(f, h), this.addNormal(g, w, u);
       } else
-        this.addFaceNormal(y, b, u);
+        this.addFaceNormal(g, w, u);
       if (n !== void 0 && n !== "") {
         const h = this.uvs.length;
-        y = this.parseUVIndex(n, h), b = this.parseUVIndex(o, h), u = this.parseUVIndex(s, h), this.addUV(y, b, u), this.object.geometry.hasUVIndices = !0;
+        g = this.parseUVIndex(n, h), w = this.parseUVIndex(o, h), u = this.parseUVIndex(s, h), this.addUV(g, w, u), this.object.geometry.hasUVIndices = !0;
       } else
         this.addDefaultUV();
     },
@@ -802,8 +813,8 @@ class Jt extends wt {
 `);
     let n = "", o = "", s = 0, l = [];
     const c = typeof "".trimLeft == "function";
-    for (let y = 0, b = e.length; y < b; y++)
-      if (n = e[y], n = c ? n.trimLeft() : n.trim(), s = n.length, s !== 0 && (o = n.charAt(0), o !== "#"))
+    for (let g = 0, w = e.length; g < w; g++)
+      if (n = e[g], n = c ? n.trimLeft() : n.trim(), s = n.length, s !== 0 && (o = n.charAt(0), o !== "#"))
         if (o === "v") {
           const u = n.split(/\s+/);
           switch (u[0]) {
@@ -834,25 +845,25 @@ class Jt extends wt {
           }
         } else if (o === "f") {
           const h = n.slice(1).trim().split(/\s+/), d = [];
-          for (let w = 0, O = h.length; w < O; w++) {
-            const x = h[w];
-            if (x.length > 0) {
-              const S = x.split("/");
+          for (let _ = 0, O = h.length; _ < O; _++) {
+            const A = h[_];
+            if (A.length > 0) {
+              const S = A.split("/");
               d.push(S);
             }
           }
-          const P = d[0];
-          for (let w = 1, O = d.length - 1; w < O; w++) {
-            const x = d[w], S = d[w + 1];
+          const M = d[0];
+          for (let _ = 1, O = d.length - 1; _ < O; _++) {
+            const A = d[_], S = d[_ + 1];
             t.addFace(
-              P[0],
-              x[0],
+              M[0],
+              A[0],
               S[0],
-              P[1],
-              x[1],
+              M[1],
+              A[1],
               S[1],
-              P[2],
-              x[2],
+              M[2],
+              A[2],
               S[2]
             );
           }
@@ -863,8 +874,8 @@ class Jt extends wt {
           if (n.indexOf("/") === -1)
             h = u;
           else
-            for (let P = 0, w = u.length; P < w; P++) {
-              const O = u[P].split("/");
+            for (let M = 0, _ = u.length; M < _; M++) {
+              const O = u[M].split("/");
               O[0] !== "" && h.push(O[0]), O[1] !== "" && d.push(O[1]);
             }
           t.addLineGeometry(h, d);
@@ -896,43 +907,43 @@ class Jt extends wt {
     t.finalize();
     const f = new Ye();
     if (f.materialLibraries = [].concat(t.materialLibraries), !(t.objects.length === 1 && t.objects[0].geometry.vertices.length === 0) === !0)
-      for (let y = 0, b = t.objects.length; y < b; y++) {
-        const u = t.objects[y], h = u.geometry, d = u.materials, P = h.type === "Line", w = h.type === "Points";
+      for (let g = 0, w = t.objects.length; g < w; g++) {
+        const u = t.objects[g], h = u.geometry, d = u.materials, M = h.type === "Line", _ = h.type === "Points";
         let O = !1;
         if (h.vertices.length === 0)
           continue;
-        const x = new j();
-        x.setAttribute("position", new q(h.vertices, 3)), h.normals.length > 0 && x.setAttribute("normal", new q(h.normals, 3)), h.colors.length > 0 && (O = !0, x.setAttribute("color", new q(h.colors, 3))), h.hasUVIndices === !0 && x.setAttribute("uv", new q(h.uvs, 2));
+        const A = new B();
+        A.setAttribute("position", new q(h.vertices, 3)), h.normals.length > 0 && A.setAttribute("normal", new q(h.normals, 3)), h.colors.length > 0 && (O = !0, A.setAttribute("color", new q(h.colors, 3))), h.hasUVIndices === !0 && A.setAttribute("uv", new q(h.uvs, 2));
         const S = [];
         for (let D = 0, ee = d.length; D < ee; D++) {
           const G = d[D], Y = G.name + "_" + G.smooth + "_" + O;
           let E = t.materials[Y];
           if (this.materials !== null) {
-            if (E = this.materials.create(G.name), P && E && !(E instanceof ne)) {
+            if (E = this.materials.create(G.name), M && E && !(E instanceof ne)) {
               const N = new ne();
               ke.prototype.copy.call(N, E), N.color.copy(E.color), E = N;
-            } else if (w && E && !(E instanceof J)) {
+            } else if (_ && E && !(E instanceof J)) {
               const N = new J({ size: 10, sizeAttenuation: !1 });
               ke.prototype.copy.call(N, E), N.color.copy(E.color), N.map = E.map, E = N;
             }
           }
-          E === void 0 && (P ? E = new ne() : w ? E = new J({ size: 1, sizeAttenuation: !1 }) : E = new vt(), E.name = G.name, E.flatShading = !G.smooth, E.vertexColors = O, t.materials[Y] = E), S.push(E);
+          E === void 0 && (M ? E = new ne() : _ ? E = new J({ size: 1, sizeAttenuation: !1 }) : E = new vt(), E.name = G.name, E.flatShading = !G.smooth, E.vertexColors = O, t.materials[Y] = E), S.push(E);
         }
         let p;
         if (S.length > 1) {
           for (let D = 0, ee = d.length; D < ee; D++) {
             const G = d[D];
-            x.addGroup(G.groupStart, G.groupCount, D);
+            A.addGroup(G.groupStart, G.groupCount, D);
           }
-          P ? p = new fe(x, S) : w ? p = new se(x, S) : p = new he(x, S);
+          M ? p = new fe(A, S) : _ ? p = new se(A, S) : p = new he(A, S);
         } else
-          P ? p = new fe(x, S[0]) : w ? p = new se(x, S[0]) : p = new he(x, S[0]);
+          M ? p = new fe(A, S[0]) : _ ? p = new se(A, S[0]) : p = new he(A, S[0]);
         p.name = u.name, f.add(p);
       }
     else if (t.vertices.length > 0) {
-      const y = new J({ size: 1, sizeAttenuation: !1 }), b = new j();
-      b.setAttribute("position", new q(t.vertices, 3)), t.colors.length > 0 && t.colors[0] !== void 0 && (b.setAttribute("color", new q(t.colors, 3)), y.vertexColors = !0);
-      const u = new se(b, y);
+      const g = new J({ size: 1, sizeAttenuation: !1 }), w = new B();
+      w.setAttribute("position", new q(t.vertices, 3)), t.colors.length > 0 && t.colors[0] !== void 0 && (w.setAttribute("color", new q(t.colors, 3)), g.vertexColors = !0);
+      const u = new se(w, g);
       f.add(u);
     }
     return f;
@@ -941,23 +952,23 @@ class Jt extends wt {
 const Qt = /* @__PURE__ */ L({
   __name: "OBJLoader",
   props: {
-    url: null,
+    castShadow: { type: Boolean, default: !1 },
     position: { default: () => [0, 0, 0] },
+    receiveShadow: { type: Boolean, default: !1 },
     rotation: { default: () => [0, 0, 0] },
     scale: { default: () => [1, 1, 1] },
-    castShadow: { type: Boolean, default: !1 },
-    receiveShadow: { type: Boolean, default: !1 }
+    url: null
   },
   emits: ["load", "progress", "error"],
   setup(i, { expose: a, emit: t }) {
-    const e = i, n = new Jt(), o = _("scene"), s = new Ye();
-    s.castShadow = !0, s.receiveShadow = !0, o.add(s), A(e, "position", s), A(e, "rotation", s), A(e, "scale", s);
+    const e = i, n = new Jt(), o = v("scene"), s = new Ye();
+    s.castShadow = !0, s.receiveShadow = !0, o.add(s), x(e, "position", s), x(e, "rotation", s), x(e, "scale", s);
     function l() {
       n.load(
         e.url,
         function(c) {
           for (const f of c.children)
-            s.children.push(f), f.material = s.material, A(e, "position", s, !1), A(e, "rotation", s, !1), A(e, "scale", s, !1);
+            s.children.push(f), f.material = s.material, x(e, "position", s, !1), x(e, "rotation", s, !1), x(e, "scale", s, !1);
           t("load", c), resolve(c);
         },
         function(c) {
@@ -968,7 +979,7 @@ const Qt = /* @__PURE__ */ L({
         }
       );
     }
-    return l(), g(
+    return l(), y(
       () => e.url,
       () => l()
     ), T("mesh", s), a({
@@ -978,14 +989,14 @@ const Qt = /* @__PURE__ */ L({
 }), en = /* @__PURE__ */ L({
   __name: "AxesHelper",
   props: {
-    size: { default: 1 },
     position: { default: () => [0, 0, 0] },
     rotation: { default: () => [0, 0, 0] },
+    size: { default: 1 },
     scale: { default: () => [1, 1, 1] }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("scene"), n = new Pt(t.size);
-    return e.add(n), A(t, "position", n), A(t, "rotation", n), A(t, "scale", n), T("mesh", n), a({ three: n }), (o, s) => k(o.$slots, "default");
+    const t = i, e = v("scene"), n = new Pt(t.size);
+    return e.add(n), x(t, "position", n), x(t, "rotation", n), x(t, "scale", n), T("mesh", n), a({ three: n }), (o, s) => k(o.$slots, "default");
   }
 }), tn = {
   name: "BoxGeometry",
@@ -1002,13 +1013,13 @@ const Qt = /* @__PURE__ */ L({
     depthSegments: { default: 1 }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh");
-    function n(c, f, v, y, b, u) {
-      return new Mt(c, f, v, y, b, u);
+    const t = i, e = v("mesh");
+    function n(c, f, P, g, w, u) {
+      return new Mt(c, f, P, g, w, u);
     }
-    const o = H(new j());
+    const o = H(new B());
     o.name = t.name, e.geometry = o;
-    const s = _("addGeometry");
+    const s = v("addGeometry");
     s(o);
     function l() {
       const c = n(
@@ -1021,9 +1032,9 @@ const Qt = /* @__PURE__ */ L({
       );
       Q(o, c);
     }
-    return l(), M(t, "name", () => {
+    return l(), b(t, "name", () => {
       o.name = t.name;
-    }), M(t, "width", l), M(t, "height", l), M(t, "depth", l), M(t, "widthSegments", l), M(t, "heightSegments", l), M(t, "depthSegments", l), a({ three: o }), { props: t, mesh: e, makeBox: n, three: o, addGeometry: s, redoGeometry: l };
+    }), b(t, "width", l), b(t, "height", l), b(t, "depth", l), b(t, "widthSegments", l), b(t, "heightSegments", l), b(t, "depthSegments", l), a({ three: o }), { props: t, mesh: e, makeBox: n, three: o, addGeometry: s, redoGeometry: l };
   }
 }), on = {
   name: "BufferGeometry",
@@ -1036,22 +1047,22 @@ const Qt = /* @__PURE__ */ L({
     faces: { default: () => [] }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh");
+    const t = i, e = v("mesh");
     function n(c, f) {
-      const v = new j(), y = new Float32Array(c.length);
-      for (let b = 0; b < c.length; b++)
-        y[b] = c[b];
-      return v.setAttribute("position", new At(y, 3)), v.computeVertexNormals(), v;
+      const P = new B(), g = new Float32Array(c.length);
+      for (let w = 0; w < c.length; w++)
+        g[w] = c[w];
+      return P.setAttribute("position", new xt(g, 3)), P.computeVertexNormals(), P;
     }
     const o = H(n(t.vertices, t.faces));
     o.name = t.name, e.geometry = o;
-    const s = _("addGeometry");
+    const s = v("addGeometry");
     s(o);
     function l(c) {
       const f = n(c);
       Q(o, f);
     }
-    return g(
+    return y(
       () => t.vertices,
       (c) => {
         l(c);
@@ -1068,23 +1079,23 @@ const Qt = /* @__PURE__ */ L({
     geometry: null
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh"), n = H(new j());
+    const t = i, e = v("mesh"), n = H(new B());
     e.geometry = n;
-    const o = _("getGeometry"), s = _("addGeometry");
+    const o = v("getGeometry"), s = v("addGeometry");
     s(n);
     function l() {
-      const v = new xt(o(t.geometry));
-      Q(n, v);
+      const P = new At(o(t.geometry));
+      Q(n, P);
     }
-    let c = g(
+    let c = y(
       o(t.geometry),
       () => {
         l();
       },
       { deep: !0, immediate: !0 }
     );
-    M(t, "geometry", () => {
-      c(), c = g(
+    b(t, "geometry", () => {
+      c(), c = y(
         o(t.geometry),
         () => {
           l();
@@ -1097,8 +1108,8 @@ const Qt = /* @__PURE__ */ L({
     };
     return ie(() => f), a({ three: n }), { props: t, mesh: e, three: n, getGeometry: o, addGeometry: s, redoGeometry: l, get unwatch() {
       return c;
-    }, set unwatch(v) {
-      c = v;
+    }, set unwatch(P) {
+      c = P;
     }, waitUntilGeometryChanged: f };
   }
 }), ln = {
@@ -1114,19 +1125,19 @@ const Qt = /* @__PURE__ */ L({
     heightSegments: { default: 1 }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh");
-    function n(c, f, v, y) {
-      return new Et(c, f, v, y);
+    const t = i, e = v("mesh");
+    function n(c, f, P, g) {
+      return new Et(c, f, P, g);
     }
-    const o = H(new j());
+    const o = H(new B());
     o.name = t.name, e.geometry = o;
-    const s = _("addGeometry");
+    const s = v("addGeometry");
     s(o);
     function l() {
       const c = n(t.width, t.height, t.widthSegments, t.heightSegments);
       Q(o, c);
     }
-    return l(), M(t, "width", l), M(t, "height", l), M(t, "widthSegments", l), M(t, "heightSegments", l), a({ three: o }), { props: t, mesh: e, makePlane: n, three: o, addGeometry: s, redoGeometry: l };
+    return l(), b(t, "width", l), b(t, "height", l), b(t, "widthSegments", l), b(t, "heightSegments", l), a({ three: o }), { props: t, mesh: e, makePlane: n, three: o, addGeometry: s, redoGeometry: l };
   }
 }), un = {
   name: "SphereGeometry",
@@ -1144,13 +1155,13 @@ const Qt = /* @__PURE__ */ L({
     thetaLength: { default: Math.PI }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh");
-    function n(c, f, v, y, b, u, h) {
-      return new Lt(c, f, v, y, b, u, h);
+    const t = i, e = v("mesh");
+    function n(c, f, P, g, w, u, h) {
+      return new Lt(c, f, P, g, w, u, h);
     }
-    const o = H(new j());
+    const o = H(new B());
     o.name = t.name, e.geometry = o;
-    const s = _("addGeometry");
+    const s = v("addGeometry");
     s(o);
     function l() {
       const c = n(
@@ -1164,7 +1175,7 @@ const Qt = /* @__PURE__ */ L({
       );
       Q(o, c);
     }
-    return l(), M(t, "radius", l), M(t, "widthSegments", l), M(t, "heightSegments", l), M(t, "phiStart", l), M(t, "phiLength", l), M(t, "thetaStart", l), M(t, "thetaLength", l), a({ three: o }), { props: t, mesh: e, makeSphere: n, three: o, addGeometry: s, redoGeometry: l };
+    return l(), b(t, "radius", l), b(t, "widthSegments", l), b(t, "heightSegments", l), b(t, "phiStart", l), b(t, "phiLength", l), b(t, "thetaStart", l), b(t, "thetaLength", l), a({ three: o }), { props: t, mesh: e, makeSphere: n, three: o, addGeometry: s, redoGeometry: l };
   }
 }), dn = {
   name: "WireframeGeometry",
@@ -1175,23 +1186,23 @@ const Qt = /* @__PURE__ */ L({
     geometry: null
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh"), n = H(new j());
+    const t = i, e = v("mesh"), n = H(new B());
     e.geometry = n;
-    const o = _("getGeometry"), s = _("addGeometry");
+    const o = v("getGeometry"), s = v("addGeometry");
     s(n);
     function l() {
-      const v = new St(o(t.geometry));
-      Q(n, v);
+      const P = new St(o(t.geometry));
+      Q(n, P);
     }
-    let c = g(
+    let c = y(
       o(t.geometry),
       () => {
         l();
       },
       { deep: !0, immediate: !0 }
     );
-    M(t, "geometry", () => {
-      c(), c = g(
+    b(t, "geometry", () => {
+      c(), c = y(
         o(t.geometry),
         () => {
           l();
@@ -1204,8 +1215,8 @@ const Qt = /* @__PURE__ */ L({
     };
     return ie(() => f), a({ three: n }), { props: t, mesh: e, three: n, getGeometry: o, addGeometry: s, redoGeometry: l, get unwatch() {
       return c;
-    }, set unwatch(v) {
-      c = v;
+    }, set unwatch(P) {
+      c = P;
     }, waitUntilGeometryChanged: f };
   }
 }), hn = {
@@ -1217,12 +1228,12 @@ const Qt = /* @__PURE__ */ L({
     color: { default: 16777215 }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh"), n = new ne({ color: t.color });
+    const t = i, e = v("mesh"), n = new ne({ color: t.color });
     e.material = n;
     function o(s) {
       s.color && (n.color = new F(s.color));
     }
-    return o(t), g(
+    return o(t), y(
       () => t.color,
       () => o(t)
     ), T("material", n), a({ three: n }), { props: t, mesh: e, three: n, applyProps: o };
@@ -1239,32 +1250,32 @@ const Qt = /* @__PURE__ */ L({
     vertexColors: { type: Boolean, default: !1 }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh"), n = new He();
-    return e.material = n, g(
+    const t = i, e = v("mesh"), n = new He();
+    return e.material = n, y(
       () => t.color,
       () => {
         t.color !== void 0 && (n.color = new F(t.color));
       },
       { immediate: !0 }
-    ), g(
+    ), y(
       () => t.side,
       () => {
         n.side = t.side;
       },
       { immediate: !0 }
-    ), g(
+    ), y(
       () => t.opacity,
       () => {
         n.opacity = t.opacity;
       },
       { immediate: !0 }
-    ), g(
+    ), y(
       () => t.transparent,
       () => {
         n.transparent = t.transparent;
       },
       { immediate: !0 }
-    ), g(
+    ), y(
       () => t.vertexColors,
       () => {
         n.vertexColors = t.vertexColors;
@@ -1283,24 +1294,24 @@ const Qt = /* @__PURE__ */ L({
     transparent: { type: Boolean, default: !1 }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh"), n = new Ot();
+    const t = i, e = v("mesh"), n = new Ot();
     e.material = n;
     function o(s) {
       s.color && (n.color = new F(s.color)), s.side && (n.side = s.side);
     }
-    return o(t), g(
+    return o(t), y(
       () => t.color,
       () => o(t)
-    ), g(
+    ), y(
       () => t.side,
       () => o(t)
-    ), g(
+    ), y(
       () => t.opacity,
       () => {
         n.opacity = t.opacity;
       },
       { immediate: !0 }
-    ), g(
+    ), y(
       () => t.transparent,
       () => {
         n.transparent = t.transparent;
@@ -1319,18 +1330,18 @@ const Qt = /* @__PURE__ */ L({
     size: { default: 1 }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh"), n = new J({ color: t.color, sizeAttenuation: t.sizeAttenuation, size: t.size });
+    const t = i, e = v("mesh"), n = new J({ color: t.color, sizeAttenuation: t.sizeAttenuation, size: t.size });
     e.material = n;
     function o(s) {
       s.color && (n.color = new F(s.color)), s.size && (n.size = s.size), s.sizeAttenuation !== void 0 && (n.sizeAttenuation = s.sizeAttenuation);
     }
-    return o(t), g(
+    return o(t), y(
       () => t.color,
       () => o(t)
-    ), g(
+    ), y(
       () => t.size,
       () => o(t)
-    ), g(
+    ), y(
       () => t.sizeAttenuation,
       () => o(t)
     ), T("material", n), a({ three: n }), { props: t, mesh: e, three: n, applyProps: o };
@@ -1345,20 +1356,20 @@ const Qt = /* @__PURE__ */ L({
     transparent: { type: Boolean, default: !1 }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("mesh"), n = new Tt();
-    return e.material = n, g(
+    const t = i, e = v("mesh"), n = new Tt();
+    return e.material = n, y(
       () => t.side,
       () => {
         n.side = t.side;
       },
       { immediate: !0 }
-    ), g(
+    ), y(
       () => t.opacity,
       () => {
         n.opacity = t.opacity;
       },
       { immediate: !0 }
-    ), g(
+    ), y(
       () => t.transparent,
       () => {
         n.transparent = t.transparent;
@@ -1366,25 +1377,25 @@ const Qt = /* @__PURE__ */ L({
       { immediate: !0 }
     ), T("material", n), a({ three: n }), (o, s) => k(o.$slots, "default");
   }
-}), An = {
+}), xn = {
   name: "AmbientLight",
   render: () => null
-}, xn = /* @__PURE__ */ L({
-  ...An,
+}, An = /* @__PURE__ */ L({
+  ...xn,
   props: {
     color: { default: 16777215 },
     intensity: { default: 1 }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("scene"), n = new Ct();
+    const t = i, e = v("scene"), n = new Ct();
     e.add(n);
     function o(s) {
       n.color = new F(s.color), n.intensity = s.intensity;
     }
-    return o(t), g(
+    return o(t), y(
       () => t.color,
       () => o(t)
-    ), g(
+    ), y(
       () => t.intensity,
       () => o(t)
     ), a({ three: n }), { props: t, scene: e, three: n, applyProps: o };
@@ -1395,26 +1406,26 @@ const Qt = /* @__PURE__ */ L({
 }, Ln = /* @__PURE__ */ L({
   ...En,
   props: {
-    position: { default: () => [0, 0, 0] },
-    rotation: { default: () => [0, 0, 0] },
-    scale: { default: () => [1, 1, 1] },
+    castShadow: { type: Boolean, default: !1 },
     color: { default: 16777215 },
     intensity: { default: 1 },
-    castShadow: { type: Boolean, default: !1 }
+    position: { default: () => [0, 0, 0] },
+    rotation: { default: () => [0, 0, 0] },
+    scale: { default: () => [1, 1, 1] }
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("scene"), n = new zt();
-    e.add(n), A(t, "position", n), A(t, "rotation", n), A(t, "scale", n);
+    const t = i, e = v("scene"), n = new zt();
+    e.add(n), x(t, "position", n), x(t, "rotation", n), x(t, "scale", n);
     function o(s) {
       n.color = new F(s.color), n.intensity = s.intensity, n.castShadow = s.castShadow;
     }
-    return o(t), g(
+    return o(t), y(
       () => t.color,
       () => o(t)
-    ), g(
+    ), y(
       () => t.intensity,
       () => o(t)
-    ), g(
+    ), y(
       () => t.castShadow,
       () => o(t)
     ), a({ three: n }), { props: t, scene: e, three: n, applyProps: o };
@@ -1428,21 +1439,21 @@ const Qt = /* @__PURE__ */ L({
     url: null
   },
   setup(i, { expose: a }) {
-    const t = i, e = _("material"), n = te(new Rt());
+    const t = i, e = v("material"), n = te(new Rt());
     function o(s) {
       "map" in e && (e.map = new Dt().load(s.url));
     }
-    return o(t), g(
+    return o(t), y(
       () => t.url,
       () => o(t)
     ), a({ three: n }), { props: t, material: e, three: n, applyProps: o };
   }
 });
 function zn(i) {
-  i.component("Renderer", Gt), i.component("Scene", It), i.component("PerspectiveCamera", Nt), i.component("OrthographicCamera", jt), i.component("OrbitControls", Ut), i.component("LineSegments", Ft), i.component("Mesh", Ht), i.component("Points", Yt), i.component("OBJLoader", Qt), i.component("AxesHelper", en), i.component("BoxGeometry", nn), i.component("BufferGeometry", an), i.component("EdgesGeometry", rn), i.component("PlaneGeometry", cn), i.component("SphereGeometry", mn), i.component("WireframeGeometry", fn), i.component("LineBasicMaterial", pn), i.component("MeshBasicMaterial", yn), i.component("MeshLambertMaterial", wn), i.component("PointsMaterial", vn), i.component("MeshNormalMaterial", Mn), i.component("AmbientLight", xn), i.component("PointLight", Ln), i.component("TextureLoader", On);
+  i.component("Renderer", Gt), i.component("Scene", It), i.component("PerspectiveCamera", Nt), i.component("OrthographicCamera", Bt), i.component("OrbitControls", Ut), i.component("LineSegments", Ft), i.component("Mesh", Ht), i.component("Points", Yt), i.component("OBJLoader", Qt), i.component("AxesHelper", en), i.component("BoxGeometry", nn), i.component("BufferGeometry", an), i.component("EdgesGeometry", rn), i.component("PlaneGeometry", cn), i.component("SphereGeometry", mn), i.component("WireframeGeometry", fn), i.component("LineBasicMaterial", pn), i.component("MeshBasicMaterial", yn), i.component("MeshLambertMaterial", wn), i.component("PointsMaterial", vn), i.component("MeshNormalMaterial", Mn), i.component("AmbientLight", An), i.component("PointLight", Ln), i.component("TextureLoader", On);
 }
 export {
-  xn as AmbientLight,
+  An as AmbientLight,
   en as AxesHelper,
   nn as BoxGeometry,
   an as BufferGeometry,
@@ -1455,7 +1466,7 @@ export {
   Mn as MeshNormalMaterial,
   Qt as OBJLoader,
   Ut as OrbitControls,
-  jt as OrthographicCamera,
+  Bt as OrthographicCamera,
   Nt as PerspectiveCamera,
   cn as PlaneGeometry,
   Ln as PointLight,

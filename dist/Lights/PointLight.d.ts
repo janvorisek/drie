@@ -3,6 +3,18 @@ import { Color, PointLight, Scene } from "three";
 import { type Vector3Like } from "../types";
 export interface Props {
     /**
+     * If set to true light will cast dynamic shadows.
+     */
+    castShadow?: boolean;
+    /**
+     * Color of the light
+     */
+    color?: string | number;
+    /**
+     * Numeric value of the light's strength/intensity.
+     */
+    intensity?: number;
+    /**
      * A Vector3Like representing the object's local position.
      */
     position?: Vector3Like;
@@ -14,20 +26,23 @@ export interface Props {
      * A Vector3Like representing the object's local scale.
      */
     scale?: Vector3Like;
-    /**
-     * Color of the light
-     */
-    color?: string | number;
-    /**
-     * Numeric value of the light's strength/intensity.
-     */
-    intensity?: number;
-    /**
-     * If set to true light will cast dynamic shadows.
-     */
-    castShadow?: boolean;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
+    castShadow: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    color: {
+        type: (StringConstructor | NumberConstructor)[];
+        required: false;
+        default: number;
+    };
+    intensity: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
     position: {
         type: null;
         required: false;
@@ -42,21 +57,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: null;
         required: false;
         default: () => number[];
-    };
-    color: {
-        type: (StringConstructor | NumberConstructor)[];
-        required: false;
-        default: number;
-    };
-    intensity: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    castShadow: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
     };
 }, {
     props: any;
@@ -72,6 +72,21 @@ declare const _sfc_main: import("vue").DefineComponent<{
         [key: string]: any;
     }, prop: string, obj: import("three").Object3D<import("three").Event> | import("three").Group, registerWatch?: boolean) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    castShadow: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    color: {
+        type: (StringConstructor | NumberConstructor)[];
+        required: false;
+        default: number;
+    };
+    intensity: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
     position: {
         type: null;
         required: false;
@@ -86,21 +101,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: null;
         required: false;
         default: () => number[];
-    };
-    color: {
-        type: (StringConstructor | NumberConstructor)[];
-        required: false;
-        default: number;
-    };
-    intensity: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    castShadow: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
     };
 }>>, {
     scale: any;

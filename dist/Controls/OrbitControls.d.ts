@@ -692,6 +692,18 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     transposeIntoArray: (r: number[]) => import("three").Matrix3;
                     setUvTransform: (tx: number, ty: number, sx: number, sy: number, rotation: number, cx: number, cy: number) => import("three").Matrix3;
                     scale: (sx: number, sy: number) => import("three").Matrix3;
+                    makeTranslation: {
+                        (x: number, y: number): import("three").Matrix3;
+                        (x: number, y: number): import("three").Matrix3;
+                    };
+                    makeRotation: {
+                        (theta: number): import("three").Matrix3;
+                        (theta: number): import("three").Matrix3;
+                    };
+                    makeScale: {
+                        (x: number, y: number): import("three").Matrix3;
+                        (x: number, y: number): import("three").Matrix3;
+                    };
                     rotate: (theta: number) => import("three").Matrix3;
                     translate: (tx: number, ty: number) => import("three").Matrix3;
                     equals: (matrix: import("three").Matrix3) => boolean;
@@ -1661,6 +1673,18 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     transposeIntoArray: (r: number[]) => import("three").Matrix3;
                     setUvTransform: (tx: number, ty: number, sx: number, sy: number, rotation: number, cx: number, cy: number) => import("three").Matrix3;
                     scale: (sx: number, sy: number) => import("three").Matrix3;
+                    makeTranslation: {
+                        (x: number, y: number): import("three").Matrix3;
+                        (x: number, y: number): import("three").Matrix3;
+                    };
+                    makeRotation: {
+                        (theta: number): import("three").Matrix3;
+                        (theta: number): import("three").Matrix3;
+                    };
+                    makeScale: {
+                        (x: number, y: number): import("three").Matrix3;
+                        (x: number, y: number): import("three").Matrix3;
+                    };
                     rotate: (theta: number) => import("three").Matrix3;
                     translate: (tx: number, ty: number) => import("three").Matrix3;
                     equals: (matrix: import("three").Matrix3) => boolean;
@@ -2623,6 +2647,18 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 transposeIntoArray: (r: number[]) => import("three").Matrix3;
                 setUvTransform: (tx: number, ty: number, sx: number, sy: number, rotation: number, cx: number, cy: number) => import("three").Matrix3;
                 scale: (sx: number, sy: number) => import("three").Matrix3;
+                makeTranslation: {
+                    (x: number, y: number): import("three").Matrix3;
+                    (x: number, y: number): import("three").Matrix3;
+                };
+                makeRotation: {
+                    (theta: number): import("three").Matrix3;
+                    (theta: number): import("three").Matrix3;
+                };
+                makeScale: {
+                    (x: number, y: number): import("three").Matrix3;
+                    (x: number, y: number): import("three").Matrix3;
+                };
                 rotate: (theta: number) => import("three").Matrix3;
                 translate: (tx: number, ty: number) => import("three").Matrix3;
                 equals: (matrix: import("three").Matrix3) => boolean;

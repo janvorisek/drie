@@ -18,6 +18,11 @@ export interface Props {
      */
     antialias?: boolean;
     /**
+     * Set FPS limit for the renderer.
+     * Use `-1` to disable frame limitter.
+     */
+    frameLimit?: number;
+    /**
      * Controls the default clear alpha value.
      */
     alpha?: boolean;
@@ -45,6 +50,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         required: false;
         default: boolean;
+    };
+    frameLimit: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
     };
     alpha: {
         type: BooleanConstructor;
@@ -1055,6 +1065,18 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 transposeIntoArray: (r: number[]) => import("three").Matrix3;
                 setUvTransform: (tx: number, ty: number, sx: number, sy: number, rotation: number, cx: number, cy: number) => import("three").Matrix3;
                 scale: (sx: number, sy: number) => import("three").Matrix3;
+                makeTranslation: {
+                    (x: number, y: number): import("three").Matrix3;
+                    (x: number, y: number): import("three").Matrix3;
+                };
+                makeRotation: {
+                    (theta: number): import("three").Matrix3;
+                    (theta: number): import("three").Matrix3;
+                };
+                makeScale: {
+                    (x: number, y: number): import("three").Matrix3;
+                    (x: number, y: number): import("three").Matrix3;
+                };
                 rotate: (theta: number) => import("three").Matrix3;
                 translate: (tx: number, ty: number) => import("three").Matrix3;
                 equals: (matrix: import("three").Matrix3) => boolean;
@@ -2024,6 +2046,18 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 transposeIntoArray: (r: number[]) => import("three").Matrix3;
                 setUvTransform: (tx: number, ty: number, sx: number, sy: number, rotation: number, cx: number, cy: number) => import("three").Matrix3;
                 scale: (sx: number, sy: number) => import("three").Matrix3;
+                makeTranslation: {
+                    (x: number, y: number): import("three").Matrix3;
+                    (x: number, y: number): import("three").Matrix3;
+                };
+                makeRotation: {
+                    (theta: number): import("three").Matrix3;
+                    (theta: number): import("three").Matrix3;
+                };
+                makeScale: {
+                    (x: number, y: number): import("three").Matrix3;
+                    (x: number, y: number): import("three").Matrix3;
+                };
                 rotate: (theta: number) => import("three").Matrix3;
                 translate: (tx: number, ty: number) => import("three").Matrix3;
                 equals: (matrix: import("three").Matrix3) => boolean;
@@ -2986,6 +3020,18 @@ declare const _sfc_main: import("vue").DefineComponent<{
             transposeIntoArray: (r: number[]) => import("three").Matrix3;
             setUvTransform: (tx: number, ty: number, sx: number, sy: number, rotation: number, cx: number, cy: number) => import("three").Matrix3;
             scale: (sx: number, sy: number) => import("three").Matrix3;
+            makeTranslation: {
+                (x: number, y: number): import("three").Matrix3;
+                (x: number, y: number): import("three").Matrix3;
+            };
+            makeRotation: {
+                (theta: number): import("three").Matrix3;
+                (theta: number): import("three").Matrix3;
+            };
+            makeScale: {
+                (x: number, y: number): import("three").Matrix3;
+                (x: number, y: number): import("three").Matrix3;
+            };
             rotate: (theta: number) => import("three").Matrix3;
             translate: (tx: number, ty: number) => import("three").Matrix3;
             equals: (matrix: import("three").Matrix3) => boolean;
@@ -3593,6 +3639,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: boolean;
     };
+    frameLimit: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
     alpha: {
         type: BooleanConstructor;
         required: false;
@@ -3607,6 +3658,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     autoResize: boolean;
     onBeforeRender: Function;
     antialias: boolean;
+    frameLimit: number;
     alpha: boolean;
     shadowMapEnabled: boolean;
 }>;
