@@ -19,53 +19,56 @@
         <OrbitControls />
       </OrthographicCamera>
       <Scene background="white">
+        <Mesh :position="[0, 0, -3]" :receive-shadow="true">
+          <MeshLambertMaterial color="#cccccc" :side="DoubleSide" />
+          <PlaneGeometry name="plane" :width="20" :height="20" />
+        </Mesh>
         <PointLight :position="[0, 0, 10]" :intensity="0.25" :cast-shadow="true" />
         <AmbientLight :color="0xffffff" />
         <Points :position="posV" :scale="[s, s, s]">
           <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
           <SphereGeometry name="sphere" :radius="radius" :width-segments="12" :height-segments="12" />
         </Points>
-        <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
-          <MeshLambertMaterial transparent :opacity="opacity">
-            <TextureLoader url="https://threejs.org/examples/textures/crate.gif" />
-          </MeshLambertMaterial>
-          <BoxGeometry name="test" :width="w + 1" :height="w * 2 + 1" />
-        </Mesh>
-        <Mesh :position="[-5, 0, 0]" :scale="[s, 1, 1]" :cast-shadow="true">
-          <MeshLambertMaterial :color="color2" :side="DoubleSide" />
-          <BufferGeometry name="custom" :vertices="vertices" />
-        </Mesh>
-        <Mesh :position="[0, 0, -3]" :receive-shadow="true">
-          <MeshLambertMaterial color="#cccccc" :side="DoubleSide" />
-          <PlaneGeometry name="plane" :width="20" :height="20" />
-        </Mesh>
+        <Group @click="onClick" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+          <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
+            <MeshLambertMaterial transparent :opacity="opacity">
+              <TextureLoader url="https://threejs.org/examples/textures/crate.gif" />
+            </MeshLambertMaterial>
+            <BoxGeometry name="test" :width="w + 1" :height="w * 2 + 1" />
+          </Mesh>
+          <Mesh :position="[-5, 0, 0]" :scale="[s, 1, 1]" :cast-shadow="true">
+            <MeshLambertMaterial :color="color2" :side="DoubleSide" />
+            <BufferGeometry name="custom" :vertices="vertices" />
+          </Mesh>
+
+          <OBJLoader
+            :position="[3, 0, 0]"
+            :rotation="[Math.PI / 2, Math.cos(Date.now() / 1000) * Math.PI, 0]"
+            :scale="[20, 20, 20]"
+            url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
+            @load="onLoad"
+          >
+            <MeshBasicMaterial :color="color3" :side="DoubleSide" />
+          </OBJLoader>
+          <OBJLoader
+            :position="[-2, 2, 0]"
+            :rotation="[Math.PI / 2, 0, 0]"
+            :scale="[10, 10, 10]"
+            url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
+          >
+            <MeshNormalMaterial :side="DoubleSide" transparent :opacity="0.5" />
+          </OBJLoader>
+          <Mesh v-for="i in count" :key="i" :position="[i * 1.5, 0, 0]">
+            <MeshBasicMaterial color="#aaa" />
+            <BufferGeometry :vertices="[0, 0, 0, 1, 0, 0, 1, 1, 0]" :faces="[0, 1, 2]" />
+          </Mesh>
+        </Group>
         <LineSegments :position="pos" :rotation="rot">
           <EdgesGeometry geometry="test" />
         </LineSegments>
         <LineSegments>
           <WireframeGeometry :geometry="geoName" />
         </LineSegments>
-        <OBJLoader
-          :position="[3, 0, 0]"
-          :rotation="[Math.PI / 2, Math.cos(Date.now() / 1000) * Math.PI, 0]"
-          :scale="[20, 20, 20]"
-          url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
-          @load="onLoad"
-        >
-          <MeshBasicMaterial :color="color3" :side="DoubleSide" />
-        </OBJLoader>
-        <OBJLoader
-          :position="[-2, 2, 0]"
-          :rotation="[Math.PI / 2, 0, 0]"
-          :scale="[10, 10, 10]"
-          url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
-        >
-          <MeshNormalMaterial :side="DoubleSide" transparent :opacity="0.5" />
-        </OBJLoader>
-        <Mesh v-for="i in count" :key="i" :position="[i * 1.5, 0, 0]">
-          <MeshBasicMaterial color="#aaa" />
-          <BufferGeometry :vertices="[0, 0, 0, 1, 0, 0, 1, 1, 0]" :faces="[0, 1, 2]" />
-        </Mesh>
         <AxesHelper :size="3" />
       </Scene>
     </Renderer>
@@ -74,7 +77,16 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from "vue";
-import { DoubleSide, Vector3 } from "three";
+import {
+  DoubleSide,
+  Mesh as TMesh,
+  Vector3,
+  Vector2,
+  MeshBasicMaterial as TMeshBasicMaterial,
+  BufferGeometry as TBufferGeometry,
+  Intersection,
+  Color,
+} from "three";
 
 const count = ref(5);
 const pos = ref<[number, number, number]>([0, 0, 0]);
@@ -130,6 +142,23 @@ window.setInterval(() => {
 
 const onLoad = () => {
   console.log("obj load event");
+};
+
+const onClick = (m: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>>[], p: Vector2) => {
+  console.log("click");
+  console.log(m);
+};
+
+const onMouseEnter = (m: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>>[], p: Vector2) => {
+  m[0].object.material.color = new Color("red");
+  console.log("enter");
+  console.log(m);
+};
+
+const onMouseLeave = (m: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>>[], p: Vector2) => {
+  m[0].object.material.color = new Color("#aaa");
+  console.log("leave");
+  console.log(m);
 };
 
 const camera = ref("cam1");

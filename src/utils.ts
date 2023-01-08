@@ -1,5 +1,5 @@
-import { Vector3, Object3D, Group, BufferGeometry } from "three";
-import { watch } from "vue";
+import { Vector3, Object3D, Group, BufferGeometry, Vector2, Camera, Mesh, Raycaster, Scene, Intersection } from "three";
+import { inject, onMounted, onUnmounted, type Ref, watch, defineEmits } from "vue";
 import { Vector3Like } from "./types";
 
 export const vector3LikeToVector3 = (data?: Vector3Like) => {
@@ -128,4 +128,93 @@ export function disposeTHREEObject(obj: any) {
   obj.removeFromParent();
 
   return true;
+}
+
+export function manageParentRelationship(three: Object3D) {
+  const scene = inject("scene") as Scene;
+  const parent = inject("parent", undefined) as Object3D | undefined;
+
+  onMounted(() => {
+    if (parent) parent.add(three);
+    else scene.add(three);
+  });
+
+  onUnmounted(() => {
+    if (parent) parent.remove(three);
+    else scene.remove(three);
+  });
+}
+
+export function handleGroupRaycasting(three: Group, emit: any) {
+  const camera = inject("camera") as Ref<Camera>;
+  const canvas = inject<Ref<HTMLCanvasElement>>("canvas");
+  const scene = inject("scene") as Scene;
+
+  const onCanvasClick = (e: MouseEvent) => {
+    const raycaster = new Raycaster();
+    const pointer = getPointer(e);
+
+    raycaster.setFromCamera(pointer, camera.value);
+
+    const intersects = raycaster.intersectObjects(three.children);
+
+    if (intersects.length > 0) emit("click", intersects, pointer);
+  };
+
+  let mouseOverObject = false;
+  let prevIntersects: Intersection[] = [];
+
+  const onCanvasMouseMove = (e: MouseEvent) => {
+    const raycaster = new Raycaster();
+    const pointer = getPointer(e);
+
+    raycaster.setFromCamera(pointer, camera.value);
+
+    const intersects = raycaster.intersectObjects(three.children);
+
+    if (intersects.length > 0) {
+      prevIntersects = intersects;
+      if (mouseOverObject === false) emit("mouseenter", intersects, pointer);
+
+      mouseOverObject = true;
+      emit("mousemove", three, pointer);
+    } else {
+      if (mouseOverObject) emit("mouseleave", prevIntersects, pointer);
+      mouseOverObject = false;
+      prevIntersects = [];
+    }
+  };
+
+  onMounted(() => {
+    canvas?.value.addEventListener("click", onCanvasClick);
+    canvas?.value.addEventListener("mousemove", onCanvasMouseMove);
+  });
+
+  onUnmounted(() => {
+    scene.remove(three);
+    disposeTHREEObject(three);
+
+    canvas?.value.removeEventListener("click", onCanvasClick);
+    canvas?.value.removeEventListener("mousemove", onCanvasMouseMove);
+  });
+}
+
+export function getPointer(e: MouseEvent) {
+  const pointer = new Vector2();
+
+  pointer.x =
+    ((e.pageX - (e.currentTarget as HTMLCanvasElement).offsetLeft) /
+      (e.currentTarget as HTMLCanvasElement).offsetWidth) *
+      2 -
+    1;
+
+  pointer.y =
+    -(
+      (e.pageY - (e.currentTarget as HTMLCanvasElement).offsetTop) /
+      (e.currentTarget as HTMLCanvasElement).offsetHeight
+    ) *
+      2 +
+    1;
+
+  return pointer;
 }

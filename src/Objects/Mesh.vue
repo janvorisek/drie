@@ -3,11 +3,11 @@
 </template>
 
 <script setup lang="ts">
-import { provide, inject, watch, onUnmounted } from "vue";
+import { provide, inject, onUnmounted } from "vue";
 
 import { BufferGeometry, Mesh, MeshBasicMaterial, Scene } from "three";
 import { Vector3Like } from "../types";
-import { handleVectorProp, disposeTHREEObject } from "../utils";
+import { handleVectorProp, disposeTHREEObject, handlePropCallback, manageParentRelationship } from "../utils";
 
 export interface Props {
   /**
@@ -52,32 +52,25 @@ const material = new MeshBasicMaterial();
 const three = new Mesh(geometry, material);
 three.castShadow = true;
 three.receiveShadow = true;
-scene.add(three);
+
+manageParentRelationship(three);
 
 handleVectorProp(props, "position", three);
 handleVectorProp(props, "rotation", three);
 handleVectorProp(props, "scale", three);
 
-function applyProps(props: Props) {
+function applyProps() {
   three.castShadow = props.castShadow as boolean;
   three.receiveShadow = props.receiveShadow as boolean;
 }
 
-applyProps(props);
+applyProps();
 
-watch(
-  () => props.castShadow,
-  () => applyProps(props),
-);
-
-watch(
-  () => props.receiveShadow,
-  () => applyProps(props),
-);
+handlePropCallback(props, "castShadow", applyProps);
+handlePropCallback(props, "receiveShadow", applyProps);
 
 onUnmounted(() => {
   scene.remove(three);
-
   disposeTHREEObject(three);
 });
 

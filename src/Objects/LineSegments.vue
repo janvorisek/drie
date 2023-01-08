@@ -7,7 +7,7 @@ import { provide, inject, onUnmounted } from "vue";
 
 import { BufferGeometry, LineBasicMaterial, LineSegments, Scene } from "three";
 import { Vector3Like } from "../types";
-import { disposeTHREEObject, handleVectorProp } from "../utils";
+import { disposeTHREEObject, handleVectorProp, manageParentRelationship } from "../utils";
 
 export interface Props {
   /**
@@ -38,7 +38,8 @@ const geometry = new BufferGeometry();
 const material = new LineBasicMaterial({ color: "black" });
 
 const three = new LineSegments(geometry, material);
-scene.add(three);
+
+manageParentRelationship(three);
 
 handleVectorProp(props, "position", three);
 handleVectorProp(props, "rotation", three);
