@@ -62,7 +62,7 @@ let renderer: WebGLRenderer | null = null;
 const scenes: Scene[] = [];
 const geometries = reactive<BufferGeometry[]>([]);
 
-let activeCamera: Camera | null = null;
+let activeCamera = ref<Camera | null>(null);
 const cameras = ref<Camera[]>([]);
 
 const controls = ref<Ref<{ update: () => void; enabled: boolean; object: Camera }>[]>([]);
@@ -82,13 +82,13 @@ watch(
 const setCamera = (newCamera?: string) => {
   if (newCamera) {
     const findCamera = cameras.value.find((c) => c.name === newCamera);
-    if (findCamera === undefined) activeCamera = null;
+    if (findCamera === undefined) activeCamera.value = null;
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    activeCamera = findCamera;
+    activeCamera.value = findCamera;
   } else {
-    activeCamera = cameras.value[0];
+    activeCamera.value = cameras.value[0];
   }
 };
 
@@ -140,7 +140,7 @@ function animate() {
   if (controls.value.length > 0 && activeCamera) {
     for (const ctrl of controls.value) {
       if (ctrl.value === null) continue;
-      if (ctrl.value.object.uuid === activeCamera.uuid) {
+      if (ctrl.value.object.uuid === activeCamera.value.uuid) {
         ctrl.value.enabled = true;
         ctrl.value.update();
       } else {
@@ -149,7 +149,7 @@ function animate() {
     }
   }
 
-  if (activeCamera && renderer) for (const scene of scenes) renderer.render(scene, activeCamera);
+  if (activeCamera && renderer) for (const scene of scenes) renderer.render(scene, activeCamera.value);
 }
 
 applyProps(props);
@@ -172,6 +172,8 @@ provide("getGeometry", (c: string) => geometries.find((g) => g.name === c));
 
 //provide("controls", controls);
 provide("addControls", (controlsRef: any) => controls.value.push(controlsRef));
+
+provide("camera", activeCamera);
 
 defineExpose({ three: renderer });
 </script>
