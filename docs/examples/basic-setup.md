@@ -1,15 +1,37 @@
+<script setup lang="ts">
+// Basic example just imports the used Drie components
+import { Renderer, Scene } from "../../src"; // always needed
+import { Mesh, BoxGeometry, MeshBasicMaterial } from "../../src"; // mesh
+import { PerspectiveCamera, OrbitControls } from "../../src"; // camera
+</script>
+
 # Basic setup
 
 The minimal setup is a renderer, a camera and a scene containing objects.
 
-```vue
-<script setup lang="ts">
-// Basic example just imports the used Drie components
-import { Renderer, Scene } from "@janvorisek/drie"; // always needed
-import { Mesh, BoxGeometry, MeshBasicMaterial } from "@janvorisek/drie"; // mesh
-import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie"; // camera
-</script>
+<div class="example">
+  <Renderer ref="renderer" :antialias="true">
+    <PerspectiveCamera :position="[1, 1, 1]" :up="[0, 0, 1]">
+      <OrbitControls />
+    </PerspectiveCamera>
+    <Scene background="#f9f9f9">
+      <Mesh>
+        <MeshBasicMaterial color="blue" />
+        <BoxGeometry />
+      </Mesh>
+    </Scene>
+  </Renderer>
+</div>
 
+In this example, the scene consists of
+
+- single perspective camera
+- orbit controls
+- one blue cube 
+
+## Code
+
+```vue
 <template>
   <!--
     Parent element's width and height are automatically propagated to the renderer.
@@ -24,7 +46,7 @@ import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie"; // camera
         At least one camera is required to render the scene.
         Using single camera makes it automatically renderer's default camera.
       -->
-      <PerspectiveCamera>
+      <PerspectiveCamera :position="[1, 1, 1]" :up="[0, 0, 1]">
         <!-- Controls can be passed directly to the camera. -->
         <OrbitControls />
       </PerspectiveCamera>
@@ -41,4 +63,11 @@ import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie"; // camera
     </Renderer>
   </div>
 </template>
+
+<script setup lang="ts">
+// Basic example just imports the used Drie components
+import { Renderer, Scene } from "@janvorisek/drie"; // always needed
+import { Mesh, BoxGeometry, MeshBasicMaterial } from "@janvorisek/drie"; // mesh
+import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie"; // camera
+</script>
 ```

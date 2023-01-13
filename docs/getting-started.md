@@ -46,7 +46,7 @@ Note that tree shaking is not available and the resulting bundle size may be hug
 
 ```ts
 import { createApp } from "vue";
-import { install as installDrie } from 'drie';
+import { install as installDrie } from '@janvorisek/drie';
 import App from "./App.vue";
 
 const app = createApp(App);

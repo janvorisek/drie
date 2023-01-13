@@ -1,9 +1,15 @@
 import { defineConfig } from 'vitepress'
+import { SitemapStream } from 'sitemap'
+
+import { createWriteStream } from 'node:fs'
+import { resolve } from 'node:path'
 
 const pkg = require('../../package.json')
 
 const testFolder = './docs/components';
 import * as fs from "fs";
+
+const links: any[] = []
 
 const componentTree = {
   text: 'Components',
@@ -90,7 +96,23 @@ export default defineConfig( {
       text: 'Edit this page on GitHub'
     }*/
   },
+  transformHtml: (_, id, { pageData }) => {
+    if (!/[\\/]404\.html$/.test(id))
+      links.push({
+        // you might need to change this if not using clean urls mode
+        url: pageData.relativePath.replace(/((^|\/)index)?\.md$/, '$2'),
+        lastmod: pageData.lastUpdated
+      })
+  },
+
+  buildEnd: ({ outDir }) => {
+    const sitemap = new SitemapStream({ hostname: 'https://www.drie.dev/' })
+    const writeStream = createWriteStream(resolve(outDir, 'sitemap.xml'))
+    sitemap.pipe(writeStream)
+    links.forEach((link) => sitemap.write(link))
+    sitemap.end()
+  },
   vite: {
-    plugins: [vueDocsPlugin()]
+    plugins: [vueDocsPlugin()],
   },
 })
