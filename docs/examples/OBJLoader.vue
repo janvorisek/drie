@@ -13,6 +13,7 @@
         >
           <MeshNormalMaterial />
         </OBJLoader>
+        <AxesHelper :size="3" />
       </Scene>
     </Renderer>
   </div>
@@ -25,4 +26,5 @@ import { OBJLoader } from "../../src";
 import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
+import { AxesHelper } from "../../src";
 </script>

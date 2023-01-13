@@ -21,10 +21,10 @@ export default {
   </ClientOnly>
 
   ::: details Click me to view the example code
-  ```vue
+  ```vue{5}
   <template>
     <div style="width: 100vh; height: 100vh;">
-      <Renderer ref="renderer" :antialias="true">
+      <Renderer :antialias="true">
         <PerspectiveCamera :position="[5,5,5]" :up="[0, 0, 1]">
           <OrbitControls />
         </PerspectiveCamera>

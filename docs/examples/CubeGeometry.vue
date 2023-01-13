@@ -9,6 +9,7 @@
           <MeshNormalMaterial />
           <BoxGeometry :width="6" :height="4" :depth="2" />
         </Mesh>
+        <AxesHelper :size="3" />
       </Scene>
     </Renderer>
   </div>
@@ -24,6 +25,7 @@ import { BoxGeometry } from "../../src";
 import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
+import { AxesHelper } from "../../src";
 
 const rot = ref<[number, number, number]>([0, 0, 0]);
 

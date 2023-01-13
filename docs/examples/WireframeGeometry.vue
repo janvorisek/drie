@@ -13,6 +13,7 @@
           <WireframeGeometry geometry="box" />
           <LineBasicMaterial color="black" />
         </LineSegments>
+        <AxesHelper :size="3" />
       </Scene>
     </Renderer>
   </div>
@@ -29,6 +30,7 @@ import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
 import { LineSegments, LineBasicMaterial, WireframeGeometry } from '../../src';
+import { AxesHelper } from "../../src";
 
 const rot = ref<[number, number, number]>([0, 0, 0]);
 

@@ -1,6 +1,6 @@
 <template>
   <div class="example">
-    <Renderer ref="renderer" :antialias="true">
+    <Renderer :antialias="true">
       <PerspectiveCamera :position="[5, 5, 5]" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>
@@ -13,6 +13,7 @@
           <EdgesGeometry geometry="box" />
           <LineBasicMaterial color="black" />
         </LineSegments>
+        <AxesHelper :size="3" />
       </Scene>
     </Renderer>
   </div>
@@ -29,6 +30,7 @@ import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
 import { EdgesGeometry, LineBasicMaterial, LineSegments } from '../../src';
+import { AxesHelper } from "../../src";
 
 const rot = ref<[number, number, number]>([0, 0, 0]);
 

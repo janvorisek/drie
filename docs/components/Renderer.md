@@ -1,4 +1,22 @@
 # Renderer
+This component manages [`THREE.WebGLRenderer`](https://threejs.org/docs/#api/en/renderers/WebGLRenderer). It is the main component containing cameras and scenes.
+
+## Features
+
+Drie provides some of the common features not contained in three.js by default.
+
+### Renderer auto resize
+
+Modern web is based on complex responsive layouts. Drie allows you to make your renderer canvas responsive. It is based on ResizeObserver watching renderer's parent element dimensions.
+
+It can be disabled using the `autoResize` prop. When disabled, you are required to provide `width` and`height` prop.
+
+### Frame limiter
+
+Frame limiter may increase performance of your scenes. The limit defaults to `60` FPS.
+
+It can be disabled by setting the `frameLimit` prop to `-1`.
+
 
 ## Props
 
@@ -19,3 +37,4 @@
 | default |             |          |
 
 ---
+

@@ -9,6 +9,7 @@
           <MeshNormalMaterial :side="DoubleSide" />
           <PlaneGeometry :width="8" :height="6" />
         </Mesh>
+        <AxesHelper :size="3" />
       </Scene>
     </Renderer>
   </div>
@@ -25,6 +26,7 @@ import { PlaneGeometry } from "../../src";
 import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
+import { AxesHelper } from "../../src";
 
 const rot = ref<[number, number, number]>([0, 0, 0]);
 

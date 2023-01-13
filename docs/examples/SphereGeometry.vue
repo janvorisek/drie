@@ -7,10 +7,11 @@
       <Scene background="#f9f9f9">
         <Mesh>
           <MeshLambertMaterial :color="0xeeaa55" />
-          <SphereGeometry :radius="3" :width-segments="24" :height-segments="24" />
+          <SphereGeometry :radius="2" :width-segments="24" :height-segments="24" />
         </Mesh>
         <PointLight :position="rot" />
         <AmbientLight />
+        <AxesHelper :size="3" />
       </Scene>
     </Renderer>
   </div>
@@ -26,6 +27,7 @@ import { SphereGeometry } from "../../src";
 import { MeshLambertMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls, PointLight, AmbientLight } from "../../src";
+import { AxesHelper } from "../../src";
 
 const rot = ref<[number, number, number]>([0, 0, 0]);
 
