@@ -47,32 +47,32 @@ handleVectorProp(props, "scale", three);
 
 const emit = defineEmits<{
   /**
-   * Emitted when Mesh is clicked.
-   * @arg {Mesh} mesh An instance of `THREE.Mesh` being clicked.
+   * Emitted when Object3Ds are clicked.
+   * @arg {Intersection[]} is An array of [`Intersection`](https://github.com/three-types/three-ts-types/blob/master/types/three/src/core/Raycaster.d.ts#L16) being clicked.
    * @arg {Vector2} pointer A `THREE.Vector2` representing relative element coordinates on the canvas
    */
-  (event: "click", mesh: Intersection[], pointer: Vector2): void;
+  (event: "click", is: Intersection[], pointer: Vector2): void;
 
   /**
-   * Emitted when mouse is moved over Mesh.
-   * @arg {Mesh} mesh An instance of `THREE.Mesh` being clicked.
+   * Emitted when mouse is moved over Object3Ds.
+   * @arg {Intersection[]} is An array of [`Intersection`](https://github.com/three-types/three-ts-types/blob/master/types/three/src/core/Raycaster.d.ts#L16) mousemoved over.
    * @arg {Vector2} pointer A `THREE.Vector2` representing relative element coordinates on the canvas
    */
-  (event: "mousemove", mesh: Intersection[], pointer: Vector2): void;
+  (event: "mousemove", is: Intersection[], pointer: Vector2): void;
 
   /**
-   * Emitted when mouse enters Mesh.
-   * @arg {Mesh} mesh An instance of `THREE.Mesh` being clicked.
+   * Emitted when mouse enters Object3Ds.
+   * @arg {Intersection[]} is An array of [`Intersection`](https://github.com/three-types/three-ts-types/blob/master/types/three/src/core/Raycaster.d.ts#L16) entered by mouse.
    * @arg {Vector2} pointer A `THREE.Vector2` representing relative element coordinates on the canvas
    */
-  (event: "mouseenter", mesh: Intersection[], pointer: Vector2): void;
+  (event: "mouseenter", is: Intersection[], pointer: Vector2): void;
 
   /**
-   * Emitted when mouse leaves Mesh.
-   * @arg {Mesh} mesh An instance of `THREE.Mesh` being clicked.
+   * Emitted when mouse leaves Object3Ds.
+   * @arg {Intersection[]} is An array of [`Intersection`](https://github.com/three-types/three-ts-types/blob/master/types/three/src/core/Raycaster.d.ts#L16) left by mouse.
    * @arg {Vector2} pointer A `THREE.Vector2` representing relative element coordinates on the canvas
    */
-  (event: "mouseleave", mesh: Intersection[], pointer: Vector2): void;
+  (event: "mouseleave", is: Intersection[], pointer: Vector2): void;
 }>();
 
 handleRaycasting(three.children, props, emit);
