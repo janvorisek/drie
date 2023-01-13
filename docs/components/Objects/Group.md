@@ -1,4 +1,8 @@
 # Group
+This component makes working with groups of objects easier.
+
+Raycasting may be enabled for group children. When enabled, [events](#events) are fired for corresponding mouse events.
+
 
 ## Props
 
@@ -25,3 +29,4 @@
 | default |             |          |
 
 ---
+

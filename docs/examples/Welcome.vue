@@ -1,7 +1,7 @@
 <template>
-  <div class="example" style="height: 400px">
+  <div class="example" style="height: 200px">
     <Renderer ref="renderer" :camera="camera" :antialias="true" :frame-limit="30" shadow-map-enabled>
-      <PerspectiveCamera name="cam1" :position="[5,5,5]" :up="[0, 0, 1]">
+      <PerspectiveCamera name="cam1" :position="[0,5,5]" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>
       <OrthographicCamera name="cam2">
@@ -20,14 +20,22 @@
           </MeshBasicMaterial>
           <BoxGeometry :width="w + 1" :height="w * 2 + 1" />
         </Mesh>
-        <Mesh :position="[-5, 0, 0]" :scale="[s2+0.5, 1, s]" :cast-shadow="true">
+        <Mesh :position="[-8, 0, 0]" :scale="[s2+0.5, 1, s]" :cast-shadow="true">
           <MeshBasicMaterial :color="color2" :side="DoubleSide" />
-          <BufferGeometry :vertices="vertices" />
+          <BufferGeometry name="weirdGeo" :vertices="vertices" />
         </Mesh>
+        <LineSegments :position="[-8, 0, 0]" :scale="[s2+0.5, 1, s]">
+          <LineBasicMaterial color="black" />
+          <WireframeGeometry geometry="weirdGeo" />
+        </LineSegments>
         <Mesh :position="[0, 0, -3]" :receive-shadow="true">
-          <MeshLambertMaterial color="#cccccc" :side="DoubleSide" />
-          <PlaneGeometry :width="20" :height="20" />
+          <MeshLambertMaterial color="#aaa" :side="DoubleSide" />
+          <PlaneGeometry name="plane" :width="20" :height="5" :width-segments="3" :height-segments="3" />
         </Mesh>
+        <LineSegments :position="[0, 0, -3]">
+          <LineBasicMaterial color="black" />
+          <WireframeGeometry geometry="plane" />
+        </LineSegments>
         <OBJLoader
           :position="[3, 0, 0]"
           :rotation="[Math.PI / 2, Math.cos(Date.now() / 1000) * Math.PI, 0]"
@@ -43,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { Renderer } from "../../src";
+import { LineBasicMaterial, Renderer, WireframeGeometry } from "../../src";
 import { Scene } from "../../src";
 import { Mesh } from "../../src";
 import { Points } from "../../src";
@@ -55,7 +63,7 @@ import { PointsMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrthographicCamera } from "../../src";
 import { OrbitControls, OBJLoader } from "../../src";
-import { AxesHelper, AmbientLight, PointLight, PlaneGeometry, MeshLambertMaterial, TextureLoader } from "../../src";
+import { AxesHelper, AmbientLight, PointLight, PlaneGeometry, LineSegments, MeshLambertMaterial, TextureLoader } from "../../src";
 
 import { reactive, ref, onMounted } from "vue";
 import { DoubleSide, Vector3 } from "three";
@@ -69,20 +77,23 @@ const s = ref(1);
 const s2 = ref(1);
 const radius = ref(1);
 
-const posV = new Vector3(5, -1, 0);
+const posV = new Vector3(10, 0, 0);
 const color = ref("rgb(255,0,0)");
 const color2 = ref("rgb(255,0,0)");
 const color3 = ref("rgb(255,0,0)");
 
 onMounted(() => {
   let segs = 24;
-  let r1 = 2;
-  let r2 = 1;
+  let r1 = 3;
+  let r2 = 2;
+  
   for (let i = 0; i < segs; i++) {
     const x1 = r1 * Math.cos(((2 * Math.PI) / segs) * i);
-    const y1 = r2 * Math.sin(((2 * Math.PI) / segs) * i);
+    const dy1 = Math.sin(x1);
+    const y1 = r2 * Math.sin(((2 * Math.PI) / segs) * i) + dy1;
     const x2 = r1 * Math.cos(((2 * Math.PI) / segs) * (i + 1));
-    const y2 = r2 * Math.sin(((2 * Math.PI) / segs) * (i + 1));
+    const dy2 = Math.sin(x2);
+    const y2 = r2 * Math.sin(((2 * Math.PI) / segs) * (i + 1)) + dy2;
 
     vertices.push(x1, y1, 0);
     vertices.push(x2, y2, 0);
@@ -105,7 +116,7 @@ window.setInterval(() => {
   s2.value = Math.sin(angle*2) * 0.5 + 1;
 
   w.value = Math.sin(angle) + 1;
-  pos.value = [Math.cos(angle), Math.sin(angle), Math.sin(angle)];
+  pos.value = [Math.cos(angle) - 1, Math.sin(angle), Math.sin(angle)];
   rot.value = [Math.cos(angle) * Math.PI, 0, 0];
 }, 10);
 

@@ -2,6 +2,12 @@
   <slot></slot>
 </template>
 
+<docs>BEGIN_DOCS
+  This component makes working with groups of objects easier.
+
+  Raycasting may be enabled for group children. When enabled, [events](#events) are fired for corresponding mouse events.
+</docs>
+
 <script setup lang="ts">
 import { Group, Intersection, Vector2 } from "three";
 import { provide } from "vue";

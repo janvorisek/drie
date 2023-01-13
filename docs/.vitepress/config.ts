@@ -62,6 +62,9 @@ export default defineConfig( {
         text: 'Guide',
         items: [
           { text: 'Getting Started', link: '/getting-started' },
+          { text: 'Geometries', link: '/geometries'},
+          { text: 'Materials', link: '/materials'},
+          { text: 'Objects', link: '/objects'},
           { text: 'Types', link: '/types'}
         ]
       },
