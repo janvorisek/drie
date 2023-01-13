@@ -1,18 +1,14 @@
-import { BufferGeometry, Mesh, MeshBasicMaterial, Scene } from "three";
-import { Vector3Like } from "../types";
+import { Group, Intersection, Vector2 } from "three";
+import { Vector3Like } from "~/types";
 export interface Props {
     /**
-     * Whether the object gets rendered into shadow map.
+     * Component will emit mouse events when raycasting is enabled
      */
-    castShadow?: boolean;
+    enableRaycasting?: boolean;
     /**
      * A [Vector3Like](/types#vector3like) representing the object's local position.
      */
     position?: Vector3Like;
-    /**
-     * Whether the material receives shadows.
-     */
-    receiveShadow?: boolean;
     /**
      * A [Vector3Like](/types#vector3like) representing local rotation (see Euler angles), in radians.
      */
@@ -23,7 +19,7 @@ export interface Props {
     scale?: Vector3Like;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
-    castShadow: {
+    enableRaycasting: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
@@ -32,11 +28,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: null;
         required: false;
         default: () => number[];
-    };
-    receiveShadow: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
     };
     rotation: {
         type: null;
@@ -50,13 +41,15 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     props: any;
-    scene: Scene;
-    geometry: BufferGeometry;
-    material: MeshBasicMaterial;
-    three: Mesh<BufferGeometry, MeshBasicMaterial>;
-    applyProps: () => void;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    castShadow: {
+    three: Group;
+    emit: {
+        (event: "click", is: Intersection[], pointer: Vector2): void;
+        (event: "mousemove", is: Intersection[], pointer: Vector2): void;
+        (event: "mouseenter", is: Intersection[], pointer: Vector2): void;
+        (event: "mouseleave", is: Intersection[], pointer: Vector2): void;
+    };
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "mousemove" | "mouseenter" | "mouseleave")[], "click" | "mousemove" | "mouseenter" | "mouseleave", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    enableRaycasting: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
@@ -65,11 +58,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: null;
         required: false;
         default: () => number[];
-    };
-    receiveShadow: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
     };
     rotation: {
         type: null;
@@ -81,11 +69,15 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: () => number[];
     };
-}>>, {
+}>> & {
+    onClick?: ((...args: any[]) => any) | undefined;
+    onMousemove?: ((...args: any[]) => any) | undefined;
+    onMouseenter?: ((...args: any[]) => any) | undefined;
+    onMouseleave?: ((...args: any[]) => any) | undefined;
+}, {
     scale: any;
     position: any;
     rotation: any;
-    castShadow: boolean;
-    receiveShadow: boolean;
+    enableRaycasting: boolean;
 }>;
 export default _sfc_main;
