@@ -43,7 +43,7 @@
   "repository": "github:janvorisek/drie",
   "devDependencies": {
     "@types/node": "^18.11.17",
-    "@types/three": "^0.147.1",
+    "@types/three": "^0.148.0",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
     "@vitejs/plugin-vue": "^4.0.0",
