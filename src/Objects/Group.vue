@@ -5,7 +5,18 @@
 <script setup lang="ts">
 import { Group, Intersection, Vector2 } from "three";
 import { provide } from "vue";
-import { manageParentRelationship, handleGroupRaycasting } from "../utils";
+import { manageParentRelationship, handleRaycasting } from "../utils";
+
+export interface Props {
+  /**
+   * Component will emit mouse events when raycasting is enabled
+   */
+  enableRaycasting?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  enableRaycasting: false,
+});
 
 const three = new Group();
 
@@ -41,7 +52,7 @@ const emit = defineEmits<{
   (event: "mouseleave", mesh: Intersection[], pointer: Vector2): void;
 }>();
 
-handleGroupRaycasting(three, emit);
+handleRaycasting(three.children, props, emit);
 
 provide("parent", three);
 

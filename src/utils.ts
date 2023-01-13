@@ -145,7 +145,7 @@ export function manageParentRelationship(three: Object3D) {
   });
 }
 
-export function handleGroupRaycasting(three: Group, emit: any) {
+export function handleRaycasting(intersect: any[], props: any, emit: any) {
   const camera = inject("camera") as Ref<Camera>;
   const canvas = inject<Ref<HTMLCanvasElement>>("canvas");
   const scene = inject("scene") as Scene;
@@ -156,7 +156,7 @@ export function handleGroupRaycasting(three: Group, emit: any) {
 
     raycaster.setFromCamera(pointer, camera.value);
 
-    const intersects = raycaster.intersectObjects(three.children);
+    const intersects = raycaster.intersectObjects(intersect);
 
     if (intersects.length > 0) emit("click", intersects, pointer);
   };
@@ -170,14 +170,14 @@ export function handleGroupRaycasting(three: Group, emit: any) {
 
     raycaster.setFromCamera(pointer, camera.value);
 
-    const intersects = raycaster.intersectObjects(three.children);
+    const intersects = raycaster.intersectObjects(intersect);
 
     if (intersects.length > 0) {
       prevIntersects = intersects;
       if (mouseOverObject === false) emit("mouseenter", intersects, pointer);
 
       mouseOverObject = true;
-      emit("mousemove", three, pointer);
+      emit("mousemove", intersects, pointer);
     } else {
       if (mouseOverObject) emit("mouseleave", prevIntersects, pointer);
       mouseOverObject = false;
@@ -186,17 +186,31 @@ export function handleGroupRaycasting(three: Group, emit: any) {
   };
 
   onMounted(() => {
-    canvas?.value.addEventListener("click", onCanvasClick);
-    canvas?.value.addEventListener("mousemove", onCanvasMouseMove);
+    if (props.enableRaycasting) {
+      canvas?.value.addEventListener("click", onCanvasClick);
+      canvas?.value.addEventListener("mousemove", onCanvasMouseMove);
+    }
   });
 
   onUnmounted(() => {
-    scene.remove(three);
-    disposeTHREEObject(three);
-
-    canvas?.value.removeEventListener("click", onCanvasClick);
-    canvas?.value.removeEventListener("mousemove", onCanvasMouseMove);
+    if (props.enableRaycasting) {
+      canvas?.value.removeEventListener("click", onCanvasClick);
+      canvas?.value.removeEventListener("mousemove", onCanvasMouseMove);
+    }
   });
+
+  watch(
+    () => props.enableRaycasting,
+    (newVal) => {
+      if (newVal) {
+        canvas?.value.addEventListener("click", onCanvasClick);
+        canvas?.value.addEventListener("mousemove", onCanvasMouseMove);
+      } else {
+        canvas?.value.removeEventListener("click", onCanvasClick);
+        canvas?.value.removeEventListener("mousemove", onCanvasMouseMove);
+      }
+    },
+  );
 }
 
 export function getPointer(e: MouseEvent) {

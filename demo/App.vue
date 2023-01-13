@@ -29,7 +29,17 @@
           <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
           <SphereGeometry name="sphere" :radius="radius" :width-segments="12" :height-segments="12" />
         </Points>
-        <Group @click="onClick" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+        <Mesh :position="posBoxHelper">
+          <MeshBasicMaterial color="black" />
+          <BoxGeometry :width="0.1" :height="0.1" :depth="0.1" />
+        </Mesh>
+        <Group
+          enable-raycasting
+          @click="onClick"
+          @mousemove="onMouseEnter"
+          @mouseenter="onMouseEnter"
+          @mouseleave="onMouseLeave"
+        >
           <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
             <MeshLambertMaterial transparent :opacity="opacity">
               <TextureLoader url="https://threejs.org/examples/textures/crate.gif" />
@@ -100,6 +110,7 @@ const radius = ref(1);
 const opacity = ref(1);
 
 const posV = new Vector3(5, -1, 0);
+const posBoxHelper = ref<[number, number, number]>([0, 0, 0]);
 const color = ref("rgb(255,0,0)");
 const color2 = ref("rgb(255,0,0)");
 const color3 = ref("rgb(255,0,0)");
@@ -146,19 +157,21 @@ const onLoad = () => {
 
 const onClick = (m: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>>[], p: Vector2) => {
   console.log("click");
-  console.log(m);
+  //console.log(m);
 };
 
 const onMouseEnter = (m: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>>[], p: Vector2) => {
   m[0].object.material.color = new Color("red");
+  const pt = m[0].point;
+  posBoxHelper.value = [pt.x, pt.y, pt.z];
   console.log("enter");
-  console.log(m);
+  //console.log({ m, p });
 };
 
 const onMouseLeave = (m: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>>[], p: Vector2) => {
   m[0].object.material.color = new Color("#aaa");
   console.log("leave");
-  console.log(m);
+  //console.log({ m, p });
 };
 
 const camera = ref("cam1");
