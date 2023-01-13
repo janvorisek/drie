@@ -65,6 +65,7 @@
             :rotation="[Math.PI / 2, 0, 0]"
             :scale="[10, 10, 10]"
             url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
+            @load="onLoad"
           >
             <MeshNormalMaterial :side="DoubleSide" transparent :opacity="0.5" />
           </OBJLoader>

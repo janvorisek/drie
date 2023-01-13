@@ -37,11 +37,12 @@ export const handleVectorProp = (
   if (props[prop] !== undefined) {
     const position = vector3LikeToVector3(props[prop]);
 
-    if ("isGroup" in obj) {
+    /*if ("isGroup" in obj) {
       for (const o of obj.children) handleVectorProp(props, prop, o, false);
     } else {
       setVectorProp(prop, position, obj);
-    }
+    }*/
+    setVectorProp(prop, position, obj);
   }
 
   if (!registerWatch) return;
@@ -52,11 +53,12 @@ export const handleVectorProp = (
       if (props[prop] !== undefined) {
         const position = vector3LikeToVector3(props[prop]);
 
-        if ("isGroup" in obj) {
+        /*if ("isGroup" in obj) {
           for (const o of obj.children) handleVectorProp(props, prop, o, false);
         } else {
           setVectorProp(prop, position, obj);
-        }
+        }*/
+        setVectorProp(prop, position, obj);
       }
     },
   );

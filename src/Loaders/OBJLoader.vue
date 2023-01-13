@@ -107,7 +107,7 @@ function load() {
     // called when resource is loaded
     function (object) {
       for (const o of object.children) {
-        three.children.push(o);
+        three.add(o);
         (o as Mesh).material = three.material;
 
         handleVectorProp(props, "position", three, false);
@@ -131,6 +131,7 @@ function load() {
 }
 
 load();
+
 watch(
   () => props.url,
   () => load(),
