@@ -46,6 +46,8 @@ const three = ref<Texture>(new Texture());
 function load() {
   three.value = new TextureLoader().load(props.url);
   if ("map" in material) material.map = three.value;
+
+  applyProps();
 }
 
 function applyProps() {
