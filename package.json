@@ -62,6 +62,7 @@
     "release-it": "^15.6.0",
     "rimraf": "4.0.4",
     "sitemap": "^7.1.1",
+    "three": "github:mrdoob/three.js#dev",
     "typescript": "^4.9.4",
     "vite": "^4.0.3",
     "vite-plugin-dts": "1.7.1",
@@ -71,7 +72,7 @@
     "vue-docgen-cli": "^4.56.1",
     "vue-tsc": "^1.0.18"
   },
-  "dependencies": {
-    "three": "github:mrdoob/three.js#dev"
+  "peerDependencies": {
+    "three": "^0.148.0"
   }
 }
