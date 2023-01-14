@@ -1,15 +1,39 @@
-import { inject, ref, watch } from "vue";
-import { Texture, TextureLoader, Material } from "three";
+import { inject, ref } from "vue";
+import { Texture, TextureLoader, Material, type Wrapping } from "three";
 export interface Props {
     /**
      *  The path or URL to the texture file. This can also be a Data URI.
      */
     url: string;
+    /**
+     * This defines how the texture is wrapped horizontally and corresponds to U in UV mapping.
+     * The default is `THREE.ClampToEdgeWrapping`, where the edge is clamped to the outer edge texels.
+     * The other two choices are `THREE.RepeatWrapping` and `THREE.MirroredRepeatWrapping`.
+     * See the [texture constants](https://threejs.org/docs/?q=texture#api/en/constants/Textures) page for details.
+     */
+    wrapS?: Wrapping;
+    /**
+     * This defines how the texture is wrapped vertically and corresponds to V in UV mapping.
+     * The default is `THREE.ClampToEdgeWrapping`, where the edge is clamped to the outer edge texels.
+     * The other two choices are `THREE.RepeatWrapping` and `THREE.MirroredRepeatWrapping`.
+     * See the [texture constants](https://threejs.org/docs/?q=texture#api/en/constants/Textures) page for details.
+     */
+    wrapT?: Wrapping;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
     url: {
         type: StringConstructor;
         required: true;
+    };
+    wrapS: {
+        type: null;
+        required: false;
+        default: Wrapping;
+    };
+    wrapT: {
+        type: null;
+        required: false;
+        default: Wrapping;
     };
 }, {
     props: any;
@@ -30,8 +54,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
         image: any;
         mipmaps: any[];
         mapping: import("three").Mapping;
-        wrapS: import("three").Wrapping;
-        wrapT: import("three").Wrapping;
+        wrapS: Wrapping;
+        wrapT: Wrapping;
         magFilter: import("three").TextureFilter;
         minFilter: import("three").TextureFilter;
         anisotropy: number;
@@ -297,17 +321,34 @@ declare const _sfc_main: import("vue").DefineComponent<{
         removeEventListener: <T_2 extends string>(type: T_2, listener: import("three").EventListener<import("three").Event, T_2, Texture>) => void;
         dispatchEvent: (event: import("three").Event) => void;
     }>;
-    applyProps: (props: Props) => void;
+    load: () => void;
+    applyProps: () => void;
     inject: typeof inject;
     ref: typeof ref;
-    watch: typeof watch;
     readonly Texture: typeof Texture;
     readonly TextureLoader: typeof TextureLoader;
     readonly Material: typeof Material;
+    readonly ClampToEdgeWrapping: Wrapping;
+    readonly handlePropCallback: (props: {
+        [key: string]: any;
+    }, prop: string, fn: () => void) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     url: {
         type: StringConstructor;
         required: true;
     };
-}>>, {}>;
+    wrapS: {
+        type: null;
+        required: false;
+        default: Wrapping;
+    };
+    wrapT: {
+        type: null;
+        required: false;
+        default: Wrapping;
+    };
+}>>, {
+    wrapS: any;
+    wrapT: any;
+}>;
 export default _sfc_main;
