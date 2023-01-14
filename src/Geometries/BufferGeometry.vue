@@ -89,40 +89,41 @@ export interface Props {
 
   /**
    * Flat array of triangular faces.
-   * Indexed [THREE.BufferGeometry](https://threejs.org/docs/#api/en/core/BufferGeometry) will be used then non-empty array is provided.
+   * Indexed [THREE.BufferGeometry](https://threejs.org/docs/#api/en/core/BufferGeometry) will be used if non-empty array is provided.
    */
   faces?: number[];
+
+  /**
+   * Flat array of vertex UVs.
+   */
+  uvs?: number[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
   name: "",
   vertices: () => [],
   faces: () => [],
+  uvs: () => [],
 });
 
 const mesh = inject("mesh") as Mesh;
 
-function makeGeometry(vertices: number[], faces: number[]) {
+function makeGeometry(vertices: number[], faces: number[], uvs: number[]) {
   const geometry = new BufferGeometry();
 
-  const vertArray = new Float32Array(vertices.length);
-  for (let v = 0; v < vertices.length; v++) {
-    /*const tmp = vector3LikeToArray(vertices[v]);
-    vertArray[v * 3] = tmp[0];
-    vertArray[v * 3 + 1] = tmp[1];
-    vertArray[v * 3 + 2] = tmp[2];*/
-
-    vertArray[v] = vertices[v];
-  }
+  const vertArray = new Float32Array(vertices);
+  const uvArray = new Float32Array(uvs);
 
   geometry.setAttribute("position", new BufferAttribute(vertArray, 3));
+  geometry.setAttribute("uv", new BufferAttribute(uvArray, 2));
   if (props.faces.length > 0) geometry.setIndex(faces);
+
   geometry.computeVertexNormals();
 
   return geometry;
 }
 
-const three = reactive(makeGeometry(props.vertices, props.faces));
+const three = reactive(makeGeometry(props.vertices, props.faces, props.uvs));
 // eslint-disable-next-line vue/no-setup-props-destructure
 three.name = props.name;
 mesh.geometry = three;
@@ -130,8 +131,8 @@ mesh.geometry = three;
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
 addGeometry(three);
 
-function redoGeometry(vertices: number[], faces: number[]) {
-  const tmp = makeGeometry(vertices, faces);
+function redoGeometry(vertices: number[], faces: number[], uvs: number[]) {
+  const tmp = makeGeometry(vertices, faces, uvs);
 
   copyGeo(three, tmp);
 }
@@ -139,7 +140,7 @@ function redoGeometry(vertices: number[], faces: number[]) {
 watch(
   () => props.vertices,
   (vertices) => {
-    redoGeometry(vertices, props.faces);
+    redoGeometry(vertices, props.faces, props.uvs);
   },
   { deep: true, immediate: true },
 );
@@ -147,7 +148,7 @@ watch(
 watch(
   () => props.faces,
   (faces) => {
-    redoGeometry(props.vertices, faces);
+    redoGeometry(props.vertices, faces, props.uvs);
   },
   { deep: true, immediate: true },
 );
