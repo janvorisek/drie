@@ -3,15 +3,38 @@ import { SphereGeometry, BufferGeometry, Mesh } from "three";
 import { copyGeo } from "../utils";
 export interface Props {
     /**
-     * Name of the geometry
+     * Name of the geometry.
      */
     name?: string;
+    /**
+     * Sphere radius.
+     */
     radius?: number;
+    /**
+     * Number of horizontal segments.
+     * Minimum value is `3`.
+     */
     widthSegments?: number;
+    /**
+     * Number of vertical segments.
+     * Minimum value is `2`
+     */
     heightSegments?: number;
+    /**
+     * Specify horizontal starting angle.
+     */
     phiStart?: number;
+    /**
+     * Specify horizontal sweep angle size.
+     */
     phiLength?: number;
+    /**
+     * Specify vertical starting angle
+     */
     thetaStart?: number;
+    /**
+     * Specify vertical sweep angle size
+     */
     thetaLength?: number;
 }
 declare const _sfc_main: import("vue").DefineComponent<{

@@ -3,15 +3,16 @@ import { BufferAttribute, BufferGeometry, Mesh } from "three";
 import { copyGeo } from "../utils";
 export interface Props {
     /**
-     * Name of the geometry
+     * Name of the geometry.
      */
     name?: string;
     /**
-     * Flat array of vertex coordinates
+     * Flat array of vertex coordinates.
      */
     vertices?: number[];
     /**
-     * Flat array of triangular faces
+     * Flat array of triangular faces.
+     * Indexed [THREE.BufferGeometry](https://threejs.org/docs/#api/en/core/BufferGeometry) will be used then non-empty array is provided.
      */
     faces?: number[];
 }

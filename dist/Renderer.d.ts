@@ -1454,6 +1454,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     InterpolantFactoryMethodSmooth: (result: any) => import("three").CubicInterpolant;
                     setInterpolation: (interpolation: import("three").InterpolationModes) => import("three").KeyframeTrack;
                     getInterpolation: () => import("three").InterpolationModes;
+                    createInterpolant: () => import("three").Interpolant;
                     getValueSize: () => number;
                     shift: (timeOffset: number) => import("three").KeyframeTrack;
                     scale: (timeScale: number) => import("three").KeyframeTrack;
@@ -1630,6 +1631,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             getObjectById: (id: number) => import("three").Object3D<import("three").Event> | undefined;
             getObjectByName: (name: string) => import("three").Object3D<import("three").Event> | undefined;
             getObjectByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event> | undefined;
+            getObjectsByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event>[];
             getWorldPosition: (target: import("three").Vector3) => import("three").Vector3;
             getWorldQuaternion: (target: import("three").Quaternion) => import("three").Quaternion;
             getWorldScale: (target: import("three").Vector3) => import("three").Vector3;
@@ -2435,6 +2437,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     InterpolantFactoryMethodSmooth: (result: any) => import("three").CubicInterpolant;
                     setInterpolation: (interpolation: import("three").InterpolationModes) => import("three").KeyframeTrack;
                     getInterpolation: () => import("three").InterpolationModes;
+                    createInterpolant: () => import("three").Interpolant;
                     getValueSize: () => number;
                     shift: (timeOffset: number) => import("three").KeyframeTrack;
                     scale: (timeScale: number) => import("three").KeyframeTrack;
@@ -2611,6 +2614,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             getObjectById: (id: number) => import("three").Object3D<import("three").Event> | undefined;
             getObjectByName: (name: string) => import("three").Object3D<import("three").Event> | undefined;
             getObjectByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event> | undefined;
+            getObjectsByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event>[];
             getWorldPosition: (target: import("three").Vector3) => import("three").Vector3;
             getWorldQuaternion: (target: import("three").Quaternion) => import("three").Quaternion;
             getWorldScale: (target: import("three").Vector3) => import("three").Vector3;
@@ -3409,6 +3413,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 InterpolantFactoryMethodSmooth: (result: any) => import("three").CubicInterpolant;
                 setInterpolation: (interpolation: import("three").InterpolationModes) => import("three").KeyframeTrack;
                 getInterpolation: () => import("three").InterpolationModes;
+                createInterpolant: () => import("three").Interpolant;
                 getValueSize: () => number;
                 shift: (timeOffset: number) => import("three").KeyframeTrack;
                 scale: (timeScale: number) => import("three").KeyframeTrack;
@@ -3585,6 +3590,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         getObjectById: (id: number) => import("three").Object3D<import("three").Event> | undefined;
         getObjectByName: (name: string) => import("three").Object3D<import("three").Event> | undefined;
         getObjectByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event> | undefined;
+        getObjectsByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event>[];
         getWorldPosition: (target: import("three").Vector3) => import("three").Vector3;
         getWorldQuaternion: (target: import("three").Quaternion) => import("three").Quaternion;
         getWorldScale: (target: import("three").Vector3) => import("three").Vector3;
@@ -4564,6 +4570,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     InterpolantFactoryMethodSmooth: (result: any) => import("three").CubicInterpolant;
                     setInterpolation: (interpolation: import("three").InterpolationModes) => import("three").KeyframeTrack;
                     getInterpolation: () => import("three").InterpolationModes;
+                    createInterpolant: () => import("three").Interpolant;
                     getValueSize: () => number;
                     shift: (timeOffset: number) => import("three").KeyframeTrack;
                     scale: (timeScale: number) => import("three").KeyframeTrack;
@@ -4740,6 +4747,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             getObjectById: (id: number) => import("three").Object3D<import("three").Event> | undefined;
             getObjectByName: (name: string) => import("three").Object3D<import("three").Event> | undefined;
             getObjectByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event> | undefined;
+            getObjectsByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event>[];
             getWorldPosition: (target: import("three").Vector3) => import("three").Vector3;
             getWorldQuaternion: (target: import("three").Quaternion) => import("three").Quaternion;
             getWorldScale: (target: import("three").Vector3) => import("three").Vector3;
@@ -5545,6 +5553,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     InterpolantFactoryMethodSmooth: (result: any) => import("three").CubicInterpolant;
                     setInterpolation: (interpolation: import("three").InterpolationModes) => import("three").KeyframeTrack;
                     getInterpolation: () => import("three").InterpolationModes;
+                    createInterpolant: () => import("three").Interpolant;
                     getValueSize: () => number;
                     shift: (timeOffset: number) => import("three").KeyframeTrack;
                     scale: (timeScale: number) => import("three").KeyframeTrack;
@@ -5721,6 +5730,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             getObjectById: (id: number) => import("three").Object3D<import("three").Event> | undefined;
             getObjectByName: (name: string) => import("three").Object3D<import("three").Event> | undefined;
             getObjectByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event> | undefined;
+            getObjectsByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event>[];
             getWorldPosition: (target: import("three").Vector3) => import("three").Vector3;
             getWorldQuaternion: (target: import("three").Quaternion) => import("three").Quaternion;
             getWorldScale: (target: import("three").Vector3) => import("three").Vector3;
@@ -6519,6 +6529,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 InterpolantFactoryMethodSmooth: (result: any) => import("three").CubicInterpolant;
                 setInterpolation: (interpolation: import("three").InterpolationModes) => import("three").KeyframeTrack;
                 getInterpolation: () => import("three").InterpolationModes;
+                createInterpolant: () => import("three").Interpolant;
                 getValueSize: () => number;
                 shift: (timeOffset: number) => import("three").KeyframeTrack;
                 scale: (timeScale: number) => import("three").KeyframeTrack;
@@ -6695,6 +6706,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         getObjectById: (id: number) => import("three").Object3D<import("three").Event> | undefined;
         getObjectByName: (name: string) => import("three").Object3D<import("three").Event> | undefined;
         getObjectByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event> | undefined;
+        getObjectsByProperty: (name: string, value: any) => import("three").Object3D<import("three").Event>[];
         getWorldPosition: (target: import("three").Vector3) => import("three").Vector3;
         getWorldQuaternion: (target: import("three").Quaternion) => import("three").Quaternion;
         getWorldScale: (target: import("three").Vector3) => import("three").Vector3;
