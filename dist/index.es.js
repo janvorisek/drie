@@ -1492,7 +1492,7 @@ const sn = /* @__PURE__ */ E({
   setup(s, { expose: a }) {
     const t = s, e = b("material"), n = J(new It());
     function o() {
-      n.value = new jt().load(t.url), "map" in e && (e.map = n.value);
+      n.value = new jt().load(t.url), "map" in e && (e.map = n.value), r();
     }
     function r() {
       n.value.wrapS = t.wrapS, n.value.wrapT = t.wrapT, n.value.needsUpdate = !0;
