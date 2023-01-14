@@ -12,9 +12,13 @@ export interface Props {
     vertices?: number[];
     /**
      * Flat array of triangular faces.
-     * Indexed [THREE.BufferGeometry](https://threejs.org/docs/#api/en/core/BufferGeometry) will be used then non-empty array is provided.
+     * Indexed [THREE.BufferGeometry](https://threejs.org/docs/#api/en/core/BufferGeometry) will be used if non-empty array is provided.
      */
     faces?: number[];
+    /**
+     * Flat array of vertex UVs.
+     */
+    uvs?: number[];
 }
 declare const _sfc_main: import("vue").DefineComponent<{
     name: {
@@ -32,10 +36,15 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: () => never[];
     };
+    uvs: {
+        type: ArrayConstructor;
+        required: false;
+        default: () => never[];
+    };
 }, {
     props: any;
     mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]>;
-    makeGeometry: (vertices: number[], faces: number[]) => BufferGeometry;
+    makeGeometry: (vertices: number[], faces: number[], uvs: number[]) => BufferGeometry;
     three: {
         id: number;
         uuid: string;
@@ -464,7 +473,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         dispatchEvent: (event: import("three").Event) => void;
     };
     addGeometry: (g: BufferGeometry) => void;
-    redoGeometry: (vertices: number[], faces: number[]) => void;
+    redoGeometry: (vertices: number[], faces: number[], uvs: number[]) => void;
     inject: typeof inject;
     watch: typeof watch;
     reactive: typeof reactive;
@@ -488,9 +497,15 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: () => never[];
     };
+    uvs: {
+        type: ArrayConstructor;
+        required: false;
+        default: () => never[];
+    };
 }>>, {
     name: string;
     vertices: unknown[];
     faces: unknown[];
+    uvs: unknown[];
 }>;
 export default _sfc_main;
