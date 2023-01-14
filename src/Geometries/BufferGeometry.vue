@@ -118,8 +118,6 @@ function makeGeometry(vertices: number[], faces: number[], uvs: number[]) {
   geometry.setAttribute("uv", new BufferAttribute(uvArray, 2));
   if (props.faces.length > 0) geometry.setIndex(faces);
 
-  geometry.computeVertexNormals();
-
   return geometry;
 }
 
