@@ -1495,7 +1495,7 @@ const sn = /* @__PURE__ */ E({
       n.value = new jt().load(t.url), "map" in e && (e.map = n.value);
     }
     function r() {
-      n.value.wrapS = t.wrapS, n.value.wrapT = t.wrapT;
+      n.value.wrapS = t.wrapS, n.value.wrapT = t.wrapT, n.value.needsUpdate = !0;
     }
     return o(), g(t, "url", o), g(t, "wrapS", r), g(t, "wrapT", r), a({ three: n }), { props: t, material: e, three: n, load: o, applyProps: r };
   }
