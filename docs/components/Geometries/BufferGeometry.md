@@ -86,11 +86,12 @@ const vertices = reactive<number[]>([
 
 ## Props
 
-| Prop name | Description                                                                                                                                                             | Type   | Default     |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
-|` name      `| Name of the geometry.                                                                                                                                                   | string | ""          |
-|` vertices  `| Flat array of vertex coordinates.                                                                                                                                       | Array  | [] |
-|` faces     `| Flat array of triangular faces.<br/>Indexed [THREE.BufferGeometry](https://threejs.org/docs/#api/en/core/BufferGeometry) will be used then non-empty array is provided. | Array  | [] |
+| Prop name | Description                                                                                                                                                           | Type   | Default     |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------- |
+|` name      `| Name of the geometry.                                                                                                                                                 | string | ""          |
+|` vertices  `| Flat array of vertex coordinates.                                                                                                                                     | Array  | [] |
+|` faces     `| Flat array of triangular faces.<br/>Indexed [THREE.BufferGeometry](https://threejs.org/docs/#api/en/core/BufferGeometry) will be used if non-empty array is provided. | Array  | [] |
+|` uvs       `| Flat array of vertex UVs.                                                                                                                                             | Array  | [] |
 
 ---
 
