@@ -54,7 +54,7 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { Camera } from "three";
+import { Camera, Object3D } from "three";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
@@ -151,7 +151,7 @@ const props = withDefaults(defineProps<Props>(), {
 const three = ref<OrbitControls | null>(null);
 (inject("addControls") as (c: Ref<OrbitControls | null>) => void)(three);
 
-const camera = inject<Camera>("parentCamera");
+const camera = inject<Camera>("parentCamera") as Camera;
 const canvas = inject<Ref<HTMLCanvasElement>>("canvas");
 
 function applyProps() {
@@ -173,7 +173,8 @@ function applyProps() {
 watch(canvas!, () => {
   three.value = new OrbitControls(camera, canvas!.value);
   applyProps();
-  handleVectorProp(props, "target", three.value, false);
+
+  handleVectorProp(props, "target", three.value as unknown as Object3D);
 });
 
 applyProps();
@@ -190,7 +191,7 @@ handlePropCallback(props, "maxPolarAngle", applyProps);
 handlePropCallback(props, "minAzimuthAngle", applyProps);
 handlePropCallback(props, "maxAzimuthAngle", applyProps);
 
-handleVectorProp(props, "target", three.value);
+//handleVectorProp(props, "target", three.value as unknown as Object3D);
 
-defineExpose({ three: three.value });
+defineExpose({ three });
 </script>
