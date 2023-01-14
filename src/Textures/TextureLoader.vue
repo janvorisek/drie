@@ -51,6 +51,8 @@ function load() {
 function applyProps() {
   three.value.wrapS = props.wrapS;
   three.value.wrapT = props.wrapT;
+
+  three.value.needsUpdate = true;
 }
 
 load();
