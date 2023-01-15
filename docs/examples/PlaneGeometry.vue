@@ -5,10 +5,14 @@
         <OrbitControls />
       </PerspectiveCamera>
       <Scene background="#f9f9f9">
-        <Mesh :rotation="rot">
+        <Mesh>
           <MeshNormalMaterial :side="DoubleSide" />
-          <PlaneGeometry :width="8" :height="6" />
+          <PlaneGeometry name="geo" :width="8" :height="6" :width-segments="3" :height-segments="3" />
         </Mesh>
+        <LineSegments>
+          <WireframeGeometry geometry="geo" />
+          <LineBasicMaterial color="black" />
+        </LineSegments>
         <AxesHelper :size="3" />
       </Scene>
     </Renderer>
@@ -17,7 +21,6 @@
 
 <script setup lang="ts">
 import { DoubleSide } from "three";
-import { ref } from "vue";
 
 import { Renderer } from "../../src";
 import { Scene } from "../../src";
@@ -27,11 +30,5 @@ import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
 import { AxesHelper } from "../../src";
-
-const rot = ref<[number, number, number]>([0, 0, 0]);
-
-window.setInterval(() => {
-  const angle = Date.now() / 1000;
-  rot.value = [Math.cos(angle), 0, 0];
-}, 10);
+import { LineSegments, LineBasicMaterial, WireframeGeometry } from "../../src";
 </script>

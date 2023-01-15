@@ -58,7 +58,7 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { inject, watch, ref, reactive } from "vue";
+import { inject, reactive } from "vue";
 
 import { BufferGeometry, Mesh, PlaneGeometry } from "three";
 import { handlePropCallback, copyGeo } from "../utils";
