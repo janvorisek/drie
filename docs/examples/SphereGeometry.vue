@@ -5,34 +5,28 @@
         <OrbitControls />
       </PerspectiveCamera>
       <Scene background="#f9f9f9">
-        <Mesh>
-          <MeshLambertMaterial :color="0xeeaa55" />
-          <SphereGeometry :radius="2" :width-segments="24" :height-segments="24" />
+        <Mesh :rotation="[Math.PI/2, 0, 0]">
+          <MeshNormalMaterial :color="0xeeaa55" />
+          <SphereGeometry name="geo" :radius="3" :width-segments="12" :height-segments="12" />
         </Mesh>
-        <PointLight :position="rot" />
-        <AmbientLight />
-        <AxesHelper :size="3" />
+        <LineSegments :rotation="[Math.PI/2, 0, 0]">
+          <WireframeGeometry geometry="geo" />
+          <LineBasicMaterial color="black" />
+        </LineSegments>
+        <AxesHelper :size="5" />
       </Scene>
     </Renderer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-
 import { Renderer } from "../../src";
 import { Scene } from "../../src";
 import { Mesh } from "../../src";
 import { SphereGeometry } from "../../src";
-import { MeshLambertMaterial } from "../../src";
+import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
-import { OrbitControls, PointLight, AmbientLight } from "../../src";
+import { OrbitControls } from "../../src";
 import { AxesHelper } from "../../src";
-
-const rot = ref<[number, number, number]>([0, 0, 0]);
-
-window.setInterval(() => {
-  const angle = Date.now() / 1000;
-  rot.value = [15*Math.cos(angle), 15*Math.sin(angle), 5];
-}, 10);
+import { LineSegments, LineBasicMaterial, WireframeGeometry } from "../../src";
 </script>
