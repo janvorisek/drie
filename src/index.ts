@@ -9,6 +9,8 @@ import OrthographicCamera from "./Cameras/OrthographicCamera.vue";
 import OrbitControls from "./Controls/OrbitControls.vue";
 
 import Group from "./Objects/Group.vue";
+import Line from "./Objects/Line.vue";
+import LineLoop from "./Objects/LineLoop.vue";
 import LineSegments from "./Objects/LineSegments.vue";
 import Mesh from "./Objects/Mesh.vue";
 import Points from "./Objects/Points.vue";
@@ -50,6 +52,9 @@ function install(app: App) {
   app.component("OrbitControls", OrbitControls);
   // Objects
   app.component("Group", Group);
+  // eslint-disable-next-line vue/no-reserved-component-names
+  app.component("Line", Line);
+  app.component("LineLoop", LineLoop);
   app.component("LineSegments", LineSegments);
   app.component("Mesh", Mesh);
   app.component("Points", Points);
@@ -93,6 +98,8 @@ export {
   OrbitControls,
   // Objects
   Group,
+  Line,
+  LineLoop,
   LineSegments,
   Mesh,
   Points,
