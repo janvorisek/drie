@@ -4,7 +4,9 @@
   import SphereGeometry from '../../examples/SphereGeometry.vue'
   </script>
 
-SphereGeometry is a component for a sphere with a given `radius`. Incomplete spheres can be created through the use of different values of `phiStart`, `phiLength`, `thetaStart` and `thetaLength`.
+SphereGeometry is a component for a sphere with a given `radius`.
+
+Incomplete spheres can be created through the use of different values of `phiStart`, `phiLength`, `thetaStart` and `thetaLength`.
 
 Any modifications to the properties will update the underlying [`THREE.BufferGeometry`](https://threejs.org/docs/#api/en/core/BufferGeometry).
 
@@ -25,10 +27,9 @@ Any modifications to the properties will update the underlying [`THREE.BufferGeo
       </PerspectiveCamera>
       <Scene background="#f9f9f9">
         <Mesh>
-          <MeshLambertMaterial :color="0xeeaa55" />
+          <MeshNormalMaterial />
           <SphereGeometry :radius="2" :width-segments="24" :height-segments="24" />
         </Mesh>
-        <PointLight :position="rot" />
         <AmbientLight />
       </Scene>
     </Renderer>
@@ -36,19 +37,9 @@ Any modifications to the properties will update the underlying [`THREE.BufferGeo
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-
 import { Renderer, Scene } from "@janvorisek/drie";
 import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie";
-import { Mesh, SphereGeometry, MeshLambertMaterial } from "@janvorisek/drie";
-import { PointLight, AmbientLight } from "@janvorisek/drie";
-
-const rot = ref<[number, number, number]>([0, 0, 0]);
-
-window.setInterval(() => {
-  const angle = Date.now() / 1000;
-  rot.value = [15 * Math.cos(angle), 15 * Math.sin(angle), 5];
-}, 10);
+import { Mesh, SphereGeometry, MeshNormalMaterial } from "@janvorisek/drie";
 </script>
 ```
 
