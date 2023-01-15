@@ -6,7 +6,7 @@ Geometry components are simply passed to the corresponding mesh.
 ```vue-html{3} [Mesh]
 <Mesh>
   <MeshBasicMaterial color="red" />
-  <CubeGeometry />
+  <BoxGeometry />
 </Mesh>
 ```
 

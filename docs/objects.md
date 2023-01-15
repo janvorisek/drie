@@ -6,7 +6,7 @@ Objects typically require a geometry and a material.
 ```vue-html [Mesh]
 <Mesh>
   <MeshBasicMaterial color="red" />
-  <CubeGeometry />
+  <BoxGeometry />
 </Mesh>
 ```
 
@@ -44,7 +44,7 @@ Setting constant position, rotation and scale is simply done by passing an array
   :scale="[10, 5, 3]"
 >
   <MeshBasicMaterial color="red" />
-  <CubeGeometry />
+  <BoxGeometry />
 </Mesh>
 ```
 
@@ -58,7 +58,7 @@ In order to use reactivity, specify the variable using Vue3 `ref` or `reactive`.
     :scale="sca"
   >
     <MeshBasicMaterial color="red" />
-    <CubeGeometry />
+    <BoxGeometry />
   </Mesh>
 </template>
 
