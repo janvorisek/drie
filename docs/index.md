@@ -42,7 +42,8 @@ Notable features include:
 - Auto resizing of WebGL canvas (including PerspectiveCamera aspect ratio update)
 - Raycasting as mouse events
 - FPS Limiter
-- Simple usage of geometry utilities (see [EdgesGeometry](components/Geometries/EdgesGeometry) or [WireframeGeometry](components/Geometries/WireframeGeometry)
+- Simple usage of geometry utilities (see [EdgesGeometry](components/Geometries/EdgesGeometry) or [WireframeGeometry](components/Geometries/WireframeGeometry))
+- Simple geometries (e.g., [BoxGeometry](components/Geometries/BoxGeometry)) have reactive properties. Drie handles regeneration of the geometry internally.
 
 ## Authors
 
