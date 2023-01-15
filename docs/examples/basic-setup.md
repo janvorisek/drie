@@ -9,19 +9,21 @@ import { PerspectiveCamera, OrbitControls } from "../../src"; // camera
 
 The minimal setup is a renderer, a camera and a scene containing objects.
 
-<div class="example">
-  <Renderer ref="renderer" :antialias="true">
-    <PerspectiveCamera :position="[1, 1, 1]" :up="[0, 0, 1]">
-      <OrbitControls />
-    </PerspectiveCamera>
-    <Scene background="#f9f9f9">
-      <Mesh>
-        <MeshBasicMaterial color="blue" />
-        <BoxGeometry />
-      </Mesh>
-    </Scene>
-  </Renderer>
-</div>
+<ClientOnly>
+  <div class="example">
+    <Renderer :antialias="true">
+      <PerspectiveCamera :position="[1, 1, 1]" :up="[0, 0, 1]">
+        <OrbitControls />
+      </PerspectiveCamera>
+      <Scene background="#f9f9f9">
+        <Mesh>
+          <MeshBasicMaterial color="blue" />
+          <BoxGeometry />
+        </Mesh>
+      </Scene>
+    </Renderer>
+  </div>
+</ClientOnly>
 
 In this example, the scene consists of
 
