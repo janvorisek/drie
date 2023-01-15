@@ -1,27 +1,40 @@
 import { inject, reactive } from "vue";
-import { BufferGeometry, Mesh, PlaneGeometry } from "three";
+import { BufferGeometry, Mesh, RingGeometry } from "three";
 import { copyGeo } from "../utils";
 export interface Props {
     /**
-     * Name of the geometry
+     * Name of the geometry.
      */
     name?: string;
     /**
-     * Width along the X axis.
+     * Inner radius of the ring.
+     * Must be smaller than `outerRadius`.
      */
-    width?: number;
+    innerRadius?: number;
     /**
-     * Height along the Y axis.
+     * Outer radius of the ring.
+     * Must be greater than `innerRadius`.
      */
-    height?: number;
+    outerRadius?: number;
     /**
-     * Number of segmented rectangular faces along the width of the sides.
+     * Number of radial segments.
+     * A higher number means the ring will be more round
+     * Minimum value is `3`.
      */
-    widthSegments?: number;
+    thetaSegments?: number;
     /**
-     * Number of segmented rectangular faces along the height of the sides
+     * Number of segments over the ring thickness.
      */
-    heightSegments?: number;
+    phiSegments?: number;
+    /**
+     * Start angle for first segment.
+     */
+    thetaStart?: number;
+    /**
+     * The central angle, often called theta, of the circular sector.
+     * The default is `2π`, which makes for a complete circle.
+     */
+    thetaLength?: number;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
     name: {
@@ -29,22 +42,32 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: string;
     };
-    width: {
+    innerRadius: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    height: {
+    outerRadius: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    widthSegments: {
+    thetaSegments: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    heightSegments: {
+    phiSegments: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    thetaStart: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    thetaLength: {
         type: NumberConstructor;
         required: false;
         default: number;
@@ -52,7 +75,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
 }, {
     props: any;
     mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]>;
-    makePlane: (width: number | undefined, height: number | undefined, widthSegments: number | undefined, heightSegments: number | undefined) => PlaneGeometry;
+    makeRing: (innerRadius: number | undefined, outerRadius: number | undefined, thetaSegments: number | undefined, phiSegments: number | undefined, thetaStart: number | undefined, thetaLength: number | undefined) => RingGeometry;
     three: {
         id: number;
         uuid: string;
@@ -486,7 +509,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     reactive: typeof reactive;
     readonly BufferGeometry: typeof BufferGeometry;
     readonly Mesh: typeof Mesh;
-    readonly PlaneGeometry: typeof PlaneGeometry;
+    readonly RingGeometry: typeof RingGeometry;
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
@@ -497,31 +520,43 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: string;
     };
-    width: {
+    innerRadius: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    height: {
+    outerRadius: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    widthSegments: {
+    thetaSegments: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    heightSegments: {
+    phiSegments: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    thetaStart: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    thetaLength: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
 }>>, {
     name: string;
-    width: number;
-    height: number;
-    widthSegments: number;
-    heightSegments: number;
+    thetaStart: number;
+    thetaLength: number;
+    innerRadius: number;
+    outerRadius: number;
+    thetaSegments: number;
+    phiSegments: number;
 }>;
 export default _sfc_main;

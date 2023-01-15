@@ -1,27 +1,47 @@
 import { inject, reactive } from "vue";
-import { BufferGeometry, Mesh, PlaneGeometry } from "three";
+import { BufferGeometry, Mesh, CylinderGeometry } from "three";
 import { copyGeo } from "../utils";
 export interface Props {
     /**
-     * Name of the geometry
+     * Name of the geometry.
      */
     name?: string;
     /**
-     * Width along the X axis.
+     * Radius of the cylinder at the top.
      */
-    width?: number;
+    radiusTop?: number;
     /**
-     * Height along the Y axis.
+     * Radius of the cylinder at the bottom.
+     */
+    radiusBottom?: number;
+    /**
+     * Height of the cylinder.
      */
     height?: number;
     /**
-     * Number of segmented rectangular faces along the width of the sides.
+     * Number of segmented faces around the circumference of the cylinder.
+     * Minimum value is `3`.
      */
-    widthSegments?: number;
+    radialSegments?: number;
     /**
-     * Number of segmented rectangular faces along the height of the sides
+     * Number of rows of faces along the height of the cylinder.
+     * Minimum value is `3`.
      */
     heightSegments?: number;
+    /**
+     * A Boolean indicating whether the base of the cylinder is open or capped.
+     * Default is `false`, meaning capped.
+     */
+    openEnded?: boolean;
+    /**
+     * Start angle for first segment.
+     */
+    thetaStart?: number;
+    /**
+     * The central angle, often called theta, of the circular sector.
+     * The default is `2π`, which makes for a complete cylinder.
+     */
+    thetaLength?: number;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
     name: {
@@ -29,7 +49,12 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: string;
     };
-    width: {
+    radiusTop: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    radiusBottom: {
         type: NumberConstructor;
         required: false;
         default: number;
@@ -39,7 +64,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
-    widthSegments: {
+    radialSegments: {
         type: NumberConstructor;
         required: false;
         default: number;
@@ -49,10 +74,25 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
+    openEnded: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    thetaStart: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    thetaLength: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
 }, {
     props: any;
     mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]>;
-    makePlane: (width: number | undefined, height: number | undefined, widthSegments: number | undefined, heightSegments: number | undefined) => PlaneGeometry;
+    makeCylinder: (radiusTop: number | undefined, radiusBottom: number | undefined, height: number | undefined, radialSegments: number | undefined, heightSegments: number | undefined, openEnded: boolean | undefined, thetaStart: number | undefined, thetaLength: number | undefined) => CylinderGeometry;
     three: {
         id: number;
         uuid: string;
@@ -486,7 +526,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     reactive: typeof reactive;
     readonly BufferGeometry: typeof BufferGeometry;
     readonly Mesh: typeof Mesh;
-    readonly PlaneGeometry: typeof PlaneGeometry;
+    readonly CylinderGeometry: typeof CylinderGeometry;
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
@@ -497,7 +537,12 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: string;
     };
-    width: {
+    radiusTop: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    radiusBottom: {
         type: NumberConstructor;
         required: false;
         default: number;
@@ -507,7 +552,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
-    widthSegments: {
+    radialSegments: {
         type: NumberConstructor;
         required: false;
         default: number;
@@ -517,11 +562,30 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
+    openEnded: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    thetaStart: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    thetaLength: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
 }>>, {
     name: string;
-    width: number;
     height: number;
-    widthSegments: number;
     heightSegments: number;
+    thetaStart: number;
+    thetaLength: number;
+    radialSegments: number;
+    openEnded: boolean;
+    radiusTop: number;
+    radiusBottom: number;
 }>;
 export default _sfc_main;
