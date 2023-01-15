@@ -29,7 +29,7 @@ export default {
           <OrbitControls />
         </PerspectiveCamera>
         <Scene background="#f9f9f9">
-          <Mesh :rotation="rot">
+          <Mesh>
             <MeshNormalMaterial />
             <BoxGeometry :width="6" :height="4" :depth="2" />
           </Mesh>
@@ -39,18 +39,9 @@ export default {
   </template>
 
   <script setup lang="ts">
-    import { ref } from "vue";
-
     import { Renderer, Scene } from "@janvorisek/drie";
     import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie"
     import { Mesh, BoxGeometry, MeshNormalMaterial } from "@janvorisek/drie";
-
-    const rot = ref<[number, number, number]>([0, 0, 0]);
-
-    window.setInterval(() => {
-      const angle = Date.now() / 1000;
-      rot.value = [Math.cos(angle), 0, 0];
-    }, 10);
   </script>
   ```
   :::

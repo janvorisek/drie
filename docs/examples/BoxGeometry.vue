@@ -5,10 +5,14 @@
         <OrbitControls />
       </PerspectiveCamera>
       <Scene background="#f9f9f9">
-        <Mesh :rotation="rot">
+        <Mesh>
           <MeshNormalMaterial />
-          <BoxGeometry :width="6" :height="4" :depth="2" />
+          <BoxGeometry name="geo" :width="6" :height="4" :depth="2" />
         </Mesh>
+        <LineSegments>
+          <WireframeGeometry geometry="geo" />
+          <LineBasicMaterial color="black" />
+        </LineSegments>
         <AxesHelper :size="3" />
       </Scene>
     </Renderer>
@@ -16,8 +20,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-
 import { Renderer } from "../../src";
 import { Scene } from "../../src";
 import { Mesh } from "../../src";
@@ -26,11 +28,5 @@ import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
 import { AxesHelper } from "../../src";
-
-const rot = ref<[number, number, number]>([0, 0, 0]);
-
-window.setInterval(() => {
-  const angle = Date.now() / 1000;
-  rot.value = [Math.cos(angle), 0, 0];
-}, 10);
+import { LineSegments, LineBasicMaterial, WireframeGeometry } from "../../src";
 </script>
