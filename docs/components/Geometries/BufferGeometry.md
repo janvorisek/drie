@@ -18,7 +18,7 @@ Any modifications to the `vertices` and `faces` properties will update the under
 
 ::: details Click me to view the example code
 
-```vue{9,13}
+```vue{10}
 <template>
   <div style="width: 100vh; height: 100vh;">
     <Renderer :antialias="true" :frame-limit="30">
@@ -28,12 +28,8 @@ Any modifications to the `vertices` and `faces` properties will update the under
       <Scene background="#f9f9f9">
         <Mesh :position="[1, 1, 0]">
           <MeshNormalMaterial :side="DoubleSide" />
-          <BufferGeometry name="geo" :vertices="vertices" />
+          <BufferGeometry :vertices="vertices" />
         </Mesh>
-        <LineSegments :position="[1, 1, 0]">
-          <WireframeGeometry geometry="geo" />
-          <LineBasicMaterial color="black" />
-        </LineSegments>
       </Scene>
     </Renderer>
   </div>
@@ -46,7 +42,6 @@ import { DoubleSide } from "three";
 import { Renderer, Scene } from "@janvorisek/drie";
 import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie";
 import { Mesh, BufferGeometry, MeshNormalMaterial } from "@janvorisek/drie";
-import { WireframeGeometry, LineBasicMaterial, LineSegments } from "@janvorisek/drie";
 
 // Flat array of 3 faces, may be updated
 const vertices = reactive<number[]>([
