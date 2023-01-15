@@ -28,10 +28,11 @@ Objects typically require a geometry and a material.
 The following objects are supported:
 
 - [Group](components/Objects/Group)
+- [Line](components/Objects/Line)
+- [LineLoop](components/Objects/LineLoop)
 - [LineSegments](components/Objects/LineSegments)
 - [Mesh](components/Objects/Mesh)
 - [Points](components/Objects/Points)
-
 
 ## Position, rotation, scale
 
