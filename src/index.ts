@@ -19,8 +19,12 @@ import AxesHelper from "./Helpers/AxesHelper.vue";
 
 import BoxGeometry from "./Geometries/BoxGeometry.vue";
 import BufferGeometry from "./Geometries/BufferGeometry.vue";
+import CircleGeometry from "./Geometries/CircleGeometry.vue";
+import ConeGeometry from "./Geometries/ConeGeometry.vue";
+import CylinderGeometry from "./Geometries/CylinderGeometry.vue";
 import EdgesGeometry from "./Geometries/EdgesGeometry.vue";
 import PlaneGeometry from "./Geometries/PlaneGeometry.vue";
+import RingGeometry from "./Geometries/RingGeometry.vue";
 import SphereGeometry from "./Geometries/SphereGeometry.vue";
 import WireframeGeometry from "./Geometries/WireframeGeometry.vue";
 
@@ -56,8 +60,12 @@ function install(app: App) {
   // Geometries
   app.component("BoxGeometry", BoxGeometry);
   app.component("BufferGeometry", BufferGeometry);
+  app.component("CircleGeometry", CircleGeometry);
+  app.component("ConeGeometry", ConeGeometry);
+  app.component("CylinderGeometry", CylinderGeometry);
   app.component("EdgesGeometry", EdgesGeometry);
   app.component("PlaneGeometry", PlaneGeometry);
+  app.component("RingGeometry", RingGeometry);
   app.component("SphereGeometry", SphereGeometry);
   app.component("WireframeGeometry", WireframeGeometry);
   // Materials
@@ -95,8 +103,12 @@ export {
   // Geometries
   BoxGeometry,
   BufferGeometry,
+  CircleGeometry,
+  ConeGeometry,
+  CylinderGeometry,
   EdgesGeometry,
   PlaneGeometry,
+  RingGeometry,
   SphereGeometry,
   WireframeGeometry,
   // Materials
