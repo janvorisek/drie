@@ -157,9 +157,10 @@ function animate() {
 
   if (props.onBeforeRender) props.onBeforeRender();
 
-  if (controls.value.length > 0 && activeCamera) {
+  if (controls.value.length > 0 && activeCamera.value) {
     for (const ctrl of controls.value) {
       if (ctrl.value === null) continue;
+
       if (ctrl.value.object.uuid === activeCamera.value.uuid) {
         ctrl.value.enabled = true;
         ctrl.value.update();
@@ -169,7 +170,7 @@ function animate() {
     }
   }
 
-  if (activeCamera && renderer) for (const scene of scenes) renderer.render(scene, activeCamera.value);
+  if (activeCamera.value && renderer) for (const scene of scenes) renderer.render(scene, activeCamera.value);
 }
 
 applyProps(props);
