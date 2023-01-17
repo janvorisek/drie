@@ -1,5 +1,20 @@
 # MeshBasicMaterial
 
+  <script setup>
+  import MeshBasicMaterial from '../../examples/MeshBasicMaterial.vue'
+  </script>
+
+A material for drawing geometries in a simple shaded (flat or wireframe) way.
+
+This material is not affected by lights.
+
+## Example
+
+  <ClientOnly>
+  <MeshBasicMaterial />
+  </ClientOnly>
+
+
 ## Props
 
 | Prop name    | Description                                                                                       | Type    | Default   |
@@ -17,3 +32,4 @@
 | default |             |          |
 
 ---
+

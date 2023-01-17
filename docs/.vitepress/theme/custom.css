@@ -24,3 +24,11 @@ canvas {
 table {
   font-size: 0.875em;
 }
+
+.example-with-props {
+  display: flex; gap: 12px;
+}
+
+.example-props {
+  flex-basis: 32em;
+}
