@@ -5,11 +5,26 @@ export default {
 };
 </script>
 
+<docs>BEGIN_DOCS
+  <script setup>
+  import LineBasicMaterial from '../../examples/LineBasicMaterial.vue'
+  </script>
+
+  A material for drawing wireframe-style geometries.
+
+  ## Example
+
+  <ClientOnly>
+  <LineBasicMaterial />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
-import { inject, watch, provide } from "vue";
+import { inject, provide } from "vue";
 
 import type { Mesh } from "three";
 import { Color, LineBasicMaterial } from "three";
+import { handlePropCallback } from "../utils";
 
 export interface Props {
   /**
@@ -27,16 +42,15 @@ const mesh = inject("mesh") as Mesh;
 const three = new LineBasicMaterial({ color: props.color });
 mesh.material = three;
 
-function applyProps(props: Props) {
+function applyProps() {
   if (props.color) three.color = new Color(props.color);
+
+  three.needsUpdate = true;
 }
 
-applyProps(props);
+applyProps();
 
-watch(
-  () => props.color,
-  () => applyProps(props),
-);
+handlePropCallback(props, "color", applyProps);
 
 provide("material", three);
 
