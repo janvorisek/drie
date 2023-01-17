@@ -54,7 +54,7 @@ import { Mesh, CylinderGeometry, MeshNormalMaterial } from "@janvorisek/drie";
 |` radiusBottom   `| Radius of the cylinder at the bottom.                                                                                        | number  | 1            |
 |` height         `| Height of the cylinder.                                                                                                      | number  | 1            |
 |` radialSegments `| Number of segmented faces around the circumference of the cylinder.<br/>Minimum value is `3`.                                | number  | 32           |
-|` heightSegments `| Number of rows of faces along the height of the cylinder.<br/>Minimum value is `3`.                                          | number  | 1            |
+|` heightSegments `| Number of rows of faces along the height of the cylinder.<br/>Minimum value is `1`.                                          | number  | 1            |
 |` openEnded      `| A Boolean indicating whether the base of the cylinder is open or capped.<br/>Default is `false`, meaning capped.             | boolean | false        |
 |` thetaStart     `| Start angle for first segment.                                                                                               | number  | 0            |
 |` thetaLength    `| The central angle, often called theta, of the circular sector.<br/>The default is `2π`, which makes for a complete cylinder. | number  | 2 \* Math.PI |
