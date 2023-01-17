@@ -83,7 +83,9 @@ import { VTweakpane } from 'v-tweakpane';
 const PARAMS: {
   pos: {x: number, y: number, z: number},
   s2: number,
-  radius: number
+  radius: number,
+  planeWidth: number,
+  planeHeight: number
 } = reactive({
   pos: {x: 0, y: 0, z: 2},
   s2: 1,
