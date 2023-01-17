@@ -31,6 +31,7 @@ import SphereGeometry from "./Geometries/SphereGeometry.vue";
 import WireframeGeometry from "./Geometries/WireframeGeometry.vue";
 
 import LineBasicMaterial from "./Materials/LineBasicMaterial.vue";
+import LineDashedMaterial from "./Materials/LineDashedMaterial.vue";
 import MeshBasicMaterial from "./Materials/MeshBasicMaterial.vue";
 import MeshLambertMaterial from "./Materials/MeshLambertMaterial.vue";
 import PointsMaterial from "./Materials/PointsMaterial.vue";
@@ -75,6 +76,7 @@ function install(app: App) {
   app.component("WireframeGeometry", WireframeGeometry);
   // Materials
   app.component("LineBasicMaterial", LineBasicMaterial);
+  app.component("LineDashedMaterial", LineDashedMaterial);
   app.component("MeshBasicMaterial", MeshBasicMaterial);
   app.component("MeshLambertMaterial", MeshLambertMaterial);
   app.component("PointsMaterial", PointsMaterial);
@@ -120,6 +122,7 @@ export {
   WireframeGeometry,
   // Materials
   LineBasicMaterial,
+  LineDashedMaterial,
   MeshBasicMaterial,
   MeshLambertMaterial,
   PointsMaterial,
