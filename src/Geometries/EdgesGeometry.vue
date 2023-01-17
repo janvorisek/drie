@@ -66,7 +66,7 @@ export default {
 <script setup lang="ts">
 import { inject, nextTick, watch, reactive } from "vue";
 
-import { BufferGeometry, EdgesGeometry, Mesh } from "three";
+import { BufferGeometry, EdgesGeometry, Mesh, Line } from "three";
 import { handlePropCallback, copyGeo } from "../utils";
 
 export interface Props {
@@ -93,6 +93,9 @@ function redoGeometry() {
   const tmp = new EdgesGeometry(getGeometry(props.geometry));
   //console.log(tmp);
   copyGeo(three, tmp);
+
+  const line = mesh as unknown as Line;
+  if ("isLine" in line) line.computeLineDistances();
 }
 
 let unwatch = watch(
