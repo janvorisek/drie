@@ -24,7 +24,7 @@ export default {
 
 <script setup lang="ts">
 import { PerspectiveCamera } from "three";
-import { onMounted, inject, type Ref, provide } from "vue";
+import { inject, type Ref, provide, watch } from "vue";
 import { handleVectorProp, handlePropCallback } from "../utils";
 import { type Vector3Like } from "../types";
 
@@ -90,9 +90,7 @@ const three = new PerspectiveCamera(75, (window.innerWidth / window.innerHeight)
 
 const canvas = inject<Ref<HTMLCanvasElement>>("canvas");
 
-onMounted(() => {
-  if (props.name) three.name = props.name;
-
+watch(canvas!, () => {
   const myObserver = new ResizeObserver((entries) => {
     entries.forEach((el) => {
       if (!props.autoResize) return;
@@ -102,6 +100,7 @@ onMounted(() => {
     });
   });
 
+  console.log(canvas!.value);
   myObserver.observe(canvas!.value);
 });
 
@@ -110,6 +109,8 @@ handleVectorProp(props, "up", three);
 handleVectorProp(props, "lookAt", three);
 
 function applyProps() {
+  three.name = props.name;
+
   if (!props.autoResize) three.aspect = props.aspect;
 
   three.near = props.near;
@@ -120,6 +121,7 @@ function applyProps() {
 
 applyProps();
 
+handlePropCallback(props, "name", applyProps);
 handlePropCallback(props, "aspect", applyProps);
 handlePropCallback(props, "near", applyProps);
 handlePropCallback(props, "far", applyProps);
