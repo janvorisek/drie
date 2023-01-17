@@ -50,6 +50,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     props: any;
     mesh: Mesh<import("three").BufferGeometry, import("three").Material | import("three").Material[]>;
     three: MeshBasicMaterial;
+    applyProps: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     color: {
         type: (StringConstructor | NumberConstructor)[];

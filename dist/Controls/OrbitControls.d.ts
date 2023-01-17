@@ -3634,6 +3634,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
     camera: Camera;
     canvas: Ref<HTMLCanvasElement> | undefined;
     applyProps: () => void;
+    boundCamera: boolean;
+    tryBindCamera: () => void;
     readonly Camera: typeof Camera;
     readonly Object3D: typeof Object3D;
     readonly OrbitControls: typeof OrbitControls;

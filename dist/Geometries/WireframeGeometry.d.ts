@@ -1,5 +1,5 @@
 import { inject, nextTick, watch, reactive } from "vue";
-import { BufferGeometry, WireframeGeometry, Mesh } from "three";
+import { BufferGeometry, WireframeGeometry, Mesh, Line } from "three";
 import { copyGeo } from "../utils";
 export interface Props {
     /**
@@ -454,6 +454,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     readonly BufferGeometry: typeof BufferGeometry;
     readonly WireframeGeometry: typeof WireframeGeometry;
     readonly Mesh: typeof Mesh;
+    readonly Line: typeof Line;
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;

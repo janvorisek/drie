@@ -25,7 +25,7 @@ export interface Props {
     radialSegments?: number;
     /**
      * Number of rows of faces along the height of the cylinder.
-     * Minimum value is `3`.
+     * Minimum value is `1`.
      */
     heightSegments?: number;
     /**
