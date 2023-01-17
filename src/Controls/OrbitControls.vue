@@ -170,11 +170,21 @@ function applyProps() {
   three.value.maxAzimuthAngle = props.maxAzimuthAngle;
 }
 
-watch(canvas!, () => {
+let boundCamera = false;
+const tryBindCamera = () => {
+  if (!canvas.value) return;
+  if (boundCamera) return;
+
   three.value = new OrbitControls(camera, canvas!.value);
   applyProps();
 
   handleVectorProp(props, "target", three.value as unknown as Object3D);
+
+  boundCamera = true;
+};
+
+watch(canvas!, () => {
+  tryBindCamera();
 });
 
 applyProps();
