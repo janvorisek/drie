@@ -8,10 +8,27 @@ export default {
 };
 </script>
 
+<docs>BEGIN_DOCS
+  <script setup>
+  import MeshBasicMaterial from '../../examples/MeshBasicMaterial.vue'
+  </script>
+
+  A material for drawing geometries in a simple shaded (flat or wireframe) way.
+
+  This material is not affected by lights.
+
+  ## Example
+
+  <ClientOnly>
+  <MeshBasicMaterial />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
-import { inject, watch, provide } from "vue";
+import { inject, provide } from "vue";
 
 import { FrontSide, Mesh, type Side, Color, MeshBasicMaterial } from "three";
+import { handlePropCallback } from "../utils";
 
 export interface Props {
   /**
@@ -52,47 +69,25 @@ const mesh = inject("mesh") as Mesh;
 const three = new MeshBasicMaterial();
 mesh.material = three;
 
-watch(
-  () => props.color,
-  () => {
-    if (props.color !== undefined) three.color = new Color(props.color);
-  },
-  { immediate: true },
-);
+function applyProps() {
+  if (props.color !== undefined) three.color = new Color(props.color);
+  three.side = props.side;
+  three.opacity = props.opacity;
+  three.transparent = props.transparent;
+  three.vertexColors = props.vertexColors;
 
-watch(
-  () => props.side,
-  () => {
-    three.side = props.side;
-  },
-  { immediate: true },
-);
+  three.needsUpdate = true;
+}
 
-watch(
-  () => props.opacity,
-  () => {
-    three.opacity = props.opacity;
-  },
-  { immediate: true },
-);
-
-watch(
-  () => props.transparent,
-  () => {
-    three.transparent = props.transparent;
-  },
-  { immediate: true },
-);
-
-watch(
-  () => props.vertexColors,
-  () => {
-    three.vertexColors = props.vertexColors;
-  },
-  { immediate: true },
-);
+applyProps();
 
 provide("material", three);
+
+handlePropCallback(props, "color", applyProps);
+handlePropCallback(props, "side", applyProps);
+handlePropCallback(props, "opacity", applyProps);
+handlePropCallback(props, "transparent", applyProps);
+handlePropCallback(props, "vertexColors", applyProps);
 
 defineExpose({ three });
 </script>
