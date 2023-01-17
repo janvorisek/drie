@@ -60,7 +60,7 @@
     "move-cli": "^2.0.0",
     "prettier": "^2.8.1",
     "release-it": "^15.6.0",
-    "rimraf": "4.0.5",
+    "rimraf": "4.1.0",
     "sitemap": "^7.1.1",
     "three": "github:mrdoob/three.js#dev",
     "typescript": "^4.9.4",
