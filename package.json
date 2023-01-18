@@ -6,8 +6,9 @@
   "keywords": [
     "vue3",
     "component",
-    "vite",
-    "THREE"
+    "three",
+    "three.js",
+    "3D"
   ],
   "homepage": "https://www.drie.dev",
   "repository": "github:janvorisek/drie",
