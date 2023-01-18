@@ -77,9 +77,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
     };
 }>>, {
-    side: any;
     opacity: number;
     transparent: boolean;
+    side: any;
     vertexColors: boolean;
 }>;
 export default _sfc_main;

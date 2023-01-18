@@ -18,6 +18,14 @@ export interface Props {
      * The size of the gap.
      */
     gapSize?: number;
+    /**
+     * Float in the range of `0.0 - 1.0` indicating how transparent the material is.
+     */
+    opacity?: number;
+    /**
+     * Defines whether this material is transparent.
+     */
+    transparent?: boolean;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
     color: {
@@ -39,6 +47,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: NumberConstructor;
         required: false;
         default: number;
+    };
+    opacity: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    transparent: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
     };
 }, {
     props: any;
@@ -73,9 +91,21 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
+    opacity: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
+    transparent: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
 }>>, {
     scale: number;
     color: string | number;
+    opacity: number;
+    transparent: boolean;
     dashSize: number;
     gapSize: number;
 }>;

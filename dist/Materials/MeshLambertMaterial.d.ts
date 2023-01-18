@@ -66,8 +66,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }>>, {
     color: string | number;
-    side: any;
     opacity: number;
     transparent: boolean;
+    side: any;
 }>;
 export default _sfc_main;

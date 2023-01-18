@@ -50,8 +50,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
     };
 }>>, {
-    side: any;
     opacity: number;
     transparent: boolean;
+    side: any;
 }>;
 export default _sfc_main;
