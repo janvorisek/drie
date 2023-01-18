@@ -4,7 +4,9 @@
   import LineBasicMaterial from '../../examples/LineBasicMaterial.vue'
   </script>
 
-A material for drawing wireframe-style geometries.
+A material for drawing line geometries.
+
+Suitable for [`<Line />`](/components/Objects/Line), [`<LineSegments />`](/components/Objects/LineSegments) or [`<LineLoop />`](/components/Objects/LineLoop).
 
 ## Example
 
