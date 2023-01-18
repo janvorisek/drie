@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="example" style="height: 200px">
-      <Renderer ref="renderer" :camera="camera" :antialias="true" :frame-limit="30" shadow-map-enabled>
+      <Renderer ref="renderer" :on-before-render="onBeforeRender" :camera="camera" :antialias="true" :frame-limit="30" shadow-map-enabled>
         <PerspectiveCamera name="cam1" :position="[0,6,5]" :up="[0, 0, 1]">
           <OrbitControls />
         </PerspectiveCamera>
@@ -140,7 +140,7 @@ onMounted(() => {
   }
 });
 
-window.setInterval(() => {
+const onBeforeRender = () => {
   const angle = Date.now() / 1000;
 
   color.value = `rgb(${Math.round(Math.cos(angle) * 50 + 100)}, ${Math.round(
@@ -161,7 +161,7 @@ window.setInterval(() => {
 
   pos.value = [PARAMS.pos.x, PARAMS.pos.y, PARAMS.pos.z];
   //twPane.refresh();
-}, 10);
+}
 
 const camera = ref("cam1");
 const renderer = ref({});
