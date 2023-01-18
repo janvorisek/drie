@@ -5,6 +5,20 @@ export default {
 };
 </script>
 
+<docs>BEGIN_DOCS
+  <script setup>
+  import PointsMaterial from '../../examples/PointsMaterial.vue'
+  </script>
+
+  A material for drawing [`<Points />`](/components/Objects/Points).
+
+  ## Example
+
+  <ClientOnly>
+    <PointsMaterial />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
 import { inject, watch, provide } from "vue";
 
@@ -18,7 +32,8 @@ export interface Props {
   color?: string | number;
 
   /**
-   * Specify whether points' size is attenuated by the camera depth. (Perspective camera only)
+   * Specify whether points' size is attenuated by the camera depth.
+   * _(Perspective camera only)_
    */
   sizeAttenuation?: boolean;
 
@@ -40,9 +55,11 @@ const three = new PointsMaterial({ color: props.color, sizeAttenuation: props.si
 mesh.material = three;
 
 function applyProps(props: Props) {
-  if (props.color) three.color = new Color(props.color);
-  if (props.size) three.size = props.size;
-  if (props.sizeAttenuation !== undefined) three.sizeAttenuation = props.sizeAttenuation;
+  three.color = new Color(props.color);
+  three.size = props.size as number;
+  three.sizeAttenuation = props.sizeAttenuation as boolean;
+
+  three.needsUpdate = true;
 }
 
 applyProps(props);

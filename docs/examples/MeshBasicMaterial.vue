@@ -45,9 +45,9 @@ import { VTweakpane } from 'v-tweakpane';
 import { reactive } from 'vue';
 
 const PARAMS = reactive({
-  color: '#ff0000',
+  color: '#666666',
   transparent: false,
-  opacity: 1
+  opacity: 1,
 });
 
 
