@@ -11,6 +11,8 @@
               :color="PARAMS.color"
               :size="PARAMS.size"
               :size-attenuation="PARAMS.sizeAttenuation"
+              :transparent="PARAMS.transparent"
+              :opacity="PARAMS.opacity"
             />
             <BoxGeometry
               name="geo"
@@ -19,7 +21,7 @@
               :depth="10"
             />
           </Points>
-          <AxesHelper :size="1" />
+          <AxesHelper :size="10" />
         </Scene>
       </Renderer>
     </div>
@@ -45,7 +47,9 @@ import { reactive } from 'vue';
 const PARAMS = reactive({
   color: '#000000',
   size: 2,
-  sizeAttenuation: true
+  sizeAttenuation: true,
+  transparent: false,
+  opacity: 1,
 });
 
 
@@ -53,6 +57,11 @@ const onPaneCreated = (pane: any) => {
     pane.addInput(PARAMS, 'color');
     pane.addInput(PARAMS, 'size', {min: 1, max: 10});
     pane.addInput(PARAMS, 'sizeAttenuation');
+    pane.addInput(PARAMS, 'transparent');
+    pane.addInput(PARAMS, 'opacity', {
+      min: 0,
+      max: 1
+    });
 };
 </script>
 

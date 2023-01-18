@@ -48,6 +48,16 @@ export interface Props {
    * The size of the gap.
    */
   gapSize?: number;
+
+  /**
+   * Float in the range of `0.0 - 1.0` indicating how transparent the material is.
+   */
+  opacity?: number;
+
+  /**
+   * Defines whether this material is transparent.
+   */
+  transparent?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -55,6 +65,8 @@ const props = withDefaults(defineProps<Props>(), {
   scale: 1,
   dashSize: 3,
   gapSize: 1,
+  opacity: 1,
+  transparent: false,
 });
 
 const mesh = inject("mesh") as Mesh;
@@ -68,6 +80,9 @@ function applyProps() {
   three.dashSize = props.dashSize;
   three.gapSize = props.gapSize;
 
+  three.opacity = props.opacity;
+  three.transparent = props.transparent;
+
   three.needsUpdate = true;
 }
 
@@ -77,6 +92,8 @@ handlePropCallback(props, "color", applyProps);
 handlePropCallback(props, "scale", applyProps);
 handlePropCallback(props, "dashSize", applyProps);
 handlePropCallback(props, "gapSize", applyProps);
+handlePropCallback(props, "opacity", applyProps);
+handlePropCallback(props, "transparent", applyProps);
 
 provide("material", three);
 

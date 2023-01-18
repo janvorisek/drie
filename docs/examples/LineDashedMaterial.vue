@@ -22,7 +22,10 @@
               :color="PARAMS.color"
               :scale="PARAMS.scale"
               :dash-size="PARAMS.dashSize"
-              :gap-size="PARAMS.gapSize" />
+              :gap-size="PARAMS.gapSize"
+              :transparent="PARAMS.transparent"
+              :opacity="PARAMS.opacity"
+            />
           </LineSegments>
           <AxesHelper :size="1" />
         </Scene>
@@ -52,7 +55,9 @@ const PARAMS = reactive({
   color: '#000000',
   scale: 1,
   dashSize: 0.25,
-  gapSize: 0.1
+  gapSize: 0.1,
+  transparent: false,
+  opacity: 1,
 });
 
 
@@ -61,6 +66,11 @@ const onPaneCreated = (pane: any) => {
     pane.addInput(PARAMS, 'scale' , { min: 0.1, max: 2 });
     pane.addInput(PARAMS, 'dashSize', { min: 0.01, max: 1 });
     pane.addInput(PARAMS, 'gapSize', { min: 0.01, max: 1 });
+    pane.addInput(PARAMS, 'transparent');
+    pane.addInput(PARAMS, 'opacity', {
+      min: 0,
+      max: 1
+    });
 };
 </script>
 

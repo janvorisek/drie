@@ -17,7 +17,11 @@
           </Mesh>
           <LineSegments>
             <WireframeGeometry geometry="geo" />
-            <LineBasicMaterial :color="PARAMS.color" />
+            <LineBasicMaterial
+              :color="PARAMS.color"
+              :transparent="PARAMS.transparent"
+              :opacity="PARAMS.opacity"
+            />
           </LineSegments>
           <AxesHelper :size="1" />
         </Scene>
@@ -44,12 +48,19 @@ import { VTweakpane } from 'v-tweakpane';
 import { reactive } from 'vue';
 
 const PARAMS = reactive({
-  color: '#000000'
+  color: '#000000',
+  transparent: false,
+  opacity: 1,
 });
 
 
 const onPaneCreated = (pane: any) => {
     pane.addInput(PARAMS, 'color');
+    pane.addInput(PARAMS, 'transparent');
+    pane.addInput(PARAMS, 'opacity', {
+      min: 0,
+      max: 1
+    });
 };
 </script>
 

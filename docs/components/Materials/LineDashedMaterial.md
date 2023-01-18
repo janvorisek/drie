@@ -17,12 +17,14 @@ Suitable for [`<Line />`](/components/Objects/Line), [`<LineSegments />`](/compo
 
 ## Props
 
-| Prop name | Description                                                 | Type   | Default  |
-| --------- | ----------------------------------------------------------- | ------ | -------- |
-|` color     `| Color of the material.                                      | union  | 0xffffff |
-|` scale     `| The scale of the dashed part of a line.                     | number | 1        |
-|` dashSize  `| The size of the dash. This is both the gap with the stroke. | number | 3        |
-|` gapSize   `| The size of the gap.                                        | number | 1        |
+| Prop name   | Description                                                                   | Type    | Default  |
+| ----------- | ----------------------------------------------------------------------------- | ------- | -------- |
+|` color       `| Color of the material.                                                        | union   | 0xffffff |
+|` scale       `| The scale of the dashed part of a line.                                       | number  | 1        |
+|` dashSize    `| The size of the dash. This is both the gap with the stroke.                   | number  | 3        |
+|` gapSize     `| The size of the gap.                                                          | number  | 1        |
+|` opacity     `| Float in the range of `0.0 - 1.0` indicating how transparent the material is. | number  | 1        |
+|` transparent `| Defines whether this material is transparent.                                 | boolean | false    |
 
 ---
 
