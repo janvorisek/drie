@@ -105,8 +105,8 @@ const onPaneCreated = (pane: any) => {
 
 const onPaneCreated2 = (pane: any) => {
   //twPane = pane;
-  pane.addMonitor(PARAMS, 's2', {label: "Crate scale"});
-  pane.addMonitor(PARAMS, 'radius', {label: "Sphere radius"});
+  pane.addMonitor(PARAMS, 's2', {view: 'graph', min: 0, max: 2, label: "Crate scale"});
+  pane.addMonitor(PARAMS, 'radius', {view: 'graph', min: 0.5, max: 3.5, label: "Sphere radius"});
 };
 
 const pos = ref<[number, number, number]>([0, 0, 2]);
