@@ -1,5 +1,18 @@
 # Mesh
 
+  <script setup>
+  import Mesh from '../../examples/Mesh.vue'
+  </script>
+
+Component representing triangular polygon mesh based objects.
+
+## Example
+
+  <ClientOnly>
+    <Mesh />
+  </ClientOnly>
+
+
 ## Props
 
 | Prop name     | Description                                                                                     | Type        | Default            |
@@ -17,3 +30,4 @@
 | default |             |          |
 
 ---
+
