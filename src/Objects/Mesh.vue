@@ -2,6 +2,20 @@
   <slot></slot>
 </template>
 
+<docs>BEGIN_DOCS
+  <script setup>
+  import Mesh from '../../examples/Mesh.vue'
+  </script>
+
+  Component representing triangular polygon mesh based objects.
+
+  ## Example
+
+  <ClientOnly>
+    <Mesh />
+  </ClientOnly>
+</docs>
+
 <script setup lang="ts">
 import { provide, inject, onUnmounted } from "vue";
 
