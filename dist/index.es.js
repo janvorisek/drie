@@ -66,9 +66,17 @@ function Yt(r, o, e) {
     b.length > 0 ? (i = b, s === !1 && e("mouseenter", b, m), s = !0, e("mousemove", b, m)) : (s && e("mouseleave", i, m), s = !1, i = []);
   };
   be(() => {
-    o.enableRaycasting && (n == null || n.value.addEventListener("click", a), n == null || n.value.addEventListener("mousemove", c));
+    if (o.enableRaycasting) {
+      if ((n == null ? void 0 : n.value) == null)
+        return;
+      n == null || n.value.addEventListener("click", a), n == null || n.value.addEventListener("mousemove", c);
+    }
   }), Z(() => {
-    o.enableRaycasting && (n == null || n.value.removeEventListener("click", a), n == null || n.value.removeEventListener("mousemove", c));
+    if (o.enableRaycasting) {
+      if ((n == null ? void 0 : n.value) == null)
+        return;
+      n == null || n.value.removeEventListener("click", a), n == null || n.value.removeEventListener("mousemove", c);
+    }
   }), S(
     () => o.enableRaycasting,
     (f) => {
@@ -185,12 +193,11 @@ const Zt = /* @__PURE__ */ P({
     p("addCamera")(t);
     const n = p("canvas");
     S(n, () => {
-      const s = new ResizeObserver((i) => {
+      new ResizeObserver((i) => {
         i.forEach((c) => {
           e.autoResize && (t.aspect = c.contentRect.width / c.contentRect.height, t.updateProjectionMatrix());
         });
-      });
-      console.log(n.value), s.observe(n.value);
+      }).observe(n.value);
     }), v(e, "position", t), v(e, "up", t), v(e, "lookAt", t);
     function a() {
       t.name = e.name, e.autoResize || (t.aspect = e.aspect), t.near = e.near, t.far = e.far, t.updateProjectionMatrix();
