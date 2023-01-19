@@ -100,7 +100,6 @@ watch(canvas!, () => {
     });
   });
 
-  console.log(canvas!.value);
   myObserver.observe(canvas!.value);
 });
 
