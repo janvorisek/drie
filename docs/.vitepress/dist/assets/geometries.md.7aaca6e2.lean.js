@@ -1,0 +1,1 @@
+import{_ as s,o as e,c as a,f as o}from"./app.35f292b2.js";const d=JSON.parse('{"title":"Geometries","description":"","frontmatter":{},"headers":[],"relativePath":"geometries.md"}'),l={name:"geometries.md"},n=o("",8),t=[n];function p(r,i,c,y,F,D){return e(),a("div",null,t)}const h=s(l,[["render",p]]);export{d as __pageData,h as default};
