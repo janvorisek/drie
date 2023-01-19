@@ -183,6 +183,7 @@ export function handleRaycasting(intersect: any[], props: any, emit: any) {
 
   onMounted(() => {
     if (props.enableRaycasting) {
+      if (canvas?.value == null) return;
       canvas?.value.addEventListener("click", onCanvasClick);
       canvas?.value.addEventListener("mousemove", onCanvasMouseMove);
     }
@@ -190,6 +191,7 @@ export function handleRaycasting(intersect: any[], props: any, emit: any) {
 
   onUnmounted(() => {
     if (props.enableRaycasting) {
+      if (canvas?.value == null) return;
       canvas?.value.removeEventListener("click", onCanvasClick);
       canvas?.value.removeEventListener("mousemove", onCanvasMouseMove);
     }
