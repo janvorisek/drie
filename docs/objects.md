@@ -36,6 +36,8 @@ The following objects are supported:
 
 ## Position, rotation, scale
 
+### Constant value
+
 Setting constant position, rotation and scale is simply done by passing an array.
 
 ```vue-html
@@ -49,32 +51,40 @@ Setting constant position, rotation and scale is simply done by passing an array
 </Mesh>
 ```
 
-In order to use reactivity, specify the variable using Vue3 `ref` or `reactive`. 
+### Dynamic value
+
+You can bind position, rotation and scale to a [Vector3Like](/types#vector3like) variable.
+
+```vue-html
+<Mesh
+  :position="pos"
+  :rotation="rot"
+  :scale="sca"
+>
+  <MeshBasicMaterial color="red" />
+  <BoxGeometry />
+</Mesh>
+```
+
+In order to use reactivity, specify the variables using Vue3 `ref()` in the setup function. 
 
 ```vue
-<template>
-  <Mesh
-    :position="pos"
-    :rotation="rot"
-    :scale="sca"
-  >
-    <MeshBasicMaterial color="red" />
-    <BoxGeometry />
-  </Mesh>
-</template>
-
-<script lang="ts">
+<script setup lang="ts">
+  // Specify position, rotation and scale as reactive arrays
   const pos = ref<[number, number, number]>([0, 0, 0]);
   const rot = ref<[number, number, number]>([0, 0, 0]);
   const sca = ref<[number, number, number]>([1, 1, 1]);
 
-  // Dynamically translate, rotate and scale the mesh
-  window.setInterval(() => {
+  const calculateTransformations = () => {
     const angle = Date.now() / 1000;
 
+    // Changing ref values triggers update of the mesh position, rotation and scale 
     pos.value = [Math.cos(angle), Math.sin(angle), Math.sin(angle)];
     rot.value = [Math.cos(angle) * Math.PI, 0, 0];
     sca.value = [1 + Math.cos(angle), 1 + Math.cos(angle), 1 + Math.cos(angle)];
-  }, 10);
+  };
+
+  // This can be called in renderer's onBeforeRender, etc.
+  calculateTransformations();
 </script>
 ```
