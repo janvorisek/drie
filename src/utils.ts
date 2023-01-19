@@ -152,6 +152,8 @@ export function handleRaycasting(intersect: any[], props: any, emit: any) {
 
     raycaster.setFromCamera(pointer, camera.value);
 
+    console.log(pointer);
+
     const intersects = raycaster.intersectObjects(intersect);
 
     if (intersects.length > 0) emit("click", intersects, pointer);
@@ -212,19 +214,10 @@ export function handleRaycasting(intersect: any[], props: any, emit: any) {
 export function getPointer(e: MouseEvent) {
   const pointer = new Vector2();
 
-  pointer.x =
-    ((e.pageX - (e.currentTarget as HTMLCanvasElement).offsetLeft) /
-      (e.currentTarget as HTMLCanvasElement).offsetWidth) *
-      2 -
-    1;
+  const bb = (e.currentTarget as HTMLCanvasElement).getBoundingClientRect();
 
-  pointer.y =
-    -(
-      (e.pageY - (e.currentTarget as HTMLCanvasElement).offsetTop) /
-      (e.currentTarget as HTMLCanvasElement).offsetHeight
-    ) *
-      2 +
-    1;
+  pointer.x = ((e.clientX - bb.left) / bb.width) * 2 - 1;
+  pointer.y = -((e.clientY - bb.top) / bb.height) * 2 + 1;
 
   return pointer;
 }
