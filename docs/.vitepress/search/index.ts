@@ -1,3 +1,4 @@
+import path from "path";
 import { Plugin } from "vite";
 import { IndexSearch } from "./md-index-builder";
 import { Options } from "./types";
@@ -34,7 +35,7 @@ export function SearchPlugin(inlineOptions?: Partial<any>): Plugin {
 
     config: () => ({
       resolve: {
-        alias: { "./VPNavBarSearch.vue": "vitepress-plugin-search/Search.vue" },
+        alias: { "./VPNavBarSearch.vue": path.resolve(__dirname, "./Search.vue") },
       },
     }),
 

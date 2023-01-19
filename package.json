@@ -71,7 +71,6 @@
     "vite": "^4.0.3",
     "vite-plugin-dts": "1.7.1",
     "vitepress": "^1.0.0-alpha.33",
-    "vitepress-plugin-search": "^1.0.4-alpha.17",
     "vitest": "^0.27.1",
     "vue": "^3.2.45",
     "vue-docgen-cli": "^4.56.1",

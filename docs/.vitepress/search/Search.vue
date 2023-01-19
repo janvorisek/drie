@@ -158,9 +158,10 @@ function cleanSearch() {
             <div class="search-list">
               <div
                 v-for="(group, groupKey) of GroupBy(result, (x:any) =>
-                  x.link.split('/').slice(0, -1).join('-')
+                  x.link.split('/').slice(0, -1).join(' / ')
                 )"
                 :key="groupKey"
+                class="search-group-parent"
               >
                 <span class="search-group">{{
                   groupKey
@@ -187,7 +188,6 @@ function cleanSearch() {
                 </a>
               </div>
             </div>
-            <img class="flex-logo" src="./flex-logo.svg" alt="flex logo"/>
           </div>
         </div>
       </Teleport>
@@ -226,14 +226,12 @@ function cleanSearch() {
 </template>
 
 <style>
-.flex-logo{
-  width: 80px;
-  margin-left: calc(100% - 90px);
-  padding-bottom: 10px;
+.search-group-parent {
+  margin-bottom: 12px;
+  padding: 0 1rem;
 }
 
 .search-list {
-  padding: 1rem;
   max-height: calc(100vh - 230px);
   overflow-x: auto;
 }
@@ -246,7 +244,7 @@ function cleanSearch() {
 }
 
 .search-list > div {
-  color: var(--vp-c-brand-dark);
+  color: var(--vp-c-brand);
   font-weight: bold;
 }
 
@@ -270,7 +268,7 @@ function cleanSearch() {
 
 .search-item:hover {
   color: #fff;
-  background: var(--vp-c-brand-dark);
+  background: var(--vp-c-brand);
 }
 
 .search-item:hover > p {
@@ -492,7 +490,7 @@ body.dark .DocSearch-Button:hover {
 }
 
 .DocSearch-MagnifierLabel {
-  color: var(--vp-c-brand-dark);
+  color: var(--vp-c-brand);
 }
 
 .DocSearch-Button .DocSearch-Search-Icon {
