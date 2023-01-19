@@ -96,7 +96,7 @@ export interface Intersection<TIntersected extends Object3D = Object3D> {
 The classical example is to mark hovered objects by changing its material colors.
 This can be done by listening to the `onMouseEnter` and `onMouseLeave` events.
 
-In our example each of the meshes is a simple triangles with its unique material. Therefore the material color can be manipulated directly.
+In our example each of the meshes is a simple triangle with its unique material. Therefore the material color can be manipulated directly.
 
 <script setup lang="ts">
 // Basic example just imports the used Drie components
@@ -153,7 +153,7 @@ const onMouseLeave = (is: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial
   </div>
 </ClientOnly>
 
-```vue{9-11,35-40,42-47}
+```vue{9-11,40-45,47-52}
 <template>
   <div style="width: 640px; height: 480px;">
     <Renderer ref="renderer" :antialias="true">
