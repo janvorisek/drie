@@ -152,8 +152,6 @@ export function handleRaycasting(intersect: any[], props: any, emit: any) {
 
     raycaster.setFromCamera(pointer, camera.value);
 
-    console.log(pointer);
-
     const intersects = raycaster.intersectObjects(intersect);
 
     if (intersects.length > 0) emit("click", intersects, pointer);
