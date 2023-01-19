@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { SitemapStream } from 'sitemap'
-import { SearchPlugin } from "vitepress-plugin-search";
+import { SearchPlugin } from "./search";
 
 import { createWriteStream } from 'node:fs'
 import { resolve } from 'node:path'
