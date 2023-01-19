@@ -98,6 +98,61 @@ This can be done by listening to the `onMouseEnter` and `onMouseLeave` events.
 
 In our example each of the meshes is a simple triangles with its unique material. Therefore the material color can be manipulated directly.
 
+<script setup lang="ts">
+// Basic example just imports the used Drie components
+import { Renderer, Scene } from "../src"; // always needed
+import { Group, Mesh, BufferGeometry, MeshBasicMaterial } from "../src"; // mesh
+import { PerspectiveCamera, OrbitControls } from "../src"; // camera
+
+// Drie component names conflict with three.js objects
+// We prepend T to the three class names for correct typings inside of the events
+import {
+  Mesh as TMesh,
+  MeshBasicMaterial as TMeshBasicMaterial,
+  BufferGeometry as TBufferGeometry,
+  Color // no conflict here
+} from "three";
+
+const onMouseEnter = (is: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>>[]) => {
+  // we expect is to contain at least 1 element
+  // the first element should be the closest one to the mouse from camera
+  is[0].object.material.color = new Color("red");
+  console.log("enter");
+};
+
+const onMouseLeave = (is: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>>[]) => {
+  // we expect is to contain at least 1 element
+  // the first element should be the closest one to the mouse from camera
+  is[0].object.material.color = new Color("#aaa");
+  console.log("leave");
+};
+</script>
+
+<ClientOnly>
+  <div class="example">
+    <Renderer ref="renderer" :antialias="true">
+      <PerspectiveCamera :position="[5, 5, 5]" :up="[0, 0, 1]">
+        <OrbitControls />
+      </PerspectiveCamera>
+      <Scene background="white">
+        <Group
+          enable-raycasting
+          @mouseenter="onMouseEnter"
+          @mouseleave="onMouseLeave"
+        >
+          <Mesh v-for="i in 5" :key="i" :position="[i * 1.5, 0, 0]">
+            <MeshBasicMaterial color="#aaa" />
+            <BufferGeometry
+              :vertices="[0, 0, 0, 1, 0, 0, 1, 1, 0]"
+              :faces="[0, 1, 2]"
+            />
+          </Mesh>
+        </Group>
+      </Scene>
+    </Renderer>
+  </div>
+</ClientOnly>
+
 ```vue{9-11,35-40,42-47}
 <template>
   <div style="width: 640px; height: 480px;">
@@ -125,12 +180,17 @@ In our example each of the meshes is a simple triangles with its unique material
 </template>
 
 <script setup lang="ts">
+import { Renderer, Scene } from "../src"; // always needed
+import { Group, Mesh, BufferGeometry, MeshBasicMaterial } from "../src"; // mesh
+import { PerspectiveCamera, OrbitControls } from "../src"; // camera
+
 // Drie component names conflict with three.js objects
 // We prepend T to the three class names for correct typings inside of the events
 import {
   Mesh as TMesh,
   MeshBasicMaterial as TMeshBasicMaterial,
   BufferGeometry as TBufferGeometry,
+  Color // no conflict here
 } from "three";
 
 const onMouseEnter = (is: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>>[]) => {
