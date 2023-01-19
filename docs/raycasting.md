@@ -131,8 +131,8 @@ const onMouseLeave = (is: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial
 <ClientOnly>
   <div class="example">
     <Renderer ref="renderer" :antialias="true">
-      <PerspectiveCamera :position="[5, 5, 5]" :up="[0, 0, 1]">
-        <OrbitControls />
+      <PerspectiveCamera :position="[5, 1, 2]" :up="[0, 0, 1]">
+        <OrbitControls :target="[5, 0, 0]" />
       </PerspectiveCamera>
       <Scene background="white">
         <Group
@@ -157,8 +157,8 @@ const onMouseLeave = (is: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial
 <template>
   <div style="width: 640px; height: 480px;">
     <Renderer ref="renderer" :antialias="true">
-      <PerspectiveCamera :position="[5, 5, 5]" :up="[0, 0, 1]">
-        <OrbitControls />
+      <PerspectiveCamera :position="[5, 1, 2]" :up="[0, 0, 1]">
+        <OrbitControls :target="[5, 0, 0]" />
       </PerspectiveCamera>
       <Scene background="white">
         <Group
