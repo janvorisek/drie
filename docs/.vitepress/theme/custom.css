@@ -32,3 +32,10 @@ table {
 .example-props {
   flex-basis: 32em;
 }
+
+@media (min-width: 960px) {
+  .VPNavBarSearch {
+    position: absolute;
+    left: 32px;
+  }
+}
