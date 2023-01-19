@@ -7,7 +7,7 @@ export interface Props {
      */
     aspect?: number;
     /**
-     * Flag marking whether camera aspect ration recalculates on renderer resize.
+     * Flag marking whether camera aspect ratio recalculates on renderer resize.
      */
     autoResize?: boolean;
     /**

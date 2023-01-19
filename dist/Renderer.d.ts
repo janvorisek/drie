@@ -6,11 +6,13 @@ export interface Props {
      */
     camera?: string;
     /**
-     * Flag marking whether renderer auto resizes to match parent dimensions.
+     * Flag marking whether the renderer auto resizes to match parent dimensions.
      */
     autoResize?: boolean;
     /**
      * Callback to fire before each animation frame is rendered.
+     * This is typically used for animations.
+     * Use this instead of `window.setInterval`.
      */
     onBeforeRender?: () => void;
     /**
