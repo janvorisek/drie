@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { SitemapStream } from 'sitemap'
+import { SearchPlugin } from "vitepress-plugin-search";
 
 import { createWriteStream } from 'node:fs'
 import { resolve } from 'node:path'
@@ -71,6 +72,7 @@ export default defineConfig( {
           { text: 'Geometries', link: '/geometries'},
           { text: 'Materials', link: '/materials'},
           { text: 'Objects', link: '/objects'},
+          { text: 'Raycasting', link: '/raycasting'},
           { text: 'Types', link: '/types'}
         ]
       },
@@ -113,6 +115,10 @@ export default defineConfig( {
     sitemap.end()
   },
   vite: {
-    plugins: [vueDocsPlugin()],
+    plugins: [vueDocsPlugin(), SearchPlugin({
+      previewLength: 62,
+      buttonLabel: "Search",
+      placeholder: "Search docs",
+    })],
   },
 })
