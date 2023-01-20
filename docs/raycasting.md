@@ -14,7 +14,7 @@ You need to set the `enableRaycasting` property to true.
 </Group>
 ```
 
-This way, raycasting is performed only on the `Group` children and not whole `Scene`. When raycasting is disabled, the mouse event listeners are disabled and there is no performance drop.
+This way, raycasting is performed only on the [`Group`](components/Objects/Group) children and not whole [`Scene`](components/Objects/Scene). When raycasting is disabled, the mouse event listeners are disabled and there is no performance drop.
 
 ## Events
 
