@@ -27,7 +27,7 @@ export default {
 <script setup lang="ts">
 import { inject, provide } from "vue";
 
-import { FrontSide, Mesh, type Side, Color, MeshBasicMaterial, Material } from "three";
+import { FrontSide, Mesh, type Side, Color, MeshBasicMaterial } from "three";
 import { handlePropCallback } from "../utils";
 
 export interface Props {
@@ -40,11 +40,6 @@ export interface Props {
    * Defines which side of faces will be rendered - front, back or both. Represtented by `THREE.Side`.
    */
   side?: Side;
-
-  /**
-   * Name of the material
-   */
-  name?: string;
 
   /**
    * Float in the range of `0.0 - 1.0` indicating how transparent the material is.
@@ -67,21 +62,12 @@ const props = withDefaults(defineProps<Props>(), {
   opacity: 1,
   transparent: false,
   vertexColors: false,
-  name: "",
 });
 
+const mesh = inject("mesh") as Mesh;
+
 const three = new MeshBasicMaterial();
-// eslint-disable-next-line vue/no-setup-props-destructure
-three.name = props.name;
-
-const addMaterial = inject("addMaterial") as (g: Material) => void;
-addMaterial(three);
-
-const mesh = inject<Mesh | null>("mesh", null);
-
-if (mesh) {
-  mesh.material = three;
-}
+mesh.material = three;
 
 function applyProps() {
   if (props.color !== undefined) three.color = new Color(props.color);

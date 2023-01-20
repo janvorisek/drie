@@ -11,18 +11,13 @@ export default {
 <script setup lang="ts">
 import { inject, watch, provide } from "vue";
 
-import { FrontSide, Mesh, type Side, MeshNormalMaterial, Material } from "three";
+import { FrontSide, Mesh, type Side, MeshNormalMaterial } from "three";
 
 export interface Props {
   /**
    * Defines which side of faces will be rendered - front, back or both. Represtented by `THREE.Side`.
    */
   side?: Side;
-
-  /**
-   * Name of the material
-   */
-  name?: string;
 
   /**
    * Float in the range of `0.0 - 1.0` indicating how transparent the material is.
@@ -39,21 +34,12 @@ const props = withDefaults(defineProps<Props>(), {
   side: FrontSide,
   opacity: 1,
   transparent: false,
-  name: "",
 });
 
+const mesh = inject("mesh") as Mesh;
+
 const three = new MeshNormalMaterial();
-// eslint-disable-next-line vue/no-setup-props-destructure
-three.name = props.name;
-
-const addMaterial = inject("addMaterial") as (g: Material) => void;
-addMaterial(three);
-
-const mesh = inject<Mesh | null>("mesh", null);
-
-if (mesh) {
-  mesh.material = three;
-}
+mesh.material = three;
 
 watch(
   () => props.side,
