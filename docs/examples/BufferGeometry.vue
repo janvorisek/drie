@@ -1,7 +1,7 @@
 <template>
   <div class="example">
     <Renderer :antialias="true" :frame-limit="30">
-      <PerspectiveCamera :position="[3,3,3]" :up="[0, 0, 1]">
+      <PerspectiveCamera :position="[3, 3, 3]" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>
       <Scene background="#f9f9f9">
@@ -28,18 +28,11 @@ import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
 import { AxesHelper } from "../../src";
 
-import { reactive} from "vue";
+import { reactive } from "vue";
 import { DoubleSide } from "three";
 
 const vertices = reactive<number[]>([
-	-1.0, -1.0,  2.0,
-	 1.0, -1.0,  0.0,
-	 1.0,  1.0,  1.0,
-  -1.0, -1.0,  2.0,
-	 1.0, -1.0,  0.0,
-	 1.0, -2.0,  1.0,
-	 1.0,  1.0,  1.0,
-	-1.0,  1.0,  1.0,
-	-1.0, -1.0,  2.0
+  -1.0, -1.0, 2.0, 1.0, -1.0, 0.0, 1.0, 1.0, 1.0, -1.0, -1.0, 2.0, 1.0, -1.0, 0.0, 1.0, -2.0, 1.0, 1.0, 1.0, 1.0, -1.0,
+  1.0, 1.0, -1.0, -1.0, 2.0,
 ]);
 </script>

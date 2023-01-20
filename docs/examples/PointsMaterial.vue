@@ -14,12 +14,7 @@
               :transparent="PARAMS.transparent"
               :opacity="PARAMS.opacity"
             />
-            <BoxGeometry
-              name="geo"
-              :width="10"
-              :height="10"
-              :depth="10"
-            />
+            <BoxGeometry name="geo" :width="10" :height="10" :depth="10" />
           </Points>
           <AxesHelper :size="10" />
         </Scene>
@@ -28,7 +23,7 @@
     <div class="example-props">
       <VTweakpane :pane="{ title: 'Properties' }" @on-pane-created="onPaneCreated" />
     </div>
-  </div>  
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -41,30 +36,29 @@ import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
 import { AxesHelper } from "../../src";
 
-import { VTweakpane } from 'v-tweakpane';
-import { reactive } from 'vue';
+import { VTweakpane } from "v-tweakpane";
+import { reactive } from "vue";
 
 const PARAMS = reactive({
-  color: '#000000',
+  color: "#000000",
   size: 2,
   sizeAttenuation: true,
   transparent: false,
   opacity: 1,
 });
 
-
 const onPaneCreated = (pane: any) => {
-    pane.addInput(PARAMS, 'color');
-    pane.addInput(PARAMS, 'size', {min: 1, max: 10});
-    pane.addInput(PARAMS, 'sizeAttenuation');
-    pane.addInput(PARAMS, 'transparent');
-    pane.addInput(PARAMS, 'opacity', {
-      min: 0,
-      max: 1
-    });
+  pane.addInput(PARAMS, "color");
+  pane.addInput(PARAMS, "size", { min: 1, max: 10 });
+  pane.addInput(PARAMS, "sizeAttenuation");
+  pane.addInput(PARAMS, "transparent");
+  pane.addInput(PARAMS, "opacity", {
+    min: 0,
+    max: 1,
+  });
 };
 </script>
 
 <style>
-  @import 'v-tweakpane/dist/v-tweakpane.css';
+@import "v-tweakpane/dist/v-tweakpane.css";
 </style>

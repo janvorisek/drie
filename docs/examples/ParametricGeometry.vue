@@ -26,11 +26,11 @@
     <div class="example-props">
       <VTweakpane :pane="{ title: 'Properties' }" @on-pane-created="onPaneCreated" />
     </div>
-  </div>  
+  </div>
 </template>
 
 <script setup lang="ts">
-import { DoubleSide, Vector3 } from 'three';
+import { DoubleSide, Vector3 } from "three";
 
 import { Renderer } from "../../src";
 import { Scene } from "../../src";
@@ -42,42 +42,37 @@ import { OrbitControls } from "../../src";
 import { AxesHelper } from "../../src";
 import { LineSegments, LineBasicMaterial, WireframeGeometry } from "../../src";
 
-import { VTweakpane } from 'v-tweakpane';
-import { reactive } from 'vue';
+import { VTweakpane } from "v-tweakpane";
+import { reactive } from "vue";
 
 const PARAMS = reactive({
   function: (u: number, v: number, target: Vector3) => {
-    u = u-0.5
-    v = v-0.5
-    const x = u*u + v*v;
-    const y = u
-    const z = v
-    target.set( 10*x, 10*y, 10*z );
+    u = u - 0.5;
+    v = v - 0.5;
+    const x = u * u + v * v;
+    const y = u;
+    const z = v;
+    target.set(10 * x, 10 * y, 10 * z);
   },
   slices: 8,
   stacks: 8,
 });
 
-
 const onPaneCreated = (pane: any) => {
-  pane.addInput(PARAMS, 'slices', 
-    {
-      min: 3,
-      max: 24,
-      step: 1
-    }
-  );
-  
-  pane.addInput(PARAMS, 'stacks', 
-    {
-      min: 3,
-      max: 24,
-      step: 1
-    }
-  );
+  pane.addInput(PARAMS, "slices", {
+    min: 3,
+    max: 24,
+    step: 1,
+  });
+
+  pane.addInput(PARAMS, "stacks", {
+    min: 3,
+    max: 24,
+    step: 1,
+  });
 };
 </script>
 
 <style>
-  @import 'v-tweakpane/dist/v-tweakpane.css';
+@import "v-tweakpane/dist/v-tweakpane.css";
 </style>

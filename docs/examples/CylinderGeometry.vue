@@ -8,7 +8,17 @@
         <Scene background="#f9f9f9">
           <Mesh>
             <MeshNormalMaterial :side="DoubleSide" />
-            <CylinderGeometry name="geo" :radius-top="PARAMS.radiusTop" :radius-bottom="PARAMS.radiusBottom" :height="PARAMS.height" :radial-segments="PARAMS.radialSegments" :height-segments="PARAMS.heightSegments" :open-ended="PARAMS.openEnded" :thetaStart="PARAMS.thetaStart" :thetaLength="PARAMS.thetaLength" />
+            <CylinderGeometry
+              name="geo"
+              :radius-top="PARAMS.radiusTop"
+              :radius-bottom="PARAMS.radiusBottom"
+              :height="PARAMS.height"
+              :radial-segments="PARAMS.radialSegments"
+              :height-segments="PARAMS.heightSegments"
+              :open-ended="PARAMS.openEnded"
+              :theta-start="PARAMS.thetaStart"
+              :theta-length="PARAMS.thetaLength"
+            />
           </Mesh>
           <LineSegments>
             <WireframeGeometry geometry="geo" />
@@ -37,8 +47,8 @@ import { OrbitControls } from "../../src";
 import { AxesHelper } from "../../src";
 import { LineSegments, LineBasicMaterial, WireframeGeometry } from "../../src";
 
-import { VTweakpane } from 'v-tweakpane';
-import { reactive } from 'vue';
+import { VTweakpane } from "v-tweakpane";
+import { reactive } from "vue";
 
 const PARAMS = reactive({
   radiusTop: 1,
@@ -48,68 +58,51 @@ const PARAMS = reactive({
   heightSegments: 1,
   openEnded: false,
   thetaStart: 0,
-  thetaLength: 2*Math.PI,
+  thetaLength: 2 * Math.PI,
 });
 
 const onPaneCreated = (pane: any) => {
-        pane.addInput(PARAMS, 'radiusTop', 
-          {
-            min: 1,
-            max: 5
-          }
-        );
+  pane.addInput(PARAMS, "radiusTop", {
+    min: 1,
+    max: 5,
+  });
 
-        pane.addInput(PARAMS, 'radiusBottom', 
-          {
-            min: 1,
-            max: 5
-          }
-        );
-        
-        pane.addInput(PARAMS, 'height', 
-          {
-            min: 1,
-            max: 10
-          }
-        );
+  pane.addInput(PARAMS, "radiusBottom", {
+    min: 1,
+    max: 5,
+  });
 
-        pane.addInput(PARAMS, 'radialSegments', 
-          {
-            min: 3,
-            max: 64,
-            step: 1
-          }
-        );
+  pane.addInput(PARAMS, "height", {
+    min: 1,
+    max: 10,
+  });
 
-        pane.addInput(PARAMS, 'heightSegments', 
-          {
-            min: 1,
-            max: 20,
-            step: 1
-          }
-        );
+  pane.addInput(PARAMS, "radialSegments", {
+    min: 3,
+    max: 64,
+    step: 1,
+  });
 
-        pane.addInput(PARAMS, 'openEnded', 
-          {
-          }
-        );
+  pane.addInput(PARAMS, "heightSegments", {
+    min: 1,
+    max: 20,
+    step: 1,
+  });
 
-        pane.addInput(PARAMS, 'thetaStart', 
-          {
-            min: 0,
-            max: 2*Math.PI
-          }
-        );
+  pane.addInput(PARAMS, "openEnded", {});
 
-        pane.addInput(PARAMS, 'thetaLength', 
-          {
-            min: 0,
-            max: 2*Math.PI,
-          }
-        );
-      };
+  pane.addInput(PARAMS, "thetaStart", {
+    min: 0,
+    max: 2 * Math.PI,
+  });
+
+  pane.addInput(PARAMS, "thetaLength", {
+    min: 0,
+    max: 2 * Math.PI,
+  });
+};
 </script>
 
 <style>
-  @import 'v-tweakpane/dist/v-tweakpane.css';
+@import "v-tweakpane/dist/v-tweakpane.css";
 </style>

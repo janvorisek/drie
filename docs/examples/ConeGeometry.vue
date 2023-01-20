@@ -5,11 +5,11 @@
         <OrbitControls />
       </PerspectiveCamera>
       <Scene background="#f9f9f9">
-        <Mesh :rotation="[Math.PI/2, 0, 0]">
+        <Mesh :rotation="[Math.PI / 2, 0, 0]">
           <MeshNormalMaterial :side="DoubleSide" />
           <ConeGeometry name="geo" :radius="4" :height="5" />
         </Mesh>
-        <LineSegments :rotation="[Math.PI/2, 0, 0]">
+        <LineSegments :rotation="[Math.PI / 2, 0, 0]">
           <WireframeGeometry geometry="geo" />
           <LineBasicMaterial color="black" />
         </LineSegments>

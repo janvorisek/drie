@@ -1,7 +1,7 @@
 <template>
   <div class="example">
     <Renderer ref="renderer" :antialias="true">
-      <PerspectiveCamera :position="[5,5,5]" :up="[0, 0, 1]">
+      <PerspectiveCamera :position="[5, 5, 5]" :up="[0, 0, 1]">
         <OrbitControls />
       </PerspectiveCamera>
       <Scene background="#f9f9f9">

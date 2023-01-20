@@ -1,8 +1,15 @@
 <template>
   <div>
     <div class="example" style="height: 200px">
-      <Renderer ref="renderer" :on-before-render="onBeforeRender" :camera="camera" :antialias="true" :frame-limit="30" shadow-map-enabled>
-        <PerspectiveCamera name="cam1" :position="[0,6,5]" :up="[0, 0, 1]">
+      <Renderer
+        ref="renderer"
+        :on-before-render="onBeforeRender"
+        :camera="camera"
+        :antialias="true"
+        :frame-limit="30"
+        shadow-map-enabled
+      >
+        <PerspectiveCamera name="cam1" :position="[0, 6, 5]" :up="[0, 0, 1]">
           <OrbitControls />
         </PerspectiveCamera>
         <OrthographicCamera name="cam2">
@@ -21,17 +28,23 @@
             </MeshBasicMaterial>
             <BoxGeometry :width="w + 1" :height="w * 2 + 1" />
           </Mesh>
-          <Mesh :position="[-8, 0, 0]" :scale="[PARAMS.s2+0.5, 1, s]" :cast-shadow="true">
+          <Mesh :position="[-8, 0, 0]" :scale="[PARAMS.s2 + 0.5, 1, s]" :cast-shadow="true">
             <MeshBasicMaterial :color="color2" :side="DoubleSide" />
             <BufferGeometry name="weirdGeo" :vertices="vertices" />
           </Mesh>
-          <LineSegments :position="[-8, 0, 0]" :scale="[PARAMS.s2+0.5, 1, s]">
+          <LineSegments :position="[-8, 0, 0]" :scale="[PARAMS.s2 + 0.5, 1, s]">
             <LineBasicMaterial color="black" />
             <WireframeGeometry geometry="weirdGeo" />
           </LineSegments>
           <Mesh :position="[0, 0, -3]" :receive-shadow="true">
             <MeshLambertMaterial color="#aaa" :side="DoubleSide" />
-            <PlaneGeometry name="plane" :width="PARAMS.planeWidth" :height="PARAMS.planeHeight" :width-segments="3" :height-segments="3" />
+            <PlaneGeometry
+              name="plane"
+              :width="PARAMS.planeWidth"
+              :height="PARAMS.planeHeight"
+              :width-segments="3"
+              :height-segments="3"
+            />
           </Mesh>
           <LineSegments :position="[0, 0, -3]">
             <LineBasicMaterial color="black" />
@@ -49,7 +62,7 @@
         </Scene>
       </Renderer>
     </div>
-    <div style="display: flex; gap: 24px; flex-direction: row; justify-content: center; margin-top: 24px;">
+    <div style="display: flex; gap: 24px; flex-direction: row; justify-content: center; margin-top: 24px">
       <div>
         <VTweakpane :pane="{ title: 'Set properties' }" @on-pane-created="onPaneCreated" />
       </div>
@@ -73,40 +86,48 @@ import { PointsMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrthographicCamera } from "../../src";
 import { OrbitControls, OBJLoader } from "../../src";
-import { AxesHelper, AmbientLight, PointLight, PlaneGeometry, LineSegments, MeshLambertMaterial, TextureLoader } from "../../src";
+import {
+  AxesHelper,
+  AmbientLight,
+  PointLight,
+  PlaneGeometry,
+  LineSegments,
+  MeshLambertMaterial,
+  TextureLoader,
+} from "../../src";
 
 import { reactive, ref, onMounted } from "vue";
 import { DoubleSide, Vector3 } from "three";
 
-import { VTweakpane } from 'v-tweakpane';
+import { VTweakpane } from "v-tweakpane";
 
 const PARAMS: {
-  pos: {x: number, y: number, z: number},
-  s2: number,
-  radius: number,
-  planeWidth: number,
-  planeHeight: number
+  pos: { x: number; y: number; z: number };
+  s2: number;
+  radius: number;
+  planeWidth: number;
+  planeHeight: number;
 } = reactive({
-  pos: {x: 0, y: 0, z: 2},
+  pos: { x: 0, y: 0, z: 2 },
   s2: 1,
   radius: 1,
   planeWidth: 20,
-  planeHeight: 5
+  planeHeight: 5,
 });
 
 //let twPane: any = null;
 
 const onPaneCreated = (pane: any) => {
   //twPane = pane;
-  pane.addInput(PARAMS, 'pos', {label: "Crate position"});
-  pane.addInput(PARAMS, 'planeWidth', {label: "Plane width", min: 1, max: 30});
-  pane.addInput(PARAMS, 'planeHeight', {label: "Plane height", min: 1, max: 10});
+  pane.addInput(PARAMS, "pos", { label: "Crate position" });
+  pane.addInput(PARAMS, "planeWidth", { label: "Plane width", min: 1, max: 30 });
+  pane.addInput(PARAMS, "planeHeight", { label: "Plane height", min: 1, max: 10 });
 };
 
 const onPaneCreated2 = (pane: any) => {
   //twPane = pane;
-  pane.addMonitor(PARAMS, 's2', {view: 'graph', min: 0, max: 2, label: "Crate scale"});
-  pane.addMonitor(PARAMS, 'radius', {view: 'graph', min: 0.5, max: 3.5, label: "Sphere radius"});
+  pane.addMonitor(PARAMS, "s2", { view: "graph", min: 0, max: 2, label: "Crate scale" });
+  pane.addMonitor(PARAMS, "radius", { view: "graph", min: 0.5, max: 3.5, label: "Sphere radius" });
 };
 
 const pos = ref<[number, number, number]>([0, 0, 2]);
@@ -125,7 +146,7 @@ onMounted(() => {
   let segs = 24;
   let r1 = 3;
   let r2 = 2;
-  
+
   for (let i = 0; i < segs; i++) {
     const x1 = r1 * Math.cos(((2 * Math.PI) / segs) * i);
     const dy1 = Math.sin(x1);
@@ -149,19 +170,18 @@ const onBeforeRender = () => {
 
   color2.value = `rgb(${Math.round(Math.cos(angle) * 50 + 200)}, ${Math.round(Math.sin(angle) * 50 + 100)}, 50)`;
   color3.value = `rgb(${Math.round(Math.cos(angle * 2) * 100 + 100)}, 50, ${Math.round(Math.sin(angle) * 50 + 100)})`;
-  
+
   PARAMS.radius = Math.cos(angle) + 2;
   s.value = Math.sin(angle * 3) * 3;
-  PARAMS.s2 = Math.sin(angle*2) * 0.5 + 1;
+  PARAMS.s2 = Math.sin(angle * 2) * 0.5 + 1;
 
   w.value = Math.sin(angle) + 1;
   //PARAMS.pos = {x: Math.cos(angle) - 1, y: Math.sin(angle), z: Math.sin(angle)};
   rot.value = [Math.cos(angle) * Math.PI, 0, 0];
 
-
   pos.value = [PARAMS.pos.x, PARAMS.pos.y, PARAMS.pos.z];
   //twPane.refresh();
-}
+};
 
 const camera = ref("cam1");
 const renderer = ref({});
@@ -171,5 +191,4 @@ const renderer = ref({});
 .tp-lblv_v {
   width: 128px !important;
 }
-
 </style>

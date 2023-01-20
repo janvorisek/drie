@@ -1,4 +1,5 @@
 const testFolder = "./docs/components";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require("fs");
 
 function swapDocs(content: string) {

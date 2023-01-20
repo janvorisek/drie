@@ -29,7 +29,7 @@ import { BoxGeometry } from "../../src";
 import { MeshNormalMaterial } from "../../src";
 import { PerspectiveCamera } from "../../src";
 import { OrbitControls } from "../../src";
-import { LineSegments, LineBasicMaterial, WireframeGeometry } from '../../src';
+import { LineSegments, LineBasicMaterial, WireframeGeometry } from "../../src";
 import { AxesHelper } from "../../src";
 
 const rot = ref<[number, number, number]>([0, 0, 0]);
