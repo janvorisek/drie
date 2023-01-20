@@ -111,8 +111,6 @@ const props = withDefaults(defineProps<Props>(), {
   thetaLength: Math.PI,
 });
 
-const mesh = inject("mesh") as Mesh;
-
 function makeSphere(
   radius: number | undefined,
   widthSegments: number | undefined,
@@ -128,7 +126,12 @@ function makeSphere(
 const three = reactive(new BufferGeometry());
 // eslint-disable-next-line vue/no-setup-props-destructure
 three.name = props.name;
-mesh.geometry = three;
+
+const mesh = inject<Mesh | null>("mesh", null);
+
+if (mesh) {
+  mesh.geometry = three;
+}
 
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
 addGeometry(three);

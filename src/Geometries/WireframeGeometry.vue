@@ -80,10 +80,13 @@ const props = withDefaults(defineProps<Props>(), {
   //
 });
 
-const mesh = inject("mesh") as Mesh;
-
 const three = reactive(new BufferGeometry());
-mesh.geometry = three;
+
+const mesh = inject<Mesh | null>("mesh", null);
+
+if (mesh) {
+  mesh.geometry = three;
+}
 
 const getGeometry = inject("getGeometry") as (g: string) => BufferGeometry;
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;

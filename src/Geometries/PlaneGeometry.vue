@@ -98,8 +98,6 @@ const props = withDefaults(defineProps<Props>(), {
   heightSegments: 1,
 });
 
-const mesh = inject("mesh") as Mesh;
-
 function makePlane(
   width: number | undefined,
   height: number | undefined,
@@ -112,7 +110,12 @@ function makePlane(
 const three = reactive(new BufferGeometry());
 // eslint-disable-next-line vue/no-setup-props-destructure
 three.name = props.name;
-mesh.geometry = three;
+
+const mesh = inject<Mesh | null>("mesh", null);
+
+if (mesh) {
+  mesh.geometry = three;
+}
 
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
 addGeometry(three);

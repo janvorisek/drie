@@ -101,8 +101,6 @@ const props = withDefaults(defineProps<Props>(), {
   uvs: () => [],
 });
 
-const mesh = inject("mesh") as Mesh;
-
 function makeGeometry(vertices: number[], faces: number[], uvs: number[]) {
   const geometry = new BufferGeometry();
 
@@ -119,7 +117,12 @@ function makeGeometry(vertices: number[], faces: number[], uvs: number[]) {
 const three = reactive(makeGeometry(props.vertices, props.faces, props.uvs));
 // eslint-disable-next-line vue/no-setup-props-destructure
 three.name = props.name;
-mesh.geometry = three;
+
+const mesh = inject<Mesh | null>("mesh", null);
+
+if (mesh) {
+  mesh.geometry = three;
+}
 
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
 addGeometry(three);

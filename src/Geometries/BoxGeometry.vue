@@ -100,8 +100,6 @@ const props = withDefaults(defineProps<Props>(), {
   depthSegments: 1,
 });
 
-const mesh = inject("mesh") as Mesh;
-
 function makeBox(
   width: number | undefined,
   height: number | undefined,
@@ -116,7 +114,12 @@ function makeBox(
 const three = reactive(new BufferGeometry());
 // eslint-disable-next-line vue/no-setup-props-destructure
 three.name = props.name;
-mesh.geometry = three;
+
+const mesh = inject<Mesh | null>("mesh", null);
+
+if (mesh) {
+  mesh.geometry = three;
+}
 
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
 addGeometry(three);

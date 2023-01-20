@@ -107,8 +107,6 @@ const props = withDefaults(defineProps<Props>(), {
   thetaLength: 2 * Math.PI,
 });
 
-const mesh = inject("mesh") as Mesh;
-
 function makeRing(
   innerRadius: number | undefined,
   outerRadius: number | undefined,
@@ -123,7 +121,12 @@ function makeRing(
 const three = reactive(new BufferGeometry());
 // eslint-disable-next-line vue/no-setup-props-destructure
 three.name = props.name;
-mesh.geometry = three;
+
+const mesh = inject<Mesh | null>("mesh", null);
+
+if (mesh) {
+  mesh.geometry = three;
+}
 
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
 addGeometry(three);
