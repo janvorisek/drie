@@ -23,7 +23,7 @@ export default {
 import { inject, provide } from "vue";
 
 import type { Mesh } from "three";
-import { Color, PointsMaterial } from "three";
+import { Color, PointsMaterial, Material } from "three";
 import { handlePropCallback } from "../utils";
 
 export interface Props {
@@ -37,6 +37,11 @@ export interface Props {
    * _(Perspective camera only)_
    */
   sizeAttenuation?: boolean;
+
+  /**
+   * Name of the material
+   */
+  name?: string;
 
   /**
    * Defines the size of the points in pixels.
@@ -60,12 +65,21 @@ const props = withDefaults(defineProps<Props>(), {
   size: 1,
   opacity: 1,
   transparent: false,
+  name: "",
 });
 
-const mesh = inject("mesh") as Mesh;
-
 const three = new PointsMaterial({ color: props.color, sizeAttenuation: props.sizeAttenuation, size: props.size });
-mesh.material = three;
+// eslint-disable-next-line vue/no-setup-props-destructure
+three.name = props.name;
+
+const mesh = inject<Mesh | null>("mesh", null);
+
+const addMaterial = inject("addMaterial") as (g: Material) => void;
+addMaterial(three);
+
+if (mesh) {
+  mesh.material = three;
+}
 
 function applyProps() {
   three.color = new Color(props.color);

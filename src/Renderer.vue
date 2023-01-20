@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import { onMounted, provide, type Ref, ref, watch, onUnmounted, reactive } from "vue";
 
-import { BufferGeometry, Camera, Scene, WebGLRenderer } from "three";
+import { BufferGeometry, Camera, Material, Scene, WebGLRenderer } from "three";
 import { disposeTHREEObject } from "./utils";
 
 export interface Props {
@@ -79,10 +79,12 @@ const props = withDefaults(defineProps<Props>(), {
   shadowMapEnabled: false,
 });
 
-let renderer: WebGLRenderer | null = null;
+let renderer = ref<WebGLRenderer | null>(null);
 
 const scenes: Scene[] = [];
+
 const geometries = reactive<BufferGeometry[]>([]);
+const materials = reactive<Material[]>([]);
 
 let activeCamera = ref<Camera | null>(null);
 const cameras = ref<Camera[]>([]);
@@ -115,15 +117,15 @@ const setCamera = (newCamera?: string) => {
 };
 
 function applyProps(props: Props) {
-  if (renderer === null) return;
+  if (renderer.value === null) return;
 
-  renderer.shadowMap.enabled = props.shadowMapEnabled as boolean;
+  renderer.value.shadowMap.enabled = props.shadowMapEnabled as boolean;
   fpsInterval = 1000 / (props.frameLimit as number);
 }
 
 onMounted(() => {
-  renderer = new WebGLRenderer({ canvas: canvas.value, antialias: props.antialias, alpha: props.alpha });
-  renderer.setSize(1, 1);
+  renderer.value = new WebGLRenderer({ canvas: canvas.value, antialias: props.antialias, alpha: props.alpha });
+  renderer.value.setSize(1, 1);
 
   applyProps(props);
 
@@ -132,7 +134,7 @@ onMounted(() => {
 
   const myObserver = new ResizeObserver((entries) => {
     entries.forEach((el) => {
-      if (renderer && props.autoResize) renderer.setSize(el.contentRect.width, el.contentRect.height);
+      if (renderer.value && props.autoResize) renderer.value.setSize(el.contentRect.width, el.contentRect.height);
     });
   });
 
@@ -147,6 +149,8 @@ onUnmounted(() => {
 
 function animate() {
   requestAnimationFrame(animate);
+
+  if (renderer.value === null) return;
 
   const now = Date.now();
   const elapsed = now - then;
@@ -172,7 +176,7 @@ function animate() {
     }
   }
 
-  if (activeCamera.value && renderer) for (const scene of scenes) renderer.render(scene, activeCamera.value);
+  if (activeCamera.value && renderer) for (const scene of scenes) renderer.value.render(scene, activeCamera.value);
 }
 
 applyProps(props);
@@ -192,6 +196,9 @@ provide("addScene", (s: Scene) => scenes.push(s));
 
 provide("addGeometry", (s: BufferGeometry) => geometries.push(s));
 provide("getGeometry", (c: string) => geometries.find((g) => g.name === c));
+
+provide("addMaterial", (s: Material) => materials.push(s));
+provide("getMaterial", (c: string) => materials.find((g) => g.name === c));
 
 //provide("controls", controls);
 provide("addControls", (controlsRef: any) => controls.value.push(controlsRef));
