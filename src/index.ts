@@ -25,6 +25,7 @@ import CircleGeometry from "./Geometries/CircleGeometry.vue";
 import ConeGeometry from "./Geometries/ConeGeometry.vue";
 import CylinderGeometry from "./Geometries/CylinderGeometry.vue";
 import EdgesGeometry from "./Geometries/EdgesGeometry.vue";
+import ParametricGeometry from "./Geometries/ParametricGeometry.vue";
 import PlaneGeometry from "./Geometries/PlaneGeometry.vue";
 import RingGeometry from "./Geometries/RingGeometry.vue";
 import SphereGeometry from "./Geometries/SphereGeometry.vue";
@@ -70,6 +71,7 @@ function install(app: App) {
   app.component("ConeGeometry", ConeGeometry);
   app.component("CylinderGeometry", CylinderGeometry);
   app.component("EdgesGeometry", EdgesGeometry);
+  app.component("ParametricGeometry", ParametricGeometry);
   app.component("PlaneGeometry", PlaneGeometry);
   app.component("RingGeometry", RingGeometry);
   app.component("SphereGeometry", SphereGeometry);
@@ -116,6 +118,7 @@ export {
   ConeGeometry,
   CylinderGeometry,
   EdgesGeometry,
+  ParametricGeometry,
   PlaneGeometry,
   RingGeometry,
   SphereGeometry,

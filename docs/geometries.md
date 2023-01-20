@@ -25,7 +25,9 @@ Geometry components are simply passed to the corresponding mesh.
 ```
 :::
 
-The following geometries are supported:
+General [BufferGeometry](/components/Geometries/BufferGeometry) is available with reactive vertices, faces and uvs support. The props are passed as flat arrays.
+
+The following basic geometries are supported:
 
 - [BoxGeometry](components/Geometries/BoxGeometry)
 - [CircleGeometry](components/Geometries/CircleGeometry)
@@ -40,4 +42,5 @@ Some utility geometries are supported as well:
 - [EdgesGeometry](components/Geometries/EdgesGeometry)
 - [WireframeGeometry](components/Geometries/WireframeGeometry)
 
-General [BufferGeometry](/components/Geometries/BufferGeometry) is available with reactive vertices, faces and uvs support.
+Additional geometries are implemented:
+- [ParametricGeometry](components/Geometries/ParametricGeometry)
