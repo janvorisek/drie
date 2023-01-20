@@ -19,8 +19,16 @@ export interface Props {
    */
   count: number;
 
+  /**
+   * Optional name of the geometry.
+   * This allows reusing of the geometry.
+   */
   geometry?: string | null;
 
+  /**
+   * Optional name of the material.
+   * This allows reusing of the material.
+   */
   material?: string | null;
 
   /**
