@@ -122,7 +122,7 @@ function applyProps(props: Props) {
 }
 
 onMounted(() => {
-  renderer = new WebGLRenderer({ canvas: canvas.value, antialias: props.antialias, alpha: true });
+  renderer = new WebGLRenderer({ canvas: canvas.value, antialias: props.antialias, alpha: props.alpha });
   renderer.setSize(1, 1);
 
   applyProps(props);
