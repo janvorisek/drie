@@ -21,6 +21,10 @@
   Frame limiter may increase performance of your scenes. The limit defaults to `60` FPS.
   
   It can be disabled by setting the `frameLimit` prop to `-1`.
+
+  ::: warning Note
+  Browser will usually limit the frame rate to 60 FPS.
+  :::
 </docs>
 
 <script setup lang="ts">
@@ -31,14 +35,36 @@ import { disposeTHREEObject } from "./utils";
 
 export interface Props {
   /**
-   * Name of the active camera when using multiple cameras.
+   * Controls the default clear alpha value.
    */
-  camera?: string;
+  alpha?: boolean;
+
+  /**
+   * Whether to perform antialiasing.
+   */
+  antialias?: boolean;
 
   /**
    * Flag marking whether the renderer auto resizes to match parent dimensions.
    */
   autoResize?: boolean;
+
+  /**
+   * Name of the active camera when using multiple cameras.
+   */
+  camera?: string;
+
+  /**
+   * Height of the renderer.
+   * Specify if autoResize if disabled.
+   */
+  height?: number;
+
+  /**
+   * Set FPS limit for the renderer.
+   * Use `-1` to disable frame limitter.
+   */
+  frameLimit?: number;
 
   /**
    * Callback to fire before each animation frame is rendered.
@@ -48,25 +74,15 @@ export interface Props {
   onBeforeRender?: () => void;
 
   /**
-   * Whether to perform antialiasing.
-   */
-  antialias?: boolean;
-
-  /**
-   * Set FPS limit for the renderer.
-   * Use `-1` to disable frame limitter.
-   */
-  frameLimit?: number;
-
-  /**
-   * Controls the default clear alpha value.
-   */
-  alpha?: boolean;
-
-  /**
    * If set, use shadow maps in the scene.
    */
   shadowMapEnabled?: boolean;
+
+  /**
+   * Width of the renderer.
+   * Specify if autoResize if disabled.
+   */
+  width?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -77,6 +93,8 @@ const props = withDefaults(defineProps<Props>(), {
   frameLimit: 60,
   alpha: false,
   shadowMapEnabled: false,
+  width: 0,
+  height: 0,
 });
 
 let renderer = ref<WebGLRenderer | null>(null);
@@ -116,18 +134,22 @@ const setCamera = (newCamera?: string) => {
   }
 };
 
-function applyProps(props: Props) {
+function applyProps() {
   if (renderer.value === null) return;
 
   renderer.value.shadowMap.enabled = props.shadowMapEnabled as boolean;
   fpsInterval = 1000 / (props.frameLimit as number);
+
+  if (!props.autoResize) {
+    renderer.value.setSize(props.width, props.height);
+  }
 }
 
 onMounted(() => {
   renderer.value = new WebGLRenderer({ canvas: canvas.value, antialias: props.antialias, alpha: props.alpha });
   renderer.value.setSize(1, 1);
 
-  applyProps(props);
+  applyProps();
 
   // Check if camera set by name
   setCamera(props.camera);
@@ -179,16 +201,26 @@ function animate() {
   if (activeCamera.value && renderer) for (const scene of scenes) renderer.value.render(scene, activeCamera.value);
 }
 
-applyProps(props);
+applyProps();
 
 watch(
   () => props.shadowMapEnabled,
-  () => applyProps(props),
+  () => applyProps(),
 );
 
 watch(
   () => props.frameLimit,
-  () => applyProps(props),
+  () => applyProps(),
+);
+
+watch(
+  () => props.width,
+  () => applyProps(),
+);
+
+watch(
+  () => props.height,
+  () => applyProps(),
 );
 
 provide("addCamera", (c: Camera) => cameras.value.push(c));
