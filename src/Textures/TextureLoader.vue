@@ -44,10 +44,14 @@ const material = inject("material") as Material;
 const three = ref<Texture>(new Texture());
 
 function load() {
-  three.value = new TextureLoader().load(props.url);
-  if ("map" in material) material.map = three.value;
-
-  applyProps();
+  new TextureLoader().loadAsync(props.url).then((texture) => {
+    three.value = texture;
+    if ("map" in material) {
+      material.map = three.value;
+      material.needsUpdate = true;
+    }
+    applyProps();
+  });
 }
 
 function applyProps() {
