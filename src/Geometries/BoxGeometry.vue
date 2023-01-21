@@ -8,6 +8,19 @@ export default {
 <docs>BEGIN_DOCS
   <script setup>
   import BoxGeometry from '../../examples/BoxGeometry.vue'
+  import { computed, ref } from 'vue';
+  const demo = ref('');
+  
+  const liveCode = computed(() => {
+    return `<BoxGeometry
+  :width="${Math.round(demo.value.width*100)/100}"
+  :height="${Math.round(demo.value.height*100)/100}"
+  :depth="${Math.round(demo.value.depth*100)/100}"
+  :widthSegments="${demo.value.widthSegments}"
+  :heightSegments="${demo.value.heightSegments}"
+  :depthSegments="${demo.value.depthSegments}"
+/>`
+    });
   </script>
 
   BoxGeometry is a component for a rectangular cuboid with a given `width`, `height`, and `depth`. The cuboid is centred on the origin, with each edge parallel to one of the axes.
@@ -17,34 +30,16 @@ export default {
   ## Example
 
   <ClientOnly>
-  <BoxGeometry />
+  <BoxGeometry ref="demo" />
   </ClientOnly>
 
-  ::: details Click me to view the example code
-  ```vue{10}
-  <template>
-    <div style="width: 100vh; height: 100vh;">
-      <Renderer :antialias="true">
-        <PerspectiveCamera :position="[5, 5, 5]" :up="[0, 0, 1]">
-          <OrbitControls />
-        </PerspectiveCamera>
-        <Scene background="#f9f9f9">
-          <Mesh>
-            <MeshNormalMaterial />
-            <BoxGeometry :width="6" :height="4" :depth="2" />
-          </Mesh>
-        </Scene>
-      </Renderer>
-    </div>
-  </template>
+  ### Code
 
-  <script setup lang="ts">
-    import { Renderer, Scene } from "@janvorisek/drie";
-    import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie"
-    import { Mesh, BoxGeometry, MeshNormalMaterial } from "@janvorisek/drie";
-  </script>
-  ```
-  :::
+  Note: *The following code is updated according to the properties set above.*
+
+  <ClientOnly>
+  <LiveCodeBlock lang="vue-html" :code="liveCode" />
+  </ClientOnly>
 </docs>
 
 <script setup lang="ts">

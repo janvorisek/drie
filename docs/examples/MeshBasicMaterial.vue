@@ -52,6 +52,8 @@ const onPaneCreated = (pane: any) => {
     max: 1,
   });
 };
+
+defineExpose(PARAMS);
 </script>
 
 <style>

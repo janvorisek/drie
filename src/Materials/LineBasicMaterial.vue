@@ -8,6 +8,17 @@ export default {
 <docs>BEGIN_DOCS
   <script setup>
   import LineBasicMaterial from '../../examples/LineBasicMaterial.vue'
+  import { computed, ref } from 'vue';
+  const demo = ref('');
+  
+  const liveCode = computed(() => {
+    return `<LineBasicMaterial
+  :color="${demo.value.color}"
+  :transparent="${demo.value.transparent}"
+  :opacity="${Math.round(demo.value.opacity*100)/100}"
+/>`
+    });
+
   </script>
 
   A material for drawing line geometries.
@@ -17,7 +28,15 @@ export default {
   ## Example
 
   <ClientOnly>
-  <LineBasicMaterial />
+  <LineBasicMaterial ref="demo" />
+  </ClientOnly>
+
+  ### Code
+
+  Note: *The following code is updated according to the properties set above.*
+
+  <ClientOnly>
+  <LiveCodeBlock lang="vue-html" :code="liveCode" />
   </ClientOnly>
 </docs>
 

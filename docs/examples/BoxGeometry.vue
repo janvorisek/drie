@@ -89,6 +89,8 @@ const onPaneCreated = (pane: any) => {
     step: 1,
   });
 };
+
+defineExpose(PARAMS);
 </script>
 
 <style>

@@ -11,6 +11,16 @@ export default {
 <docs>BEGIN_DOCS
   <script setup>
   import MeshBasicMaterial from '../../examples/MeshBasicMaterial.vue'
+  import { computed, ref } from 'vue';
+  const demo = ref('');
+  
+  const liveCode = computed(() => {
+    return `<MeshBasicMaterial
+  :color="${demo.value.color}"
+  :transparent="${demo.value.transparent}"
+  :opacity="${Math.round(demo.value.opacity*100)/100}"
+/>`
+    });
   </script>
 
   A material for drawing geometries in a simple shaded (flat or wireframe) way.
@@ -20,7 +30,15 @@ export default {
   ## Example
 
   <ClientOnly>
-  <MeshBasicMaterial />
+  <MeshBasicMaterial ref="demo" />
+  </ClientOnly>
+
+  ### Code
+
+  Note: *The following code is updated according to the properties set above.*
+
+  <ClientOnly>
+  <LiveCodeBlock lang="vue-html" :code="liveCode" />
   </ClientOnly>
 </docs>
 
