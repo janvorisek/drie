@@ -117,7 +117,7 @@ const buildDoc = (mdDoc: MdIndexDoc, id: string): Doc => {
   a = slugify(a);
   if (a[0] == "#") a = a.replace("#", "");
 
-  let link = mdDoc.path.replace(rootPath + "/", "").replace("md", "html");
+  let link = mdDoc.path.replace(rootPath + "/", "").replace(".md", "");
 
   if (!id.includes(".0")) link += `#${slugify(a)}`;
 
