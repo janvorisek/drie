@@ -56,7 +56,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.8.0",
     "flexsearch": "^0.7.31",
-    "gh-pages": "4.0.0",
+    "gh-pages": "5.0.0",
     "happy-dom": "^8.1.1",
     "husky": "^8.0.2",
     "markdown-it": "^13.0.1",
