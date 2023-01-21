@@ -59,7 +59,7 @@ Then use the material in as many meshes as you need. For example in a loop:
 
 Use [`<InstancedMesh>`](/components/Objects/InstancedMesh) if you have to render a large number of objects with the same geometry and material but with different world transformations.
 
-Mumber of instances must be specified using the `count` property.
+Number of instances must be specified using the `count` property.
 
 ```vue-html
 <InstancedMesh
