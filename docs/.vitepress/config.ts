@@ -72,6 +72,7 @@ export default defineConfig( {
           { text: 'Geometries', link: '/geometries'},
           { text: 'Materials', link: '/materials'},
           { text: 'Objects', link: '/objects'},
+          { text: 'Performance', link: '/performance'},
           { text: 'Raycasting', link: '/raycasting'},
           { text: 'Types', link: '/types'}
         ]
