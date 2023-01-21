@@ -2,6 +2,10 @@
   <slot></slot>
 </template>
 
+<docs>BEGIN_DOCS
+A material for non-shiny surfaces, without specular highlights.
+</docs>
+
 <script lang="ts">
 export default {
   name: "MeshLambertMaterial",

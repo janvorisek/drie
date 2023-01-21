@@ -1,4 +1,19 @@
 # Points
+A component for displaying points.
+
+It accepts any geometry and [`<PointsMaterial>`](/components/Materials/PointsMaterial) as a material.
+
+## Example
+
+### Code
+
+```vue-html
+<Points>
+  <PointsMaterial color="blue" />
+  <SphereGeometry />
+</Points>
+```
+
 
 ## Props
 
@@ -15,3 +30,4 @@
 | default |             |          |
 
 ---
+

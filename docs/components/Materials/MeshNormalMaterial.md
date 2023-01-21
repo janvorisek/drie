@@ -1,4 +1,6 @@
 # MeshNormalMaterial
+A material that maps the normal vectors to RGB colors.
+
 
 ## Props
 
@@ -16,3 +18,4 @@
 | default |             |          |
 
 ---
+

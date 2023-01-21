@@ -1,4 +1,14 @@
 # PointLight
+A light that gets emitted from a single point in all directions. A common use case for this is to replicate the light emitted from a bare lightbulb.
+
+## Example
+
+### Code
+
+```vue-html
+<PointLight :position="[0, 0, 10]" :intensity="0.25" :cast-shadow="true" />
+```
+
 
 ## Props
 
@@ -12,3 +22,4 @@
 |` scale      `| A Vector3Like representing the object's local scale.                      | Vector3Like | [1, 1, 1] |
 
 ---
+

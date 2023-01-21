@@ -1,4 +1,6 @@
 # MeshLambertMaterial
+A material for non-shiny surfaces, without specular highlights.
+
 
 ## Props
 
@@ -17,3 +19,4 @@
 | default |             |          |
 
 ---
+

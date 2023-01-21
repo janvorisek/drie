@@ -2,6 +2,10 @@
   <slot></slot>
 </template>
 
+<docs>BEGIN_DOCS
+A material that maps the normal vectors to RGB colors.
+</docs>
+
 <script lang="ts">
 export default {
   name: "MeshNormalMaterial",

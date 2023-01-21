@@ -5,6 +5,18 @@ export default {
 };
 </script>
 
+<docs>BEGIN_DOCS
+A light that gets emitted from a single point in all directions. A common use case for this is to replicate the light emitted from a bare lightbulb.
+
+## Example
+
+### Code
+
+```vue-html
+<PointLight :position="[0, 0, 10]" :intensity="0.25" :cast-shadow="true" />
+```
+</docs>
+
 <script setup lang="ts">
 import { inject, watch } from "vue";
 

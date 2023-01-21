@@ -1,4 +1,16 @@
 # AxesHelper
+An axis object to visualize the 3 axes in a simple way.
+
+The X axis is red. The Y axis is green. The Z axis is blue.
+
+## Example
+
+### Code
+
+```vue-html
+<AxesHelper :size="3" />
+```
+
 
 ## Props
 
@@ -16,3 +28,4 @@
 | default |             |          |
 
 ---
+

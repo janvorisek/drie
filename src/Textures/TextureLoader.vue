@@ -5,6 +5,10 @@ export default {
 };
 </script>
 
+<docs>BEGIN_DOCS
+Component for asynchronously loading a texture. It internally manages `THREE.Texture`.
+</docs>
+
 <script setup lang="ts">
 import { inject, ref } from "vue";
 
@@ -64,7 +68,6 @@ function applyProps() {
 load();
 
 handlePropCallback(props, "url", load);
-
 handlePropCallback(props, "wrapS", applyProps);
 handlePropCallback(props, "wrapT", applyProps);
 

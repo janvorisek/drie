@@ -4,13 +4,26 @@
   import Mesh from '../../examples/Mesh.vue'
   </script>
 
-Component representing triangular polygon mesh based objects.
+A component representing triangular mesh. Each triangle in the mesh is defined by three vertices, which are connected by edges to form the surface of the object.
+
+Mesh is composed of a [geometry](/geometries), which defines the shape of the object, and a [material](/materials), which defines the appearance of the object.
 
 ## Example
 
   <ClientOnly>
     <Mesh />
   </ClientOnly>
+
+### Code
+
+```vue-html
+<Mesh>
+  <!-- Use any supported mesh material -->
+  <MeshBasicMaterial color="red" />
+  <!-- Use any supported geometry -->
+  <BoxGeometry />
+</Mesh>
+```
 
 
 ## Props

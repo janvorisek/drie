@@ -2,6 +2,22 @@
   <slot></slot>
 </template>
 
+<docs>BEGIN_DOCS
+A component drawing series of lines between vertices.
+
+## Example
+
+### Code
+
+```vue-html
+<Line>
+  <!-- Any line material is supported -->
+  <LineBasicMaterial color="black" />
+  <PlaneGeometry />
+</Line>
+```
+</docs>
+
 <script setup lang="ts">
 import { provide, inject, onUnmounted } from "vue";
 

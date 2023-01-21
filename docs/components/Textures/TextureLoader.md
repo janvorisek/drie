@@ -1,4 +1,6 @@
 # TextureLoader
+Component for asynchronously loading a texture. It internally manages `THREE.Texture`.
+
 
 ## Props
 
@@ -9,3 +11,4 @@
 |` wrapT     `| This defines how the texture is wrapped vertically and corresponds to V in UV mapping.<br/>The default is `THREE.ClampToEdgeWrapping`, where the edge is clamped to the outer edge texels.<br/>The other two choices are `THREE.RepeatWrapping` and `THREE.MirroredRepeatWrapping`.<br/>See the [texture constants](https://threejs.org/docs/?q=texture#api/en/constants/Textures) page for details.   | Wrapping | ClampToEdgeWrapping |
 
 ---
+

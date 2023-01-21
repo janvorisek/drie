@@ -1,4 +1,18 @@
 # LineSegments
+A component drawing series of lines between pairs of vertices.
+
+## Example
+
+### Code
+
+```vue-html
+<LineSegments>
+  <!-- Any line material is supported -->
+  <LineBasicMaterial color="black" />
+  <PlaneGeometry />
+</LineSegments>
+```
+
 
 ## Props
 
@@ -15,3 +29,4 @@
 | default |             |          |
 
 ---
+

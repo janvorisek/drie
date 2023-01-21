@@ -1,4 +1,18 @@
 # LineLoop
+A component drawing series of lines between vertices and connects the last vertex back to the first.
+
+## Example
+
+### Code
+
+```vue-html
+<LineLoop>
+  <!-- Any line material is supported -->
+  <LineBasicMaterial color="black" />
+  <PlaneGeometry />
+</LineLoop>
+```
+
 
 ## Props
 
@@ -15,3 +29,4 @@
 | default |             |          |
 
 ---
+

@@ -5,6 +5,20 @@ export default {
 };
 </script>
 
+<docs>BEGIN_DOCS
+This light globally illuminates all objects in the scene equally.
+
+This light cannot be used to cast shadows as it does not have a direction.
+
+## Example
+
+### Code
+
+```vue-html
+<AmbientLight :color="0xffffff" />
+```
+</docs>
+
 <script setup lang="ts">
 import { inject, watch } from "vue";
 
