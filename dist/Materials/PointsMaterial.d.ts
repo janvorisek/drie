@@ -1,6 +1,6 @@
 import { inject, provide } from "vue";
 import type { Mesh } from "three";
-import { Color, PointsMaterial } from "three";
+import { Color, PointsMaterial, Material } from "three";
 export interface Props {
     /**
      * Color of the material.
@@ -11,6 +11,10 @@ export interface Props {
      * _(Perspective camera only)_
      */
     sizeAttenuation?: boolean;
+    /**
+     * Name of the material
+     */
+    name?: string;
     /**
      * Defines the size of the points in pixels.
      */
@@ -35,6 +39,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: boolean;
     };
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
+    };
     size: {
         type: NumberConstructor;
         required: false;
@@ -52,13 +61,15 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     props: any;
-    mesh: Mesh<import("three").BufferGeometry, import("three").Material | import("three").Material[]>;
     three: PointsMaterial;
+    mesh: Mesh<import("three").BufferGeometry, Material | Material[]> | null;
+    addMaterial: (g: Material) => void;
     applyProps: () => void;
     inject: typeof inject;
     provide: typeof provide;
     readonly Color: typeof Color;
     readonly PointsMaterial: typeof PointsMaterial;
+    readonly Material: typeof Material;
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
@@ -72,6 +83,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         required: false;
         default: boolean;
+    };
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
     };
     size: {
         type: NumberConstructor;
@@ -89,10 +105,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
     };
 }>>, {
+    name: string;
+    opacity: number;
+    transparent: boolean;
     color: string | number;
     sizeAttenuation: boolean;
     size: number;
-    opacity: number;
-    transparent: boolean;
 }>;
 export default _sfc_main;

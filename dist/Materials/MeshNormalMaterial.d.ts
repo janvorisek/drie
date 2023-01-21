@@ -1,9 +1,13 @@
-import { Mesh, type Side, MeshNormalMaterial } from "three";
+import { Mesh, type Side, MeshNormalMaterial, Material } from "three";
 export interface Props {
     /**
      * Defines which side of faces will be rendered - front, back or both. Represtented by `THREE.Side`.
      */
     side?: Side;
+    /**
+     * Name of the material
+     */
+    name?: string;
     /**
      * Float in the range of `0.0 - 1.0` indicating how transparent the material is.
      */
@@ -19,6 +23,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: Side;
     };
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
+    };
     opacity: {
         type: NumberConstructor;
         required: false;
@@ -31,13 +40,19 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     props: any;
-    mesh: Mesh<import("three").BufferGeometry, import("three").Material | import("three").Material[]>;
     three: MeshNormalMaterial;
+    addMaterial: (g: Material) => void;
+    mesh: Mesh<import("three").BufferGeometry, Material | Material[]> | null;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     side: {
         type: null;
         required: false;
         default: Side;
+    };
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
     };
     opacity: {
         type: NumberConstructor;
@@ -50,8 +65,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
     };
 }>>, {
+    name: string;
     opacity: number;
-    transparent: boolean;
     side: any;
+    transparent: boolean;
 }>;
 export default _sfc_main;

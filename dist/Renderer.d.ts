@@ -1,14 +1,33 @@
+/// <reference types="webxr" />
 import { type Ref } from "vue";
-import { BufferGeometry, Camera, Scene, WebGLRenderer } from "three";
+import { BufferGeometry, Camera, Material, Scene, WebGLRenderer } from "three";
 export interface Props {
+    /**
+     * Controls the default clear alpha value.
+     */
+    alpha?: boolean;
+    /**
+     * Whether to perform antialiasing.
+     */
+    antialias?: boolean;
+    /**
+     * Flag marking whether the renderer auto resizes to match parent dimensions.
+     */
+    autoResize?: boolean;
     /**
      * Name of the active camera when using multiple cameras.
      */
     camera?: string;
     /**
-     * Flag marking whether the renderer auto resizes to match parent dimensions.
+     * Height of the renderer.
+     * Specify if autoResize if disabled.
      */
-    autoResize?: boolean;
+    height?: number;
+    /**
+     * Set FPS limit for the renderer.
+     * Use `-1` to disable frame limitter.
+     */
+    frameLimit?: number;
     /**
      * Callback to fire before each animation frame is rendered.
      * This is typically used for animations.
@@ -16,61 +35,297 @@ export interface Props {
      */
     onBeforeRender?: () => void;
     /**
-     * Whether to perform antialiasing.
-     */
-    antialias?: boolean;
-    /**
-     * Set FPS limit for the renderer.
-     * Use `-1` to disable frame limitter.
-     */
-    frameLimit?: number;
-    /**
-     * Controls the default clear alpha value.
-     */
-    alpha?: boolean;
-    /**
      * If set, use shadow maps in the scene.
      */
     shadowMapEnabled?: boolean;
+    /**
+     * Width of the renderer.
+     * Specify if autoResize if disabled.
+     */
+    width?: number;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
-    camera: {
-        type: StringConstructor;
-        required: false;
-    };
-    autoResize: {
+    alpha: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
-    };
-    onBeforeRender: {
-        type: FunctionConstructor;
-        required: false;
-        default: () => void;
     };
     antialias: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
     };
+    autoResize: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    camera: {
+        type: StringConstructor;
+        required: false;
+    };
+    height: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
     frameLimit: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    alpha: {
-        type: BooleanConstructor;
+    onBeforeRender: {
+        type: FunctionConstructor;
         required: false;
-        default: boolean;
+        default: () => void;
     };
     shadowMapEnabled: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
     };
+    width: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
 }, {
     props: any;
-    renderer: WebGLRenderer | null;
+    renderer: Ref<{
+        domElement: HTMLCanvasElement;
+        autoClear: boolean;
+        autoClearColor: boolean;
+        autoClearDepth: boolean;
+        autoClearStencil: boolean;
+        debug: {
+            checkShaderErrors: boolean;
+        };
+        sortObjects: boolean;
+        clippingPlanes: any[];
+        localClippingEnabled: boolean;
+        extensions: {
+            has: (name: string) => boolean;
+            init: (capabilities: import("three").WebGLCapabilities) => void;
+            get: (name: string) => any;
+        };
+        outputEncoding: import("three").TextureEncoding;
+        physicallyCorrectLights: boolean;
+        toneMapping: import("three").ToneMapping;
+        toneMappingExposure: number;
+        info: {
+            autoReset: boolean;
+            memory: {
+                geometries: number;
+                textures: number;
+            };
+            programs: {
+                name: string;
+                id: number;
+                cacheKey: string;
+                usedTimes: number;
+                program: any;
+                vertexShader: WebGLShader;
+                fragmentShader: WebGLShader;
+                uniforms: any;
+                attributes: any;
+                getUniforms: () => import("three").WebGLUniforms;
+                getAttributes: () => any;
+                destroy: () => void;
+            }[] | null;
+            render: {
+                calls: number;
+                frame: number;
+                lines: number;
+                points: number;
+                triangles: number;
+            };
+            update: (count: number, mode: number, instanceCount: number) => void;
+            reset: () => void;
+        };
+        shadowMap: {
+            enabled: boolean;
+            autoUpdate: boolean;
+            needsUpdate: boolean;
+            type: import("three").ShadowMapType;
+            render: (shadowsArray: import("three").Light[], scene: Scene, camera: Camera) => void;
+            cullFace: any;
+        };
+        pixelRatio: number;
+        capabilities: {
+            readonly isWebGL2: boolean;
+            precision: string;
+            logarithmicDepthBuffer: boolean;
+            maxTextures: number;
+            maxVertexTextures: number;
+            maxTextureSize: number;
+            maxCubemapSize: number;
+            maxAttributes: number;
+            maxVertexUniforms: number;
+            maxVaryings: number;
+            maxFragmentUniforms: number;
+            vertexTextures: boolean;
+            floatFragmentTextures: boolean;
+            floatVertexTextures: boolean;
+            maxSamples: number;
+            getMaxAnisotropy: () => number;
+            getMaxPrecision: (precision: string) => string;
+        };
+        properties: {
+            get: (object: any) => any;
+            remove: (object: any) => void;
+            update: (object: any, key: any, value: any) => any;
+            dispose: () => void;
+        };
+        renderLists: {
+            dispose: () => void;
+            get: (scene: Scene, renderCallDepth: number) => import("three").WebGLRenderList;
+        };
+        state: {
+            buffers: {
+                color: {
+                    setMask: (colorMask: boolean) => void;
+                    setLocked: (lock: boolean) => void;
+                    setClear: (r: number, g: number, b: number, a: number, premultipliedAlpha: boolean) => void;
+                    reset: () => void;
+                };
+                depth: {
+                    setTest: (depthTest: boolean) => void;
+                    setMask: (depthMask: boolean) => void;
+                    setFunc: (depthFunc: import("three").DepthModes) => void;
+                    setLocked: (lock: boolean) => void;
+                    setClear: (depth: number) => void;
+                    reset: () => void;
+                };
+                stencil: {
+                    setTest: (stencilTest: boolean) => void;
+                    setMask: (stencilMask: number) => void;
+                    setFunc: (stencilFunc: number, stencilRef: number, stencilMask: number) => void;
+                    setOp: (stencilFail: number, stencilZFail: number, stencilZPass: number) => void;
+                    setLocked: (lock: boolean) => void;
+                    setClear: (stencil: number) => void;
+                    reset: () => void;
+                };
+            };
+            initAttributes: () => void;
+            enableAttribute: (attribute: number) => void;
+            enableAttributeAndDivisor: (attribute: number, meshPerAttribute: number) => void;
+            disableUnusedAttributes: () => void;
+            vertexAttribPointer: (index: number, size: number, type: number, normalized: boolean, stride: number, offset: number) => void;
+            enable: (id: number) => void;
+            disable: (id: number) => void;
+            bindFramebuffer: (target: number, framebuffer: WebGLFramebuffer | null) => void;
+            bindXRFramebuffer: (framebuffer: WebGLFramebuffer | null) => void;
+            useProgram: (program: any) => boolean;
+            setBlending: (blending: import("three").Blending, blendEquation?: import("three").BlendingEquation | undefined, blendSrc?: import("three").BlendingSrcFactor | undefined, blendDst?: import("three").BlendingDstFactor | undefined, blendEquationAlpha?: import("three").BlendingEquation | undefined, blendSrcAlpha?: import("three").BlendingSrcFactor | undefined, blendDstAlpha?: import("three").BlendingDstFactor | undefined, premultiplyAlpha?: boolean | undefined) => void;
+            setMaterial: (material: Material, frontFaceCW: boolean) => void;
+            setFlipSided: (flipSided: boolean) => void;
+            setCullFace: (cullFace: import("three").CullFace) => void;
+            setLineWidth: (width: number) => void;
+            setPolygonOffset: (polygonoffset: boolean, factor?: number | undefined, units?: number | undefined) => void;
+            setScissorTest: (scissorTest: boolean) => void;
+            activeTexture: (webglSlot: number) => void;
+            bindTexture: (webglType: number, webglTexture: any) => void;
+            unbindTexture: () => void;
+            compressedTexImage2D: (target: number, level: number, internalformat: number, width: number, height: number, border: number, data: ArrayBufferView) => void;
+            texImage2D: {
+                (target: number, level: number, internalformat: number, width: number, height: number, border: number, format: number, type: number, pixels: ArrayBufferView | null): void;
+                (target: number, level: number, internalformat: number, format: number, type: number, source: any): void;
+            };
+            texImage3D: (target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, format: number, type: number, pixels: any) => void;
+            scissor: (scissor: import("three").Vector4) => void;
+            viewport: (viewport: import("three").Vector4) => void;
+            reset: () => void;
+        };
+        xr: {
+            enabled: boolean;
+            isPresenting: boolean;
+            cameraAutoUpdate: boolean;
+            getController: (index: number) => import("three").XRTargetRaySpace;
+            getControllerGrip: (index: number) => import("three").XRGripSpace;
+            getHand: (index: number) => import("three").XRHandSpace;
+            setFramebufferScaleFactor: (value: number) => void;
+            setReferenceSpaceType: (value: XRReferenceSpaceType) => void;
+            getReferenceSpace: () => XRReferenceSpace | null;
+            setReferenceSpace: (value: XRReferenceSpace) => void;
+            getBaseLayer: () => XRWebGLLayer | XRProjectionLayer;
+            getBinding: () => XRWebGLBinding;
+            getFrame: () => XRFrame;
+            getSession: () => XRSession | null;
+            setSession: (value: XRSession) => Promise<void>;
+            getCamera: () => import("three").WebXRArrayCamera;
+            updateCamera: (camera: import("three").PerspectiveCamera) => void;
+            setAnimationLoop: (callback: XRFrameRequestCallback | null) => void;
+            getFoveation: () => number | undefined;
+            setFoveation: (foveation: number) => void;
+            getPlanes: () => Set<XRPlane>;
+            dispose: () => void;
+            addEventListener: <T extends string>(type: T, listener: import("three").EventListener<import("three").Event, T, import("three").WebXRManager>) => void;
+            hasEventListener: <T_1 extends string>(type: T_1, listener: import("three").EventListener<import("three").Event, T_1, import("three").WebXRManager>) => boolean;
+            removeEventListener: <T_2 extends string>(type: T_2, listener: import("three").EventListener<import("three").Event, T_2, import("three").WebXRManager>) => void;
+            dispatchEvent: (event: import("three").Event) => void;
+        };
+        getContext: () => WebGLRenderingContext | WebGL2RenderingContext;
+        getContextAttributes: () => any;
+        forceContextLoss: () => void;
+        forceContextRestore: () => void;
+        getMaxAnisotropy: () => number;
+        getPrecision: () => string;
+        getPixelRatio: () => number;
+        setPixelRatio: (value: number) => void;
+        getDrawingBufferSize: (target: import("three").Vector2) => import("three").Vector2;
+        setDrawingBufferSize: (width: number, height: number, pixelRatio: number) => void;
+        getSize: (target: import("three").Vector2) => import("three").Vector2;
+        setSize: (width: number, height: number, updateStyle?: boolean | undefined) => void;
+        getCurrentViewport: (target: import("three").Vector4) => import("three").Vector4;
+        getViewport: (target: import("three").Vector4) => import("three").Vector4;
+        setViewport: (x: number | import("three").Vector4, y?: number | undefined, width?: number | undefined, height?: number | undefined) => void;
+        getScissor: (target: import("three").Vector4) => import("three").Vector4;
+        setScissor: (x: number | import("three").Vector4, y?: number | undefined, width?: number | undefined, height?: number | undefined) => void;
+        getScissorTest: () => boolean;
+        setScissorTest: (enable: boolean) => void;
+        setOpaqueSort: (method: (a: any, b: any) => number) => void;
+        setTransparentSort: (method: (a: any, b: any) => number) => void;
+        getClearColor: (target: import("three").Color) => import("three").Color;
+        setClearColor: (color: import("three").ColorRepresentation, alpha?: number | undefined) => void;
+        getClearAlpha: () => number;
+        setClearAlpha: (alpha: number) => void;
+        clear: (color?: boolean | undefined, depth?: boolean | undefined, stencil?: boolean | undefined) => void;
+        clearColor: () => void;
+        clearDepth: () => void;
+        clearStencil: () => void;
+        clearTarget: (renderTarget: import("three").WebGLRenderTarget, color: boolean, depth: boolean, stencil: boolean) => void;
+        resetGLState: () => void;
+        dispose: () => void;
+        renderBufferDirect: (camera: Camera, scene: Scene, geometry: BufferGeometry, material: Material, object: import("three").Object3D<import("three").Event>, geometryGroup: any) => void;
+        setAnimationLoop: (callback: XRFrameRequestCallback | null) => void;
+        animate: (callback: () => void) => void;
+        compile: (scene: import("three").Object3D<import("three").Event>, camera: Camera) => void;
+        render: (scene: import("three").Object3D<import("three").Event>, camera: Camera) => void;
+        getActiveCubeFace: () => number;
+        getActiveMipmapLevel: () => number;
+        getRenderTarget: () => import("three").WebGLRenderTarget | null;
+        getCurrentRenderTarget: () => import("three").WebGLRenderTarget | null;
+        setRenderTarget: (renderTarget: import("three").WebGLRenderTarget | import("three").WebGLMultipleRenderTargets | null, activeCubeFace?: number | undefined, activeMipmapLevel?: number | undefined) => void;
+        readRenderTargetPixels: (renderTarget: import("three").WebGLRenderTarget | import("three").WebGLMultipleRenderTargets, x: number, y: number, width: number, height: number, buffer: any, activeCubeFaceIndex?: number | undefined) => void;
+        copyFramebufferToTexture: (position: import("three").Vector2, texture: import("three").Texture, level?: number | undefined) => void;
+        copyTextureToTexture: (position: import("three").Vector2, srcTexture: import("three").Texture, dstTexture: import("three").Texture, level?: number | undefined) => void;
+        copyTextureToTexture3D: (sourceBox: import("three").Box3, position: import("three").Vector3, srcTexture: import("three").Texture, dstTexture: import("three").Data3DTexture | import("three").DataArrayTexture, level?: number | undefined) => void;
+        initTexture: (texture: import("three").Texture) => void;
+        resetState: () => void;
+        vr: boolean;
+        shadowMapEnabled: boolean;
+        shadowMapType: import("three").ShadowMapType;
+        shadowMapCullFace: import("three").CullFace;
+        supportsFloatTextures: () => any;
+        supportsHalfFloatTextures: () => any;
+        supportsStandardDerivatives: () => any;
+        supportsCompressedTextureS3TC: () => any;
+        supportsCompressedTexturePVRTC: () => any;
+        supportsBlendMinMax: () => any;
+        supportsVertexTextures: () => any;
+        supportsInstancedArrays: () => any;
+        enableScissorTest: (boolean: any) => any;
+    } | null>;
     scenes: Scene[];
     geometries: {
         id: number;
@@ -494,9 +749,70 @@ declare const _sfc_main: import("vue").DefineComponent<{
             (name: any, array: any, itemSize: any): any;
         };
         removeAttribute: (name: string) => BufferGeometry;
-        addEventListener: <T extends string>(type: T, listener: import("three").EventListener<import("three").Event, T, BufferGeometry>) => void;
-        hasEventListener: <T_1 extends string>(type: T_1, listener: import("three").EventListener<import("three").Event, T_1, BufferGeometry>) => boolean;
-        removeEventListener: <T_2 extends string>(type: T_2, listener: import("three").EventListener<import("three").Event, T_2, BufferGeometry>) => void;
+        addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, BufferGeometry>) => void;
+        hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, BufferGeometry>) => boolean;
+        removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, BufferGeometry>) => void;
+        dispatchEvent: (event: import("three").Event) => void;
+    }[];
+    materials: {
+        alphaTest: number;
+        alphaToCoverage: boolean;
+        blendDst: import("three").BlendingDstFactor;
+        blendDstAlpha: number | null;
+        blendEquation: import("three").BlendingEquation;
+        blendEquationAlpha: number | null;
+        blending: import("three").Blending;
+        blendSrc: import("three").BlendingSrcFactor | import("three").BlendingDstFactor;
+        blendSrcAlpha: number | null;
+        clipIntersection: boolean;
+        clippingPlanes: any;
+        clipShadows: boolean;
+        colorWrite: boolean;
+        defines: {
+            [key: string]: any;
+        } | undefined;
+        depthFunc: import("three").DepthModes;
+        depthTest: boolean;
+        depthWrite: boolean;
+        id: number;
+        stencilWrite: boolean;
+        stencilFunc: import("three").StencilFunc;
+        stencilRef: number;
+        stencilWriteMask: number;
+        stencilFuncMask: number;
+        stencilFail: import("three").StencilOp;
+        stencilZFail: import("three").StencilOp;
+        stencilZPass: import("three").StencilOp;
+        readonly isMaterial: true;
+        name: string;
+        needsUpdate: boolean;
+        opacity: number;
+        polygonOffset: boolean;
+        polygonOffsetFactor: number;
+        polygonOffsetUnits: number;
+        precision: "highp" | "mediump" | "lowp" | null;
+        premultipliedAlpha: boolean;
+        dithering: boolean;
+        side: import("three").Side;
+        shadowSide: import("three").Side | null;
+        toneMapped: boolean;
+        transparent: boolean;
+        type: string;
+        uuid: string;
+        vertexColors: boolean;
+        visible: boolean;
+        userData: any;
+        version: number;
+        clone: () => Material;
+        copy: (material: Material) => Material;
+        dispose: () => void;
+        onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
+        customProgramCacheKey: () => string;
+        setValues: (values: import("three").MaterialParameters) => void;
+        toJSON: (meta?: any) => any;
+        addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+        hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+        removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
         dispatchEvent: (event: import("three").Event) => void;
     }[];
     activeCamera: Ref<{
@@ -1528,16 +1844,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 visible: boolean;
                 userData: any;
                 version: number;
-                clone: () => import("three").Material;
-                copy: (material: import("three").Material) => import("three").Material;
+                clone: () => Material;
+                copy: (material: Material) => Material;
                 dispose: () => void;
                 onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
                 customProgramCacheKey: () => string;
                 setValues: (values: import("three").MaterialParameters) => void;
                 toJSON: (meta?: any) => any;
-                addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-                hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-                removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+                addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+                hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+                removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
                 dispatchEvent: (event: import("three").Event) => void;
             };
             customDistanceMaterial: {
@@ -1589,21 +1905,21 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 visible: boolean;
                 userData: any;
                 version: number;
-                clone: () => import("three").Material;
-                copy: (material: import("three").Material) => import("three").Material;
+                clone: () => Material;
+                copy: (material: Material) => Material;
                 dispose: () => void;
                 onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
                 customProgramCacheKey: () => string;
                 setValues: (values: import("three").MaterialParameters) => void;
                 toJSON: (meta?: any) => any;
-                addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-                hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-                removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+                addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+                hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+                removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
                 dispatchEvent: (event: import("three").Event) => void;
             };
             readonly isObject3D: true;
-            onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
-            onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
+            onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
+            onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
             applyMatrix4: (matrix: import("three").Matrix4) => void;
             applyQuaternion: (quaternion: import("three").Quaternion) => import("three").Object3D<import("three").Event>;
             setRotationFromAxisAngle: (axis: import("three").Vector3, angle: number) => void;
@@ -1653,9 +1969,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
             } | undefined) => any;
             clone: (recursive?: boolean | undefined) => import("three").Object3D<import("three").Event>;
             copy: (source: import("three").Object3D<import("three").Event>, recursive?: boolean | undefined) => import("three").Object3D<import("three").Event>;
-            addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, import("three").Object3D<import("three").Event>>) => void;
-            hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, import("three").Object3D<import("three").Event>>) => boolean;
-            removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, import("three").Object3D<import("three").Event>>) => void;
+            addEventListener: <T_9 extends string>(type: T_9, listener: import("three").EventListener<import("three").Event, T_9, import("three").Object3D<import("three").Event>>) => void;
+            hasEventListener: <T_10 extends string>(type: T_10, listener: import("three").EventListener<import("three").Event, T_10, import("three").Object3D<import("three").Event>>) => boolean;
+            removeEventListener: <T_11 extends string>(type: T_11, listener: import("three").EventListener<import("three").Event, T_11, import("three").Object3D<import("three").Event>>) => void;
             dispatchEvent: (event: import("three").Event) => void;
         } | null;
         children: {
@@ -2511,16 +2827,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 visible: boolean;
                 userData: any;
                 version: number;
-                clone: () => import("three").Material;
-                copy: (material: import("three").Material) => import("three").Material;
+                clone: () => Material;
+                copy: (material: Material) => Material;
                 dispose: () => void;
                 onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
                 customProgramCacheKey: () => string;
                 setValues: (values: import("three").MaterialParameters) => void;
                 toJSON: (meta?: any) => any;
-                addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-                hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-                removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+                addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+                hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+                removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
                 dispatchEvent: (event: import("three").Event) => void;
             };
             customDistanceMaterial: {
@@ -2572,21 +2888,21 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 visible: boolean;
                 userData: any;
                 version: number;
-                clone: () => import("three").Material;
-                copy: (material: import("three").Material) => import("three").Material;
+                clone: () => Material;
+                copy: (material: Material) => Material;
                 dispose: () => void;
                 onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
                 customProgramCacheKey: () => string;
                 setValues: (values: import("three").MaterialParameters) => void;
                 toJSON: (meta?: any) => any;
-                addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-                hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-                removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+                addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+                hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+                removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
                 dispatchEvent: (event: import("three").Event) => void;
             };
             readonly isObject3D: true;
-            onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
-            onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
+            onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
+            onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
             applyMatrix4: (matrix: import("three").Matrix4) => void;
             applyQuaternion: (quaternion: import("three").Quaternion) => import("three").Object3D<import("three").Event>;
             setRotationFromAxisAngle: (axis: import("three").Vector3, angle: number) => void;
@@ -2636,9 +2952,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
             } | undefined) => any;
             clone: (recursive?: boolean | undefined) => import("three").Object3D<import("three").Event>;
             copy: (source: import("three").Object3D<import("three").Event>, recursive?: boolean | undefined) => import("three").Object3D<import("three").Event>;
-            addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, import("three").Object3D<import("three").Event>>) => void;
-            hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, import("three").Object3D<import("three").Event>>) => boolean;
-            removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, import("three").Object3D<import("three").Event>>) => void;
+            addEventListener: <T_9 extends string>(type: T_9, listener: import("three").EventListener<import("three").Event, T_9, import("three").Object3D<import("three").Event>>) => void;
+            hasEventListener: <T_10 extends string>(type: T_10, listener: import("three").EventListener<import("three").Event, T_10, import("three").Object3D<import("three").Event>>) => boolean;
+            removeEventListener: <T_11 extends string>(type: T_11, listener: import("three").EventListener<import("three").Event, T_11, import("three").Object3D<import("three").Event>>) => void;
             dispatchEvent: (event: import("three").Event) => void;
         }[];
         up: {
@@ -3487,16 +3803,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
             visible: boolean;
             userData: any;
             version: number;
-            clone: () => import("three").Material;
-            copy: (material: import("three").Material) => import("three").Material;
+            clone: () => Material;
+            copy: (material: Material) => Material;
             dispose: () => void;
             onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
             customProgramCacheKey: () => string;
             setValues: (values: import("three").MaterialParameters) => void;
             toJSON: (meta?: any) => any;
-            addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-            hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-            removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+            addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+            hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+            removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
             dispatchEvent: (event: import("three").Event) => void;
         };
         customDistanceMaterial: {
@@ -3548,21 +3864,21 @@ declare const _sfc_main: import("vue").DefineComponent<{
             visible: boolean;
             userData: any;
             version: number;
-            clone: () => import("three").Material;
-            copy: (material: import("three").Material) => import("three").Material;
+            clone: () => Material;
+            copy: (material: Material) => Material;
             dispose: () => void;
             onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
             customProgramCacheKey: () => string;
             setValues: (values: import("three").MaterialParameters) => void;
             toJSON: (meta?: any) => any;
-            addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-            hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-            removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+            addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+            hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+            removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
             dispatchEvent: (event: import("three").Event) => void;
         };
         readonly isObject3D: true;
-        onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
-        onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
+        onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
+        onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
         applyMatrix4: (matrix: import("three").Matrix4) => void;
         applyQuaternion: (quaternion: import("three").Quaternion) => Camera;
         setRotationFromAxisAngle: (axis: import("three").Vector3, angle: number) => void;
@@ -3610,9 +3926,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         } | undefined) => any;
         clone: (recursive?: boolean | undefined) => Camera;
         copy: (source: Camera, recursive?: boolean | undefined) => Camera;
-        addEventListener: <T_9 extends string>(type: T_9, listener: import("three").EventListener<import("three").Event, T_9, Camera>) => void;
-        hasEventListener: <T_10 extends string>(type: T_10, listener: import("three").EventListener<import("three").Event, T_10, Camera>) => boolean;
-        removeEventListener: <T_11 extends string>(type: T_11, listener: import("three").EventListener<import("three").Event, T_11, Camera>) => void;
+        addEventListener: <T_12 extends string>(type: T_12, listener: import("three").EventListener<import("three").Event, T_12, Camera>) => void;
+        hasEventListener: <T_13 extends string>(type: T_13, listener: import("three").EventListener<import("three").Event, T_13, Camera>) => boolean;
+        removeEventListener: <T_14 extends string>(type: T_14, listener: import("three").EventListener<import("three").Event, T_14, Camera>) => void;
         dispatchEvent: (event: import("three").Event) => void;
     } | null>;
     cameras: Ref<{
@@ -4644,16 +4960,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 visible: boolean;
                 userData: any;
                 version: number;
-                clone: () => import("three").Material;
-                copy: (material: import("three").Material) => import("three").Material;
+                clone: () => Material;
+                copy: (material: Material) => Material;
                 dispose: () => void;
                 onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
                 customProgramCacheKey: () => string;
                 setValues: (values: import("three").MaterialParameters) => void;
                 toJSON: (meta?: any) => any;
-                addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-                hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-                removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+                addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+                hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+                removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
                 dispatchEvent: (event: import("three").Event) => void;
             };
             customDistanceMaterial: {
@@ -4705,21 +5021,21 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 visible: boolean;
                 userData: any;
                 version: number;
-                clone: () => import("three").Material;
-                copy: (material: import("three").Material) => import("three").Material;
+                clone: () => Material;
+                copy: (material: Material) => Material;
                 dispose: () => void;
                 onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
                 customProgramCacheKey: () => string;
                 setValues: (values: import("three").MaterialParameters) => void;
                 toJSON: (meta?: any) => any;
-                addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-                hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-                removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+                addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+                hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+                removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
                 dispatchEvent: (event: import("three").Event) => void;
             };
             readonly isObject3D: true;
-            onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
-            onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
+            onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
+            onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
             applyMatrix4: (matrix: import("three").Matrix4) => void;
             applyQuaternion: (quaternion: import("three").Quaternion) => import("three").Object3D<import("three").Event>;
             setRotationFromAxisAngle: (axis: import("three").Vector3, angle: number) => void;
@@ -4769,9 +5085,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
             } | undefined) => any;
             clone: (recursive?: boolean | undefined) => import("three").Object3D<import("three").Event>;
             copy: (source: import("three").Object3D<import("three").Event>, recursive?: boolean | undefined) => import("three").Object3D<import("three").Event>;
-            addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, import("three").Object3D<import("three").Event>>) => void;
-            hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, import("three").Object3D<import("three").Event>>) => boolean;
-            removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, import("three").Object3D<import("three").Event>>) => void;
+            addEventListener: <T_9 extends string>(type: T_9, listener: import("three").EventListener<import("three").Event, T_9, import("three").Object3D<import("three").Event>>) => void;
+            hasEventListener: <T_10 extends string>(type: T_10, listener: import("three").EventListener<import("three").Event, T_10, import("three").Object3D<import("three").Event>>) => boolean;
+            removeEventListener: <T_11 extends string>(type: T_11, listener: import("three").EventListener<import("three").Event, T_11, import("three").Object3D<import("three").Event>>) => void;
             dispatchEvent: (event: import("three").Event) => void;
         } | null;
         children: {
@@ -5627,16 +5943,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 visible: boolean;
                 userData: any;
                 version: number;
-                clone: () => import("three").Material;
-                copy: (material: import("three").Material) => import("three").Material;
+                clone: () => Material;
+                copy: (material: Material) => Material;
                 dispose: () => void;
                 onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
                 customProgramCacheKey: () => string;
                 setValues: (values: import("three").MaterialParameters) => void;
                 toJSON: (meta?: any) => any;
-                addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-                hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-                removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+                addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+                hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+                removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
                 dispatchEvent: (event: import("three").Event) => void;
             };
             customDistanceMaterial: {
@@ -5688,21 +6004,21 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 visible: boolean;
                 userData: any;
                 version: number;
-                clone: () => import("three").Material;
-                copy: (material: import("three").Material) => import("three").Material;
+                clone: () => Material;
+                copy: (material: Material) => Material;
                 dispose: () => void;
                 onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
                 customProgramCacheKey: () => string;
                 setValues: (values: import("three").MaterialParameters) => void;
                 toJSON: (meta?: any) => any;
-                addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-                hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-                removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+                addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+                hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+                removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
                 dispatchEvent: (event: import("three").Event) => void;
             };
             readonly isObject3D: true;
-            onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
-            onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
+            onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
+            onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
             applyMatrix4: (matrix: import("three").Matrix4) => void;
             applyQuaternion: (quaternion: import("three").Quaternion) => import("three").Object3D<import("three").Event>;
             setRotationFromAxisAngle: (axis: import("three").Vector3, angle: number) => void;
@@ -5752,9 +6068,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
             } | undefined) => any;
             clone: (recursive?: boolean | undefined) => import("three").Object3D<import("three").Event>;
             copy: (source: import("three").Object3D<import("three").Event>, recursive?: boolean | undefined) => import("three").Object3D<import("three").Event>;
-            addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, import("three").Object3D<import("three").Event>>) => void;
-            hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, import("three").Object3D<import("three").Event>>) => boolean;
-            removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, import("three").Object3D<import("three").Event>>) => void;
+            addEventListener: <T_9 extends string>(type: T_9, listener: import("three").EventListener<import("three").Event, T_9, import("three").Object3D<import("three").Event>>) => void;
+            hasEventListener: <T_10 extends string>(type: T_10, listener: import("three").EventListener<import("three").Event, T_10, import("three").Object3D<import("three").Event>>) => boolean;
+            removeEventListener: <T_11 extends string>(type: T_11, listener: import("three").EventListener<import("three").Event, T_11, import("three").Object3D<import("three").Event>>) => void;
             dispatchEvent: (event: import("three").Event) => void;
         }[];
         up: {
@@ -6603,16 +6919,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
             visible: boolean;
             userData: any;
             version: number;
-            clone: () => import("three").Material;
-            copy: (material: import("three").Material) => import("three").Material;
+            clone: () => Material;
+            copy: (material: Material) => Material;
             dispose: () => void;
             onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
             customProgramCacheKey: () => string;
             setValues: (values: import("three").MaterialParameters) => void;
             toJSON: (meta?: any) => any;
-            addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-            hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-            removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+            addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+            hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+            removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
             dispatchEvent: (event: import("three").Event) => void;
         };
         customDistanceMaterial: {
@@ -6664,21 +6980,21 @@ declare const _sfc_main: import("vue").DefineComponent<{
             visible: boolean;
             userData: any;
             version: number;
-            clone: () => import("three").Material;
-            copy: (material: import("three").Material) => import("three").Material;
+            clone: () => Material;
+            copy: (material: Material) => Material;
             dispose: () => void;
             onBeforeCompile: (shader: import("three").Shader, renderer: WebGLRenderer) => void;
             customProgramCacheKey: () => string;
             setValues: (values: import("three").MaterialParameters) => void;
             toJSON: (meta?: any) => any;
-            addEventListener: <T_3 extends string>(type: T_3, listener: import("three").EventListener<import("three").Event, T_3, import("three").Material>) => void;
-            hasEventListener: <T_4 extends string>(type: T_4, listener: import("three").EventListener<import("three").Event, T_4, import("three").Material>) => boolean;
-            removeEventListener: <T_5 extends string>(type: T_5, listener: import("three").EventListener<import("three").Event, T_5, import("three").Material>) => void;
+            addEventListener: <T_6 extends string>(type: T_6, listener: import("three").EventListener<import("three").Event, T_6, Material>) => void;
+            hasEventListener: <T_7 extends string>(type: T_7, listener: import("three").EventListener<import("three").Event, T_7, Material>) => boolean;
+            removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Material>) => void;
             dispatchEvent: (event: import("three").Event) => void;
         };
         readonly isObject3D: true;
-        onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
-        onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: import("three").Material, group: import("three").Group) => void;
+        onBeforeRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
+        onAfterRender: (renderer: WebGLRenderer, scene: Scene, camera: Camera, geometry: BufferGeometry, material: Material, group: import("three").Group) => void;
         applyMatrix4: (matrix: import("three").Matrix4) => void;
         applyQuaternion: (quaternion: import("three").Quaternion) => Camera;
         setRotationFromAxisAngle: (axis: import("three").Vector3, angle: number) => void;
@@ -6726,9 +7042,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         } | undefined) => any;
         clone: (recursive?: boolean | undefined) => Camera;
         copy: (source: Camera, recursive?: boolean | undefined) => Camera;
-        addEventListener: <T_9 extends string>(type: T_9, listener: import("three").EventListener<import("three").Event, T_9, Camera>) => void;
-        hasEventListener: <T_10 extends string>(type: T_10, listener: import("three").EventListener<import("three").Event, T_10, Camera>) => boolean;
-        removeEventListener: <T_11 extends string>(type: T_11, listener: import("three").EventListener<import("three").Event, T_11, Camera>) => void;
+        addEventListener: <T_12 extends string>(type: T_12, listener: import("three").EventListener<import("three").Event, T_12, Camera>) => void;
+        hasEventListener: <T_13 extends string>(type: T_13, listener: import("three").EventListener<import("three").Event, T_13, Camera>) => boolean;
+        removeEventListener: <T_14 extends string>(type: T_14, listener: import("three").EventListener<import("three").Event, T_14, Camera>) => void;
         dispatchEvent: (event: import("three").Event) => void;
     }[]>;
     controls: Ref<Ref<{
@@ -6740,49 +7056,61 @@ declare const _sfc_main: import("vue").DefineComponent<{
     then: number;
     fpsInterval: number;
     setCamera: (newCamera?: string) => void;
-    applyProps: (props: Props) => void;
+    applyProps: () => void;
     animate: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    camera: {
-        type: StringConstructor;
-        required: false;
-    };
-    autoResize: {
+    alpha: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
-    };
-    onBeforeRender: {
-        type: FunctionConstructor;
-        required: false;
-        default: () => void;
     };
     antialias: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
     };
+    autoResize: {
+        type: BooleanConstructor;
+        required: false;
+        default: boolean;
+    };
+    camera: {
+        type: StringConstructor;
+        required: false;
+    };
+    height: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
     frameLimit: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    alpha: {
-        type: BooleanConstructor;
+    onBeforeRender: {
+        type: FunctionConstructor;
         required: false;
-        default: boolean;
+        default: () => void;
     };
     shadowMapEnabled: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
     };
+    width: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
 }>>, {
-    autoResize: boolean;
-    onBeforeRender: Function;
-    antialias: boolean;
-    frameLimit: number;
     alpha: boolean;
+    antialias: boolean;
+    autoResize: boolean;
+    height: number;
+    frameLimit: number;
+    onBeforeRender: Function;
     shadowMapEnabled: boolean;
+    width: number;
 }>;
 export default _sfc_main;

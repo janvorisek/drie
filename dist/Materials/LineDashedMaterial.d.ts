@@ -1,6 +1,6 @@
 import { inject, provide } from "vue";
 import type { Mesh } from "three";
-import { Color, LineDashedMaterial } from "three";
+import { Color, LineDashedMaterial, Material } from "three";
 export interface Props {
     /**
      * Color of the material.
@@ -18,6 +18,10 @@ export interface Props {
      * The size of the gap.
      */
     gapSize?: number;
+    /**
+     * Name of the material
+     */
+    name?: string;
     /**
      * Float in the range of `0.0 - 1.0` indicating how transparent the material is.
      */
@@ -48,6 +52,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
+    };
     opacity: {
         type: NumberConstructor;
         required: false;
@@ -60,13 +69,15 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     props: any;
-    mesh: Mesh<import("three").BufferGeometry, import("three").Material | import("three").Material[]>;
     three: LineDashedMaterial;
+    addMaterial: (g: Material) => void;
+    mesh: Mesh<import("three").BufferGeometry, Material | Material[]> | null;
     applyProps: () => void;
     inject: typeof inject;
     provide: typeof provide;
     readonly Color: typeof Color;
     readonly LineDashedMaterial: typeof LineDashedMaterial;
+    readonly Material: typeof Material;
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
@@ -91,6 +102,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
+    };
     opacity: {
         type: NumberConstructor;
         required: false;
@@ -102,10 +118,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
     };
 }>>, {
+    name: string;
     scale: number;
-    color: string | number;
     opacity: number;
     transparent: boolean;
+    color: string | number;
     dashSize: number;
     gapSize: number;
 }>;

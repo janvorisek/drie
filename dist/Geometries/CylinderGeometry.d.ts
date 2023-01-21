@@ -91,7 +91,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     props: any;
-    mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]>;
     makeCylinder: (radiusTop: number | undefined, radiusBottom: number | undefined, height: number | undefined, radialSegments: number | undefined, heightSegments: number | undefined, openEnded: boolean | undefined, thetaStart: number | undefined, thetaLength: number | undefined) => CylinderGeometry;
     three: {
         id: number;
@@ -520,6 +519,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         removeEventListener: <T_2 extends string>(type: T_2, listener: import("three").EventListener<import("three").Event, T_2, BufferGeometry>) => void;
         dispatchEvent: (event: import("three").Event) => void;
     };
+    mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]> | null;
     addGeometry: (g: BufferGeometry) => void;
     redoGeometry: () => void;
     inject: typeof inject;
@@ -578,8 +578,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: number;
     };
 }>>, {
-    name: string;
     height: number;
+    name: string;
     heightSegments: number;
     thetaStart: number;
     thetaLength: number;

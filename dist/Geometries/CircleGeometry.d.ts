@@ -53,7 +53,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     props: any;
-    mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]>;
     makeCircle: (radius: number | undefined, segments: number | undefined, thetaStart: number | undefined, thetaLength: number | undefined) => CircleGeometry;
     three: {
         id: number;
@@ -482,6 +481,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         removeEventListener: <T_2 extends string>(type: T_2, listener: import("three").EventListener<import("three").Event, T_2, BufferGeometry>) => void;
         dispatchEvent: (event: import("three").Event) => void;
     };
+    mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]> | null;
     addGeometry: (g: BufferGeometry) => void;
     redoGeometry: () => void;
     inject: typeof inject;
