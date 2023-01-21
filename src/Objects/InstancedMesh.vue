@@ -2,6 +2,10 @@
   <slot></slot>
 </template>
 
+<docs>BEGIN_DOCS
+  A special version of Mesh with instanced rendering support. Use InstancedMesh if you have to render a large number of objects with the same geometry and material but with different world transformations. The usage of InstancedMesh will help you to reduce the number of draw calls and thus improve the overall rendering performance in your application.
+</docs>
+
 <script setup lang="ts">
 import { provide, inject, onUnmounted, onMounted } from "vue";
 
