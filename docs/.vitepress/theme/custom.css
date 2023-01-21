@@ -34,8 +34,13 @@ table {
 }
 
 @media (min-width: 960px) {
-  .VPNavBarSearch {
+  .has-sidebar .VPNavBarSearch {
     position: absolute;
     left: 32px;
+  }
+
+  .no-sidebar .VPNavBarSearch {
+    position: absolute;
+    left: 128px;
   }
 }

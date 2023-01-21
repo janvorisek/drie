@@ -96,6 +96,8 @@ onMounted(async () => {
       e.preventDefault();
       openSearch();
     }
+
+    if(e.key === "Escape") open.value = false;
   };
 
   window.addEventListener("keydown", handleSearchHotKey);
@@ -217,8 +219,9 @@ function cleanSearch() {
           <span class="DocSearch-Button-Placeholder">{{buttonLabel}}</span>
         </span>
         <span class="DocSearch-Button-Keys">
-          <span class="DocSearch-Button-Key" ref="metaKey">Meta</span>
-          <span class="DocSearch-Button-Key">K</span>
+          <kbd class="DocSearch-Button-Key" ref="metaKey">Meta</kbd>
+          <kbd class="DocSearch-Button-Key-Divider">+</kbd>
+          <kbd class="DocSearch-Button-Key">K</kbd>
         </span>
       </button>
     </div>
@@ -382,27 +385,26 @@ function cleanSearch() {
 }
 
 .DocSearch-Button .DocSearch-Button-Key {
-  margin-top: 2px;
-  border: 1px solid var(--vt-c-divider);
-  border-right: none;
-  border-radius: 4px 0 0 4px;
-  display: none;
-  padding-left: 6px;
-  height: 22px;
-  line-height: 22px;
-  transition: color 0.5s, border-color 0.5s;
-  min-width: 0;
+  background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+    color: #333;
+    display: inline-block;
+    font-size: 0.85em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
 }
 .DocSearch-Button-Key {
   font-size: 12px;
   font-weight: 500;
-  height: 20px;
   margin: 0;
   width: auto;
   color: var(--vt-c-text-3);
   transition: color 0.5s;
   display: inline-block;
-  padding: 0 1px;
 }
 .DocSearch-Button-Key {
   align-items: center;
@@ -411,13 +413,16 @@ function cleanSearch() {
   box-shadow: var(--c-brand);
   color: var(--docsearch-muted-color);
   display: flex;
-  height: 18px;
   justify-content: center;
   margin-right: 0.4em;
-  padding-bottom: 2px;
   position: relative;
   top: -1px;
   width: 20px;
+}
+
+.DocSearch-Button-Key-Divider {
+  line-height: 1;
+  margin: 0 3px;
 }
 
 body.dark .DocSearch-Button:hover {
@@ -533,27 +538,6 @@ body.dark .DocSearch-Button:hover {
   color: var(--vt-c-text-1);
 }
 
-.DocSearch-Button .DocSearch-Button-Key {
-  margin-top: 2px;
-  border: 1px solid var(--vt-c-divider);
-  border-right: none;
-  border-radius: 4px 0 0 4px;
-  display: none;
-  padding-left: 6px;
-  height: 22px;
-  line-height: 22px;
-  transition: color 0.5s, border-color 0.5s;
-  min-width: 0;
-}
-
-.DocSearch-Button .DocSearch-Button-Key + .DocSearch-Button-Key {
-  border-right: 1px solid var(--vt-c-divider);
-  border-left: none;
-  border-radius: 0 4px 4px 0;
-  padding-left: 2px;
-  padding-right: 6px;
-}
-
 .DocSearch-Button:hover .DocSearch-Button-Key {
   /* border-color: var(--vt-c-brand-light); */
   color: var(--vt-c-brand-light);
@@ -568,7 +552,6 @@ body.dark .DocSearch-Button:hover {
 .DocSearch-Button-Key {
   font-size: 12px;
   font-weight: 500;
-  height: 20px;
   margin: 0;
   width: auto;
   color: var(--vt-c-text-3);
