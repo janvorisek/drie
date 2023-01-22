@@ -16,7 +16,7 @@ export default {
   
   const liveCode = computed(() => {
     return `<MeshBasicMaterial
-  :color="${demo.value.color}"
+  color="${demo.value.color}"
   :transparent="${demo.value.transparent}"
   :opacity="${Math.round(demo.value.opacity*100)/100}"
 />`
