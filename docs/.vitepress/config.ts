@@ -51,6 +51,18 @@ export default defineConfig( {
   title: 'Drie',
   description: 'Drie is a Vue 3 component library for THREE.js made with TypeScript and Composition API.',
   cleanUrls: 'with-subfolders',
+  head: [
+    [
+      'script',
+      // @ts-expect-error
+      { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-7ZLF9801NT' }
+    ],
+    [
+      'script',
+      {},
+      "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-7ZLF9801NT');"
+    ]
+  ],
   themeConfig: {
     nav: [{
       text: pkg.version,
