@@ -26,11 +26,24 @@ table {
 }
 
 .example-with-props {
-  display: flex; gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.example-props {
-  flex-basis: 32em;
+@media (min-width: 960px) {
+  .example-with-props {
+    flex-direction: row;
+  }
+
+  .example-props {
+    flex-basis: 32em;
+  }
+}
+
+.VPNavBarSearch {
+  position: absolute;
+  right: 82px;
 }
 
 @media (min-width: 960px) {
@@ -42,5 +55,27 @@ table {
   .no-sidebar .VPNavBarSearch {
     position: absolute;
     left: 128px;
+  }
+}
+
+.demo-welcome {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+@media (min-width: 960px) {
+  .demo-welcome {
+    display: flex;
+    gap: 24px;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .demo-welcome .tp-lblv_v {
+    width: 128px !important;
   }
 }

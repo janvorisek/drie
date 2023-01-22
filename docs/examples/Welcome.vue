@@ -62,7 +62,7 @@
         </Scene>
       </Renderer>
     </div>
-    <div style="display: flex; gap: 24px; flex-direction: row; justify-content: center; margin-top: 24px">
+    <div class="demo-welcome">
       <div>
         <VTweakpane :pane="{ title: 'Set properties' }" @on-pane-created="onPaneCreated" />
       </div>
@@ -186,9 +186,3 @@ const onBeforeRender = () => {
 const camera = ref("cam1");
 const renderer = ref({});
 </script>
-
-<style>
-.tp-lblv_v {
-  width: 128px !important;
-}
-</style>
