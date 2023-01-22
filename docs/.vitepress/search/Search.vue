@@ -219,7 +219,7 @@ function cleanSearch() {
           <span class="DocSearch-Button-Placeholder">{{buttonLabel}}</span>
         </span>
         <span class="DocSearch-Button-Keys">
-          <kbd class="DocSearch-Button-Key" ref="metaKey">Meta</kbd>
+          <kbd class="DocSearch-Button-Key" ref="metaKey">Ctrl</kbd>
           <kbd class="DocSearch-Button-Key-Divider">+</kbd>
           <kbd class="DocSearch-Button-Key">K</kbd>
         </span>
