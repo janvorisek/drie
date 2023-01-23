@@ -152,7 +152,7 @@ const three = ref<OrbitControls | null>(null);
 (inject("addControls") as (c: Ref<OrbitControls | null>) => void)(three);
 
 const camera = inject<Camera>("parentCamera") as Camera;
-const canvas = inject<Ref<HTMLCanvasElement>>("canvas");
+const canvas = inject<Ref<HTMLCanvasElement>>("canvas") as Ref<HTMLCanvasElement>;
 
 function applyProps() {
   if (three.value == null) return;
@@ -175,7 +175,7 @@ const tryBindCamera = () => {
   if (!canvas.value) return;
   if (boundCamera) return;
 
-  three.value = new OrbitControls(camera, canvas!.value);
+  three.value = new OrbitControls(camera, canvas.value);
   applyProps();
 
   handleVectorProp(props, "target", three.value as unknown as Object3D);
@@ -183,7 +183,7 @@ const tryBindCamera = () => {
   boundCamera = true;
 };
 
-watch(canvas!, () => {
+watch(canvas, () => {
   tryBindCamera();
 });
 
