@@ -40,7 +40,6 @@ Drie implements components for the common three.js classes. Some additional feat
 Notable features include:
 
 - Auto resizing of WebGL canvas (including PerspectiveCamera aspect ratio update)
-- Raycasting as mouse events
 - FPS Limiter
 - [Raycasting](/raycasting) with mouse events
 - Simple usage of geometry utilities (see [EdgesGeometry](components/Geometries/EdgesGeometry) or [WireframeGeometry](components/Geometries/WireframeGeometry))
