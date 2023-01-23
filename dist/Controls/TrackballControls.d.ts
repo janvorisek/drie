@@ -1,31 +1,7 @@
 import { Camera, Object3D } from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { TrackballControls } from "three/examples/jsm/controls/TrackballControls";
 import { inject, ref, watch, type Ref } from "vue";
-import { type Vector3Like } from "../types";
 export interface Props {
-    /**
-     * Enable or disable camera panning.
-     */
-    enablePan?: boolean;
-    /**
-     * Enable or disable horizontal and vertical rotation of the camera.
-     * Note that it is possible to disable a single axis by setting the min and max of the polar angle or azimuth angle to the same value, which will cause the vertical or horizontal rotation to be fixed at that value.
-     */
-    enableRotate?: boolean;
-    /**
-     * Enable or disable zooming (dollying) of the camera.
-     */
-    enableZoom?: boolean;
-    /**
-     * How far you can zoom in.
-     * `OrthographicCamera` only.
-     */
-    minZoom?: number;
-    /**
-     * How far you can zoom out.
-     * `OrthographicCamera` only.
-     */
-    maxZoom?: number;
     /**
      * How far you can dolly in.
      * `PerspectiveCamera` only.
@@ -37,56 +13,19 @@ export interface Props {
      */
     maxDistance?: number;
     /**
-     * How far you can orbit vertically, lower limit.
-     * Range is 0 to Math.PI radians
+     * The pan speed
      */
-    minPolarAngle?: number;
+    panSpeed?: number;
     /**
-     * How far you can orbit vertically, upper limit.
-     * Range is 0 to Math.PI radians
+     * The rotation speed.
      */
-    maxPolarAngle?: number;
+    rotateSpeed?: number;
     /**
-     * How far you can orbit horizontally, lower limit.
-     * If set, the interval [min, max] must be a sub-interval of [-2π, 2π], with (max - min < 2π).
+     * The zoom speed.
      */
-    minAzimuthAngle?: number;
-    /**
-     * How far you can orbit horizontally, upper limit.
-     * If set, the interval [min, max] must be a sub-interval of [-2π, 2π], with (max - min < 2π).
-     */
-    maxAzimuthAngle?: number;
-    /**
-     * The focus point of the controls.
-     */
-    target?: Vector3Like;
+    zoomSpeed?: number;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
-    enablePan: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
-    };
-    enableRotate: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
-    };
-    enableZoom: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
-    };
-    minZoom: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    maxZoom: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
     minDistance: {
         type: NumberConstructor;
         required: false;
@@ -97,30 +36,20 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
-    minPolarAngle: {
+    panSpeed: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    maxPolarAngle: {
+    rotateSpeed: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    minAzimuthAngle: {
+    zoomSpeed: {
         type: NumberConstructor;
         required: false;
         default: number;
-    };
-    maxAzimuthAngle: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    target: {
-        type: null;
-        required: false;
-        default: () => number[];
     };
 }, {
     props: any;
@@ -3241,212 +3170,32 @@ declare const _sfc_main: import("vue").DefineComponent<{
             removeEventListener: <T_8 extends string>(type: T_8, listener: import("three").EventListener<import("three").Event, T_8, Camera>) => void;
             dispatchEvent: (event: import("three").Event) => void;
         };
-        domElement: HTMLElement | Document;
+        domElement: HTMLElement;
         enabled: boolean;
-        target: {
-            x: number;
-            y: number;
-            z: number;
-            readonly isVector3: true;
-            set: (x: number, y: number, z: number) => import("three").Vector3;
-            setScalar: (scalar: number) => import("three").Vector3;
-            setX: (x: number) => import("three").Vector3;
-            setY: (y: number) => import("three").Vector3;
-            setZ: (z: number) => import("three").Vector3;
-            setComponent: (index: number, value: number) => import("three").Vector3;
-            getComponent: (index: number) => number;
-            clone: () => import("three").Vector3;
-            copy: (v: import("three").Vector3) => import("three").Vector3;
-            add: (v: import("three").Vector3) => import("three").Vector3;
-            addScalar: (s: number) => import("three").Vector3;
-            addScaledVector: (v: import("three").Vector3, s: number) => import("three").Vector3;
-            addVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
-            sub: (a: import("three").Vector3) => import("three").Vector3;
-            subScalar: (s: number) => import("three").Vector3;
-            subVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
-            multiply: (v: import("three").Vector3) => import("three").Vector3;
-            multiplyScalar: (s: number) => import("three").Vector3;
-            multiplyVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
-            applyEuler: (euler: import("three").Euler) => import("three").Vector3;
-            applyAxisAngle: (axis: import("three").Vector3, angle: number) => import("three").Vector3;
-            applyMatrix3: (m: import("three").Matrix3) => import("three").Vector3;
-            applyNormalMatrix: (m: import("three").Matrix3) => import("three").Vector3;
-            applyMatrix4: (m: import("three").Matrix4) => import("three").Vector3;
-            applyQuaternion: (q: import("three").Quaternion) => import("three").Vector3;
-            project: (camera: Camera) => import("three").Vector3;
-            unproject: (camera: Camera) => import("three").Vector3;
-            transformDirection: (m: import("three").Matrix4) => import("three").Vector3;
-            divide: (v: import("three").Vector3) => import("three").Vector3;
-            divideScalar: (s: number) => import("three").Vector3;
-            min: (v: import("three").Vector3) => import("three").Vector3;
-            max: (v: import("three").Vector3) => import("three").Vector3;
-            clamp: (min: import("three").Vector3, max: import("three").Vector3) => import("three").Vector3;
-            clampScalar: (min: number, max: number) => import("three").Vector3;
-            clampLength: (min: number, max: number) => import("three").Vector3;
-            floor: () => import("three").Vector3;
-            ceil: () => import("three").Vector3;
-            round: () => import("three").Vector3;
-            roundToZero: () => import("three").Vector3;
-            negate: () => import("three").Vector3;
-            dot: (v: import("three").Vector3) => number;
-            lengthSq: () => number;
-            length: () => number;
-            lengthManhattan: () => number;
-            manhattanLength: () => number;
-            manhattanDistanceTo: (v: import("three").Vector3) => number;
-            normalize: () => import("three").Vector3;
-            setLength: (l: number) => import("three").Vector3;
-            lerp: (v: import("three").Vector3, alpha: number) => import("three").Vector3;
-            lerpVectors: (v1: import("three").Vector3, v2: import("three").Vector3, alpha: number) => import("three").Vector3;
-            cross: (a: import("three").Vector3) => import("three").Vector3;
-            crossVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
-            projectOnVector: (v: import("three").Vector3) => import("three").Vector3;
-            projectOnPlane: (planeNormal: import("three").Vector3) => import("three").Vector3;
-            reflect: (vector: import("three").Vector3) => import("three").Vector3;
-            angleTo: (v: import("three").Vector3) => number;
-            distanceTo: (v: import("three").Vector3) => number;
-            distanceToSquared: (v: import("three").Vector3) => number;
-            distanceToManhattan: (v: import("three").Vector3) => number;
-            setFromSpherical: (s: import("three").Spherical) => import("three").Vector3;
-            setFromSphericalCoords: (r: number, phi: number, theta: number) => import("three").Vector3;
-            setFromCylindrical: (s: import("three").Cylindrical) => import("three").Vector3;
-            setFromCylindricalCoords: (radius: number, theta: number, y: number) => import("three").Vector3;
-            setFromMatrixPosition: (m: import("three").Matrix4) => import("three").Vector3;
-            setFromMatrixScale: (m: import("three").Matrix4) => import("three").Vector3;
-            setFromMatrixColumn: (matrix: import("three").Matrix4, index: number) => import("three").Vector3;
-            setFromMatrix3Column: (matrix: import("three").Matrix3, index: number) => import("three").Vector3;
-            setFromEuler: (e: import("three").Euler) => import("three").Vector3;
-            equals: (v: import("three").Vector3) => boolean;
-            fromArray: (array: number[] | ArrayLike<number>, offset?: number | undefined) => import("three").Vector3;
-            toArray: {
-                (array?: number[] | undefined, offset?: number | undefined): number[];
-                (array?: import("three").Vector3Tuple | undefined, offset?: 0 | undefined): import("three").Vector3Tuple;
-                (array: ArrayLike<number>, offset?: number | undefined): ArrayLike<number>;
-            };
-            fromBufferAttribute: (attribute: import("three").BufferAttribute | import("three").InterleavedBufferAttribute, index: number) => import("three").Vector3;
-            random: () => import("three").Vector3;
-            randomDirection: () => import("three").Vector3;
+        screen: {
+            left: number;
+            top: number;
+            width: number;
+            height: number;
         };
-        center: {
-            x: number;
-            y: number;
-            z: number;
-            readonly isVector3: true;
-            set: (x: number, y: number, z: number) => import("three").Vector3;
-            setScalar: (scalar: number) => import("three").Vector3;
-            setX: (x: number) => import("three").Vector3;
-            setY: (y: number) => import("three").Vector3;
-            setZ: (z: number) => import("three").Vector3;
-            setComponent: (index: number, value: number) => import("three").Vector3;
-            getComponent: (index: number) => number;
-            clone: () => import("three").Vector3;
-            copy: (v: import("three").Vector3) => import("three").Vector3;
-            add: (v: import("three").Vector3) => import("three").Vector3;
-            addScalar: (s: number) => import("three").Vector3;
-            addScaledVector: (v: import("three").Vector3, s: number) => import("three").Vector3;
-            addVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
-            sub: (a: import("three").Vector3) => import("three").Vector3;
-            subScalar: (s: number) => import("three").Vector3;
-            subVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
-            multiply: (v: import("three").Vector3) => import("three").Vector3;
-            multiplyScalar: (s: number) => import("three").Vector3;
-            multiplyVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
-            applyEuler: (euler: import("three").Euler) => import("three").Vector3;
-            applyAxisAngle: (axis: import("three").Vector3, angle: number) => import("three").Vector3;
-            applyMatrix3: (m: import("three").Matrix3) => import("three").Vector3;
-            applyNormalMatrix: (m: import("three").Matrix3) => import("three").Vector3;
-            applyMatrix4: (m: import("three").Matrix4) => import("three").Vector3;
-            applyQuaternion: (q: import("three").Quaternion) => import("three").Vector3;
-            project: (camera: Camera) => import("three").Vector3;
-            unproject: (camera: Camera) => import("three").Vector3;
-            transformDirection: (m: import("three").Matrix4) => import("three").Vector3;
-            divide: (v: import("three").Vector3) => import("three").Vector3;
-            divideScalar: (s: number) => import("three").Vector3;
-            min: (v: import("three").Vector3) => import("three").Vector3;
-            max: (v: import("three").Vector3) => import("three").Vector3;
-            clamp: (min: import("three").Vector3, max: import("three").Vector3) => import("three").Vector3;
-            clampScalar: (min: number, max: number) => import("three").Vector3;
-            clampLength: (min: number, max: number) => import("three").Vector3;
-            floor: () => import("three").Vector3;
-            ceil: () => import("three").Vector3;
-            round: () => import("three").Vector3;
-            roundToZero: () => import("three").Vector3;
-            negate: () => import("three").Vector3;
-            dot: (v: import("three").Vector3) => number;
-            lengthSq: () => number;
-            length: () => number;
-            lengthManhattan: () => number;
-            manhattanLength: () => number;
-            manhattanDistanceTo: (v: import("three").Vector3) => number;
-            normalize: () => import("three").Vector3;
-            setLength: (l: number) => import("three").Vector3;
-            lerp: (v: import("three").Vector3, alpha: number) => import("three").Vector3;
-            lerpVectors: (v1: import("three").Vector3, v2: import("three").Vector3, alpha: number) => import("three").Vector3;
-            cross: (a: import("three").Vector3) => import("three").Vector3;
-            crossVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
-            projectOnVector: (v: import("three").Vector3) => import("three").Vector3;
-            projectOnPlane: (planeNormal: import("three").Vector3) => import("three").Vector3;
-            reflect: (vector: import("three").Vector3) => import("three").Vector3;
-            angleTo: (v: import("three").Vector3) => number;
-            distanceTo: (v: import("three").Vector3) => number;
-            distanceToSquared: (v: import("three").Vector3) => number;
-            distanceToManhattan: (v: import("three").Vector3) => number;
-            setFromSpherical: (s: import("three").Spherical) => import("three").Vector3;
-            setFromSphericalCoords: (r: number, phi: number, theta: number) => import("three").Vector3;
-            setFromCylindrical: (s: import("three").Cylindrical) => import("three").Vector3;
-            setFromCylindricalCoords: (radius: number, theta: number, y: number) => import("three").Vector3;
-            setFromMatrixPosition: (m: import("three").Matrix4) => import("three").Vector3;
-            setFromMatrixScale: (m: import("three").Matrix4) => import("three").Vector3;
-            setFromMatrixColumn: (matrix: import("three").Matrix4, index: number) => import("three").Vector3;
-            setFromMatrix3Column: (matrix: import("three").Matrix3, index: number) => import("three").Vector3;
-            setFromEuler: (e: import("three").Euler) => import("three").Vector3;
-            equals: (v: import("three").Vector3) => boolean;
-            fromArray: (array: number[] | ArrayLike<number>, offset?: number | undefined) => import("three").Vector3;
-            toArray: {
-                (array?: number[] | undefined, offset?: number | undefined): number[];
-                (array?: import("three").Vector3Tuple | undefined, offset?: 0 | undefined): import("three").Vector3Tuple;
-                (array: ArrayLike<number>, offset?: number | undefined): ArrayLike<number>;
-            };
-            fromBufferAttribute: (attribute: import("three").BufferAttribute | import("three").InterleavedBufferAttribute, index: number) => import("three").Vector3;
-            random: () => import("three").Vector3;
-            randomDirection: () => import("three").Vector3;
-        };
+        rotateSpeed: number;
+        zoomSpeed: number;
+        panSpeed: number;
+        noRotate: boolean;
+        noZoom: boolean;
+        noPan: boolean;
+        noRoll: boolean;
+        staticMoving: boolean;
+        dynamicDampingFactor: number;
         minDistance: number;
         maxDistance: number;
-        minZoom: number;
-        maxZoom: number;
-        minPolarAngle: number;
-        maxPolarAngle: number;
-        minAzimuthAngle: number;
-        maxAzimuthAngle: number;
-        enableDamping: boolean;
-        dampingFactor: number;
-        enableZoom: boolean;
-        zoomSpeed: number;
-        enableRotate: boolean;
-        rotateSpeed: number;
-        enablePan: boolean;
-        panSpeed: number;
-        screenSpacePanning: boolean;
-        keyPanSpeed: number;
-        autoRotate: boolean;
-        autoRotateSpeed: number;
-        keys: {
-            LEFT: string;
-            UP: string;
-            RIGHT: string;
-            BOTTOM: string;
-        };
+        keys: string[];
         mouseButtons: {
-            LEFT?: import("three").MOUSE | undefined;
-            MIDDLE?: import("three").MOUSE | undefined;
-            RIGHT?: import("three").MOUSE | undefined;
+            LEFT: import("three").MOUSE;
+            MIDDLE: import("three").MOUSE;
+            RIGHT: import("three").MOUSE;
         };
-        touches: {
-            ONE?: import("three").TOUCH | undefined;
-            TWO?: import("three").TOUCH | undefined;
-        };
-        target0: {
+        target: {
             x: number;
             y: number;
             z: number;
@@ -3614,22 +3363,186 @@ declare const _sfc_main: import("vue").DefineComponent<{
             random: () => import("three").Vector3;
             randomDirection: () => import("three").Vector3;
         };
-        zoomO: number;
-        update: () => boolean;
-        listenToKeyEvents: (domElement: Window | HTMLElement) => void;
-        saveState: () => void;
+        target0: {
+            x: number;
+            y: number;
+            z: number;
+            readonly isVector3: true;
+            set: (x: number, y: number, z: number) => import("three").Vector3;
+            setScalar: (scalar: number) => import("three").Vector3;
+            setX: (x: number) => import("three").Vector3;
+            setY: (y: number) => import("three").Vector3;
+            setZ: (z: number) => import("three").Vector3;
+            setComponent: (index: number, value: number) => import("three").Vector3;
+            getComponent: (index: number) => number;
+            clone: () => import("three").Vector3;
+            copy: (v: import("three").Vector3) => import("three").Vector3;
+            add: (v: import("three").Vector3) => import("three").Vector3;
+            addScalar: (s: number) => import("three").Vector3;
+            addScaledVector: (v: import("three").Vector3, s: number) => import("three").Vector3;
+            addVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
+            sub: (a: import("three").Vector3) => import("three").Vector3;
+            subScalar: (s: number) => import("three").Vector3;
+            subVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
+            multiply: (v: import("three").Vector3) => import("three").Vector3;
+            multiplyScalar: (s: number) => import("three").Vector3;
+            multiplyVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
+            applyEuler: (euler: import("three").Euler) => import("three").Vector3;
+            applyAxisAngle: (axis: import("three").Vector3, angle: number) => import("three").Vector3;
+            applyMatrix3: (m: import("three").Matrix3) => import("three").Vector3;
+            applyNormalMatrix: (m: import("three").Matrix3) => import("three").Vector3;
+            applyMatrix4: (m: import("three").Matrix4) => import("three").Vector3;
+            applyQuaternion: (q: import("three").Quaternion) => import("three").Vector3;
+            project: (camera: Camera) => import("three").Vector3;
+            unproject: (camera: Camera) => import("three").Vector3;
+            transformDirection: (m: import("three").Matrix4) => import("three").Vector3;
+            divide: (v: import("three").Vector3) => import("three").Vector3;
+            divideScalar: (s: number) => import("three").Vector3;
+            min: (v: import("three").Vector3) => import("three").Vector3;
+            max: (v: import("three").Vector3) => import("three").Vector3;
+            clamp: (min: import("three").Vector3, max: import("three").Vector3) => import("three").Vector3;
+            clampScalar: (min: number, max: number) => import("three").Vector3;
+            clampLength: (min: number, max: number) => import("three").Vector3;
+            floor: () => import("three").Vector3;
+            ceil: () => import("three").Vector3;
+            round: () => import("three").Vector3;
+            roundToZero: () => import("three").Vector3;
+            negate: () => import("three").Vector3;
+            dot: (v: import("three").Vector3) => number;
+            lengthSq: () => number;
+            length: () => number;
+            lengthManhattan: () => number;
+            manhattanLength: () => number;
+            manhattanDistanceTo: (v: import("three").Vector3) => number;
+            normalize: () => import("three").Vector3;
+            setLength: (l: number) => import("three").Vector3;
+            lerp: (v: import("three").Vector3, alpha: number) => import("three").Vector3;
+            lerpVectors: (v1: import("three").Vector3, v2: import("three").Vector3, alpha: number) => import("three").Vector3;
+            cross: (a: import("three").Vector3) => import("three").Vector3;
+            crossVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
+            projectOnVector: (v: import("three").Vector3) => import("three").Vector3;
+            projectOnPlane: (planeNormal: import("three").Vector3) => import("three").Vector3;
+            reflect: (vector: import("three").Vector3) => import("three").Vector3;
+            angleTo: (v: import("three").Vector3) => number;
+            distanceTo: (v: import("three").Vector3) => number;
+            distanceToSquared: (v: import("three").Vector3) => number;
+            distanceToManhattan: (v: import("three").Vector3) => number;
+            setFromSpherical: (s: import("three").Spherical) => import("three").Vector3;
+            setFromSphericalCoords: (r: number, phi: number, theta: number) => import("three").Vector3;
+            setFromCylindrical: (s: import("three").Cylindrical) => import("three").Vector3;
+            setFromCylindricalCoords: (radius: number, theta: number, y: number) => import("three").Vector3;
+            setFromMatrixPosition: (m: import("three").Matrix4) => import("three").Vector3;
+            setFromMatrixScale: (m: import("three").Matrix4) => import("three").Vector3;
+            setFromMatrixColumn: (matrix: import("three").Matrix4, index: number) => import("three").Vector3;
+            setFromMatrix3Column: (matrix: import("three").Matrix3, index: number) => import("three").Vector3;
+            setFromEuler: (e: import("three").Euler) => import("three").Vector3;
+            equals: (v: import("three").Vector3) => boolean;
+            fromArray: (array: number[] | ArrayLike<number>, offset?: number | undefined) => import("three").Vector3;
+            toArray: {
+                (array?: number[] | undefined, offset?: number | undefined): number[];
+                (array?: import("three").Vector3Tuple | undefined, offset?: 0 | undefined): import("three").Vector3Tuple;
+                (array: ArrayLike<number>, offset?: number | undefined): ArrayLike<number>;
+            };
+            fromBufferAttribute: (attribute: import("three").BufferAttribute | import("three").InterleavedBufferAttribute, index: number) => import("three").Vector3;
+            random: () => import("three").Vector3;
+            randomDirection: () => import("three").Vector3;
+        };
+        up0: {
+            x: number;
+            y: number;
+            z: number;
+            readonly isVector3: true;
+            set: (x: number, y: number, z: number) => import("three").Vector3;
+            setScalar: (scalar: number) => import("three").Vector3;
+            setX: (x: number) => import("three").Vector3;
+            setY: (y: number) => import("three").Vector3;
+            setZ: (z: number) => import("three").Vector3;
+            setComponent: (index: number, value: number) => import("three").Vector3;
+            getComponent: (index: number) => number;
+            clone: () => import("three").Vector3;
+            copy: (v: import("three").Vector3) => import("three").Vector3;
+            add: (v: import("three").Vector3) => import("three").Vector3;
+            addScalar: (s: number) => import("three").Vector3;
+            addScaledVector: (v: import("three").Vector3, s: number) => import("three").Vector3;
+            addVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
+            sub: (a: import("three").Vector3) => import("three").Vector3;
+            subScalar: (s: number) => import("three").Vector3;
+            subVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
+            multiply: (v: import("three").Vector3) => import("three").Vector3;
+            multiplyScalar: (s: number) => import("three").Vector3;
+            multiplyVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
+            applyEuler: (euler: import("three").Euler) => import("three").Vector3;
+            applyAxisAngle: (axis: import("three").Vector3, angle: number) => import("three").Vector3;
+            applyMatrix3: (m: import("three").Matrix3) => import("three").Vector3;
+            applyNormalMatrix: (m: import("three").Matrix3) => import("three").Vector3;
+            applyMatrix4: (m: import("three").Matrix4) => import("three").Vector3;
+            applyQuaternion: (q: import("three").Quaternion) => import("three").Vector3;
+            project: (camera: Camera) => import("three").Vector3;
+            unproject: (camera: Camera) => import("three").Vector3;
+            transformDirection: (m: import("three").Matrix4) => import("three").Vector3;
+            divide: (v: import("three").Vector3) => import("three").Vector3;
+            divideScalar: (s: number) => import("three").Vector3;
+            min: (v: import("three").Vector3) => import("three").Vector3;
+            max: (v: import("three").Vector3) => import("three").Vector3;
+            clamp: (min: import("three").Vector3, max: import("three").Vector3) => import("three").Vector3;
+            clampScalar: (min: number, max: number) => import("three").Vector3;
+            clampLength: (min: number, max: number) => import("three").Vector3;
+            floor: () => import("three").Vector3;
+            ceil: () => import("three").Vector3;
+            round: () => import("three").Vector3;
+            roundToZero: () => import("three").Vector3;
+            negate: () => import("three").Vector3;
+            dot: (v: import("three").Vector3) => number;
+            lengthSq: () => number;
+            length: () => number;
+            lengthManhattan: () => number;
+            manhattanLength: () => number;
+            manhattanDistanceTo: (v: import("three").Vector3) => number;
+            normalize: () => import("three").Vector3;
+            setLength: (l: number) => import("three").Vector3;
+            lerp: (v: import("three").Vector3, alpha: number) => import("three").Vector3;
+            lerpVectors: (v1: import("three").Vector3, v2: import("three").Vector3, alpha: number) => import("three").Vector3;
+            cross: (a: import("three").Vector3) => import("three").Vector3;
+            crossVectors: (a: import("three").Vector3, b: import("three").Vector3) => import("three").Vector3;
+            projectOnVector: (v: import("three").Vector3) => import("three").Vector3;
+            projectOnPlane: (planeNormal: import("three").Vector3) => import("three").Vector3;
+            reflect: (vector: import("three").Vector3) => import("three").Vector3;
+            angleTo: (v: import("three").Vector3) => number;
+            distanceTo: (v: import("three").Vector3) => number;
+            distanceToSquared: (v: import("three").Vector3) => number;
+            distanceToManhattan: (v: import("three").Vector3) => number;
+            setFromSpherical: (s: import("three").Spherical) => import("three").Vector3;
+            setFromSphericalCoords: (r: number, phi: number, theta: number) => import("three").Vector3;
+            setFromCylindrical: (s: import("three").Cylindrical) => import("three").Vector3;
+            setFromCylindricalCoords: (radius: number, theta: number, y: number) => import("three").Vector3;
+            setFromMatrixPosition: (m: import("three").Matrix4) => import("three").Vector3;
+            setFromMatrixScale: (m: import("three").Matrix4) => import("three").Vector3;
+            setFromMatrixColumn: (matrix: import("three").Matrix4, index: number) => import("three").Vector3;
+            setFromMatrix3Column: (matrix: import("three").Matrix3, index: number) => import("three").Vector3;
+            setFromEuler: (e: import("three").Euler) => import("three").Vector3;
+            equals: (v: import("three").Vector3) => boolean;
+            fromArray: (array: number[] | ArrayLike<number>, offset?: number | undefined) => import("three").Vector3;
+            toArray: {
+                (array?: number[] | undefined, offset?: number | undefined): number[];
+                (array?: import("three").Vector3Tuple | undefined, offset?: 0 | undefined): import("three").Vector3Tuple;
+                (array: ArrayLike<number>, offset?: number | undefined): ArrayLike<number>;
+            };
+            fromBufferAttribute: (attribute: import("three").BufferAttribute | import("three").InterleavedBufferAttribute, index: number) => import("three").Vector3;
+            random: () => import("three").Vector3;
+            randomDirection: () => import("three").Vector3;
+        };
+        update: () => void;
         reset: () => void;
         dispose: () => void;
-        getPolarAngle: () => number;
-        getAzimuthalAngle: () => number;
-        getDistance: () => number;
-        addEventListener: (type: string, listener: (event: any) => void) => void;
-        hasEventListener: (type: string, listener: (event: any) => void) => boolean;
-        removeEventListener: (type: string, listener: (event: any) => void) => void;
-        dispatchEvent: (event: {
-            type: string;
-            target: any;
-        }) => void;
+        checkDistances: () => void;
+        zoomCamera: () => void;
+        panCamera: () => void;
+        rotateCamera: () => void;
+        handleResize: () => void;
+        addEventListener: <T_9 extends string>(type: T_9, listener: import("three").EventListener<import("three").Event, T_9, TrackballControls>) => void;
+        hasEventListener: <T_10 extends string>(type: T_10, listener: import("three").EventListener<import("three").Event, T_10, TrackballControls>) => boolean;
+        removeEventListener: <T_11 extends string>(type: T_11, listener: import("three").EventListener<import("three").Event, T_11, TrackballControls>) => void;
+        dispatchEvent: (event: import("three").Event) => void;
     } | null>;
     camera: Camera;
     canvas: Ref<HTMLCanvasElement>;
@@ -3638,42 +3551,14 @@ declare const _sfc_main: import("vue").DefineComponent<{
     tryBindCamera: () => void;
     readonly Camera: typeof Camera;
     readonly Object3D: typeof Object3D;
-    readonly OrbitControls: typeof OrbitControls;
+    readonly TrackballControls: typeof TrackballControls;
     inject: typeof inject;
     ref: typeof ref;
     watch: typeof watch;
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
-    readonly handleVectorProp: (props: {
-        [key: string]: any;
-    }, prop: string, obj: Object3D<import("three").Event> | import("three").Group, registerWatch?: boolean) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    enablePan: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
-    };
-    enableRotate: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
-    };
-    enableZoom: {
-        type: BooleanConstructor;
-        required: false;
-        default: boolean;
-    };
-    minZoom: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    maxZoom: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
     minDistance: {
         type: NumberConstructor;
         required: false;
@@ -3684,43 +3569,26 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: number;
     };
-    minPolarAngle: {
+    panSpeed: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    maxPolarAngle: {
+    rotateSpeed: {
         type: NumberConstructor;
         required: false;
         default: number;
     };
-    minAzimuthAngle: {
+    zoomSpeed: {
         type: NumberConstructor;
         required: false;
         default: number;
-    };
-    maxAzimuthAngle: {
-        type: NumberConstructor;
-        required: false;
-        default: number;
-    };
-    target: {
-        type: null;
-        required: false;
-        default: () => number[];
     };
 }>>, {
-    enablePan: boolean;
-    enableRotate: boolean;
-    enableZoom: boolean;
-    minZoom: number;
-    maxZoom: number;
     minDistance: number;
     maxDistance: number;
-    minPolarAngle: number;
-    maxPolarAngle: number;
-    minAzimuthAngle: number;
-    maxAzimuthAngle: number;
-    target: any;
+    zoomSpeed: number;
+    rotateSpeed: number;
+    panSpeed: number;
 }>;
 export default _sfc_main;
