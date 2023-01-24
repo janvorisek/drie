@@ -1,6 +1,6 @@
 <template>
-  <slot></slot>
   <canvas ref="canvas"> </canvas>
+  <slot></slot>
 </template>
 
 <docs>BEGIN_DOCS
@@ -112,6 +112,7 @@ const controls = ref<Ref<{ update: () => void; enabled: boolean; object: Camera 
 const canvas = ref<HTMLCanvasElement>();
 provide("canvas", canvas);
 
+let allControlsEnabled = true;
 let then = Date.now();
 let fpsInterval = 1000 / props.frameLimit;
 
@@ -190,7 +191,7 @@ function animate() {
       if (ctrl.value === null) continue;
 
       if (ctrl.value.object.uuid === activeCamera.value.uuid) {
-        ctrl.value.enabled = true;
+        ctrl.value.enabled = allControlsEnabled; //true;
         ctrl.value.update();
       } else {
         ctrl.value.enabled = false;
@@ -234,6 +235,14 @@ provide("getMaterial", (c: string) => materials.find((g) => g.name === c));
 
 //provide("controls", controls);
 provide("addControls", (controlsRef: any) => controls.value.push(controlsRef));
+
+provide("enableAllControls", () => {
+  allControlsEnabled = true;
+});
+
+provide("disableAllControls", () => {
+  allControlsEnabled = false;
+});
 
 provide("camera", activeCamera);
 
