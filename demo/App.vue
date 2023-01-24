@@ -20,7 +20,7 @@
         :on-before-render="onBeforeRender"
         :camera="camera"
         :antialias="true"
-        :shadow-map-enabled="false"
+        :shadow-map-enabled="true"
       >
         <PerspectiveCamera name="cam1" :position="[5, 5, 5]" :up="[0, 0, 1]">
           <OrbitControls />
@@ -37,11 +37,12 @@
 
         <Scene background="white">
           <Mesh :position="[0, 0, -3]" :receive-shadow="true">
-            <MeshLambertMaterial color="#cccccc" :side="DoubleSide" />
+            <MeshLambertMaterial color="#555" :side="DoubleSide" />
             <PlaneGeometry name="plane" :width="20" :height="20" />
+            <TransformControls :size="0.5" />
           </Mesh>
           <PointLight :position="[0, 0, 10]" :intensity="0.25" :cast-shadow="true" />
-          <AmbientLight :color="0xffffff" />
+          <AmbientLight :color="0xffffff" :intensity="2" />
           <Points :position="posV" :scale="[s, s, s]">
             <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
             <SphereGeometry name="sphere" :radius="radius" :width-segments="12" :height-segments="12" />
@@ -57,6 +58,7 @@
             @mouseenter="onMouseEnter"
             @mouseleave="onMouseLeave"
           >
+            <TransformControls :size="0.5" :position="[20, 20, 0]" />
             <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
               <MeshLambertMaterial transparent :opacity="opacity">
                 <TextureLoader url="https://threejs.org/examples/textures/crate.gif" />
@@ -72,6 +74,7 @@
               :position="[3, 0, 0]"
               :scale="[20, 20, 20]"
               url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
+              :cast-shadow="true"
               @load="onLoad"
             >
               <MeshBasicMaterial :color="color3" :side="DoubleSide" />
@@ -80,11 +83,21 @@
               :position="[-2, 2, 0]"
               :rotation="[Math.PI / 2, 0, 0]"
               :scale="[10, 10, 10]"
+              :cast-shadow="true"
               url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
               @load="onLoad"
             >
+              <TransformControls :size="0.5" />
               <MeshNormalMaterial :side="DoubleSide" transparent :opacity="0.5" />
             </OBJLoader>
+            <GLTFLoader
+              url="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF-Binary/Avocado.glb"
+              :position="[0, 0, 5]"
+              :scale="[10, 10, 10]"
+              :cast-shadow="true"
+            >
+              <TransformControls :size="0.5" />
+            </GLTFLoader>
             <Mesh v-for="i in count" :key="i" geometry="reusedGeo" material="reusedMat" :position="[i * 1.5, 0, 0]">
             </Mesh>
 
