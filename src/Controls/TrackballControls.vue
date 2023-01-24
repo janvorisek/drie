@@ -54,7 +54,7 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { Camera, Object3D } from "three";
+import { Camera } from "three";
 
 import { TrackballControls } from "three/examples/jsm/controls/TrackballControls";
 

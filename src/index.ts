@@ -8,6 +8,7 @@ import OrthographicCamera from "./Cameras/OrthographicCamera.vue";
 
 import OrbitControls from "./Controls/OrbitControls.vue";
 import TrackballControls from "./Controls/TrackballControls.vue";
+import TransformControls from "./Controls/TransformControls.vue";
 
 import Group from "./Objects/Group.vue";
 import InstancedMesh from "./Objects/InstancedMesh.vue";
@@ -56,6 +57,7 @@ function install(app: App) {
   // Controls
   app.component("OrbitControls", OrbitControls);
   app.component("TrackballControls", TrackballControls);
+  app.component("TransformControls", TransformControls);
   // Objects
   app.component("Group", Group);
   app.component("InstancedMesh", InstancedMesh);
@@ -107,6 +109,7 @@ export {
   // Controls
   OrbitControls,
   TrackballControls,
+  TransformControls,
   // Objects
   Group,
   InstancedMesh,
