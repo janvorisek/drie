@@ -1,6 +1,6 @@
 import { inject, ref } from "vue";
 import { Texture, TextureLoader, Material, type Wrapping } from "three";
-import { Vector2Like } from "../types";
+import { type Vector2Like } from "../types";
 export interface Props {
     /**
      * How much a single repetition of the texture is offset from the beginning, in each direction U and V.
@@ -367,7 +367,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     readonly handleVector2Prop: (props: {
         [key: string]: any;
     }, prop: string, obj: any, registerWatch?: boolean) => void;
-    readonly Vector2Like: any;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     offset: {
         type: null;
