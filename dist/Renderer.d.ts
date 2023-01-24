@@ -7053,6 +7053,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         object: Camera;
     }>[]>;
     canvas: Ref<HTMLCanvasElement | undefined>;
+    allControlsEnabled: boolean;
     then: number;
     fpsInterval: number;
     setCamera: (newCamera?: string) => void;

@@ -1,5 +1,5 @@
 import { Group, Scene } from "three";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Vector3Like } from "../types";
 export interface Props {
     /**
@@ -64,7 +64,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         (event: "progress", xhr: ProgressEvent<EventTarget>): void;
         (event: "error", error: ErrorEvent): void;
     };
-    loader: OBJLoader;
+    loader: GLTFLoader;
     scene: Scene;
     three: Group;
     load: () => void;
