@@ -7,7 +7,7 @@
       <Scene background="#f9f9f9">
         <Mesh :position="[1, 1, 0]">
           <MeshNormalMaterial :side="DoubleSide" />
-          <BufferGeometry name="geo" :vertices="vertices" />
+          <BufferGeometry name="geo" :normals="true" :vertices="vertices" />
         </Mesh>
         <LineSegments :position="[1, 1, 0]">
           <WireframeGeometry geometry="geo" />

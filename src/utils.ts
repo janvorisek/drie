@@ -67,10 +67,6 @@ export function copyGeo(three: BufferGeometry, tmp: BufferGeometry) {
   if (tmp.hasAttribute("position")) {
     three.setAttribute("position", tmp.getAttribute("position"));
     three.attributes.position.needsUpdate = true;
-
-    three.computeVertexNormals();
-    three.computeBoundingBox();
-    three.computeBoundingSphere();
   }
 
   if (tmp.hasAttribute("normal")) {

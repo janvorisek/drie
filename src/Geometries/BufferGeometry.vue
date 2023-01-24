@@ -33,7 +33,7 @@ export default {
         <Scene background="#f9f9f9">
           <Mesh :position="[1, 1, 0]">
             <MeshNormalMaterial :side="DoubleSide" />
-            <BufferGeometry :vertices="vertices" />
+            <BufferGeometry :vertices="vertices" :normals="true" />
           </Mesh>
         </Scene>
       </Renderer>
@@ -92,6 +92,12 @@ export interface Props {
    * Flat array of vertex UVs.
    */
   uvs?: number[];
+
+  /**
+   * Flat array of vertex normals.
+   * Use `true` for automated calculation of vertex normals
+   */
+  normals?: number[] | boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -99,22 +105,38 @@ const props = withDefaults(defineProps<Props>(), {
   vertices: () => [],
   faces: () => [],
   uvs: () => [],
+  normals: false,
 });
 
-function makeGeometry(vertices: number[], faces: number[], uvs: number[]) {
+function makeGeometry() {
+  console.log("make");
   const geometry = new BufferGeometry();
 
-  const vertArray = new Float32Array(vertices);
-  const uvArray = new Float32Array(uvs);
+  const vertArray = new Float32Array(props.vertices);
 
   geometry.setAttribute("position", new BufferAttribute(vertArray, 3));
-  geometry.setAttribute("uv", new BufferAttribute(uvArray, 2));
-  if (props.faces.length > 0) geometry.setIndex(faces);
+
+  if (props.uvs.length > 0) {
+    const uvArray = new Float32Array(props.uvs);
+    geometry.setAttribute("uv", new BufferAttribute(uvArray, 2));
+  }
+
+  if (props.normals === true) {
+    geometry.computeVertexNormals();
+    geometry.attributes.normal.needsUpdate = true;
+  }
+
+  if (Array.isArray(props.normals)) {
+    const nArray = new Float32Array(props.normals);
+    geometry.setAttribute("normal", new BufferAttribute(nArray, 3));
+  }
+
+  if (props.faces.length > 0) geometry.setIndex(props.faces);
 
   return geometry;
 }
 
-const three = reactive(makeGeometry(props.vertices, props.faces, props.uvs));
+const three = reactive(new BufferGeometry());
 // eslint-disable-next-line vue/no-setup-props-destructure
 three.name = props.name;
 
@@ -127,26 +149,28 @@ if (mesh) {
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
 addGeometry(three);
 
-function redoGeometry(vertices: number[], faces: number[], uvs: number[]) {
-  const tmp = makeGeometry(vertices, faces, uvs);
+function redoGeometry() {
+  const tmp = makeGeometry();
 
   copyGeo(three, tmp);
 }
 
+redoGeometry();
+
 watch(
   () => props.vertices,
   (vertices) => {
-    redoGeometry(vertices, props.faces, props.uvs);
+    redoGeometry();
   },
-  { deep: true, immediate: true },
+  { deep: true },
 );
 
 watch(
   () => props.faces,
   (faces) => {
-    redoGeometry(props.vertices, faces, props.uvs);
+    redoGeometry();
   },
-  { deep: true, immediate: true },
+  { deep: true },
 );
 
 defineExpose({ three });
