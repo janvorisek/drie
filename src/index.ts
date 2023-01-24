@@ -17,6 +17,7 @@ import LineSegments from "./Objects/LineSegments.vue";
 import Mesh from "./Objects/Mesh.vue";
 import Points from "./Objects/Points.vue";
 
+import GLTFLoader from "./Loaders/GLTFLoader.vue";
 import OBJLoader from "./Loaders/OBJLoader.vue";
 
 import AxesHelper from "./Helpers/AxesHelper.vue";
@@ -65,6 +66,7 @@ function install(app: App) {
   app.component("Mesh", Mesh);
   app.component("Points", Points);
   // Loaders
+  app.component("GLTFLoader", GLTFLoader);
   app.component("OBJLoader", OBJLoader);
   // Helpers
   app.component("AxesHelper", AxesHelper);
@@ -114,6 +116,7 @@ export {
   Mesh,
   Points,
   // Loaders
+  GLTFLoader,
   OBJLoader,
   //Helpers
   AxesHelper,
