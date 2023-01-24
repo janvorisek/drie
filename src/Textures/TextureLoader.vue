@@ -6,7 +6,17 @@ export default {
 </script>
 
 <docs>BEGIN_DOCS
+<script setup>
+import TextureLoader from '../../examples/TextureLoader.vue'
+</script>
+
 Component for asynchronously loading a texture. It internally manages `THREE.Texture`.
+
+## Example
+
+<ClientOnly>
+  <TextureLoader />
+</ClientOnly>
 </docs>
 
 <script setup lang="ts">
@@ -14,7 +24,7 @@ import { inject, ref } from "vue";
 
 import { Texture, TextureLoader, Material, type Wrapping, ClampToEdgeWrapping } from "three";
 import { handlePropCallback, handleVector2Prop } from "../utils";
-import { Vector2Like } from "../types";
+import { type Vector2Like } from "../types";
 
 export interface Props {
   /**
@@ -73,6 +83,8 @@ const three = ref<Texture>(new Texture());
 function load() {
   new TextureLoader().loadAsync(props.url).then((texture) => {
     three.value = texture;
+    handleVector2Prop(props, "offset", three.value);
+    handleVector2Prop(props, "repeat", three.value);
     if ("map" in material) {
       material.map = three.value;
       material.needsUpdate = true;
@@ -95,9 +107,6 @@ handlePropCallback(props, "url", load);
 handlePropCallback(props, "wrapS", applyProps);
 handlePropCallback(props, "wrapT", applyProps);
 handlePropCallback(props, "rotation", applyProps);
-
-handleVector2Prop(props, "offset", three.value);
-handleVector2Prop(props, "repeat", three.value);
 
 defineExpose({ three });
 </script>
