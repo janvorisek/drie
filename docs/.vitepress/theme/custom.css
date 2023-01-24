@@ -46,6 +46,10 @@ table {
   right: 82px;
 }
 
+.container .VPNavBarSearch {
+  max-width: 180px;
+}
+
 @media (min-width: 960px) {
   .has-sidebar .VPNavBarSearch {
     position: absolute;
