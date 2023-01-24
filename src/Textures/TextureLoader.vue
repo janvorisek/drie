@@ -13,7 +13,7 @@ Component for asynchronously loading a texture. It internally manages `THREE.Tex
 import { inject, ref } from "vue";
 
 import { Texture, TextureLoader, Material, type Wrapping, ClampToEdgeWrapping } from "three";
-import { handlePropCallback } from "../utils";
+import { handlePropCallback, handleVector2Prop } from "../utils";
 import { Vector2Like } from "../types";
 
 export interface Props {
@@ -84,6 +84,7 @@ function load() {
 function applyProps() {
   three.value.wrapS = props.wrapS;
   three.value.wrapT = props.wrapT;
+  three.value.rotation = props.rotation;
 
   three.value.needsUpdate = true;
 }
@@ -93,6 +94,10 @@ load();
 handlePropCallback(props, "url", load);
 handlePropCallback(props, "wrapS", applyProps);
 handlePropCallback(props, "wrapT", applyProps);
+handlePropCallback(props, "rotation", applyProps);
+
+handleVector2Prop(props, "offset", three.value);
+handleVector2Prop(props, "repeat", three.value);
 
 defineExpose({ three });
 </script>

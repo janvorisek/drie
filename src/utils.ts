@@ -1,12 +1,19 @@
 import { Vector3, Object3D, Group, BufferGeometry, Vector2, Camera, Raycaster, Scene, Intersection } from "three";
 import { inject, onMounted, onUnmounted, type Ref, watch } from "vue";
-import { Vector3Like } from "./types";
+import { Vector2Like, Vector3Like } from "./types";
 
 export const vector3LikeToVector3 = (data?: Vector3Like) => {
   if (data === undefined) return new Vector3(0, 0, 0);
 
   if ("x" in data) return new Vector3(data.x, data.y, data.z);
   else return new Vector3(data[0], data[1], data[2]);
+};
+
+export const vector2LikeToVector2 = (data?: Vector2Like) => {
+  if (data === undefined) return new Vector2(0, 0);
+
+  if ("x" in data) return new Vector2(data.x, data.y);
+  else return new Vector2(data[0], data[1]);
 };
 
 export const vector3LikeToArray = (data?: Vector3Like) => {
@@ -16,7 +23,7 @@ export const vector3LikeToArray = (data?: Vector3Like) => {
   else return data;
 };
 
-export const setVectorProp = (prop: string, value: Vector3, obj: Object3D) => {
+export const setVectorProp = (prop: string, value: Vector3, obj: any) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   if (obj[prop].isVector3) (obj[prop] as Vector3).set(value.x, value.y, value.z);
@@ -26,12 +33,7 @@ export const setVectorProp = (prop: string, value: Vector3, obj: Object3D) => {
 };
 
 // Handle vector prop
-export const handleVectorProp = (
-  props: { [key: string]: any },
-  prop: string,
-  obj: Object3D | Group,
-  registerWatch = true,
-) => {
+export const handleVectorProp = (props: { [key: string]: any }, prop: string, obj: any, registerWatch = true) => {
   if (obj === null) return;
 
   if (props[prop] !== undefined) {
@@ -49,6 +51,36 @@ export const handleVectorProp = (
         const position = vector3LikeToVector3(props[prop]);
 
         setVectorProp(prop, position, obj);
+      }
+    },
+  );
+};
+
+export const setVector2Prop = (prop: string, value: Vector2, obj: any) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  if (obj[prop].isVector2) (obj[prop] as Vector2).set(value.x, value.y);
+};
+
+// Handle vector prop
+export const handleVector2Prop = (props: { [key: string]: any }, prop: string, obj: any, registerWatch = true) => {
+  if (obj === null) return;
+
+  if (props[prop] !== undefined) {
+    const position = vector2LikeToVector2(props[prop]);
+
+    setVector2Prop(prop, position, obj);
+  }
+
+  if (!registerWatch) return;
+
+  watch(
+    () => props[prop],
+    () => {
+      if (props[prop] !== undefined) {
+        const position = vector2LikeToVector2(props[prop]);
+
+        setVector2Prop(prop, position, obj);
       }
     },
   );
