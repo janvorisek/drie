@@ -1,5 +1,5 @@
-import { watch as C, inject as S, onMounted as ot, onUnmounted as _e, defineComponent as O, ref as Oe, reactive as ce, provide as k, openBlock as zn, createElementBlock as Un, Fragment as Bn, createElementVNode as Xn, renderSlot as te, shallowRef as Yn, nextTick as pt } from "vue";
-import { Vector3 as x, Raycaster as It, Vector2 as B, WebGLRenderer as Vn, Scene as Zn, Color as K, PerspectiveCamera as bn, OrthographicCamera as Mn, EventDispatcher as En, MOUSE as Se, TOUCH as Xe, Quaternion as re, Spherical as $t, Euler as Kn, Matrix4 as yt, Object3D as ft, MeshBasicMaterial as we, LineBasicMaterial as xe, CylinderGeometry as se, BoxGeometry as ne, BufferGeometry as X, Float32BufferAttribute as pe, Mesh as A, OctahedronGeometry as rt, Line as ye, SphereGeometry as Tn, TorusGeometry as Ke, PlaneGeometry as Sn, DoubleSide as xn, Group as Fe, InstancedMesh as $n, LineLoop as An, LineSegments as mt, PointsMaterial as Ge, Points as tt, Loader as vn, LoaderUtils as je, FileLoader as Ft, SpotLight as Qn, PointLight as Ln, DirectionalLight as qn, sRGBEncoding as He, MeshPhysicalMaterial as ze, TangentSpaceNormalMap as Wn, Interpolant as Jn, TextureLoader as Pn, ImageBitmapLoader as es, InterleavedBuffer as ts, InterleavedBufferAttribute as ns, BufferAttribute as gt, LinearFilter as Rn, LinearMipmapLinearFilter as In, RepeatWrapping as Ot, Material as nt, MeshStandardMaterial as jt, PropertyBinding as ss, SkinnedMesh as os, MathUtils as is, InterpolateLinear as On, AnimationClip as as, Bone as rs, Skeleton as cs, TriangleFanDrawMode as Cn, NearestFilter as ls, NearestMipmapNearestFilter as us, LinearMipmapNearestFilter as hs, NearestMipmapLinearFilter as ds, ClampToEdgeWrapping as Ct, MirroredRepeatWrapping as ps, InterpolateDiscrete as fs, FrontSide as wt, Texture as Nt, TriangleStripDrawMode as ms, VectorKeyframeTrack as gs, QuaternionKeyframeTrack as Qt, NumberKeyframeTrack as ys, Box3 as ws, Sphere as _s, MeshPhongMaterial as bs, AxesHelper as Ms, CircleGeometry as Es, ConeGeometry as Ts, EdgesGeometry as Ss, Curve as xs, RingGeometry as As, WireframeGeometry as vs, LineDashedMaterial as Ls, MeshLambertMaterial as Ps, MeshNormalMaterial as Rs, AmbientLight as Is } from "three";
+import { watch as C, inject as S, onMounted as it, onUnmounted as _e, defineComponent as O, ref as Oe, reactive as ce, provide as k, openBlock as zn, createElementBlock as Un, Fragment as Bn, createElementVNode as Xn, renderSlot as te, shallowRef as Yn, nextTick as ft } from "vue";
+import { Vector3 as x, Raycaster as It, Vector2 as X, WebGLRenderer as Vn, Scene as Zn, Color as K, PerspectiveCamera as bn, OrthographicCamera as Mn, EventDispatcher as En, MOUSE as Se, TOUCH as Xe, Quaternion as re, Spherical as $t, Euler as Kn, Matrix4 as yt, Object3D as mt, MeshBasicMaterial as we, LineBasicMaterial as xe, CylinderGeometry as se, BoxGeometry as ne, BufferGeometry as B, Float32BufferAttribute as pe, Mesh as A, OctahedronGeometry as ct, Line as ye, SphereGeometry as Tn, TorusGeometry as Ke, PlaneGeometry as Sn, DoubleSide as xn, Group as Fe, InstancedMesh as $n, LineLoop as An, LineSegments as gt, PointsMaterial as Ge, Points as tt, Loader as vn, LoaderUtils as je, FileLoader as Ft, SpotLight as Qn, PointLight as Ln, DirectionalLight as qn, sRGBEncoding as He, MeshPhysicalMaterial as ze, TangentSpaceNormalMap as Wn, Interpolant as Jn, TextureLoader as Pn, ImageBitmapLoader as es, InterleavedBuffer as ts, InterleavedBufferAttribute as ns, BufferAttribute as nt, LinearFilter as Rn, LinearMipmapLinearFilter as In, RepeatWrapping as Ot, Material as st, MeshStandardMaterial as jt, PropertyBinding as ss, SkinnedMesh as os, MathUtils as is, InterpolateLinear as On, AnimationClip as as, Bone as rs, Skeleton as cs, TriangleFanDrawMode as Cn, NearestFilter as ls, NearestMipmapNearestFilter as us, LinearMipmapNearestFilter as hs, NearestMipmapLinearFilter as ds, ClampToEdgeWrapping as Ct, MirroredRepeatWrapping as ps, InterpolateDiscrete as fs, FrontSide as wt, Texture as Nt, TriangleStripDrawMode as ms, VectorKeyframeTrack as gs, QuaternionKeyframeTrack as Qt, NumberKeyframeTrack as ys, Box3 as ws, Sphere as _s, MeshPhongMaterial as bs, AxesHelper as Ms, CircleGeometry as Es, ConeGeometry as Ts, EdgesGeometry as Ss, Curve as xs, RingGeometry as As, WireframeGeometry as vs, LineDashedMaterial as Ls, MeshLambertMaterial as Ps, MeshNormalMaterial as Rs, AmbientLight as Is } from "three";
 const qt = (c) => c === void 0 ? new x(0, 0, 0) : "x" in c ? new x(c.x, c.y, c.z) : new x(c[0], c[1], c[2]), Wt = (c, o, t) => {
   t[c].isVector3 ? t[c].set(o.x, o.y, o.z) : "isEuler" in t[c] && t[c].setFromVector3(o);
 }, R = (c, o, t, e = !0) => {
@@ -27,7 +27,7 @@ const qt = (c) => c === void 0 ? new x(0, 0, 0) : "x" in c ? new x(c.x, c.y, c.z
   );
 };
 function fe(c, o) {
-  o.hasAttribute("position") && (c.setAttribute("position", o.getAttribute("position")), c.attributes.position.needsUpdate = !0, c.computeVertexNormals(), c.computeBoundingBox(), c.computeBoundingSphere()), o.hasAttribute("normal") && (c.setAttribute("normal", o.getAttribute("normal")), c.attributes.normal.needsUpdate = !0), o.hasAttribute("uv") && (c.setAttribute("uv", o.getAttribute("uv")), c.attributes.uv.needsUpdate = !0), c.setIndex(o.getIndex());
+  o.hasAttribute("position") && (c.setAttribute("position", o.getAttribute("position")), c.attributes.position.needsUpdate = !0), o.hasAttribute("normal") && (c.setAttribute("normal", o.getAttribute("normal")), c.attributes.normal.needsUpdate = !0), o.hasAttribute("uv") && (c.setAttribute("uv", o.getAttribute("uv")), c.attributes.uv.needsUpdate = !0), c.setIndex(o.getIndex());
 }
 function Ae(c) {
   if (c.children.length > 0)
@@ -43,7 +43,7 @@ function Ae(c) {
 }
 function Ue(c) {
   const o = S("scene"), t = S("parent", void 0);
-  ot(() => {
+  it(() => {
     t ? t.add(c) : o.add(c);
   }), _e(() => {
     t ? t.remove(c) : o.remove(c);
@@ -65,7 +65,7 @@ function Os(c, o, t) {
     const d = h.intersectObjects(c);
     d.length > 0 ? (a = d, s === !1 && t("mouseenter", d, u), s = !0, t("mousemove", d, u)) : (s && t("mouseleave", a, u), s = !1, a = []);
   };
-  ot(() => {
+  it(() => {
     if (o.enableRaycasting) {
       if ((n == null ? void 0 : n.value) == null)
         return;
@@ -85,7 +85,7 @@ function Os(c, o, t) {
   );
 }
 function Jt(c) {
-  const o = new B(), t = c.currentTarget.getBoundingClientRect();
+  const o = new X(), t = c.currentTarget.getBoundingClientRect();
   return o.x = (c.clientX - t.left) / t.width * 2 - 1, o.y = -((c.clientY - t.top) / t.height) * 2 + 1, o;
 }
 const Cs = /* @__PURE__ */ O({
@@ -124,7 +124,7 @@ const Cs = /* @__PURE__ */ O({
     function _() {
       e.value !== null && (e.value.shadowMap.enabled = t.shadowMapEnabled, p = 1e3 / t.frameLimit, t.autoResize || e.value.setSize(t.width, t.height));
     }
-    ot(() => {
+    it(() => {
       e.value = new Vn({ canvas: h.value, antialias: t.antialias, alpha: t.alpha }), e.value.setSize(1, 1), _(), g(t.camera), new ResizeObserver((M) => {
         M.forEach((E) => {
           e.value && t.autoResize && e.value.setSize(E.contentRect.width, E.contentRect.height);
@@ -287,7 +287,7 @@ class js extends En {
     let l = 1;
     const h = new x();
     let u = !1;
-    const d = new B(), p = new B(), g = new B(), _ = new B(), b = new B(), m = new B(), M = new B(), E = new B(), v = new B(), T = [], D = {};
+    const d = new X(), p = new X(), g = new X(), _ = new X(), b = new X(), m = new X(), M = new X(), E = new X(), v = new X(), T = [], D = {};
     function F() {
       return 2 * Math.PI / 60 / 60 * e.autoRotateSpeed;
     }
@@ -317,8 +317,8 @@ class js extends En {
         if (e.object.isPerspectiveCamera) {
           const Be = e.object.position;
           f.copy(Be).sub(e.target);
-          let at = f.length();
-          at *= Math.tan(e.object.fov / 2 * Math.PI / 180), Y(2 * q * at / de.clientHeight, e.object.matrix), oe(2 * ee * at / de.clientHeight, e.object.matrix);
+          let rt = f.length();
+          rt *= Math.tan(e.object.fov / 2 * Math.PI / 180), Y(2 * q * rt / de.clientHeight, e.object.matrix), oe(2 * ee * rt / de.clientHeight, e.object.matrix);
         } else
           e.object.isOrthographicCamera ? (Y(q * (e.object.right - e.object.left) / e.object.zoom / de.clientWidth, e.object.matrix), oe(ee * (e.object.top - e.object.bottom) / e.object.zoom / de.clientHeight, e.object.matrix)) : (console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled."), e.enablePan = !1);
       };
@@ -386,15 +386,15 @@ class js extends En {
         _.set(f, L);
       }
     }
-    function it() {
+    function at() {
       const f = T[0].pageX - T[1].pageX, L = T[0].pageY - T[1].pageY, q = Math.sqrt(f * f + L * L);
       M.set(0, q);
     }
     function y() {
-      e.enableZoom && it(), e.enablePan && Ze();
+      e.enableZoom && at(), e.enablePan && Ze();
     }
     function P() {
-      e.enableZoom && it(), e.enableRotate && Pe();
+      e.enableZoom && at(), e.enableRotate && Pe();
     }
     function Z(f) {
       if (T.length == 1)
@@ -593,7 +593,7 @@ class js extends En {
     }
     function Zt(f) {
       let L = D[f.pointerId];
-      L === void 0 && (L = new B(), D[f.pointerId] = L), L.set(f.pageX, f.pageY);
+      L === void 0 && (L = new X(), D[f.pointerId] = L), L.set(f.pageX, f.pageY);
     }
     function Et(f) {
       const L = f.pointerId === T[0].pointerId ? T[1] : T[0];
@@ -648,13 +648,13 @@ class Us extends En {
     this.object = o, this.domElement = t, this.domElement.style.touchAction = "none", this.enabled = !0, this.screen = { left: 0, top: 0, width: 0, height: 0 }, this.rotateSpeed = 1, this.zoomSpeed = 1.2, this.panSpeed = 0.3, this.noRotate = !1, this.noZoom = !1, this.noPan = !1, this.staticMoving = !1, this.dynamicDampingFactor = 0.2, this.minDistance = 0, this.maxDistance = 1 / 0, this.keys = ["KeyA", "KeyS", "KeyD"], this.mouseButtons = { LEFT: Se.ROTATE, MIDDLE: Se.DOLLY, RIGHT: Se.PAN }, this.target = new x();
     const i = 1e-6, s = new x();
     let a = 1, r = n.NONE, l = n.NONE, h = 0, u = 0, d = 0;
-    const p = new x(), g = new B(), _ = new B(), b = new x(), m = new B(), M = new B(), E = new B(), v = new B(), T = [], D = {};
+    const p = new x(), g = new X(), _ = new X(), b = new x(), m = new X(), M = new X(), E = new X(), v = new X(), T = [], D = {};
     this.target0 = this.target.clone(), this.position0 = this.object.position.clone(), this.up0 = this.object.up.clone(), this.zoom0 = this.object.zoom, this.handleResize = function() {
       const y = e.domElement.getBoundingClientRect(), P = e.domElement.ownerDocument.documentElement;
       e.screen.left = y.left + window.pageXOffset - P.clientLeft, e.screen.top = y.top + window.pageYOffset - P.clientTop, e.screen.width = y.width, e.screen.height = y.height;
     };
     const F = function() {
-      const y = new B();
+      const y = new X();
       return function(Z, J) {
         return y.set(
           (Z - e.screen.left) / e.screen.width,
@@ -662,7 +662,7 @@ class Us extends En {
         ), y;
       };
     }(), G = function() {
-      const y = new B();
+      const y = new X();
       return function(Z, J) {
         return y.set(
           (Z - e.screen.width * 0.5 - e.screen.left) / (e.screen.width * 0.5),
@@ -681,7 +681,7 @@ class Us extends En {
       let y;
       r === n.TOUCH_ZOOM_PAN ? (y = h / u, h = u, e.object.isPerspectiveCamera ? p.multiplyScalar(y) : e.object.isOrthographicCamera ? (e.object.zoom /= y, e.object.updateProjectionMatrix()) : console.warn("THREE.TrackballControls: Unsupported camera type")) : (y = 1 + (M.y - m.y) * e.zoomSpeed, y !== 1 && y > 0 && (e.object.isPerspectiveCamera ? p.multiplyScalar(y) : e.object.isOrthographicCamera ? (e.object.zoom /= y, e.object.updateProjectionMatrix()) : console.warn("THREE.TrackballControls: Unsupported camera type")), e.staticMoving ? m.copy(M) : m.y += (M.y - m.y) * this.dynamicDampingFactor);
     }, this.panCamera = function() {
-      const y = new B(), P = new x(), Z = new x();
+      const y = new X(), P = new x(), Z = new x();
       return function() {
         if (y.copy(v).sub(E), y.lengthSq()) {
           if (e.object.isOrthographicCamera) {
@@ -776,7 +776,7 @@ class Us extends En {
           g.copy(_), _.copy(G(y.pageX, y.pageY));
           break;
         default:
-          const P = it(y), Z = y.pageX - P.x, J = y.pageY - P.y;
+          const P = at(y), Z = y.pageX - P.x, J = y.pageY - P.y;
           u = Math.sqrt(Z * Z + J * J);
           const ue = (y.pageX + P.x) / 2, me = (y.pageY + P.y) / 2;
           v.copy(F(ue, me));
@@ -813,9 +813,9 @@ class Us extends En {
     }
     function Ze(y) {
       let P = D[y.pointerId];
-      P === void 0 && (P = new B(), D[y.pointerId] = P), P.set(y.pageX, y.pageY);
+      P === void 0 && (P = new X(), D[y.pointerId] = P), P.set(y.pageX, y.pageY);
     }
-    function it(y) {
+    function at(y) {
       const P = y.pointerId === T[0].pointerId ? T[1] : T[0];
       return D[P.pointerId];
     }
@@ -860,7 +860,7 @@ const Bs = {
   Y: new x(0, 1, 0),
   Z: new x(0, 0, 1)
 }, vt = { type: "change" }, sn = { type: "mouseDown" }, on = { type: "mouseUp", mode: null }, an = { type: "objectChange" };
-class Ys extends ft {
+class Ys extends mt {
   constructor(o, t) {
     super(), t === void 0 && (console.warn('THREE.TransformControls: The second parameter "domElement" is now mandatory.'), t = document), this.isTransformControls = !0, this.visible = !1, this.domElement = t, this.domElement.style.touchAction = "none";
     const e = new qs();
@@ -1011,8 +1011,8 @@ function Lt(c, o, t) {
       return e[n];
   return !1;
 }
-const ct = new Kn(), j = new x(0, 1, 0), rn = new x(0, 0, 0), cn = new yt(), lt = new re(), dt = new re(), ge = new x(), ln = new yt(), Je = new x(1, 0, 0), De = new x(0, 1, 0), et = new x(0, 0, 1), ut = new x(), $e = new x(), Qe = new x();
-class qs extends ft {
+const lt = new Kn(), j = new x(0, 1, 0), rn = new x(0, 0, 0), cn = new yt(), ut = new re(), pt = new re(), ge = new x(), ln = new yt(), Je = new x(1, 0, 0), De = new x(0, 1, 0), et = new x(0, 0, 1), ht = new x(), $e = new x(), Qe = new x();
+class qs extends mt {
   constructor() {
     super(), this.isTransformControlsGizmo = !0, this.type = "TransformControlsGizmo";
     const o = new we({
@@ -1053,7 +1053,7 @@ class qs extends ft {
     _.translate(0, 0.05, 0);
     const b = new ne(0.08, 0.08, 0.08);
     b.translate(0, 0.04, 0);
-    const m = new X();
+    const m = new B();
     m.setAttribute("position", new pe([0, 0, 0, 1, 0, 0], 3));
     const M = new se(75e-4, 75e-4, 0.5, 3);
     M.translate(0, 0.25, 0);
@@ -1062,7 +1062,7 @@ class qs extends ft {
       return W.rotateY(Math.PI / 2), W.rotateX(Math.PI / 2), W;
     }
     function v() {
-      const H = new X();
+      const H = new B();
       return H.setAttribute("position", new pe([0, 0, 0, 1, 1, 1], 3)), H;
     }
     const T = {
@@ -1082,7 +1082,7 @@ class qs extends ft {
         [new A(M, a), null, [Math.PI / 2, 0, 0]]
       ],
       XYZ: [
-        [new A(new rt(0.1, 0), u.clone()), [0, 0, 0]]
+        [new A(new ct(0.1, 0), u.clone()), [0, 0, 0]]
       ],
       XY: [
         [new A(new ne(0.15, 0.15, 0.01), h.clone()), [0.15, 0.15, 0]]
@@ -1107,7 +1107,7 @@ class qs extends ft {
         [new A(new se(0.2, 0, 0.6, 4), e), [0, 0, -0.3], [-Math.PI / 2, 0, 0]]
       ],
       XYZ: [
-        [new A(new rt(0.2, 0), e)]
+        [new A(new ct(0.2, 0), e)]
       ],
       XY: [
         [new A(new ne(0.2, 0.2, 0.01), e), [0.15, 0.15, 0]]
@@ -1120,10 +1120,10 @@ class qs extends ft {
       ]
     }, F = {
       START: [
-        [new A(new rt(0.01, 2), n), null, null, null, "helper"]
+        [new A(new ct(0.01, 2), n), null, null, null, "helper"]
       ],
       END: [
-        [new A(new rt(0.01, 2), n), null, null, null, "helper"]
+        [new A(new ct(0.01, 2), n), null, null, null, "helper"]
       ],
       DELTA: [
         [new ye(v(), n), null, null, null, "helper"]
@@ -1238,7 +1238,7 @@ class qs extends ft {
       ]
     };
     function V(H) {
-      const le = new ft();
+      const le = new mt();
       for (const W in H)
         for (let ie = H[W].length; ie--; ) {
           const Q = H[W][ie][0].clone(), ve = H[W][ie][1], Le = H[W][ie][2], be = H[W][ie][3], Ve = H[W][ie][4];
@@ -1251,7 +1251,7 @@ class qs extends ft {
     this.gizmo = {}, this.picker = {}, this.helper = {}, this.add(this.gizmo.translate = V(T)), this.add(this.gizmo.rotate = V(G)), this.add(this.gizmo.scale = V(Y)), this.add(this.picker.translate = V(D)), this.add(this.picker.rotate = V(N)), this.add(this.picker.scale = V(oe)), this.add(this.helper.translate = V(F)), this.add(this.helper.rotate = V($)), this.add(this.helper.scale = V(z)), this.picker.translate.visible = !1, this.picker.rotate.visible = !1, this.picker.scale.visible = !1;
   }
   updateMatrixWorld(o) {
-    const e = (this.mode === "scale" ? "local" : this.space) === "local" ? this.worldQuaternion : dt;
+    const e = (this.mode === "scale" ? "local" : this.space) === "local" ? this.worldQuaternion : pt;
     this.gizmo.translate.visible = this.mode === "translate", this.gizmo.rotate.visible = this.mode === "rotate", this.gizmo.scale.visible = this.mode === "scale", this.helper.translate.visible = this.mode === "translate", this.helper.rotate.visible = this.mode === "rotate", this.helper.scale.visible = this.mode === "scale";
     let n = [];
     n = n.concat(this.picker[this.mode].children), n = n.concat(this.gizmo[this.mode].children), n = n.concat(this.helper[this.mode].children);
@@ -1260,10 +1260,10 @@ class qs extends ft {
       s.visible = !0, s.rotation.set(0, 0, 0), s.position.copy(this.worldPosition);
       let a;
       if (this.camera.isOrthographicCamera ? a = (this.camera.top - this.camera.bottom) / this.camera.zoom : a = this.worldPosition.distanceTo(this.cameraPosition) * Math.min(1.9 * Math.tan(Math.PI * this.camera.fov / 360) / this.camera.zoom, 7), s.scale.set(1, 1, 1).multiplyScalar(a * this.size / 4), s.tag === "helper") {
-        s.visible = !1, s.name === "AXIS" ? (s.position.copy(this.worldPositionStart), s.visible = !!this.axis, this.axis === "X" && (U.setFromEuler(ct.set(0, 0, 0)), s.quaternion.copy(e).multiply(U), Math.abs(j.copy(Je).applyQuaternion(e).dot(this.eye)) > 0.9 && (s.visible = !1)), this.axis === "Y" && (U.setFromEuler(ct.set(0, 0, Math.PI / 2)), s.quaternion.copy(e).multiply(U), Math.abs(j.copy(De).applyQuaternion(e).dot(this.eye)) > 0.9 && (s.visible = !1)), this.axis === "Z" && (U.setFromEuler(ct.set(0, Math.PI / 2, 0)), s.quaternion.copy(e).multiply(U), Math.abs(j.copy(et).applyQuaternion(e).dot(this.eye)) > 0.9 && (s.visible = !1)), this.axis === "XYZE" && (U.setFromEuler(ct.set(0, Math.PI / 2, 0)), j.copy(this.rotationAxis), s.quaternion.setFromRotationMatrix(cn.lookAt(rn, j, De)), s.quaternion.multiply(U), s.visible = this.dragging), this.axis === "E" && (s.visible = !1)) : s.name === "START" ? (s.position.copy(this.worldPositionStart), s.visible = this.dragging) : s.name === "END" ? (s.position.copy(this.worldPosition), s.visible = this.dragging) : s.name === "DELTA" ? (s.position.copy(this.worldPositionStart), s.quaternion.copy(this.worldQuaternionStart), ae.set(1e-10, 1e-10, 1e-10).add(this.worldPositionStart).sub(this.worldPosition).multiplyScalar(-1), ae.applyQuaternion(this.worldQuaternionStart.clone().invert()), s.scale.copy(ae), s.visible = this.dragging) : (s.quaternion.copy(e), this.dragging ? s.position.copy(this.worldPositionStart) : s.position.copy(this.worldPosition), this.axis && (s.visible = this.axis.search(s.name) !== -1));
+        s.visible = !1, s.name === "AXIS" ? (s.position.copy(this.worldPositionStart), s.visible = !!this.axis, this.axis === "X" && (U.setFromEuler(lt.set(0, 0, 0)), s.quaternion.copy(e).multiply(U), Math.abs(j.copy(Je).applyQuaternion(e).dot(this.eye)) > 0.9 && (s.visible = !1)), this.axis === "Y" && (U.setFromEuler(lt.set(0, 0, Math.PI / 2)), s.quaternion.copy(e).multiply(U), Math.abs(j.copy(De).applyQuaternion(e).dot(this.eye)) > 0.9 && (s.visible = !1)), this.axis === "Z" && (U.setFromEuler(lt.set(0, Math.PI / 2, 0)), s.quaternion.copy(e).multiply(U), Math.abs(j.copy(et).applyQuaternion(e).dot(this.eye)) > 0.9 && (s.visible = !1)), this.axis === "XYZE" && (U.setFromEuler(lt.set(0, Math.PI / 2, 0)), j.copy(this.rotationAxis), s.quaternion.setFromRotationMatrix(cn.lookAt(rn, j, De)), s.quaternion.multiply(U), s.visible = this.dragging), this.axis === "E" && (s.visible = !1)) : s.name === "START" ? (s.position.copy(this.worldPositionStart), s.visible = this.dragging) : s.name === "END" ? (s.position.copy(this.worldPosition), s.visible = this.dragging) : s.name === "DELTA" ? (s.position.copy(this.worldPositionStart), s.quaternion.copy(this.worldQuaternionStart), ae.set(1e-10, 1e-10, 1e-10).add(this.worldPositionStart).sub(this.worldPosition).multiplyScalar(-1), ae.applyQuaternion(this.worldQuaternionStart.clone().invert()), s.scale.copy(ae), s.visible = this.dragging) : (s.quaternion.copy(e), this.dragging ? s.position.copy(this.worldPositionStart) : s.position.copy(this.worldPosition), this.axis && (s.visible = this.axis.search(s.name) !== -1));
         continue;
       }
-      s.quaternion.copy(e), this.mode === "translate" || this.mode === "scale" ? (s.name === "X" && Math.abs(j.copy(Je).applyQuaternion(e).dot(this.eye)) > 0.99 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "Y" && Math.abs(j.copy(De).applyQuaternion(e).dot(this.eye)) > 0.99 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "Z" && Math.abs(j.copy(et).applyQuaternion(e).dot(this.eye)) > 0.99 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "XY" && Math.abs(j.copy(et).applyQuaternion(e).dot(this.eye)) < 0.2 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "YZ" && Math.abs(j.copy(Je).applyQuaternion(e).dot(this.eye)) < 0.2 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "XZ" && Math.abs(j.copy(De).applyQuaternion(e).dot(this.eye)) < 0.2 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1)) : this.mode === "rotate" && (lt.copy(e), j.copy(this.eye).applyQuaternion(U.copy(e).invert()), s.name.search("E") !== -1 && s.quaternion.setFromRotationMatrix(cn.lookAt(this.eye, rn, De)), s.name === "X" && (U.setFromAxisAngle(Je, Math.atan2(-j.y, j.z)), U.multiplyQuaternions(lt, U), s.quaternion.copy(U)), s.name === "Y" && (U.setFromAxisAngle(De, Math.atan2(j.x, j.z)), U.multiplyQuaternions(lt, U), s.quaternion.copy(U)), s.name === "Z" && (U.setFromAxisAngle(et, Math.atan2(j.y, j.x)), U.multiplyQuaternions(lt, U), s.quaternion.copy(U))), s.visible = s.visible && (s.name.indexOf("X") === -1 || this.showX), s.visible = s.visible && (s.name.indexOf("Y") === -1 || this.showY), s.visible = s.visible && (s.name.indexOf("Z") === -1 || this.showZ), s.visible = s.visible && (s.name.indexOf("E") === -1 || this.showX && this.showY && this.showZ), s.material._color = s.material._color || s.material.color.clone(), s.material._opacity = s.material._opacity || s.material.opacity, s.material.color.copy(s.material._color), s.material.opacity = s.material._opacity, this.enabled && this.axis && (s.name === this.axis || this.axis.split("").some(function(r) {
+      s.quaternion.copy(e), this.mode === "translate" || this.mode === "scale" ? (s.name === "X" && Math.abs(j.copy(Je).applyQuaternion(e).dot(this.eye)) > 0.99 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "Y" && Math.abs(j.copy(De).applyQuaternion(e).dot(this.eye)) > 0.99 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "Z" && Math.abs(j.copy(et).applyQuaternion(e).dot(this.eye)) > 0.99 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "XY" && Math.abs(j.copy(et).applyQuaternion(e).dot(this.eye)) < 0.2 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "YZ" && Math.abs(j.copy(Je).applyQuaternion(e).dot(this.eye)) < 0.2 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1), s.name === "XZ" && Math.abs(j.copy(De).applyQuaternion(e).dot(this.eye)) < 0.2 && (s.scale.set(1e-10, 1e-10, 1e-10), s.visible = !1)) : this.mode === "rotate" && (ut.copy(e), j.copy(this.eye).applyQuaternion(U.copy(e).invert()), s.name.search("E") !== -1 && s.quaternion.setFromRotationMatrix(cn.lookAt(this.eye, rn, De)), s.name === "X" && (U.setFromAxisAngle(Je, Math.atan2(-j.y, j.z)), U.multiplyQuaternions(ut, U), s.quaternion.copy(U)), s.name === "Y" && (U.setFromAxisAngle(De, Math.atan2(j.x, j.z)), U.multiplyQuaternions(ut, U), s.quaternion.copy(U)), s.name === "Z" && (U.setFromAxisAngle(et, Math.atan2(j.y, j.x)), U.multiplyQuaternions(ut, U), s.quaternion.copy(U))), s.visible = s.visible && (s.name.indexOf("X") === -1 || this.showX), s.visible = s.visible && (s.name.indexOf("Y") === -1 || this.showY), s.visible = s.visible && (s.name.indexOf("Z") === -1 || this.showZ), s.visible = s.visible && (s.name.indexOf("E") === -1 || this.showX && this.showY && this.showZ), s.material._color = s.material._color || s.material.color.clone(), s.material._opacity = s.material._opacity || s.material.opacity, s.material.color.copy(s.material._color), s.material.opacity = s.material._opacity, this.enabled && this.axis && (s.name === this.axis || this.axis.split("").some(function(r) {
         return s.name === r;
       })) && (s.material.color.setHex(16776960), s.material.opacity = 1);
     }
@@ -1279,12 +1279,12 @@ class Ws extends A {
   }
   updateMatrixWorld(o) {
     let t = this.space;
-    switch (this.position.copy(this.worldPosition), this.mode === "scale" && (t = "local"), ut.copy(Je).applyQuaternion(t === "local" ? this.worldQuaternion : dt), $e.copy(De).applyQuaternion(t === "local" ? this.worldQuaternion : dt), Qe.copy(et).applyQuaternion(t === "local" ? this.worldQuaternion : dt), j.copy($e), this.mode) {
+    switch (this.position.copy(this.worldPosition), this.mode === "scale" && (t = "local"), ht.copy(Je).applyQuaternion(t === "local" ? this.worldQuaternion : pt), $e.copy(De).applyQuaternion(t === "local" ? this.worldQuaternion : pt), Qe.copy(et).applyQuaternion(t === "local" ? this.worldQuaternion : pt), j.copy($e), this.mode) {
       case "translate":
       case "scale":
         switch (this.axis) {
           case "X":
-            j.copy(this.eye).cross(ut), ge.copy(ut).cross(j);
+            j.copy(this.eye).cross(ht), ge.copy(ht).cross(j);
             break;
           case "Y":
             j.copy(this.eye).cross($e), ge.copy($e).cross(j);
@@ -1296,7 +1296,7 @@ class Ws extends A {
             ge.copy(Qe);
             break;
           case "YZ":
-            ge.copy(ut);
+            ge.copy(ht);
             break;
           case "XZ":
             j.copy(Qe), ge.copy($e);
@@ -1373,14 +1373,14 @@ const Js = {
     receiveShadow: { type: Boolean, default: !1 }
   },
   setup(c, { expose: o }) {
-    const t = c, e = S("scene"), n = new X(), i = new we(), s = new $n(n, i, t.count);
+    const t = c, e = S("scene"), n = new B(), i = new we(), s = new $n(n, i, t.count);
     s.castShadow = !0, s.receiveShadow = !0, Ue(s);
     function a() {
       s.castShadow = t.castShadow, s.receiveShadow = t.receiveShadow;
     }
     a(), w(t, "castShadow", a), w(t, "receiveShadow", a);
     const r = S("getGeometry"), l = S("getMaterial");
-    return ot(() => {
+    return it(() => {
       if (t.geometry) {
         const h = r(t.geometry);
         s.geometry = h;
@@ -1401,7 +1401,7 @@ const Js = {
     scale: { default: () => [1, 1, 1] }
   },
   setup(c, { expose: o }) {
-    const t = c, e = S("scene"), n = new X(), i = new xe({ color: "black" }), s = new ye(n, i);
+    const t = c, e = S("scene"), n = new B(), i = new xe({ color: "black" }), s = new ye(n, i);
     return Ue(s), R(t, "position", s), R(t, "rotation", s), R(t, "scale", s), _e(() => {
       e.remove(s), Ae(s);
     }), k("mesh", s), o({ three: s }), (a, r) => te(a.$slots, "default");
@@ -1414,7 +1414,7 @@ const Js = {
     scale: { default: () => [1, 1, 1] }
   },
   setup(c, { expose: o }) {
-    const t = c, e = S("scene"), n = new X(), i = new xe({ color: "black" }), s = new An(n, i);
+    const t = c, e = S("scene"), n = new B(), i = new xe({ color: "black" }), s = new An(n, i);
     return Ue(s), R(t, "position", s), R(t, "rotation", s), R(t, "scale", s), _e(() => {
       e.remove(s), Ae(s);
     }), k("mesh", s), o({ three: s }), (a, r) => te(a.$slots, "default");
@@ -1427,7 +1427,7 @@ const Js = {
     scale: { default: () => [1, 1, 1] }
   },
   setup(c, { expose: o }) {
-    const t = c, e = S("scene"), n = new X(), i = new xe({ color: "black" }), s = new mt(n, i);
+    const t = c, e = S("scene"), n = new B(), i = new xe({ color: "black" }), s = new gt(n, i);
     return Ue(s), R(t, "position", s), R(t, "rotation", s), R(t, "scale", s), _e(() => {
       e.remove(s), Ae(s);
     }), k("mesh", s), o({ three: s }), (a, r) => te(a.$slots, "default");
@@ -1444,14 +1444,14 @@ const Js = {
     scale: { default: () => [1, 1, 1] }
   },
   setup(c, { expose: o }) {
-    const t = c, e = S("scene"), n = new X(), i = new we(), s = new A(n, i);
+    const t = c, e = S("scene"), n = new B(), i = new we(), s = new A(n, i);
     s.castShadow = !0, s.receiveShadow = !0, Ue(s), R(t, "position", s), R(t, "rotation", s), R(t, "scale", s);
     function a() {
       s.castShadow = t.castShadow, s.receiveShadow = t.receiveShadow;
     }
     a(), w(t, "castShadow", a), w(t, "receiveShadow", a);
     const r = S("getGeometry"), l = S("getMaterial");
-    return ot(() => {
+    return it(() => {
       if (t.geometry) {
         const h = r(t.geometry);
         s.geometry = h;
@@ -1472,7 +1472,7 @@ const Js = {
     scale: { default: () => [1, 1, 1] }
   },
   setup(c, { expose: o }) {
-    const t = c, e = S("scene"), n = new X(), i = new Ge({ color: "red", sizeAttenuation: !1, size: 2 }), s = new tt(n, i);
+    const t = c, e = S("scene"), n = new B(), i = new Ge({ color: "red", sizeAttenuation: !1, size: 2 }), s = new tt(n, i);
     return Ue(s), R(t, "position", s), R(t, "rotation", s), R(t, "scale", s), _e(() => {
       e.remove(s), Ae(s);
     }), k("mesh", s), o({ three: s }), (a, r) => te(a.$slots, "default");
@@ -1736,7 +1736,7 @@ class fo {
     const i = [], s = n.extensions[this.name];
     if (s.clearcoatFactor !== void 0 && (t.clearcoat = s.clearcoatFactor), s.clearcoatTexture !== void 0 && i.push(e.assignTexture(t, "clearcoatMap", s.clearcoatTexture)), s.clearcoatRoughnessFactor !== void 0 && (t.clearcoatRoughness = s.clearcoatRoughnessFactor), s.clearcoatRoughnessTexture !== void 0 && i.push(e.assignTexture(t, "clearcoatRoughnessMap", s.clearcoatRoughnessTexture)), s.clearcoatNormalTexture !== void 0 && (i.push(e.assignTexture(t, "clearcoatNormalMap", s.clearcoatNormalTexture)), s.clearcoatNormalTexture.scale !== void 0)) {
       const a = s.clearcoatNormalTexture.scale;
-      t.clearcoatNormalScale = new B(a, a);
+      t.clearcoatNormalScale = new X(a, a);
     }
     return Promise.all(i);
   }
@@ -1959,7 +1959,7 @@ class xo {
     for (const h in o.attributes) {
       const u = kt[h] || h.toLowerCase();
       if (s[h] !== void 0) {
-        const d = e.accessors[o.attributes[h]], p = st[d.componentType];
+        const d = e.accessors[o.attributes[h]], p = ot[d.componentType];
         l[u] = p, r[u] = d.normalized === !0;
       }
     }
@@ -2172,7 +2172,7 @@ const Te = {
   TRIANGLE_FAN: 6,
   UNSIGNED_BYTE: 5121,
   UNSIGNED_SHORT: 5123
-}, st = {
+}, ot = {
   5120: Int8Array,
   5121: Uint8Array,
   5122: Int16Array,
@@ -2494,17 +2494,17 @@ class Go {
       return Promise.resolve(null);
     const i = [];
     return n.bufferView !== void 0 ? i.push(this.getDependency("bufferView", n.bufferView)) : i.push(null), n.sparse !== void 0 && (i.push(this.getDependency("bufferView", n.sparse.indices.bufferView)), i.push(this.getDependency("bufferView", n.sparse.values.bufferView))), Promise.all(i).then(function(s) {
-      const a = s[0], r = pn[n.type], l = st[n.componentType], h = l.BYTES_PER_ELEMENT, u = h * r, d = n.byteOffset || 0, p = n.bufferView !== void 0 ? e.bufferViews[n.bufferView].byteStride : void 0, g = n.normalized === !0;
+      const a = s[0], r = pn[n.type], l = ot[n.componentType], h = l.BYTES_PER_ELEMENT, u = h * r, d = n.byteOffset || 0, p = n.bufferView !== void 0 ? e.bufferViews[n.bufferView].byteStride : void 0, g = n.normalized === !0;
       let _, b;
       if (p && p !== u) {
         const m = Math.floor(d / p), M = "InterleavedBuffer:" + n.bufferView + ":" + n.componentType + ":" + m + ":" + n.count;
         let E = t.cache.get(M);
         E || (_ = new l(a, m * p, n.count * p / h), E = new ts(_, p / h), t.cache.add(M, E)), b = new ns(E, r, d % p / h, g);
       } else
-        a === null ? _ = new l(n.count * r) : _ = new l(a, d, n.count * r), b = new gt(_, r, g);
+        a === null ? _ = new l(n.count * r) : _ = new l(a, d, n.count * r), b = new nt(_, r, g);
       if (n.sparse !== void 0) {
-        const m = pn.SCALAR, M = st[n.sparse.indices.componentType], E = n.sparse.indices.byteOffset || 0, v = n.sparse.values.byteOffset || 0, T = new M(s[1], E, n.sparse.count * m), D = new l(s[2], v, n.sparse.count * r);
-        a !== null && (b = new gt(b.array.slice(), b.itemSize, b.normalized));
+        const m = pn.SCALAR, M = ot[n.sparse.indices.componentType], E = n.sparse.indices.byteOffset || 0, v = n.sparse.values.byteOffset || 0, T = new M(s[1], E, n.sparse.count * m), D = new l(s[2], v, n.sparse.count * r);
+        a !== null && (b = new nt(b.array.slice(), b.itemSize, b.normalized));
         for (let F = 0, G = T.length; F < G; F++) {
           const $ = T[F];
           if (b.setX($, D[F * r]), r >= 2 && b.setY($, D[F * r + 1]), r >= 3 && b.setZ($, D[F * r + 2]), r >= 4 && b.setW($, D[F * r + 3]), r >= 5)
@@ -2585,11 +2585,11 @@ class Go {
     if (o.isPoints) {
       const a = "PointsMaterial:" + e.uuid;
       let r = this.cache.get(a);
-      r || (r = new Ge(), nt.prototype.copy.call(r, e), r.color.copy(e.color), r.map = e.map, r.sizeAttenuation = !1, this.cache.add(a, r)), e = r;
+      r || (r = new Ge(), st.prototype.copy.call(r, e), r.color.copy(e.color), r.map = e.map, r.sizeAttenuation = !1, this.cache.add(a, r)), e = r;
     } else if (o.isLine) {
       const a = "LineBasicMaterial:" + e.uuid;
       let r = this.cache.get(a);
-      r || (r = new xe(), nt.prototype.copy.call(r, e), r.color.copy(e.color), this.cache.add(a, r)), e = r;
+      r || (r = new xe(), st.prototype.copy.call(r, e), r.color.copy(e.color), this.cache.add(a, r)), e = r;
     }
     if (n || i || s) {
       let a = "ClonedMaterial:" + e.uuid + ":";
@@ -2626,7 +2626,7 @@ class Go {
     }
     i.doubleSided === !0 && (a.side = xn);
     const h = i.alphaMode || Pt.OPAQUE;
-    if (h === Pt.BLEND ? (a.transparent = !0, a.depthWrite = !1) : (a.transparent = !1, h === Pt.MASK && (a.alphaTest = i.alphaCutoff !== void 0 ? i.alphaCutoff : 0.5)), i.normalTexture !== void 0 && s !== we && (l.push(t.assignTexture(a, "normalMap", i.normalTexture)), a.normalScale = new B(1, 1), i.normalTexture.scale !== void 0)) {
+    if (h === Pt.BLEND ? (a.transparent = !0, a.depthWrite = !1) : (a.transparent = !1, h === Pt.MASK && (a.alphaTest = i.alphaCutoff !== void 0 ? i.alphaCutoff : 0.5)), i.normalTexture !== void 0 && s !== we && (l.push(t.assignTexture(a, "normalMap", i.normalTexture)), a.normalScale = new X(1, 1), i.normalTexture.scale !== void 0)) {
       const u = i.normalTexture.scale;
       a.normalScale.set(u, u);
     }
@@ -2656,7 +2656,7 @@ class Go {
         s.push(u.promise);
       else {
         let d;
-        l.extensions && l.extensions[I.KHR_DRACO_MESH_COMPRESSION] ? d = i(l) : d = mn(new X(), l, t), n[h] = { primitive: l, promise: d }, s.push(d);
+        l.extensions && l.extensions[I.KHR_DRACO_MESH_COMPRESSION] ? d = i(l) : d = mn(new B(), l, t), n[h] = { primitive: l, promise: d }, s.push(d);
       }
     }
     return Promise.all(s);
@@ -2676,7 +2676,7 @@ class Go {
         if (b.mode === Te.TRIANGLES || b.mode === Te.TRIANGLE_STRIP || b.mode === Te.TRIANGLE_FAN || b.mode === void 0)
           m = i.isSkinnedMesh === !0 ? new os(_, M) : new A(_, M), m.isSkinnedMesh === !0 && !m.geometry.attributes.skinWeight.normalized && m.normalizeSkinWeights(), b.mode === Te.TRIANGLE_STRIP ? m.geometry = gn(m.geometry, ms) : b.mode === Te.TRIANGLE_FAN && (m.geometry = gn(m.geometry, Cn));
         else if (b.mode === Te.LINES)
-          m = new mt(_, M);
+          m = new gt(_, M);
         else if (b.mode === Te.LINE_STRIP)
           m = new ye(_, M);
         else if (b.mode === Te.LINE_LOOP)
@@ -2803,7 +2803,7 @@ class Go {
       }), Promise.all(a);
     }().then(function(a) {
       let r;
-      if (i.isBone === !0 ? r = new rs() : a.length > 1 ? r = new Fe() : a.length === 1 ? r = a[0] : r = new ft(), r !== a[0])
+      if (i.isBone === !0 ? r = new rs() : a.length > 1 ? r = new Fe() : a.length === 1 ? r = a[0] : r = new mt(), r !== a[0])
         for (let l = 0, h = a.length; l < h; l++)
           r.add(a[l]);
       if (i.name && (r.userData.name = i.name, r.name = s), ke(r, i), i.extensions && We(e, r, i), i.matrix !== void 0) {
@@ -2824,7 +2824,7 @@ class Go {
       const l = (h) => {
         const u = /* @__PURE__ */ new Map();
         for (const [d, p] of i.associations)
-          (d instanceof nt || d instanceof Nt) && u.set(d, p);
+          (d instanceof st || d instanceof Nt) && u.set(d, p);
         return h.traverse((d) => {
           const p = i.associations.get(d);
           p != null && u.set(d, p);
@@ -2885,7 +2885,7 @@ function Fo(c, o, t) {
         new x(r[0], r[1], r[2]),
         new x(l[0], l[1], l[2])
       ), a.normalized) {
-        const h = Gt(st[a.componentType]);
+        const h = Gt(ot[a.componentType]);
         n.min.multiplyScalar(h), n.max.multiplyScalar(h);
       }
     } else {
@@ -2903,7 +2903,7 @@ function Fo(c, o, t) {
         const d = t.json.accessors[u.POSITION], p = d.min, g = d.max;
         if (p !== void 0 && g !== void 0) {
           if (r.setX(Math.max(Math.abs(p[0]), Math.abs(g[0]))), r.setY(Math.max(Math.abs(p[1]), Math.abs(g[1]))), r.setZ(Math.max(Math.abs(p[2]), Math.abs(g[2]))), d.normalized) {
-            const _ = Gt(st[d.componentType]);
+            const _ = Gt(ot[d.componentType]);
             r.multiplyScalar(_);
           }
           a.max(r);
@@ -3003,7 +3003,7 @@ const jo = /* @__PURE__ */ O({
       three: s
     }), (l, h) => te(l.$slots, "default");
   }
-}), Ho = /^[og]\s*(.+)?/, zo = /^mtllib /, Uo = /^usemtl /, Bo = /^usemap /, yn = new x(), Rt = new x(), wn = new x(), _n = new x(), he = new x(), ht = new K();
+}), Ho = /^[og]\s*(.+)?/, zo = /^mtllib /, Uo = /^usemtl /, Bo = /^usemap /, yn = new x(), Rt = new x(), wn = new x(), _n = new x(), he = new x(), dt = new K();
 function Xo() {
   const c = {
     objects: [],
@@ -3201,11 +3201,11 @@ class Yo extends vn {
                 parseFloat(p[1]),
                 parseFloat(p[2]),
                 parseFloat(p[3])
-              ), p.length >= 7 ? (ht.setRGB(
+              ), p.length >= 7 ? (dt.setRGB(
                 parseFloat(p[4]),
                 parseFloat(p[5]),
                 parseFloat(p[6])
-              ).convertSRGBToLinear(), t.colors.push(ht.r, ht.g, ht.b)) : t.colors.push(void 0, void 0, void 0);
+              ).convertSRGBToLinear(), t.colors.push(dt.r, dt.g, dt.b)) : t.colors.push(void 0, void 0, void 0);
               break;
             case "vn":
               t.normals.push(
@@ -3290,7 +3290,7 @@ class Yo extends vn {
         let M = !1;
         if (g.vertices.length === 0)
           continue;
-        const E = new X();
+        const E = new B();
         E.setAttribute("position", new pe(g.vertices, 3)), g.normals.length > 0 && E.setAttribute("normal", new pe(g.normals, 3)), g.colors.length > 0 && (M = !0, E.setAttribute("color", new pe(g.colors, 3))), g.hasUVIndices === !0 && E.setAttribute("uv", new pe(g.uvs, 2));
         const v = [];
         for (let D = 0, F = _.length; D < F; D++) {
@@ -3299,10 +3299,10 @@ class Yo extends vn {
           if (this.materials !== null) {
             if (N = this.materials.create(G.name), b && N && !(N instanceof xe)) {
               const Y = new xe();
-              nt.prototype.copy.call(Y, N), Y.color.copy(N.color), N = Y;
+              st.prototype.copy.call(Y, N), Y.color.copy(N.color), N = Y;
             } else if (m && N && !(N instanceof Ge)) {
               const Y = new Ge({ size: 10, sizeAttenuation: !1 });
-              nt.prototype.copy.call(Y, N), Y.color.copy(N.color), Y.map = N.map, N = Y;
+              st.prototype.copy.call(Y, N), Y.color.copy(N.color), Y.map = N.map, N = Y;
             }
           }
           N === void 0 && (b ? N = new xe() : m ? N = new Ge({ size: 1, sizeAttenuation: !1 }) : N = new bs(), N.name = G.name, N.flatShading = !G.smooth, N.vertexColors = M, t.materials[$] = N), v.push(N);
@@ -3313,13 +3313,13 @@ class Yo extends vn {
             const G = _[D];
             E.addGroup(G.groupStart, G.groupCount, D);
           }
-          b ? T = new mt(E, v) : m ? T = new tt(E, v) : T = new A(E, v);
+          b ? T = new gt(E, v) : m ? T = new tt(E, v) : T = new A(E, v);
         } else
-          b ? T = new mt(E, v[0]) : m ? T = new tt(E, v[0]) : T = new A(E, v[0]);
+          b ? T = new gt(E, v[0]) : m ? T = new tt(E, v[0]) : T = new A(E, v[0]);
         T.name = p.name, l.add(T);
       }
     else if (t.vertices.length > 0) {
-      const u = new Ge({ size: 1, sizeAttenuation: !1 }), d = new X();
+      const u = new Ge({ size: 1, sizeAttenuation: !1 }), d = new B();
       d.setAttribute("position", new pe(t.vertices, 3)), t.colors.length > 0 && t.colors[0] !== void 0 && (d.setAttribute("color", new pe(t.colors, 3)), u.vertexColors = !0);
       const p = new tt(d, u);
       l.add(p);
@@ -3403,7 +3403,7 @@ const Vo = /* @__PURE__ */ O({
     function e(r, l, h, u, d, p) {
       return new ne(r, l, h, u, d, p);
     }
-    const n = ce(new X());
+    const n = ce(new B());
     n.name = t.name;
     const i = S("mesh", null);
     i && (i.geometry = n);
@@ -3433,36 +3433,46 @@ const Vo = /* @__PURE__ */ O({
     name: { default: "" },
     vertices: { default: () => [] },
     faces: { default: () => [] },
-    uvs: { default: () => [] }
+    uvs: { default: () => [] },
+    normals: { type: [Array, Boolean], default: !1 }
   },
   setup(c, { expose: o }) {
     const t = c;
-    function e(r, l, h) {
-      const u = new X(), d = new Float32Array(r), p = new Float32Array(h);
-      return u.setAttribute("position", new gt(d, 3)), u.setAttribute("uv", new gt(p, 2)), t.faces.length > 0 && u.setIndex(l), u;
+    function e() {
+      console.log("make");
+      const r = new B(), l = new Float32Array(t.vertices);
+      if (r.setAttribute("position", new nt(l, 3)), t.uvs.length > 0) {
+        const h = new Float32Array(t.uvs);
+        r.setAttribute("uv", new nt(h, 2));
+      }
+      if (t.normals === !0 && (r.computeVertexNormals(), r.attributes.normal.needsUpdate = !0), Array.isArray(t.normals)) {
+        const h = new Float32Array(t.normals);
+        r.setAttribute("normal", new nt(h, 3));
+      }
+      return t.faces.length > 0 && r.setIndex(t.faces), r;
     }
-    const n = ce(e(t.vertices, t.faces, t.uvs));
+    const n = ce(new B());
     n.name = t.name;
     const i = S("mesh", null);
     i && (i.geometry = n);
     const s = S("addGeometry");
     s(n);
-    function a(r, l, h) {
-      const u = e(r, l, h);
-      fe(n, u);
+    function a() {
+      const r = e();
+      fe(n, r);
     }
-    return C(
+    return a(), C(
       () => t.vertices,
       (r) => {
-        a(r, t.faces, t.uvs);
+        a();
       },
-      { deep: !0, immediate: !0 }
+      { deep: !0 }
     ), C(
       () => t.faces,
       (r) => {
-        a(t.vertices, r, t.uvs);
+        a();
       },
-      { deep: !0, immediate: !0 }
+      { deep: !0 }
     ), o({ three: n }), { props: t, makeGeometry: e, three: n, mesh: i, addGeometry: s, redoGeometry: a };
   }
 }), Wo = {
@@ -3482,7 +3492,7 @@ const Vo = /* @__PURE__ */ O({
     function e(r, l, h, u) {
       return new Es(r, l, h, u);
     }
-    const n = ce(new X());
+    const n = ce(new B());
     n.name = t.name;
     const i = S("mesh", null);
     i && (i.geometry = n);
@@ -3514,7 +3524,7 @@ const Vo = /* @__PURE__ */ O({
     function e(r, l, h, u, d, p, g) {
       return new Ts(r, l, h, u, d, p, g);
     }
-    const n = ce(new X());
+    const n = ce(new B());
     n.name = t.name;
     const i = S("mesh", null);
     i && (i.geometry = n);
@@ -3564,7 +3574,7 @@ const Vo = /* @__PURE__ */ O({
         _
       );
     }
-    const n = ce(new X());
+    const n = ce(new B());
     n.name = t.name;
     const i = S("mesh", null);
     i && (i.geometry = n);
@@ -3594,7 +3604,7 @@ const Vo = /* @__PURE__ */ O({
     geometry: null
   },
   setup(c, { expose: o }) {
-    const t = c, e = ce(new X()), n = S("mesh", null);
+    const t = c, e = ce(new B()), n = S("mesh", null);
     n && (n.geometry = e);
     const i = S("getGeometry"), s = S("addGeometry");
     s(e);
@@ -3621,16 +3631,16 @@ const Vo = /* @__PURE__ */ O({
       );
     });
     const l = () => {
-      i(t.geometry) === void 0 ? pt(() => l) : a();
+      i(t.geometry) === void 0 ? ft(() => l) : a();
     };
-    return pt(() => l), o({ three: e }), { props: t, three: e, mesh: n, getGeometry: i, addGeometry: s, redoGeometry: a, get unwatch() {
+    return ft(() => l), o({ three: e }), { props: t, three: e, mesh: n, getGeometry: i, addGeometry: s, redoGeometry: a, get unwatch() {
       return r;
     }, set unwatch(h) {
       r = h;
     }, waitUntilGeometryChanged: l };
   }
 });
-class _t extends X {
+class _t extends B {
   constructor(o = (n, i, s) => s.set(n, i, Math.cos(n) * Math.sin(i)), t = 8, e = 8) {
     super(), this.type = "ParametricGeometry", this.parameters = {
       func: o,
@@ -3744,7 +3754,7 @@ const ai = {
     function e(r, l, h) {
       return new _t(r, l, h);
     }
-    const n = ce(new X());
+    const n = ce(new B());
     n.name = t.name;
     const i = S("mesh", null);
     i && (i.geometry = n);
@@ -3773,7 +3783,7 @@ const ai = {
     function e(r, l, h, u) {
       return new Sn(r, l, h, u);
     }
-    const n = ce(new X());
+    const n = ce(new B());
     n.name = t.name;
     const i = S("mesh", null);
     i && (i.geometry = n);
@@ -3804,7 +3814,7 @@ const ai = {
     function e(r, l, h, u, d, p) {
       return new As(r, l, h, u, d, p);
     }
-    const n = ce(new X());
+    const n = ce(new B());
     n.name = t.name;
     const i = S("mesh", null);
     i && (i.geometry = n);
@@ -3843,7 +3853,7 @@ const ai = {
     function e(r, l, h, u, d, p, g) {
       return new Tn(r, l, h, u, d, p, g);
     }
-    const n = ce(new X());
+    const n = ce(new B());
     n.name = t.name;
     const i = S("mesh", null);
     i && (i.geometry = n);
@@ -3872,7 +3882,7 @@ const ai = {
     geometry: null
   },
   setup(c, { expose: o }) {
-    const t = c, e = ce(new X()), n = S("mesh", null);
+    const t = c, e = ce(new B()), n = S("mesh", null);
     n && (n.geometry = e);
     const i = S("getGeometry"), s = S("addGeometry");
     s(e);
@@ -3899,9 +3909,9 @@ const ai = {
       );
     });
     const l = () => {
-      i(t.geometry) === void 0 ? pt(() => l) : a();
+      i(t.geometry) === void 0 ? ft(() => l) : a();
     };
-    return pt(() => l), o({ three: e }), { props: t, three: e, mesh: n, getGeometry: i, addGeometry: s, redoGeometry: a, get unwatch() {
+    return ft(() => l), o({ three: e }), { props: t, three: e, mesh: n, getGeometry: i, addGeometry: s, redoGeometry: a, get unwatch() {
       return r;
     }, set unwatch(h) {
       r = h;

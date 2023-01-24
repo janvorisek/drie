@@ -19,6 +19,11 @@ export interface Props {
      * Flat array of vertex UVs.
      */
     uvs?: number[];
+    /**
+     * Flat array of vertex normals.
+     * Use `true` for automated calculation of vertex normals
+     */
+    normals?: number[] | boolean;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
     name: {
@@ -41,9 +46,14 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: () => never[];
     };
+    normals: {
+        type: (BooleanConstructor | ArrayConstructor)[];
+        required: false;
+        default: boolean;
+    };
 }, {
     props: any;
-    makeGeometry: (vertices: number[], faces: number[], uvs: number[]) => BufferGeometry;
+    makeGeometry: () => BufferGeometry;
     three: {
         id: number;
         uuid: string;
@@ -473,7 +483,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
     mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]> | null;
     addGeometry: (g: BufferGeometry) => void;
-    redoGeometry: (vertices: number[], faces: number[], uvs: number[]) => void;
+    redoGeometry: () => void;
     inject: typeof inject;
     watch: typeof watch;
     reactive: typeof reactive;
@@ -502,10 +512,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: () => never[];
     };
+    normals: {
+        type: (BooleanConstructor | ArrayConstructor)[];
+        required: false;
+        default: boolean;
+    };
 }>>, {
     name: string;
     vertices: unknown[];
     faces: unknown[];
     uvs: unknown[];
+    normals: boolean | unknown[];
 }>;
 export default _sfc_main;
