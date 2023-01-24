@@ -7,7 +7,7 @@
   import OBJLoader from '../../examples/OBJLoader.vue'
   </script>
 
-  This component manages [`THREE.OBJLoader`](https://threejs.org/docs/?q=objloader#examples/en/loaders/OBJLoader).
+  This component manages [`THREE.OBJLoader`](https://threejs.org/docs/#examples/en/loaders/OBJLoader).
 
   `<OBJLoader>` behaves as a [`<Group>`](/components/Objects/Group) containing meshes loaded from the `.obj` file.
 
@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { provide, inject, watch } from "vue";
 
-import { Group, Mesh, Scene } from "three";
+import { Group, Material, Mesh, Scene } from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
 import { Vector3Like } from "../types";
@@ -90,8 +90,6 @@ const loader = new OBJLoader();
 const scene = inject("scene") as Scene;
 
 const three = new Group();
-three.castShadow = true;
-three.receiveShadow = true;
 scene.add(three);
 
 handleVectorProp(props, "position", three);
@@ -107,13 +105,12 @@ function load() {
     // called when resource is loaded
     function (object) {
       for (const o of object.children) {
-        three.add(o);
-        (o as Mesh).material = three.material;
-
-        handleVectorProp(props, "position", three, false);
-        handleVectorProp(props, "rotation", three, false);
-        handleVectorProp(props, "scale", three, false);
+        if ("material" in three) (o as Mesh).material = three.material as Material;
       }
+
+      three.add(object);
+
+      applyProps();
 
       emit("load", object);
       //resolve(object);
@@ -130,11 +127,22 @@ function load() {
   //});
 }
 
-load();
+function applyProps() {
+  if (three.children.length === 0) return;
+  for (const o of three.children[0].children) {
+    o.castShadow = props.castShadow;
+    o.receiveShadow = props.receiveShadow;
+  }
+}
+
+applyProps();
 
 watch(
   () => props.url,
   () => load(),
+  {
+    immediate: true,
+  },
 );
 
 provide("mesh", three);
