@@ -1,6 +1,23 @@
 import { inject, ref } from "vue";
 import { Texture, TextureLoader, Material, type Wrapping } from "three";
+import { Vector2Like } from "../types";
 export interface Props {
+    /**
+     * How much a single repetition of the texture is offset from the beginning, in each direction U and V.
+     * Typical range is `0.0` to `1.0`.
+     */
+    offset?: Vector2Like;
+    /**
+     * How many times the texture is repeated across the surface, in each direction U and V.
+     * If repeat is set greater than 1 in either direction, the corresponding Wrap parameter should also be set to `THREE.RepeatWrapping` or `THREE.MirroredRepeatWrapping` to achieve the desired tiling effect.
+     * Setting different repeat values for textures is restricted in the same way like `offset`.
+     */
+    repeat?: Vector2Like;
+    /**
+     * How much the texture is rotated around the center point, in radians.
+     * Positive values are counter-clockwise.
+     */
+    rotation?: number;
     /**
      *  The path or URL to the texture file. This can also be a Data URI.
      */
@@ -21,6 +38,21 @@ export interface Props {
     wrapT?: Wrapping;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
+    offset: {
+        type: null;
+        required: false;
+        default: () => number[];
+    };
+    repeat: {
+        type: null;
+        required: false;
+        default: () => number[];
+    };
+    rotation: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
     url: {
         type: StringConstructor;
         required: true;
@@ -332,7 +364,26 @@ declare const _sfc_main: import("vue").DefineComponent<{
     readonly handlePropCallback: (props: {
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
+    readonly handleVector2Prop: (props: {
+        [key: string]: any;
+    }, prop: string, obj: any, registerWatch?: boolean) => void;
+    readonly Vector2Like: any;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    offset: {
+        type: null;
+        required: false;
+        default: () => number[];
+    };
+    repeat: {
+        type: null;
+        required: false;
+        default: () => number[];
+    };
+    rotation: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
     url: {
         type: StringConstructor;
         required: true;
@@ -348,6 +399,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: Wrapping;
     };
 }>>, {
+    rotation: number;
+    offset: any;
+    repeat: any;
     wrapS: any;
     wrapT: any;
 }>;

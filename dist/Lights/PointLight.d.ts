@@ -70,7 +70,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     readonly Scene: typeof Scene;
     readonly handleVectorProp: (props: {
         [key: string]: any;
-    }, prop: string, obj: import("three").Object3D<import("three").Event> | import("three").Group, registerWatch?: boolean) => void;
+    }, prop: string, obj: any, registerWatch?: boolean) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     castShadow: {
         type: BooleanConstructor;

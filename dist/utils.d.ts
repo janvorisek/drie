@@ -1,11 +1,16 @@
-import { Vector3, Object3D, Group, BufferGeometry, Vector2 } from "three";
-import { Vector3Like } from "./types";
+import { Vector3, Object3D, BufferGeometry, Vector2 } from "three";
+import { Vector2Like, Vector3Like } from "./types";
 export declare const vector3LikeToVector3: (data?: Vector3Like) => Vector3;
+export declare const vector2LikeToVector2: (data?: Vector2Like) => Vector2;
 export declare const vector3LikeToArray: (data?: Vector3Like) => number[];
-export declare const setVectorProp: (prop: string, value: Vector3, obj: Object3D) => void;
+export declare const setVectorProp: (prop: string, value: Vector3, obj: any) => void;
 export declare const handleVectorProp: (props: {
     [key: string]: any;
-}, prop: string, obj: Object3D | Group, registerWatch?: boolean) => void;
+}, prop: string, obj: any, registerWatch?: boolean) => void;
+export declare const setVector2Prop: (prop: string, value: Vector2, obj: any) => void;
+export declare const handleVector2Prop: (props: {
+    [key: string]: any;
+}, prop: string, obj: any, registerWatch?: boolean) => void;
 export declare const handlePropCallback: (props: {
     [key: string]: any;
 }, prop: string, fn: () => void) => void;
