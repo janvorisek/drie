@@ -109,7 +109,6 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 function makeGeometry() {
-  console.log("make");
   const geometry = new BufferGeometry();
 
   const vertArray = new Float32Array(props.vertices);
