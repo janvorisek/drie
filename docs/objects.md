@@ -34,6 +34,11 @@ The following objects are supported:
 - [Mesh](components/Objects/Mesh)
 - [Points](components/Objects/Points)
 
+You can use any of the loaders and treat them as `<Mesh>`
+
+- [GLTFLoader](components/Loaders/GLTFLoader)
+- [OBJLoader](components/Loaders/OBJLoader)
+
 ## Position, rotation, scale
 
 ### Constant value
