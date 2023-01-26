@@ -23,7 +23,7 @@ This light can cast shadows.
 import { inject } from "vue";
 
 import { Color, DirectionalLight, Scene } from "three";
-import { handlePropCallback } from "~/utils";
+import { handlePropCallback } from "../utils";
 
 export interface Props {
   /**

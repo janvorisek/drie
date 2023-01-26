@@ -23,7 +23,7 @@ This light cannot be used to cast shadows.
 import { inject } from "vue";
 
 import { Color, HemisphereLight, Scene } from "three";
-import { handlePropCallback } from "~/utils";
+import { handlePropCallback } from "../utils";
 
 export interface Props {
   /**
