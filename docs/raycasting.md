@@ -163,9 +163,9 @@ const onMouseLeave = (is: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial
       </PerspectiveCamera>
       <Scene background="white">
         <Group
-          enable-raycasting
-          @mouseenter="onMouseEnter"
-          @mouseleave="onMouseLeave"
+          enableRaycasting
+          :onMouseEnter="onMouseEnter"
+          :onMouseLeave="onMouseLeave"
         >
           <Mesh v-for="i in 5" :key="i" :position="[i * 1.5, 0, 0]">
             <MeshBasicMaterial color="#aaa" />
