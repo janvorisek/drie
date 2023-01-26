@@ -18,16 +18,17 @@ This way, raycasting is performed only on the [`Group`](components/Objects/Group
 
 ## Events
 
-We use [`THREE.Raycaster`](https://threejs.org/docs/#api/en/core/Raycaster) in combination with mouse events.
-List of supported events can be seen below.
+We use [`THREE.Raycaster`](https://threejs.org/docs/#api/en/core/Raycaster) in combination with mouse event listeners. You need to supply your callbacks using props.
+
+List of supported events can be seen below:
 
 ```vue-html
 <Group
   :enableRaycasting="true"
-  @click="onClick"
-  @mousemove="onMouseMove"
-  @mouseenter="onMouseEnter"
-  @mouseleave="onMouseLeave"
+  :onClick="onClick"
+  :onMouseMove="onMouseMove"
+  :onMouseEnter="onMouseEnter"
+  :onMouseLeave="onMouseLeave"
 >
   <Mesh />
   <Mesh />
@@ -137,8 +138,8 @@ const onMouseLeave = (is: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial
       <Scene background="white">
         <Group
           enable-raycasting
-          @mouseenter="onMouseEnter"
-          @mouseleave="onMouseLeave"
+          :onMouseEnter="onMouseEnter"
+          :onMouseLeave="onMouseLeave"
         >
           <Mesh v-for="i in 5" :key="i" :position="[i * 1.5, 0, 0]">
             <MeshBasicMaterial color="#aaa" />
