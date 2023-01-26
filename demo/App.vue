@@ -75,7 +75,9 @@
               :scale="[20, 20, 20]"
               url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
               :cast-shadow="true"
+              enable-raycasting
               @load="onLoad"
+              @click="gltfClick"
             >
               <MeshBasicMaterial :color="color3" :side="DoubleSide" />
             </OBJLoader>
@@ -85,7 +87,9 @@
               :scale="[10, 10, 10]"
               :cast-shadow="true"
               url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
+              enable-raycasting
               @load="onLoad"
+              @click="gltfClick"
             >
               <TransformControls :size="0.5" />
               <MeshNormalMaterial :side="DoubleSide" transparent :opacity="0.5" />
@@ -95,6 +99,8 @@
               :position="[0, 0, 5]"
               :scale="[10, 10, 10]"
               :cast-shadow="true"
+              enable-raycasting
+              @click="gltfClick"
             >
               <TransformControls :size="0.5" />
             </GLTFLoader>
@@ -196,6 +202,10 @@ const onBeforeRender = () => {
   w.value = Math.sin(angle) + 1;
   pos.value = [Math.cos(angle), Math.sin(angle), Math.sin(angle)];
   rot.value = [Math.cos(angle) * Math.PI, 0, 0];
+};
+
+const gltfClick = (is) => {
+  console.log(is);
 };
 
 const onLoad = () => {
