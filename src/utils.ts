@@ -245,6 +245,8 @@ export function handleRaycasting(intersect: any[], props: any) {
   const scene = inject("scene") as Scene;
 
   const onCanvasClick = (e: MouseEvent) => {
+    if (props.onClick === null) return;
+
     const raycaster = new Raycaster();
     const pointer = getPointer(e);
 
