@@ -1,6 +1,6 @@
 {
   "name": "@janvorisek/drie",
-  "version": "1.0.0-alpha-1.30",
+  "version": "1.0.0-alpha-1.31",
   "private": false,
   "description": "Drie is a Vue 3 component library for three.js made with TypeScript and Composition API",
   "keywords": [
