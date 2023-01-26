@@ -25,8 +25,8 @@
         <PerspectiveCamera name="cam1" :position="[5, 5, 5]" :up="[0, 0, 1]">
           <OrbitControls />
         </PerspectiveCamera>
-        <OrthographicCamera name="cam2" :position="[5, 5, 5]">
-          <OrbitControls />
+        <OrthographicCamera name="cam2" :position="[50, 50, 50]" :up="[1, 0, 0]">
+          <TrackballControls :rotate-speed="3" :pan-speed="1" />
         </OrthographicCamera>
 
         <BufferGeometry name="reusedGeo" :vertices="[0, 0, 0, 1, 0, 0, 1, 1, 0]" :faces="[0, 1, 2]" />
@@ -52,11 +52,11 @@
             <BoxGeometry :width="0.1" :height="0.1" :depth="0.1" />
           </Mesh>
           <Group
-            :enable-raycasting="false"
-            @click="onClick"
-            @mousemove="onMouseEnter"
-            @mouseenter="onMouseEnter"
-            @mouseleave="onMouseLeave"
+            :enable-raycasting="true"
+            :on-click="onClick"
+            :on-mouse-move="onMouseEnter"
+            :on-mouse-enter="onMouseEnter"
+            :on-mouse-leave="onMouseLeave"
           >
             <TransformControls :size="0.5" :position="[20, 20, 0]" />
             <Mesh :position="pos" :rotation="rot" :cast-shadow="true">
@@ -76,8 +76,8 @@
               url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
               :cast-shadow="true"
               enable-raycasting
+              :on-click="gltfClick"
               @load="onLoad"
-              @click="gltfClick"
             >
               <MeshBasicMaterial :color="color3" :side="DoubleSide" />
             </OBJLoader>
@@ -88,8 +88,8 @@
               :cast-shadow="true"
               url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
               enable-raycasting
+              :on-click="gltfClick"
               @load="onLoad"
-              @click="gltfClick"
             >
               <TransformControls :size="0.5" />
               <MeshNormalMaterial :side="DoubleSide" transparent :opacity="0.5" />
@@ -100,7 +100,7 @@
               :scale="[10, 10, 10]"
               :cast-shadow="true"
               enable-raycasting
-              @click="gltfClick"
+              :on-click="gltfClick"
             >
               <TransformControls :size="0.5" />
             </GLTFLoader>
@@ -204,8 +204,8 @@ const onBeforeRender = () => {
   rot.value = [Math.cos(angle) * Math.PI, 0, 0];
 };
 
-const gltfClick = (is) => {
-  console.log(is);
+const gltfClick = () => {
+  console.log("gltf click");
 };
 
 const onLoad = () => {
@@ -231,16 +231,16 @@ const onMouseLeave = (m: Intersection<TMesh<TBufferGeometry, TMeshBasicMaterial>
   //console.log({ m, p });
 };
 
-const camera = ref("cam1");
+const camera = ref("cam2");
 const renderer = ref();
 
 const geoName = ref("plane");
 const instancedMesh = ref("");
 </script>
 
-<style>
+<style lang="scss">
 .rendererParent {
-  width: 100%;
+  width: calc(100vw - 300px);
   height: 580px;
   border: 1px solid black;
 }
