@@ -169,7 +169,7 @@ export function manageParentRelationship(three: Object3D) {
   });
 }
 
-export function handleRaycasting(intersect: any[], props: any, emit: any) {
+export function _handleRaycasting(intersect: any[], props: any, emit: any) {
   const camera = inject("camera") as Ref<Camera>;
   const canvas = inject<Ref<HTMLCanvasElement>>("canvas");
   const scene = inject("scene") as Scene;
@@ -204,6 +204,78 @@ export function handleRaycasting(intersect: any[], props: any, emit: any) {
       emit("mousemove", intersects, pointer);
     } else {
       if (mouseOverObject) emit("mouseleave", prevIntersects, pointer);
+      mouseOverObject = false;
+      prevIntersects = [];
+    }
+  };
+
+  onMounted(() => {
+    if (props.enableRaycasting) {
+      if (canvas?.value == null) return;
+      canvas?.value.addEventListener("click", onCanvasClick);
+      canvas?.value.addEventListener("mousemove", onCanvasMouseMove);
+    }
+  });
+
+  onUnmounted(() => {
+    if (props.enableRaycasting) {
+      if (canvas?.value == null) return;
+      canvas?.value.removeEventListener("click", onCanvasClick);
+      canvas?.value.removeEventListener("mousemove", onCanvasMouseMove);
+    }
+  });
+
+  watch(
+    () => props.enableRaycasting,
+    (newVal) => {
+      if (newVal) {
+        canvas?.value.addEventListener("click", onCanvasClick);
+        canvas?.value.addEventListener("mousemove", onCanvasMouseMove);
+      } else {
+        canvas?.value.removeEventListener("click", onCanvasClick);
+        canvas?.value.removeEventListener("mousemove", onCanvasMouseMove);
+      }
+    },
+  );
+}
+
+export function handleRaycasting(intersect: any[], props: any) {
+  const camera = inject("camera") as Ref<Camera>;
+  const canvas = inject<Ref<HTMLCanvasElement>>("canvas");
+  const scene = inject("scene") as Scene;
+
+  const onCanvasClick = (e: MouseEvent) => {
+    const raycaster = new Raycaster();
+    const pointer = getPointer(e);
+
+    raycaster.setFromCamera(pointer, camera.value);
+
+    const intersects = raycaster.intersectObjects(intersect);
+
+    if (intersects.length > 0) props.onClick(intersects, pointer);
+  };
+
+  let mouseOverObject = false;
+  let prevIntersects: Intersection[] = [];
+
+  const onCanvasMouseMove = (e: MouseEvent) => {
+    if (props.onMouseEnter === null && props.onMouseMove === null && props.onMouseLeave === null) return;
+
+    const raycaster = new Raycaster();
+    const pointer = getPointer(e);
+
+    raycaster.setFromCamera(pointer, camera.value);
+
+    const intersects = raycaster.intersectObjects(intersect);
+
+    if (intersects.length > 0) {
+      prevIntersects = intersects;
+      if (mouseOverObject === false && props.onMouseEnter !== null) props.onMouseEnter(intersects, pointer);
+
+      mouseOverObject = true;
+      if (props.onMouseLeave !== null) props.onMouseMove(intersects, pointer);
+    } else {
+      if (mouseOverObject && props.onMouseLeave !== null) props.onMouseLeave(prevIntersects, pointer);
       mouseOverObject = false;
       prevIntersects = [];
     }
