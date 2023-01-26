@@ -121,6 +121,14 @@ const tryBindCamera = () => {
 
   three.value = new TrackballControls(camera, canvas.value);
 
+  const myObserver = new ResizeObserver((entries) => {
+    entries.forEach((el) => {
+      three.value?.handleResize();
+    });
+  });
+
+  myObserver.observe(canvas!.value);
+
   applyProps();
 
   boundCamera = true;
