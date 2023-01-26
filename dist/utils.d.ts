@@ -17,5 +17,6 @@ export declare const handlePropCallback: (props: {
 export declare function copyGeo(three: BufferGeometry, tmp: BufferGeometry): void;
 export declare function disposeTHREEObject(obj: any): boolean;
 export declare function manageParentRelationship(three: Object3D): void;
-export declare function handleRaycasting(intersect: any[], props: any, emit: any): void;
+export declare function _handleRaycasting(intersect: any[], props: any, emit: any): void;
+export declare function handleRaycasting(intersect: any[], props: any): void;
 export declare function getPointer(e: MouseEvent): Vector2;

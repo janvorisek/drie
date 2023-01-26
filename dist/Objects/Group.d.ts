@@ -6,6 +6,22 @@ export interface Props {
      */
     enableRaycasting?: boolean;
     /**
+     * Callback to be fired when Group content clicked.
+     */
+    onClick?: (is?: Intersection, mv?: Vector2) => void | null;
+    /**
+     * Callback to be fired when mouse-moving over Group content.
+     */
+    onMouseMove?: (is?: Intersection, mv?: Vector2) => void | null;
+    /**
+     * Callback to be fired when Group content entered by mouse.
+     */
+    onMouseEnter?: (is?: Intersection, mv?: Vector2) => void | null;
+    /**
+     * Callback to be fired when Group content left by mouse.
+     */
+    onMouseLeave?: (is?: Intersection, mv?: Vector2) => void | null;
+    /**
      * A [Vector3Like](/types#vector3like) representing the object's local position.
      */
     position?: Vector3Like;
@@ -23,6 +39,26 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         required: false;
         default: boolean;
+    };
+    onClick: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => null;
+    };
+    onMouseMove: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => null;
+    };
+    onMouseEnter: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => null;
+    };
+    onMouseLeave: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => null;
     };
     position: {
         type: null;
@@ -42,17 +78,31 @@ declare const _sfc_main: import("vue").DefineComponent<{
 }, {
     props: any;
     three: Group;
-    emit: {
-        (event: "click", is: Intersection[], pointer: Vector2): void;
-        (event: "mousemove", is: Intersection[], pointer: Vector2): void;
-        (event: "mouseenter", is: Intersection[], pointer: Vector2): void;
-        (event: "mouseleave", is: Intersection[], pointer: Vector2): void;
-    };
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "mousemove" | "mouseenter" | "mouseleave")[], "click" | "mousemove" | "mouseenter" | "mouseleave", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     enableRaycasting: {
         type: BooleanConstructor;
         required: false;
         default: boolean;
+    };
+    onClick: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => null;
+    };
+    onMouseMove: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => null;
+    };
+    onMouseEnter: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => null;
+    };
+    onMouseLeave: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => null;
     };
     position: {
         type: null;
@@ -69,15 +119,14 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: () => number[];
     };
-}>> & {
-    onClick?: ((...args: any[]) => any) | undefined;
-    onMousemove?: ((...args: any[]) => any) | undefined;
-    onMouseenter?: ((...args: any[]) => any) | undefined;
-    onMouseleave?: ((...args: any[]) => any) | undefined;
-}, {
+}>>, {
     scale: any;
     position: any;
     rotation: any;
     enableRaycasting: boolean;
+    onClick: Function;
+    onMouseMove: Function;
+    onMouseEnter: Function;
+    onMouseLeave: Function;
 }>;
 export default _sfc_main;
