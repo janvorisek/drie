@@ -2,6 +2,12 @@
   <slot></slot>
 </template>
 
+<docs>BEGIN_DOCS
+  Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.
+
+  Multiple scenes can be used to create a picture-in-picture effect.
+</docs>
+
 <script setup lang="ts">
 import { provide, inject, watch } from "vue";
 
