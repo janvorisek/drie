@@ -43,6 +43,8 @@ import PointsMaterial from "./Materials/PointsMaterial.vue";
 import MeshNormalMaterial from "./Materials/MeshNormalMaterial.vue";
 
 import AmbientLight from "./Lights/AmbientLight.vue";
+import DirectionalLight from "./Lights/DirectionalLight.vue";
+import HemisphereLight from "./Lights/HemisphereLight.vue";
 import PointLight from "./Lights/PointLight.vue";
 
 import TextureLoader from "./Textures/TextureLoader.vue";
@@ -93,6 +95,8 @@ function install(app: App) {
   app.component("MeshNormalMaterial", MeshNormalMaterial);
   // Lights
   app.component("AmbientLight", AmbientLight);
+  app.component("DirectionalLight", DirectionalLight);
+  app.component("HemisphereLight", HemisphereLight);
   app.component("PointLight", PointLight);
   // Textures
   app.component("TextureLoader", TextureLoader);
@@ -144,6 +148,8 @@ export {
   MeshNormalMaterial,
   // Lights
   AmbientLight,
+  DirectionalLight,
+  HemisphereLight,
   PointLight,
   // Textures
   TextureLoader,
