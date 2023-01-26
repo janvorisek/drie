@@ -7,9 +7,9 @@
   import OBJLoader from '../../examples/OBJLoader.vue'
   </script>
 
-  This component manages [`THREE.OBJLoader`](https://threejs.org/docs/#examples/en/loaders/OBJLoader).
+  This component allows you to load and display 3D models in the `.obj` file format.
 
-  `<OBJLoader>` behaves as a [`<Group>`](/components/Objects/Group) containing meshes loaded from the `.obj` file.
+  `<OBJLoader>` behaves as a [`<Group>`](/components/Objects/Group).
 
   ## Example
 
