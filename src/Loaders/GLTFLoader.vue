@@ -7,9 +7,11 @@
   import GLTFLoader from '../../examples/GLTFLoader.vue'
   </script>
 
-  This component manages [`THREE.GLTFLoader`](https://threejs.org/docs/#examples/en/loaders/GLTFLoader).
-
-  `<GLTFLoader>` behaves as a [`<Group>`](/components/Objects/Group) containing meshes loaded from the `.gltf` or `glb` file.
+  This component asynchronously loads glTF file. Assets may be provided either in JSON (`.gltf`) or binary (`.glb`) format. External files store textures (`.jpg`, `.png`) and additional binary data (`.bin`).
+  
+  A glTF asset may deliver one or more scenes, including meshes, materials, textures, skins, skeletons, morph targets, animations, lights, and/or cameras.
+  
+  `<GLTFLoader>` behaves as a [`<Group>`](/components/Objects/Group).
 
   ## Example
 
