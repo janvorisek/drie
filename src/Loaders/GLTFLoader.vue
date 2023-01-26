@@ -27,19 +27,24 @@
 </docs>
 
 <script setup lang="ts">
-import { provide, inject, watch } from "vue";
+import { provide, watch } from "vue";
 
-import { Group, Scene } from "three";
+import { Group, Intersection, Vector2 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 import { Vector3Like } from "../types";
-import { handleVectorProp } from "../utils";
+import { handleRaycasting, handleVectorProp, manageParentRelationship } from "../utils";
 
 export interface Props {
   /**
    * Whether the object gets rendered into shadow map.
    */
   castShadow?: boolean;
+
+  /**
+   * Component will emit mouse events when raycasting is enabled
+   */
+  enableRaycasting?: boolean;
 
   /**
    * A [Vector3Like](/types#vector3like) representing the object's local position.
@@ -68,6 +73,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  enableRaycasting: false,
   position: () => [0, 0, 0],
   rotation: () => [0, 0, 0],
   scale: () => [1, 1, 1],
@@ -91,16 +97,43 @@ const emit = defineEmits<{
    * Emitted on XHR error or OBJ parsing error
    */
   (event: "error", error: ErrorEvent): void;
+
+  /**
+   * Emitted when Object3Ds are clicked.
+   * @arg {Intersection[]} is An array of [`Intersection`](https://github.com/three-types/three-ts-types/blob/master/types/three/src/core/Raycaster.d.ts#L16) being clicked.
+   * @arg {Vector2} pointer A `THREE.Vector2` representing relative element coordinates on the canvas
+   */
+  (event: "click", is: Intersection[], pointer: Vector2): void;
+
+  /**
+   * Emitted when mouse is moved over Object3Ds.
+   * @arg {Intersection[]} is An array of [`Intersection`](https://github.com/three-types/three-ts-types/blob/master/types/three/src/core/Raycaster.d.ts#L16) mousemoved over.
+   * @arg {Vector2} pointer A `THREE.Vector2` representing relative element coordinates on the canvas
+   */
+  (event: "mousemove", is: Intersection[], pointer: Vector2): void;
+
+  /**
+   * Emitted when mouse enters Object3Ds.
+   * @arg {Intersection[]} is An array of [`Intersection`](https://github.com/three-types/three-ts-types/blob/master/types/three/src/core/Raycaster.d.ts#L16) entered by mouse.
+   * @arg {Vector2} pointer A `THREE.Vector2` representing relative element coordinates on the canvas
+   */
+  (event: "mouseenter", is: Intersection[], pointer: Vector2): void;
+
+  /**
+   * Emitted when mouse leaves Object3Ds.
+   * @arg {Intersection[]} is An array of [`Intersection`](https://github.com/three-types/three-ts-types/blob/master/types/three/src/core/Raycaster.d.ts#L16) left by mouse.
+   * @arg {Vector2} pointer A `THREE.Vector2` representing relative element coordinates on the canvas
+   */
+  (event: "mouseleave", is: Intersection[], pointer: Vector2): void;
 }>();
 
 const loader = new GLTFLoader();
 
-const scene = inject("scene") as Scene;
-
 const three = new Group();
 three.castShadow = true;
 three.receiveShadow = true;
-scene.add(three);
+
+manageParentRelationship(three);
 
 handleVectorProp(props, "position", three);
 handleVectorProp(props, "rotation", three);
@@ -151,6 +184,8 @@ watch(
     immediate: true,
   },
 );
+
+handleRaycasting(three.children, props, emit);
 
 provide("mesh", three);
 
