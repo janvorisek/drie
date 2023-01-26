@@ -1,3 +1,6 @@
+---
+title: A Vue 3 component library for three.js
+---
 <script setup>
 import Test from './examples/Welcome.vue'
 
