@@ -98,6 +98,10 @@ export default defineConfig( {
           {
             text: 'Basic setup',
             link: '/examples/basic-setup'
+          },
+          {
+            text: 'E-shop product viewer',
+            link: '/examples/eshop-product'
           }
         ]
       }
