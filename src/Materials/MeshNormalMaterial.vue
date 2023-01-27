@@ -85,5 +85,24 @@ watch(
 
 provide("material", three);
 
-defineExpose({ three });
+defineExpose({
+  /**
+   * You can access the managed `THREE.MeshNormalMaterial` instance using the exposed `three` property.
+   *
+   * #### Example code
+   * ```vue-html
+   * <MeshNormalMaterial ref="material" />
+   * ```
+   *
+   * ```ts
+   * const material = ref(null);
+   *
+   * onMounted(() => {
+   * // Do something with the THREE.MeshNormalMaterial instance
+   * const threeMaterial = material.value.three;
+   * })
+   * ```
+   */
+  three,
+});
 </script>

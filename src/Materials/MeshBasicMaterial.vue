@@ -121,5 +121,24 @@ handlePropCallback(props, "opacity", applyProps);
 handlePropCallback(props, "transparent", applyProps);
 handlePropCallback(props, "vertexColors", applyProps);
 
-defineExpose({ three });
+defineExpose({
+  /**
+   * You can access the managed `THREE.MeshBasicMaterial` instance using the exposed `three` property.
+   *
+   * #### Example code
+   * ```vue-html
+   * <MeshBasicMaterial ref="material" />
+   * ```
+   *
+   * ```ts
+   * const material = ref(null);
+   *
+   * onMounted(() => {
+   * // Do something with the THREE.MeshBasicMaterial instance
+   * const threeMaterial = material.value.three;
+   * })
+   * ```
+   */
+  three,
+});
 </script>

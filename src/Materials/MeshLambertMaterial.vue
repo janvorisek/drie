@@ -100,5 +100,24 @@ watch(
 
 provide("material", three);
 
-defineExpose({ three });
+defineExpose({
+  /**
+   * You can access the managed `THREE.MeshLambertMaterial` instance using the exposed `three` property.
+   *
+   * #### Example code
+   * ```vue-html
+   * <MeshLambertMaterial ref="material" />
+   * ```
+   *
+   * ```ts
+   * const material = ref(null);
+   *
+   * onMounted(() => {
+   * // Do something with the THREE.MeshLambertMaterial instance
+   * const threeMaterial = material.value.three;
+   * })
+   * ```
+   */
+  three,
+});
 </script>

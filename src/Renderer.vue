@@ -246,5 +246,24 @@ provide("disableAllControls", () => {
 
 provide("camera", activeCamera);
 
-defineExpose({ three: renderer });
+defineExpose({
+  /**
+   * You can access the managed `THREE.WebGLRenderer` instance using the exposed `three` property.
+   *
+   * #### Example code
+   * ```vue-html
+   * <Renderer ref="renderer"> ... </Renderer>
+   * ```
+   *
+   * ```ts
+   * const renderer = ref(null);
+   *
+   * onMounted(() => {
+   * // Do something with the THREE.WebGLRenderer instance
+   * const threeRenderer = renderer.value.three;
+   * })
+   * ```
+   */
+  three: renderer,
+});
 </script>

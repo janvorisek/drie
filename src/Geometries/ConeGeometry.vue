@@ -161,5 +161,24 @@ handlePropCallback(props, "openEnded", redoGeometry);
 handlePropCallback(props, "thetaStart", redoGeometry);
 handlePropCallback(props, "thetaLength", redoGeometry);
 
-defineExpose({ three });
+defineExpose({
+  /**
+   * You can access the managed `THREE.BufferGeometry` instance using the exposed `three` property.
+   *
+   * #### Example code
+   * ```vue-html
+   * <ConeGeometry ref="geometry" />
+   * ```
+   *
+   * ```ts
+   * const geometry = ref(null);
+   *
+   * onMounted(() => {
+   * // Do something with the THREE.BufferGeometry instance
+   * const threeGeometry = geometry.value.three;
+   * })
+   * ```
+   */
+  three,
+});
 </script>
