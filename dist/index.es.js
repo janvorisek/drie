@@ -71,6 +71,8 @@ function Ht(c, s) {
   const t = S("camera"), e = S("canvas");
   S("scene");
   const n = (r) => {
+    if (s.onClick === null)
+      return;
     const l = new It(), d = sn(r);
     l.setFromCamera(d, t.value);
     const u = l.intersectObjects(c);
@@ -183,7 +185,9 @@ const Gs = /* @__PURE__ */ I({
       u = !0;
     }), D("disableAllControls", () => {
       u = !1;
-    }), D("camera", a), s({ three: e }), (m, M) => (Vn(), Zn(Kn, null, [
+    }), D("camera", a), s({
+      three: e
+    }), (m, M) => (Vn(), Zn(Kn, null, [
       $n("canvas", {
         ref_key: "canvas",
         ref: d
@@ -1367,9 +1371,15 @@ const so = {
         y.value ? d() : l();
       }), n.add(e.value), u(), p = !0);
     };
-    return O(r, () => {
-      h();
-    }), u(), g(t, "mode", u), g(t, "size", u), g(t, "showX", u), g(t, "showY", u), g(t, "showZ", u), g(t, "rotationSnap", u), g(t, "translationSnap", u), _e(() => {
+    return O(
+      r,
+      () => {
+        h();
+      },
+      {
+        immediate: !0
+      }
+    ), u(), g(t, "mode", u), g(t, "size", u), g(t, "showX", u), g(t, "showY", u), g(t, "showZ", u), g(t, "rotationSnap", u), g(t, "translationSnap", u), _e(() => {
       n.remove(e.value), ve(e.value);
     }), s({ three: e }), { props: t, three: e, scene: n, mesh: i, parent: o, camera: a, canvas: r, enableAllControls: l, disableAllControls: d, applyProps: u, get boundCamera() {
       return p;
@@ -3462,7 +3472,9 @@ const Qo = /* @__PURE__ */ I({
     }
     return a(), g(t, "name", () => {
       n.name = t.name;
-    }), g(t, "width", a), g(t, "height", a), g(t, "depth", a), g(t, "widthSegments", a), g(t, "heightSegments", a), g(t, "depthSegments", a), s({ three: n }), { props: t, makeBox: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
+    }), g(t, "width", a), g(t, "height", a), g(t, "depth", a), g(t, "widthSegments", a), g(t, "heightSegments", a), g(t, "depthSegments", a), s({
+      three: n
+    }), { props: t, makeBox: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
   }
 }), ei = {
   name: "BufferGeometry",
@@ -3512,7 +3524,9 @@ const Qo = /* @__PURE__ */ I({
         a();
       },
       { deep: !0 }
-    ), s({ three: n }), { props: t, makeGeometry: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
+    ), s({
+      three: n
+    }), { props: t, makeGeometry: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
   }
 }), ni = {
   name: "CircleGeometry",
@@ -3541,7 +3555,9 @@ const Qo = /* @__PURE__ */ I({
       const r = e(t.radius, t.segments, t.thetaStart, t.thetaLength);
       fe(n, r);
     }
-    return a(), g(t, "radius", a), g(t, "segments", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({ three: n }), { props: t, makeCircle: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
+    return a(), g(t, "radius", a), g(t, "segments", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({
+      three: n
+    }), { props: t, makeCircle: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
   }
 }), oi = {
   name: "ConeGeometry",
@@ -3581,7 +3597,9 @@ const Qo = /* @__PURE__ */ I({
       );
       fe(n, r);
     }
-    return a(), g(t, "radius", a), g(t, "height", a), g(t, "radialSegments", a), g(t, "heightSegments", a), g(t, "openEnded", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({ three: n }), { props: t, makeCone: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
+    return a(), g(t, "radius", a), g(t, "height", a), g(t, "radialSegments", a), g(t, "heightSegments", a), g(t, "openEnded", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({
+      three: n
+    }), { props: t, makeCone: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
   }
 }), ai = {
   name: "CylinderGeometry",
@@ -3632,7 +3650,9 @@ const Qo = /* @__PURE__ */ I({
       );
       fe(n, r);
     }
-    return a(), g(t, "radiusTop", a), g(t, "radiusBottom", a), g(t, "height", a), g(t, "radialSegments", a), g(t, "heightSegments", a), g(t, "openEnded", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({ three: n }), { props: t, makeCylinder: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
+    return a(), g(t, "radiusTop", a), g(t, "radiusBottom", a), g(t, "height", a), g(t, "radialSegments", a), g(t, "heightSegments", a), g(t, "openEnded", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({
+      three: n
+    }), { props: t, makeCylinder: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
   }
 }), ci = {
   name: "EdgesGeometry",
@@ -3672,7 +3692,9 @@ const Qo = /* @__PURE__ */ I({
     const l = () => {
       i(t.geometry) === void 0 ? ft(() => l) : a();
     };
-    return ft(() => l), s({ three: e }), { props: t, three: e, mesh: n, getGeometry: i, addGeometry: o, redoGeometry: a, get unwatch() {
+    return ft(() => l), s({
+      three: e
+    }), { props: t, three: e, mesh: n, getGeometry: i, addGeometry: o, redoGeometry: a, get unwatch() {
       return r;
     }, set unwatch(d) {
       r = d;
@@ -3803,7 +3825,9 @@ const ui = {
       const r = e(t.function, t.slices, t.stacks);
       fe(n, r);
     }
-    return a(), g(t, "function", a), g(t, "stacks", a), g(t, "slices", a), s({ three: n }), { props: t, makePlane: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
+    return a(), g(t, "function", a), g(t, "stacks", a), g(t, "slices", a), s({
+      three: n
+    }), { props: t, makePlane: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
   }
 }), hi = {
   name: "PlaneGeometry",
@@ -3832,7 +3856,9 @@ const ui = {
       const r = e(t.width, t.height, t.widthSegments, t.heightSegments);
       fe(n, r);
     }
-    return a(), g(t, "width", a), g(t, "height", a), g(t, "widthSegments", a), g(t, "heightSegments", a), s({ three: n }), { props: t, makePlane: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
+    return a(), g(t, "width", a), g(t, "height", a), g(t, "widthSegments", a), g(t, "heightSegments", a), s({
+      three: n
+    }), { props: t, makePlane: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
   }
 }), fi = {
   name: "RingGeometry",
@@ -3870,7 +3896,9 @@ const ui = {
       );
       fe(n, r);
     }
-    return a(), g(t, "innerRadius", a), g(t, "outerRadius", a), g(t, "thetaSegments", a), g(t, "phiSegments", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({ three: n }), { props: t, makeRing: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
+    return a(), g(t, "innerRadius", a), g(t, "outerRadius", a), g(t, "thetaSegments", a), g(t, "phiSegments", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({
+      three: n
+    }), { props: t, makeRing: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
   }
 }), gi = {
   name: "SphereGeometry",
@@ -3910,7 +3938,9 @@ const ui = {
       );
       fe(n, r);
     }
-    return a(), g(t, "radius", a), g(t, "widthSegments", a), g(t, "heightSegments", a), g(t, "phiStart", a), g(t, "phiLength", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({ three: n }), { props: t, makeSphere: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
+    return a(), g(t, "radius", a), g(t, "widthSegments", a), g(t, "heightSegments", a), g(t, "phiStart", a), g(t, "phiLength", a), g(t, "thetaStart", a), g(t, "thetaLength", a), s({
+      three: n
+    }), { props: t, makeSphere: e, three: n, mesh: i, addGeometry: o, redoGeometry: a };
   }
 }), wi = {
   name: "WireframeGeometry",
@@ -3950,7 +3980,9 @@ const ui = {
     const l = () => {
       i(t.geometry) === void 0 ? ft(() => l) : a();
     };
-    return ft(() => l), s({ three: e }), { props: t, three: e, mesh: n, getGeometry: i, addGeometry: o, redoGeometry: a, get unwatch() {
+    return ft(() => l), s({
+      three: e
+    }), { props: t, three: e, mesh: n, getGeometry: i, addGeometry: o, redoGeometry: a, get unwatch() {
       return r;
     }, set unwatch(d) {
       r = d;
@@ -3977,7 +4009,9 @@ const ui = {
     function o() {
       t.color && (e.color = new Y(t.color)), e.opacity = t.opacity, e.transparent = t.transparent, e.needsUpdate = !0;
     }
-    return o(), g(t, "color", o), g(t, "opacity", o), g(t, "transparent", o), D("material", e), s({ three: e }), { props: t, three: e, addMaterial: n, mesh: i, applyProps: o };
+    return o(), g(t, "color", o), g(t, "opacity", o), g(t, "transparent", o), D("material", e), s({
+      three: e
+    }), { props: t, three: e, addMaterial: n, mesh: i, applyProps: o };
   }
 }), Ei = {
   name: "LineDashedMaterial",
@@ -4003,7 +4037,9 @@ const ui = {
     function o() {
       e.color = new Y(t.color), e.scale = t.scale, e.dashSize = t.dashSize, e.gapSize = t.gapSize, e.opacity = t.opacity, e.transparent = t.transparent, e.needsUpdate = !0;
     }
-    return o(), g(t, "color", o), g(t, "scale", o), g(t, "dashSize", o), g(t, "gapSize", o), g(t, "opacity", o), g(t, "transparent", o), D("material", e), s({ three: e }), { props: t, three: e, addMaterial: n, mesh: i, applyProps: o };
+    return o(), g(t, "color", o), g(t, "scale", o), g(t, "dashSize", o), g(t, "gapSize", o), g(t, "opacity", o), g(t, "transparent", o), D("material", e), s({
+      three: e
+    }), { props: t, three: e, addMaterial: n, mesh: i, applyProps: o };
   }
 }), Si = {
   name: "MeshBasicMaterial"
@@ -4025,7 +4061,9 @@ const ui = {
     function o() {
       t.color !== void 0 && (e.color = new Y(t.color)), e.side = t.side, e.opacity = t.opacity, e.transparent = t.transparent, e.vertexColors = t.vertexColors, e.needsUpdate = !0;
     }
-    return o(), D("material", e), g(t, "color", o), g(t, "side", o), g(t, "opacity", o), g(t, "transparent", o), g(t, "vertexColors", o), s({ three: e }), (a, r) => te(a.$slots, "default");
+    return o(), D("material", e), g(t, "color", o), g(t, "side", o), g(t, "opacity", o), g(t, "transparent", o), g(t, "vertexColors", o), s({
+      three: e
+    }), (a, r) => te(a.$slots, "default");
   }
 }), vi = {
   name: "MeshLambertMaterial"
@@ -4064,7 +4102,9 @@ const ui = {
         e.transparent = t.transparent;
       },
       { immediate: !0 }
-    ), D("material", e), s({ three: e }), (a, r) => te(a.$slots, "default");
+    ), D("material", e), s({
+      three: e
+    }), (a, r) => te(a.$slots, "default");
   }
 }), Li = {
   name: "PointsMaterial",
@@ -4087,7 +4127,9 @@ const ui = {
     function o() {
       e.color = new Y(t.color), e.size = t.size, e.sizeAttenuation = t.sizeAttenuation, e.opacity = t.opacity, e.transparent = t.transparent, e.needsUpdate = !0;
     }
-    return o(), g(t, "color", o), g(t, "size", o), g(t, "sizeAttenuation", o), g(t, "opacity", o), g(t, "transparent", o), D("material", e), s({ three: e }), { props: t, three: e, mesh: n, addMaterial: i, applyProps: o };
+    return o(), g(t, "color", o), g(t, "size", o), g(t, "sizeAttenuation", o), g(t, "opacity", o), g(t, "transparent", o), D("material", e), s({
+      three: e
+    }), { props: t, three: e, mesh: n, addMaterial: i, applyProps: o };
   }
 }), Ri = {
   name: "MeshNormalMaterial"
@@ -4121,7 +4163,9 @@ const ui = {
         e.transparent = t.transparent;
       },
       { immediate: !0 }
-    ), D("material", e), s({ three: e }), (o, a) => te(o.$slots, "default");
+    ), D("material", e), s({
+      three: e
+    }), (o, a) => te(o.$slots, "default");
   }
 }), Ci = {
   name: "AmbientLight",

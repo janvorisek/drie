@@ -127,7 +127,23 @@ declare const _sfc_main: import("vue").DefineComponent<{
             setXYZ: (index: number, x: number, y: number, z: number) => import("three").BufferAttribute;
             setXYZW: (index: number, x: number, y: number, z: number, w: number) => import("three").BufferAttribute;
             toJSON: () => {
-                itemSize: number;
+                itemSize: number; /**
+                 * You can access the managed `THREE.BufferGeometry` instance using the exposed `three` property.
+                 *
+                 * #### Example code
+                 * ```vue-html
+                 * <SphereGeometry ref="geometry" />
+                 * ```
+                 *
+                 * ```ts
+                 * const geometry = ref(null);
+                 *
+                 * onMounted(() => {
+                 * // Do something with the THREE.BufferGeometry instance
+                 * const threeGeometry = geometry.value.three;
+                 * })
+                 * ```
+                 */
                 type: string;
                 array: number[];
                 normalized: boolean;
