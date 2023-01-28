@@ -146,9 +146,15 @@ const tryBindCamera = () => {
   boundCamera = true;
 };
 
-watch(canvas, () => {
-  tryBindCamera();
-});
+watch(
+  canvas,
+  () => {
+    tryBindCamera();
+  },
+  {
+    immediate: true,
+  },
+);
 
 applyProps();
 
