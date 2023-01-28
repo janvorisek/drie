@@ -10,6 +10,7 @@
     <option value="sphere">Sphere</option>
   </select>
   <input v-model.number="count" type="number" />
+  <input v-model="checkbox" type="checkbox" />
   <div style="display: flex; flex-direction: row">
     <div style="width: 300px">
       <pre>{{ renderer?.three.info }}</pre>
@@ -95,6 +96,7 @@
               <MeshNormalMaterial :side="DoubleSide" transparent :opacity="0.5" />
             </OBJLoader>
             <GLTFLoader
+              v-if="checkbox"
               url="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF-Binary/Avocado.glb"
               :position="[0, 0, 5]"
               :scale="[10, 10, 10]"
@@ -141,6 +143,7 @@ const count = ref(100);
 const pos = ref<[number, number, number]>([0, 0, 0]);
 const rot = ref<[number, number, number]>([0, 0, 0]);
 const vertices = reactive<number[]>([]);
+const checkbox = ref(true);
 
 const w = ref(1);
 const s = ref(1);
