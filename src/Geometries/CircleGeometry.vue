@@ -52,10 +52,11 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { inject, reactive } from "vue";
+import { inject, onMounted, reactive } from "vue";
 
 import { BufferGeometry, Mesh, CircleGeometry } from "three";
 import { handlePropCallback, copyGeo } from "../utils";
+import EventBus from "../EventBus";
 
 export interface Props {
   /**
@@ -120,9 +121,11 @@ function redoGeometry() {
   const tmp = makeCircle(props.radius, props.segments, props.thetaStart, props.thetaLength);
 
   copyGeo(three, tmp);
+
+  EventBus.geometryChanged(props.name, three);
 }
 
-redoGeometry();
+onMounted(redoGeometry);
 
 handlePropCallback(props, "radius", redoGeometry);
 handlePropCallback(props, "segments", redoGeometry);

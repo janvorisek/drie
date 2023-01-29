@@ -65,13 +65,14 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { inject, reactive } from "vue";
+import { inject, onMounted, reactive } from "vue";
 
 import { BufferGeometry, Mesh, Vector3 } from "three";
 import { ParametricGeometry } from "three/examples/jsm/geometries/ParametricGeometry";
 import { ParametricGeometries } from "three/examples/jsm/geometries/ParametricGeometries";
 
 import { handlePropCallback, copyGeo } from "../utils";
+import EventBus from "../EventBus";
 
 export interface Props {
   /**
@@ -128,9 +129,11 @@ function redoGeometry() {
   const tmp = makePlane(props.function, props.slices, props.stacks);
 
   copyGeo(three, tmp);
+
+  EventBus.geometryChanged(props.name, three);
 }
 
-redoGeometry();
+onMounted(redoGeometry);
 
 handlePropCallback(props, "function", redoGeometry);
 handlePropCallback(props, "stacks", redoGeometry);

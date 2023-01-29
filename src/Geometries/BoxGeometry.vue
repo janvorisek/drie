@@ -8,7 +8,7 @@ export default {
 <docs>BEGIN_DOCS
   <script setup>
   import BoxGeometry from '../../examples/BoxGeometry.vue'
-  import { computed, ref } from 'vue';
+  import { computed, ref, onMounted } from 'vue';
   const demo = ref('');
   
   const liveCode = computed(() => {
@@ -43,10 +43,11 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { inject, reactive } from "vue";
+import { inject, onMounted, reactive } from "vue";
 
 import { BoxGeometry, BufferGeometry, Mesh } from "three";
 import { handlePropCallback, copyGeo } from "../utils";
+import EventBus from "../EventBus";
 
 export interface Props {
   /**
@@ -130,9 +131,11 @@ function redoGeometry() {
   );
 
   copyGeo(three, tmp);
+
+  EventBus.geometryChanged(props.name, three);
 }
 
-redoGeometry();
+onMounted(redoGeometry);
 
 handlePropCallback(props, "name", () => {
   three.name = props.name;

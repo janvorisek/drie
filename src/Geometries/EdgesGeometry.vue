@@ -68,6 +68,7 @@ import { inject, nextTick, watch, reactive } from "vue";
 
 import { BufferGeometry, EdgesGeometry, Mesh, Line } from "three";
 import { handlePropCallback, copyGeo } from "../utils";
+import EventBus from "../EventBus";
 
 export interface Props {
   /**
@@ -88,44 +89,20 @@ if (mesh) {
   mesh.geometry = three;
 }
 
-const getGeometry = inject("getGeometry") as (g: string) => BufferGeometry;
 const addGeometry = inject("addGeometry") as (g: BufferGeometry) => void;
 addGeometry(three);
 
-function redoGeometry() {
-  const tmp = new EdgesGeometry(getGeometry(props.geometry));
-  //console.log(tmp);
+function redoGeometry(geometry: BufferGeometry) {
+  const tmp = new EdgesGeometry(geometry);
   copyGeo(three, tmp);
 
   const line = mesh as unknown as Line;
   if ("isLine" in line) line.computeLineDistances();
 }
 
-let unwatch = watch(
-  getGeometry(props.geometry),
-  () => {
-    redoGeometry();
-  },
-  { deep: true, immediate: true },
-);
-
-handlePropCallback(props, "geometry", () => {
-  unwatch();
-  unwatch = watch(
-    getGeometry(props.geometry),
-    () => {
-      redoGeometry();
-    },
-    { immediate: true, deep: true },
-  );
+EventBus.geometryChanged.on(props.geometry, (geometry) => {
+  redoGeometry(geometry);
 });
-
-const waitUntilGeometryChanged = () => {
-  if (getGeometry(props.geometry) === undefined) nextTick(() => waitUntilGeometryChanged);
-  else redoGeometry();
-};
-
-nextTick(() => waitUntilGeometryChanged);
 
 defineExpose({
   /**

@@ -66,10 +66,11 @@ export default {
 </docs>
 
 <script setup lang="ts">
-import { inject, watch, reactive } from "vue";
+import { inject, watch, reactive, onMounted } from "vue";
 
 import { BufferAttribute, BufferGeometry, Mesh } from "three";
 import { copyGeo } from "../utils";
+import EventBus from "../EventBus";
 
 export interface Props {
   /**
@@ -152,9 +153,11 @@ function redoGeometry() {
   const tmp = makeGeometry();
 
   copyGeo(three, tmp);
+
+  EventBus.geometryChanged(props.name, three);
 }
 
-redoGeometry();
+onMounted(redoGeometry);
 
 watch(
   () => props.vertices,
