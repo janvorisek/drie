@@ -22,6 +22,7 @@ import GLTFLoader from "./Loaders/GLTFLoader.vue";
 import OBJLoader from "./Loaders/OBJLoader.vue";
 
 import AxesHelper from "./Helpers/AxesHelper.vue";
+import BoxHelper from "./Helpers/BoxHelper.vue";
 
 import BoxGeometry from "./Geometries/BoxGeometry.vue";
 import BufferGeometry from "./Geometries/BufferGeometry.vue";
@@ -74,6 +75,7 @@ function install(app: App) {
   app.component("OBJLoader", OBJLoader);
   // Helpers
   app.component("AxesHelper", AxesHelper);
+  app.component("BoxHelper", BoxHelper);
   // Geometries
   app.component("BoxGeometry", BoxGeometry);
   app.component("BufferGeometry", BufferGeometry);
@@ -127,6 +129,7 @@ export {
   OBJLoader,
   //Helpers
   AxesHelper,
+  BoxHelper,
   // Geometries
   BoxGeometry,
   BufferGeometry,
