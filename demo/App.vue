@@ -44,7 +44,7 @@
           </Mesh>
           <PointLight :position="[0, 0, 10]" :intensity="0.25" :cast-shadow="true" />
           <AmbientLight :color="0xffffff" :intensity="2" />
-          <Points :position="posV" :scale="[s, s, s]">
+          <Points name="someMesh" :position="posV" :scale="[s, s, s]">
             <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
             <SphereGeometry name="sphere" :radius="radius" :width-segments="12" :height-segments="12" />
           </Points>
@@ -111,8 +111,13 @@
 
             <InstancedMesh ref="instancedMesh" geometry="reusedGeo2" material="reusedMat2" :count="step * step" />
           </Group>
-          <LineSegments :position="pos" :rotation="rot">
-            <EdgesGeometry geometry="test" />
+          <BoxHelper mesh="someMesh">
+            <BufferGeometry name="bboxBox" />
+            <MeshBasicMaterial transparent :opacity="0.5" />
+          </BoxHelper>
+          <LineSegments :position="posV">
+            <LineBasicMaterial color="red" />
+            <EdgesGeometry geometry="bboxBox" />
           </LineSegments>
           <LineSegments>
             <WireframeGeometry :geometry="geoName" />
@@ -188,7 +193,7 @@ onMounted(() => {
 });
 
 const onBeforeRender = () => {
-  return;
+  //return;
   const angle = Date.now() / 1000;
 
   opacity.value = Math.sin(2 * angle) * 0.45 + 0.5;
