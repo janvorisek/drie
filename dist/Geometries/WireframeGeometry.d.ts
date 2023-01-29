@@ -442,11 +442,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
         dispatchEvent: (event: import("three").Event) => void;
     };
     mesh: Mesh<BufferGeometry, import("three").Material | import("three").Material[]> | null;
-    getGeometry: (g: string) => BufferGeometry;
     addGeometry: (g: BufferGeometry) => void;
-    redoGeometry: () => void;
-    unwatch: import("vue").WatchStopHandle;
-    waitUntilGeometryChanged: () => void;
+    redoGeometry: (geometry: BufferGeometry) => void;
     inject: typeof inject;
     nextTick: typeof nextTick;
     watch: typeof watch;
@@ -459,6 +456,18 @@ declare const _sfc_main: import("vue").DefineComponent<{
         [key: string]: any;
     }, prop: string, fn: () => void) => void;
     readonly copyGeo: typeof copyGeo;
+    readonly EventBus: {
+        geometryChanged: import("ts-event-bus").Slot<BufferGeometry, void>;
+        object3DChanged: import("ts-event-bus").Slot<import("three").Object3D<import("three").Event>, void>;
+        object3DTranslated: import("ts-event-bus").Slot<import("three").Object3D<import("three").Event>, void>;
+        sayHello: import("ts-event-bus").Slot<string, void>;
+        getTime: import("ts-event-bus").Slot<null, string>;
+        multiply: import("ts-event-bus").Slot<{
+            a: number;
+            b: number;
+        }, number>;
+        ping: import("ts-event-bus").Slot<void, void>;
+    };
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     geometry: {
         type: StringConstructor;

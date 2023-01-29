@@ -5,17 +5,16 @@ export interface Props {
      */
     castShadow?: boolean;
     /**
-     * Optional name of the geometry.
-     * This allows reusing of the geometry.
-     */
-    geometry?: string | null;
-    /**
      * Optional name of the material.
      * This allows reusing of the material.
      */
     material?: string | null;
     /**
-     * Name of the Mesh.
+     * Name of the target mesh.
+     */
+    mesh: string;
+    /**
+     * Name of the box Mesh.
      */
     name?: string;
     /**

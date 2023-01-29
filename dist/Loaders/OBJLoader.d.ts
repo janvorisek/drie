@@ -11,6 +11,10 @@ export interface Props {
      */
     enableRaycasting?: boolean;
     /**
+     * Name of the Group.
+     */
+    name?: string;
+    /**
      * Callback to be fired when Group content clicked.
      */
     onClick?: (is?: Intersection, mv?: Vector2) => void | null;
@@ -57,6 +61,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         required: false;
         default: boolean;
+    };
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
     };
     onClick: {
         type: FunctionConstructor;
@@ -124,6 +133,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: boolean;
     };
+    name: {
+        type: StringConstructor;
+        required: false;
+        default: string;
+    };
     onClick: {
         type: FunctionConstructor;
         required: false;
@@ -173,6 +187,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     onProgress?: ((...args: any[]) => any) | undefined;
     onError?: ((...args: any[]) => any) | undefined;
 }, {
+    name: string;
     scale: any;
     position: any;
     rotation: any;
