@@ -26,6 +26,7 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
 import { Vector3Like } from "../types";
 import { handleRaycasting, handleVectorProp, manageParentRelationship } from "../utils";
+import EventBus from "../EventBus";
 
 export interface Props {
   /**
@@ -37,6 +38,11 @@ export interface Props {
    * Component will emit mouse events when raycasting is enabled
    */
   enableRaycasting?: boolean;
+
+  /**
+   * Name of the Group.
+   */
+  name?: string;
 
   /**
    * Callback to be fired when Group content clicked.
@@ -85,6 +91,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  name: "",
   onClick: () => null,
   onMouseEnter: () => null,
   onMouseMove: () => null,
@@ -142,6 +149,7 @@ function load() {
       applyProps();
 
       emit("load", object);
+      EventBus.object3DChanged(props.name, three);
       //resolve(object);
     },
     // called when loading is in progresses

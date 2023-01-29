@@ -124,7 +124,7 @@ function makeSphere(
   return new SphereGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength);
 }
 
-const three = reactive(new BufferGeometry());
+const three = new BufferGeometry();
 // eslint-disable-next-line vue/no-setup-props-destructure
 three.name = props.name;
 
@@ -151,6 +151,7 @@ function redoGeometry() {
   copyGeo(three, tmp);
 
   EventBus.geometryChanged(props.name, three);
+  if (mesh) EventBus.object3DChanged(mesh.name, mesh);
 }
 
 onMounted(redoGeometry);

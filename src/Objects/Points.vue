@@ -20,13 +20,19 @@ It accepts any geometry and [`<PointsMaterial>`](/components/Materials/PointsMat
 </docs>
 
 <script setup lang="ts">
-import { provide, inject, onUnmounted } from "vue";
+import { provide, inject, onUnmounted, onMounted } from "vue";
 
 import { BufferGeometry, Points, PointsMaterial, Scene } from "three";
 import { Vector3Like } from "../types";
-import { disposeTHREEObject, handleVectorProp, manageParentRelationship } from "../utils";
+import { disposeTHREEObject, handlePropCallback, handleVectorProp, manageParentRelationship } from "../utils";
+import EventBus from "../EventBus";
 
 export interface Props {
+  /**
+   * Name of the Points mesh.
+   */
+  name?: string;
+
   /**
    * A [Vector3Like](/types#vector3like) representing the object's local position.
    */
@@ -44,6 +50,7 @@ export interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  name: "",
   position: () => [0, 0, 0],
   rotation: () => [0, 0, 0],
   scale: () => [1, 1, 1],
@@ -61,6 +68,26 @@ manageParentRelationship(three);
 handleVectorProp(props, "position", three);
 handleVectorProp(props, "rotation", three);
 handleVectorProp(props, "scale", three);
+
+handlePropCallback(props, "position", () => {
+  EventBus.object3DTranslated(props.name, three);
+});
+handlePropCallback(props, "rotation", () => {
+  EventBus.object3DTranslated(props.name, three);
+});
+handlePropCallback(props, "scale", () => {
+  EventBus.object3DTranslated(props.name, three);
+});
+
+function applyProps() {
+  three.name = props.name;
+}
+
+applyProps();
+
+onMounted(() => {
+  EventBus.object3DChanged(props.name, three);
+});
 
 onUnmounted(() => {
   scene.remove(three);

@@ -35,6 +35,7 @@ import { provide, inject, onUnmounted, onMounted } from "vue";
 import { BufferGeometry, Material, Mesh, MeshBasicMaterial, Scene } from "three";
 import { Vector3Like } from "../types";
 import { handleVectorProp, disposeTHREEObject, handlePropCallback, manageParentRelationship } from "../utils";
+import EventBus from "../EventBus";
 
 export interface Props {
   /**
@@ -53,6 +54,11 @@ export interface Props {
    * This allows reusing of the material.
    */
   material?: string | null;
+
+  /**
+   * Name of the Mesh.
+   */
+  name?: string;
 
   /**
    * A [Vector3Like](/types#vector3like) representing the object's local position.
@@ -79,6 +85,7 @@ const props = withDefaults(defineProps<Props>(), {
   position: () => [0, 0, 0],
   rotation: () => [0, 0, 0],
   scale: () => [1, 1, 1],
+  name: "",
   castShadow: false,
   receiveShadow: false,
   geometry: null,
@@ -100,7 +107,18 @@ handleVectorProp(props, "position", three);
 handleVectorProp(props, "rotation", three);
 handleVectorProp(props, "scale", three);
 
+handlePropCallback(props, "position", () => {
+  EventBus.object3DTranslated(props.name, three);
+});
+handlePropCallback(props, "rotation", () => {
+  EventBus.object3DTranslated(props.name, three);
+});
+handlePropCallback(props, "scale", () => {
+  EventBus.object3DTranslated(props.name, three);
+});
+
 function applyProps() {
+  three.name = props.name;
   three.castShadow = props.castShadow as boolean;
   three.receiveShadow = props.receiveShadow as boolean;
 }
@@ -124,6 +142,8 @@ onMounted(() => {
     // @ts-expect-error Force material from getMaterial to Mesh
     three.material = geo;
   }
+
+  EventBus.object3DChanged(props.name, three);
 });
 
 onUnmounted(() => {

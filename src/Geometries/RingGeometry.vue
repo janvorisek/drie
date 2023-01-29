@@ -145,6 +145,7 @@ function redoGeometry() {
   copyGeo(three, tmp);
 
   EventBus.geometryChanged(props.name, three);
+  if (mesh) EventBus.object3DChanged(mesh.name, mesh);
 }
 
 onMounted(redoGeometry);
