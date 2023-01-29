@@ -33,6 +33,8 @@ import { onMounted, provide, type Ref, ref, watch, onUnmounted, reactive } from 
 import { BufferGeometry, Camera, Material, Scene, WebGLRenderer } from "three";
 import { disposeTHREEObject } from "./utils";
 
+import EventBus from "./EventBus";
+
 export interface Props {
   /**
    * Controls the default clear alpha value.
@@ -265,5 +267,7 @@ defineExpose({
    * ```
    */
   three: renderer,
+
+  eventBus: EventBus,
 });
 </script>
