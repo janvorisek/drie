@@ -78,9 +78,12 @@
     "vue-tsc": "^1.0.18"
   },
   "peerDependencies": {
-    "three": "^0.148.0"
+    "three": "^0.149.0"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "ts-event-bus": "^4.1.1"
   }
 }
