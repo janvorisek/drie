@@ -103,12 +103,24 @@ function redoGeometry(obj: Object3D) {
   EventBus.geometryChanged(three.geometry.name, three.geometry);
 }
 
+// Recursively compute bounding box
+// This is important for Groups, i.e. GLTFLoader, OBJLoader etc.
+const computeBB = (o: Object3D) => {
+  if ("geometry" in o) (o.geometry as BufferGeometry).computeBoundingBox();
+  else {
+    for (const c of o.children) {
+      computeBB(c);
+    }
+  }
+};
+
 EventBus.object3DChanged.on(props.mesh, (obj) => {
-  (obj.geometry as BufferGeometry).computeBoundingBox();
+  computeBB(obj);
   redoGeometry(obj);
 });
 
 EventBus.object3DTranslated.on(props.mesh, (obj) => {
+  computeBB(obj);
   redoGeometry(obj);
 });
 
