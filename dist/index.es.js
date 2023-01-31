@@ -4068,26 +4068,33 @@ const ji = /* @__PURE__ */ C({
     }
     a(), _(t, "castShadow", a), _(t, "receiveShadow", a);
     const c = S("getMaterial");
-    function l(d) {
-      const u = new ns();
-      u.setFromObject(d);
-      const f = new v();
-      u.getCenter(f);
-      const h = new se(u.max.x - u.min.x, u.max.y - u.min.y, u.max.z - u.min.z);
-      pe(o.geometry, h), o.position.set(f.x, f.y, f.z), k.geometryChanged(o.geometry.name, o.geometry);
+    function l(u) {
+      const f = new ns();
+      f.setFromObject(u);
+      const h = new v();
+      f.getCenter(h);
+      const m = new se(f.max.x - f.min.x, f.max.y - f.min.y, f.max.z - f.min.z);
+      pe(o.geometry, m), o.position.set(h.x, h.y, h.z), k.geometryChanged(o.geometry.name, o.geometry);
     }
-    return k.object3DChanged.on(t.mesh, (d) => {
-      d.geometry.computeBoundingBox(), l(d);
-    }), k.object3DTranslated.on(t.mesh, (d) => {
-      l(d);
+    const d = (u) => {
+      if ("geometry" in u)
+        u.geometry.computeBoundingBox();
+      else
+        for (const f of u.children)
+          d(f);
+    };
+    return k.object3DChanged.on(t.mesh, (u) => {
+      d(u), l(u);
+    }), k.object3DTranslated.on(t.mesh, (u) => {
+      d(u), l(u);
     }), oe(() => {
       if (t.material) {
-        const d = c(t.material);
-        o.material = d;
+        const u = c(t.material);
+        o.material = u;
       }
     }), _e(() => {
       e.remove(o), Me(o);
-    }), N("mesh", o), n({ three: o }), (d, u) => J(d.$slots, "default");
+    }), N("mesh", o), n({ three: o }), (u, f) => J(u.$slots, "default");
   }
 }), Gi = {
   name: "BoxGeometry",
