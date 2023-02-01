@@ -20,7 +20,7 @@ The X axis is red. The Y axis is green. The Z axis is blue.
 import { provide, inject } from "vue";
 
 import { AxesHelper, Scene } from "three";
-import { handleVectorProp } from "../utils";
+import { handleVectorProp, manageParentRelationship } from "../utils";
 import { Vector3Like } from "../types";
 
 export interface Props {
@@ -52,10 +52,9 @@ const props = withDefaults(defineProps<Props>(), {
   scale: () => [1, 1, 1],
 });
 
-const scene = inject("scene") as Scene;
-
 const three = new AxesHelper(props.size);
-scene.add(three);
+
+manageParentRelationship(three);
 
 handleVectorProp(props, "position", three);
 handleVectorProp(props, "rotation", three);
