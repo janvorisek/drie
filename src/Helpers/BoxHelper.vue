@@ -88,8 +88,9 @@ handleVectorProp(props, "rotation", three);
 handleVectorProp(props, "scale", three);
 
 function applyProps() {
-  three.castShadow = props.castShadow as boolean;
-  three.receiveShadow = props.receiveShadow as boolean;
+  three.castShadow = props.castShadow;
+  three.receiveShadow = props.receiveShadow;
+  three.name = props.name;
 }
 
 applyProps();
