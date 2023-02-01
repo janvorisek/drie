@@ -4061,7 +4061,7 @@ const Fi = /* @__PURE__ */ C({
     const t = r, e = T("scene"), s = new B(), i = new _e(), o = new x(s, i);
     ue(o), L(t, "position", o), L(t, "rotation", o), L(t, "scale", o);
     function a() {
-      o.castShadow = t.castShadow, o.receiveShadow = t.receiveShadow;
+      o.castShadow = t.castShadow, o.receiveShadow = t.receiveShadow, o.name = t.name;
     }
     a(), _(t, "castShadow", a), _(t, "receiveShadow", a);
     const c = T("getMaterial");
@@ -4843,7 +4843,7 @@ const ta = {
     function s() {
       e.color = new V(t.color), e.intensity = t.intensity, e.castShadow = t.castShadow;
     }
-    return s(), _(t, "color", s), _(t, "intensity", s), _(t, "castShadow", s), L(t, "position", e), console.log(e), n({ three: e }), { props: t, three: e, applyProps: s };
+    return s(), _(t, "color", s), _(t, "intensity", s), _(t, "castShadow", s), L(t, "position", e), n({ three: e }), { props: t, three: e, applyProps: s };
   }
 }), Aa = {
   name: "HemisphereLight",
