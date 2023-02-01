@@ -20,12 +20,16 @@ This light can cast shadows.
 </docs>
 
 <script setup lang="ts">
-import { inject } from "vue";
-
-import { Color, DirectionalLight, Scene } from "three";
-import { handlePropCallback } from "../utils";
+import { Color, DirectionalLight } from "three";
+import { handlePropCallback, handleVectorProp, manageParentRelationship } from "../utils";
+import { type Vector3Like } from "../types";
 
 export interface Props {
+  /**
+   * If set to true light will cast dynamic shadows.
+   */
+  castShadow?: boolean;
+
   /**
    * Color of the light.
    */
@@ -35,27 +39,41 @@ export interface Props {
    * Numeric value of the light's strength/intensity.
    */
   intensity?: number;
+
+  /**
+   * A Vector3Like representing the object's local position.
+   */
+  position?: Vector3Like;
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  position: () => [0, 0, 0],
+  castShadow: false,
   color: 0xffffff,
   intensity: 1,
 });
 
-const scene = inject("scene") as Scene;
-
 const three = new DirectionalLight();
-scene.add(three);
+
+manageParentRelationship(three);
+
+//scene.add(three.target);
 
 function applyProps() {
   three.color = new Color(props.color);
   three.intensity = props.intensity as number;
+  three.castShadow = props.castShadow;
 }
 
 applyProps();
 
 handlePropCallback(props, "color", applyProps);
 handlePropCallback(props, "intensity", applyProps);
+handlePropCallback(props, "castShadow", applyProps);
+
+handleVectorProp(props, "position", three);
+
+console.log(three);
 
 defineExpose({ three });
 </script>
