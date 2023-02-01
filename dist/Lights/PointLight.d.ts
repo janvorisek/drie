@@ -1,6 +1,7 @@
-import { inject, watch } from "vue";
-import { Color, PointLight, Scene } from "three";
+import { watch } from "vue";
+import { Color, PointLight } from "three";
 import { type Vector3Like } from "../types";
+import { manageParentRelationship } from "../utils";
 export interface Props {
     /**
      * If set to true light will cast dynamic shadows.
@@ -60,17 +61,15 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     props: any;
-    scene: Scene;
     three: PointLight;
     applyProps: (props: Props) => void;
-    inject: typeof inject;
     watch: typeof watch;
     readonly Color: typeof Color;
     readonly PointLight: typeof PointLight;
-    readonly Scene: typeof Scene;
     readonly handleVectorProp: (props: {
         [key: string]: any;
     }, prop: string, obj: any, registerWatch?: boolean) => void;
+    readonly manageParentRelationship: typeof manageParentRelationship;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     castShadow: {
         type: BooleanConstructor;
