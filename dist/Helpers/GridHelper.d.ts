@@ -1,6 +1,20 @@
-import { AxesHelper } from "three";
+import { GridHelper } from "three";
 import { Vector3Like } from "../types";
 export interface Props {
+    /**
+     * The color of the centerline.
+     * This can be a Color, a hexadecimal value and an CSS-Color name.
+     */
+    colorCenterLine?: number | string;
+    /**
+     * The color of the lines of the grid.
+     * This can be a Color, a hexadecimal value and an CSS-Color name.
+     */
+    colorGrid?: number | string;
+    /**
+     * The number of divisions across the grid.
+     */
+    divisions?: number;
     /**
      * A [Vector3Like](/types#vector3like) representing the object's local position.
      */
@@ -10,7 +24,7 @@ export interface Props {
      */
     rotation?: Vector3Like;
     /**
-     * Size of the lines representing the axes.
+     * The size of the grid.
      */
     size?: number;
     /**
@@ -19,6 +33,21 @@ export interface Props {
     scale?: Vector3Like;
 }
 declare const _sfc_main: import("vue").DefineComponent<{
+    colorCenterLine: {
+        type: (StringConstructor | NumberConstructor)[];
+        required: false;
+        default: number;
+    };
+    colorGrid: {
+        type: (StringConstructor | NumberConstructor)[];
+        required: false;
+        default: number;
+    };
+    divisions: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
     position: {
         type: null;
         required: false;
@@ -41,8 +70,23 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     props: any;
-    three: AxesHelper;
+    three: GridHelper;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    colorCenterLine: {
+        type: (StringConstructor | NumberConstructor)[];
+        required: false;
+        default: number;
+    };
+    colorGrid: {
+        type: (StringConstructor | NumberConstructor)[];
+        required: false;
+        default: number;
+    };
+    divisions: {
+        type: NumberConstructor;
+        required: false;
+        default: number;
+    };
     position: {
         type: null;
         required: false;
@@ -68,5 +112,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
     position: any;
     rotation: any;
     size: number;
+    colorCenterLine: string | number;
+    colorGrid: string | number;
+    divisions: number;
 }>;
 export default _sfc_main;
