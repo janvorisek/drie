@@ -108,20 +108,35 @@
             <InstancedMesh ref="instancedMesh" geometry="reusedGeo2" material="reusedMat2" :count="step * step" />
           </Group>
           <Group enable-raycasting @click="test">
-            <BoxHelper mesh="someMesh">
+            <!--<BoxHelper mesh="someMesh">
               <BufferGeometry name="bboxBox" />
               <MeshBasicMaterial transparent :opacity="0.5" />
             </BoxHelper>
             <LineSegments :position="posV">
               <LineBasicMaterial color="red" />
               <EdgesGeometry geometry="bboxBox" />
-            </LineSegments>
+            </LineSegments>-->
             <LineSegments>
               <WireframeGeometry :geometry="geoName" />
             </LineSegments>
           </Group>
 
+          <Mesh name="someMeshx" :position="[0, 0, 10]" :cast-shadow="true">
+            <MeshLambertMaterial color="blue" />
+            <SphereGeometry />
+          </Mesh>
+
+          <BoxHelper mesh="someMeshx">
+            <MeshBasicMaterial color="blue" transparent :opacity="0.1" />
+            <BufferGeometry name="boxx" />
+          </BoxHelper>
+          <LineSegments :position="[0, 0, 10]">
+            <LineDashedMaterial color="red" :dash-size="0.1" :gap-size="0.1" />
+            <EdgesGeometry geometry="boxx" />
+          </LineSegments>
+
           <AxesHelper :size="3" />
+          <GridHelper :size="10" :divisions="10" />
         </Scene>
       </Renderer>
     </div>
