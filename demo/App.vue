@@ -42,7 +42,7 @@
             <PlaneGeometry name="plane" :width="20" :height="20" />
             <TransformControls :size="0.5" />
           </Mesh>
-          <PointLight :position="[0, 0, 10]" :intensity="0.25" :cast-shadow="true" />
+          <DirectionalLight :color="0xffffff" :position="[0, 0, 100]" :intensity="2" :cast-shadow="true" />
           <AmbientLight :color="0xffffff" :intensity="2" />
           <Points name="someMesh" :position="posV" :scale="[s, s, s]">
             <PointsMaterial :color="color" :size-attenuation="false" :size="4" />
