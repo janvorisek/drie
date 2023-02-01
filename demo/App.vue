@@ -54,7 +54,6 @@
           </Mesh>
           <Group
             :enable-raycasting="true"
-            :on-click="onClick"
             :on-mouse-move="onMouseEnter"
             :on-mouse-enter="onMouseEnter"
             :on-mouse-leave="onMouseLeave"
@@ -77,7 +76,6 @@
               url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
               :cast-shadow="true"
               enable-raycasting
-              :on-click="gltfClick"
               @load="onLoad"
             >
               <MeshBasicMaterial :color="color3" :side="DoubleSide" />
@@ -89,7 +87,6 @@
               :cast-shadow="true"
               url="https://raw.githubusercontent.com/alecjacobson/common-3d-test-models/master/data/stanford-bunny.obj"
               enable-raycasting
-              :on-click="gltfClick"
               @load="onLoad"
             >
               <TransformControls :size="0.5" />
@@ -102,7 +99,6 @@
               :scale="[10, 10, 10]"
               :cast-shadow="true"
               enable-raycasting
-              :on-click="gltfClick"
             >
               <TransformControls :size="0.5" />
             </GLTFLoader>
@@ -111,17 +107,20 @@
 
             <InstancedMesh ref="instancedMesh" geometry="reusedGeo2" material="reusedMat2" :count="step * step" />
           </Group>
-          <BoxHelper mesh="someMesh">
-            <BufferGeometry name="bboxBox" />
-            <MeshBasicMaterial transparent :opacity="0.5" />
-          </BoxHelper>
-          <LineSegments :position="posV">
-            <LineBasicMaterial color="red" />
-            <EdgesGeometry geometry="bboxBox" />
-          </LineSegments>
-          <LineSegments>
-            <WireframeGeometry :geometry="geoName" />
-          </LineSegments>
+          <Group enable-raycasting @click="test">
+            <BoxHelper mesh="someMesh">
+              <BufferGeometry name="bboxBox" />
+              <MeshBasicMaterial transparent :opacity="0.5" />
+            </BoxHelper>
+            <LineSegments :position="posV">
+              <LineBasicMaterial color="red" />
+              <EdgesGeometry geometry="bboxBox" />
+            </LineSegments>
+            <LineSegments>
+              <WireframeGeometry :geometry="geoName" />
+            </LineSegments>
+          </Group>
+
           <AxesHelper :size="3" />
         </Scene>
       </Renderer>
@@ -161,6 +160,10 @@ const posBoxHelper = ref<[number, number, number]>([0, 0, 0]);
 const color = ref("rgb(255,0,0)");
 const color2 = ref("rgb(255,0,0)");
 const color3 = ref("rgb(255,0,0)");
+
+const test = (is) => {
+  console.log(is);
+};
 
 onMounted(() => {
   let segs = 24;

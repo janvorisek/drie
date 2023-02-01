@@ -98,6 +98,8 @@ function redoGeometry(obj: Object3D) {
   const tmp = new BoxGeometry(bbox.max.x - bbox.min.x, bbox.max.y - bbox.min.y, bbox.max.z - bbox.min.z);
   copyGeo(three.geometry, tmp);
 
+  three.geometry.computeBoundingSphere();
+
   three.position.set(center.x, center.y, center.z);
 
   EventBus.geometryChanged(three.geometry.name, three.geometry);

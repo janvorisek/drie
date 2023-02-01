@@ -112,6 +112,9 @@ export function copyGeo(three: BufferGeometry, tmp: BufferGeometry) {
   }
 
   three.setIndex(tmp.getIndex());
+
+  if (tmp.boundingBox !== null) three.boundingBox = tmp.boundingBox;
+  if (tmp.boundingSphere && tmp.boundingSphere.radius > 0) three.boundingSphere = tmp.boundingSphere;
 }
 
 export function disposeTHREEObject(obj: any) {
@@ -245,8 +248,6 @@ export function handleRaycasting(intersect: any[], props: any) {
   const scene = inject("scene") as Scene;
 
   const onCanvasClick = (e: MouseEvent) => {
-    if (props.onClick === null) return;
-
     const raycaster = new Raycaster();
     const pointer = getPointer(e);
 
@@ -261,8 +262,6 @@ export function handleRaycasting(intersect: any[], props: any) {
   let prevIntersects: Intersection[] = [];
 
   const onCanvasMouseMove = (e: MouseEvent) => {
-    if (props.onMouseEnter === null && props.onMouseMove === null && props.onMouseLeave === null) return;
-
     const raycaster = new Raycaster();
     const pointer = getPointer(e);
 
@@ -272,12 +271,12 @@ export function handleRaycasting(intersect: any[], props: any) {
 
     if (intersects.length > 0) {
       prevIntersects = intersects;
-      if (mouseOverObject === false && props.onMouseEnter !== null) props.onMouseEnter(intersects, pointer);
+      if (mouseOverObject === false) props.onMouseEnter(intersects, pointer);
 
       mouseOverObject = true;
-      if (props.onMouseLeave !== null) props.onMouseMove(intersects, pointer);
+      props.onMouseMove(intersects, pointer);
     } else {
-      if (mouseOverObject && props.onMouseLeave !== null) props.onMouseLeave(prevIntersects, pointer);
+      if (mouseOverObject) props.onMouseLeave(prevIntersects, pointer);
       mouseOverObject = false;
       prevIntersects = [];
     }
@@ -286,8 +285,16 @@ export function handleRaycasting(intersect: any[], props: any) {
   onMounted(() => {
     if (props.enableRaycasting) {
       if (canvas?.value == null) return;
-      canvas?.value.addEventListener("click", onCanvasClick);
-      canvas?.value.addEventListener("mousemove", onCanvasMouseMove);
+      const nullf = (() => null).toString();
+
+      if (props.onClick.toString() !== nullf) canvas?.value.addEventListener("click", onCanvasClick);
+
+      if (
+        props.onMouseEnter.toString() !== nullf ||
+        props.onMouseMove.toString() !== nullf ||
+        props.onMouseLeave.toString() !== nullf
+      )
+        canvas?.value.addEventListener("mousemove", onCanvasMouseMove);
     }
   });
 
