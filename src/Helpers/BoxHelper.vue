@@ -2,8 +2,18 @@
   <slot></slot>
 </template>
 
+<docs>BEGIN_DOCS
+
+Helper object to graphically show the world-axis-aligned bounding box around an object.
+
+Ulike the three.js helper, this component crates a box mesh around the target mesh.
+
+If you are interested in showing line segments around, you can use transparent BoxHelper in combination with LineSegments and EdgesGeometry.
+
+</docs>
+
 <script setup lang="ts">
-import { provide, inject, onUnmounted, onMounted } from "vue";
+import { provide, inject, onUnmounted, onMounted, nextTick } from "vue";
 
 import { Box3, BoxGeometry, BufferGeometry, Material, Mesh, MeshBasicMaterial, Object3D, Scene, Vector3 } from "three";
 import { Vector3Like } from "../types";
@@ -98,6 +108,7 @@ function redoGeometry(obj: Object3D) {
   const tmp = new BoxGeometry(bbox.max.x - bbox.min.x, bbox.max.y - bbox.min.y, bbox.max.z - bbox.min.z);
   copyGeo(three.geometry, tmp);
 
+  // For raycasting
   three.geometry.computeBoundingSphere();
 
   three.position.set(center.x, center.y, center.z);
@@ -118,12 +129,16 @@ const computeBB = (o: Object3D) => {
 
 EventBus.object3DChanged.on(props.mesh, (obj) => {
   computeBB(obj);
-  redoGeometry(obj);
+  nextTick(() => {
+    redoGeometry(obj);
+  });
 });
 
 EventBus.object3DTranslated.on(props.mesh, (obj) => {
   computeBB(obj);
-  redoGeometry(obj);
+  nextTick(() => {
+    redoGeometry(obj);
+  });
 });
 
 onMounted(() => {
