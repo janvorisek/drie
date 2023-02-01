@@ -18,11 +18,11 @@ A light that gets emitted from a single point in all directions. A common use ca
 </docs>
 
 <script setup lang="ts">
-import { inject, watch } from "vue";
+import { watch } from "vue";
 
-import { Color, PointLight, Scene } from "three";
+import { Color, PointLight } from "three";
 import { type Vector3Like } from "../types";
-import { handleVectorProp } from "../utils";
+import { handleVectorProp, manageParentRelationship } from "../utils";
 
 export interface Props {
   /**
@@ -65,10 +65,9 @@ const props = withDefaults(defineProps<Props>(), {
   castShadow: false,
 });
 
-const scene = inject("scene") as Scene;
-
 const three = new PointLight();
-scene.add(three);
+
+manageParentRelationship(three);
 
 handleVectorProp(props, "position", three);
 handleVectorProp(props, "rotation", three);
