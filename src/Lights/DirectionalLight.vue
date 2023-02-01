@@ -73,7 +73,5 @@ handlePropCallback(props, "castShadow", applyProps);
 
 handleVectorProp(props, "position", three);
 
-console.log(three);
-
 defineExpose({ three });
 </script>
