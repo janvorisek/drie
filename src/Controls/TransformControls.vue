@@ -44,7 +44,7 @@ export interface Props {
   mode?: Mode;
 
   /**
-   * A [Vector3Like](/types#vector3like) representing the object's local position.
+   * A [Vector3Like](/advanced/types#vector3like) representing the object's local position.
    * Default position equals to the transformed mesh position.
    */
   // eslint-disable-next-line vue/require-default-prop
