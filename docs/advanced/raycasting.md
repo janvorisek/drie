@@ -14,7 +14,7 @@ You need to set the `enableRaycasting` property to true.
 </Group>
 ```
 
-This way, raycasting is performed only on the [`Group`](components/Objects/Group) children and not whole [`Scene`](components/Scene). When raycasting is disabled, the mouse event listeners are disabled and there is no performance drop.
+This way, raycasting is performed only on the [`Group`](/components/Objects/Group) children and not whole [`Scene`](/components/Scene). When raycasting is disabled, the mouse event listeners are disabled and there is no performance drop.
 
 ## Events
 
@@ -101,9 +101,9 @@ In our example each of the meshes is a simple triangle with its unique material.
 
 <script setup lang="ts">
 // Basic example just imports the used Drie components
-import { Renderer, Scene } from "../src"; // always needed
-import { Group, Mesh, BufferGeometry, MeshBasicMaterial } from "../src"; // mesh
-import { PerspectiveCamera, OrbitControls } from "../src"; // camera
+import { Renderer, Scene } from "../../src"; // always needed
+import { Group, Mesh, BufferGeometry, MeshBasicMaterial } from "../../src"; // mesh
+import { PerspectiveCamera, OrbitControls } from "../../src"; // camera
 
 // Drie component names conflict with three.js objects
 // We prepend T to the three class names for correct typings inside of the events

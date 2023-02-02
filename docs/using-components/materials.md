@@ -31,9 +31,9 @@ Material components are simply passed to the corresponding mesh.
 
 The following materials are supported:
 
-- [LineBasicMaterial](components/Materials/LineBasicMaterial)
-- [LineDashedMaterial](components/Materials/LineDashedMaterial)
-- [MeshBasicMaterial](components/Materials/MeshBasicMaterial)
-- [MeshLambertMaterial](components/Materials/MeshLambertMaterial)
-- [MeshNormalMaterial](components/Materials/MeshNormalMaterial)
-- [PointsMaterial](components/Materials/PointsMaterial)
+- [LineBasicMaterial](/components/Materials/LineBasicMaterial)
+- [LineDashedMaterial](/components/Materials/LineDashedMaterial)
+- [MeshBasicMaterial](/components/Materials/MeshBasicMaterial)
+- [MeshLambertMaterial](/components/Materials/MeshLambertMaterial)
+- [MeshNormalMaterial](/components/Materials/MeshNormalMaterial)
+- [PointsMaterial](/components/Materials/PointsMaterial)

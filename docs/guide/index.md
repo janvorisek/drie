@@ -26,7 +26,7 @@ Drie is a Vue 3 component library that allows developers to add 3D rendering to 
 
 Drie allows for an intuitive and declarative approach to building complex 3D scenes and integrating them into existing and new Vue projects. As a result, Drie aims to be the go-to choice for building 3D web applications with Vue and three.js.
 
-To start using Drie, see the [Getting started](/getting-started) page.
+To start using Drie, see the [Getting started](/guide/getting-started) page.
 
 ## Example
 
@@ -44,9 +44,9 @@ Notable features include:
 
 - Auto resizing of WebGL canvas (including PerspectiveCamera aspect ratio update)
 - FPS Limiter
-- [Raycasting](/raycasting) with mouse events
-- Simple usage of geometry utilities (see [EdgesGeometry](components/Geometries/EdgesGeometry) or [WireframeGeometry](components/Geometries/WireframeGeometry))
-- Simple geometries (e.g., [BoxGeometry](components/Geometries/BoxGeometry)) have reactive properties. Drie handles regeneration of the geometry internally.
+- [Raycasting](/advanced/raycasting) with mouse events
+- Simple usage of geometry utilities (see [EdgesGeometry](/components/Geometries/EdgesGeometry) or [WireframeGeometry](/components/Geometries/WireframeGeometry))
+- Simple geometries (e.g., [BoxGeometry](/components/Geometries/BoxGeometry)) have reactive properties. Drie handles regeneration of the geometry internally.
 
 ## Authors
 

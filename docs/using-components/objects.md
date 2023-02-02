@@ -31,17 +31,17 @@ Objects typically require a geometry and a material.
 
 The following objects are supported:
 
-- [Group](components/Objects/Group)
-- [Line](components/Objects/Line)
-- [LineLoop](components/Objects/LineLoop)
-- [LineSegments](components/Objects/LineSegments)
-- [Mesh](components/Objects/Mesh)
-- [Points](components/Objects/Points)
+- [Group](/components/Objects/Group)
+- [Line](/components/Objects/Line)
+- [LineLoop](/components/Objects/LineLoop)
+- [LineSegments](/components/Objects/LineSegments)
+- [Mesh](/components/Objects/Mesh)
+- [Points](/components/Objects/Points)
 
 You can use any of the loaders and treat them as `<Mesh>`
 
-- [GLTFLoader](components/Loaders/GLTFLoader)
-- [OBJLoader](components/Loaders/OBJLoader)
+- [GLTFLoader](/components/Loaders/GLTFLoader)
+- [OBJLoader](/components/Loaders/OBJLoader)
 
 ## Position, rotation, scale
 
@@ -62,7 +62,7 @@ Setting constant position, rotation and scale is simply done by passing an array
 
 ### Dynamic value
 
-You can bind position, rotation and scale to a [Vector3Like](/types#vector3like) variable.
+You can bind position, rotation and scale to a [Vector3Like](/advanced/types#vector3like) variable.
 
 ```vue-html
 <Mesh

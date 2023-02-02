@@ -33,18 +33,18 @@ General [BufferGeometry](/components/Geometries/BufferGeometry) is available wit
 
 The following basic geometries are supported:
 
-- [BoxGeometry](components/Geometries/BoxGeometry)
-- [CircleGeometry](components/Geometries/CircleGeometry)
-- [ConeGeometry](components/Geometries/ConeGeometry)
-- [CylinderGeometry](components/Geometries/CylinderGeometry)
-- [PlaneGeometry](components/Geometries/PlaneGeometry)
-- [RingGeometry](components/Geometries/RingGeometry)
-- [SphereGeometry](components/Geometries/SphereGeometry)
+- [BoxGeometry](/components/Geometries/BoxGeometry)
+- [CircleGeometry](/components/Geometries/CircleGeometry)
+- [ConeGeometry](/components/Geometries/ConeGeometry)
+- [CylinderGeometry](/components/Geometries/CylinderGeometry)
+- [PlaneGeometry](/components/Geometries/PlaneGeometry)
+- [RingGeometry](/components/Geometries/RingGeometry)
+- [SphereGeometry](/components/Geometries/SphereGeometry)
 
 Some utility geometries are supported as well:
 
-- [EdgesGeometry](components/Geometries/EdgesGeometry)
-- [WireframeGeometry](components/Geometries/WireframeGeometry)
+- [EdgesGeometry](/components/Geometries/EdgesGeometry)
+- [WireframeGeometry](/components/Geometries/WireframeGeometry)
 
 Additional geometries are implemented:
-- [ParametricGeometry](components/Geometries/ParametricGeometry)
+- [ParametricGeometry](/components/Geometries/ParametricGeometry)
