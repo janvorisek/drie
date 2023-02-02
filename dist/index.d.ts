@@ -41,4 +41,5 @@ import HemisphereLight from "./Lights/HemisphereLight";
 import PointLight from "./Lights/PointLight";
 import TextureLoader from "./Textures/TextureLoader";
 declare function install(app: App): void;
+export default install;
 export { install, Renderer, Scene, PerspectiveCamera, OrthographicCamera, OrbitControls, TrackballControls, TransformControls, Group, InstancedMesh, Line, LineLoop, LineSegments, Mesh, Points, GLTFLoader, OBJLoader, AxesHelper, BoxHelper, GridHelper, BoxGeometry, BufferGeometry, CircleGeometry, ConeGeometry, CylinderGeometry, EdgesGeometry, ParametricGeometry, PlaneGeometry, RingGeometry, SphereGeometry, WireframeGeometry, LineBasicMaterial, LineDashedMaterial, MeshBasicMaterial, MeshLambertMaterial, PointsMaterial, MeshNormalMaterial, AmbientLight, DirectionalLight, HemisphereLight, PointLight, TextureLoader, };

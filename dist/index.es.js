@@ -4964,5 +4964,6 @@ export {
   No as TrackballControls,
   Zo as TransformControls,
   ua as WireframeGeometry,
+  Fa as default,
   Fa as install
 };
