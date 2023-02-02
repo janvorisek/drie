@@ -38,7 +38,7 @@ The renderer is a mandatory parent component for any 3D rendering with Drie.
 </template>
 ```
 
-Drie automatically resizes the renderer canvas to it's parent element dimensions. In our example this is equal to the window width and height. This behavior can be disabled, so that you can maintaing the dimensions manually.
+Drie automatically resizes the renderer canvas to it's parent element dimensions. In our example this is equal to the window width and height. This behavior can be disabled, so that you can maintain the dimensions manually.
 
 ## Adding objects
 

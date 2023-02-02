@@ -12,7 +12,7 @@ import * as fs from "fs";
 const links: any[] = []
 
 const componentTree = {
-  text: 'Components',
+  text: 'Component library',
   collapsible: true,
   collapsed: true,
   items: [
@@ -80,12 +80,13 @@ export default defineConfig( {
       {
         text: 'Guide',
         items: [
-          { text: 'Getting started', link: '/getting-started' },
-          { text: 'Creating the first scene', link: '/creating-the-first-scene' },
+          { text: 'Introduction', link: '/guide/' },
+          { text: 'Getting started', link: '/guide/getting-started' },
+          { text: 'Creating the first scene', link: '/guide/creating-the-first-scene' },
         ]
       },
       {
-        text: 'Basic entities',
+        text: 'Components',
         items: [
           { text: 'Geometries', link: '/geometries'},
           { text: 'Materials', link: '/materials'},
