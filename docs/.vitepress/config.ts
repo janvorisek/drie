@@ -86,19 +86,19 @@ export default defineConfig( {
         ]
       },
       {
-        text: 'Components',
+        text: 'Using components',
         items: [
-          { text: 'Geometries', link: '/geometries'},
-          { text: 'Materials', link: '/materials'},
-          { text: 'Objects', link: '/objects'}
+          { text: 'Geometries', link: '/using-components/geometries'},
+          { text: 'Materials', link: '/using-components/materials'},
+          { text: 'Objects', link: '/using-components/objects'}
         ]
       },
       {
         text: 'Advanced',
         items: [
-          { text: 'Performance', link: '/performance'},
-          { text: 'Raycasting', link: '/raycasting'},
-          { text: 'Types', link: '/types'}
+          { text: 'Performance', link: '/advanced/performance'},
+          { text: 'Raycasting', link: '/advanced/raycasting'},
+          { text: 'Types', link: '/advanced/types'}
         ]
       },
       componentTree,
