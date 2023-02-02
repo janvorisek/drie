@@ -1,4 +1,6 @@
 ---
+title: A Vue 3 component library for three.js
+
 layout: home
 
 hero:
