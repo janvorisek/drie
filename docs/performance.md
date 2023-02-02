@@ -50,7 +50,7 @@ Then use the material in as many meshes as you need. For example in a loop:
   v-for="i in count"
   :key="i"
   geometry="reuseGeo"
-  geometry="reuseMat"
+  material="reuseMat"
   :position="[i * 1.5, 0, 0]"
 />
 ```

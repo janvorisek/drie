@@ -1,11 +1,9 @@
 import { createApp } from "vue";
-import { install } from "../src/index";
+import drie from "../src/index";
 import App from "./App.vue";
 
 const app = createApp(App);
-
-install(app);
-
+app.use(drie);
 app.mount("#app");
 
 (function () {

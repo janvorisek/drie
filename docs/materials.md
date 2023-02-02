@@ -2,6 +2,8 @@
 
 Material components are simply passed to the corresponding mesh.
 
+## Usage
+
 ::: code-group
 ```vue-html{2} [Mesh]
 <Mesh>
@@ -24,6 +26,8 @@ Material components are simply passed to the corresponding mesh.
 </LineSegments>
 ```
 :::
+
+## Available materials
 
 The following materials are supported:
 

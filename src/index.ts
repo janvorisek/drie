@@ -106,6 +106,8 @@ function install(app: App) {
   app.component("TextureLoader", TextureLoader);
 }
 
+export default install;
+
 export {
   install,
   // Base entities

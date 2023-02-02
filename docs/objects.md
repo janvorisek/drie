@@ -2,6 +2,8 @@
 
 Objects typically require a geometry and a material.
 
+## Usage
+
 ::: code-group
 ```vue-html [Mesh]
 <Mesh>
@@ -24,6 +26,8 @@ Objects typically require a geometry and a material.
 </LineSegments>
 ```
 :::
+
+## Available Object3Ds
 
 The following objects are supported:
 
@@ -80,6 +84,7 @@ In order to use reactivity, specify the variables using Vue3 `ref()` in the setu
   const rot = ref<[number, number, number]>([0, 0, 0]);
   const sca = ref<[number, number, number]>([1, 1, 1]);
 
+  // A custom function to calculate the transformations
   const calculateTransformations = () => {
     const angle = Date.now() / 1000;
 

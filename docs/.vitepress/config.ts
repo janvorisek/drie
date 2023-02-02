@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress'
 import { SitemapStream } from 'sitemap'
-import { SearchPlugin } from "./search";
 
 import { createWriteStream } from 'node:fs'
 import { resolve } from 'node:path'
@@ -74,16 +73,28 @@ export default defineConfig( {
       ]
     }],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/janvorisek/drie' }
+      { icon: 'github', link: 'https://github.com/janvorisek/drie' },
+      { icon: 'twitter', link: 'https://twitter.com/janvorisekdev' }
     ],
     sidebar: [
       {
         text: 'Guide',
         items: [
-          { text: 'Getting Started', link: '/getting-started' },
+          { text: 'Getting started', link: '/getting-started' },
+          { text: 'Creating the first scene', link: '/creating-the-first-scene' },
+        ]
+      },
+      {
+        text: 'Basic entities',
+        items: [
           { text: 'Geometries', link: '/geometries'},
           { text: 'Materials', link: '/materials'},
-          { text: 'Objects', link: '/objects'},
+          { text: 'Objects', link: '/objects'}
+        ]
+      },
+      {
+        text: 'Advanced',
+        items: [
           { text: 'Performance', link: '/performance'},
           { text: 'Raycasting', link: '/raycasting'},
           { text: 'Types', link: '/types'}
@@ -132,10 +143,6 @@ export default defineConfig( {
     sitemap.end()
   },
   vite: {
-    plugins: [vueDocsPlugin(), SearchPlugin({
-      previewLength: 62,
-      buttonLabel: "Search",
-      placeholder: "Search docs",
-    })],
+    plugins: [vueDocsPlugin()],
   },
 })

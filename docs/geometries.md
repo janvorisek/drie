@@ -1,6 +1,8 @@
 # Geometries
 
-Geometry components are simply passed to the corresponding mesh.
+Geometry components are simply passed to the corresponding Object3D.
+
+## Usage
 
 ::: code-group
 ```vue-html{3} [Mesh]
@@ -24,6 +26,8 @@ Geometry components are simply passed to the corresponding mesh.
 </LineSegments>
 ```
 :::
+
+## Available geometries
 
 General [BufferGeometry](/components/Geometries/BufferGeometry) is available with reactive vertices, faces and uvs support. The props are passed as flat arrays.
 

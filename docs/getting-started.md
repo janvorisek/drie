@@ -4,15 +4,37 @@
 
 Drie can be installed from npm and always supports the latest `three.js` version.
 
-Note that you are supposed to install `three.js` yourself.
-
 ```shell
 npm install @janvorisek/drie three #latest Drie & three.js
 ```
 
-## Usage
+If you are using typescript, don't forget to install `three.js` typings.
 
-The preffered way is to import the components as needed in the single file components.
+```shell
+npm install --save-dev @types/three
+```
+
+::: info
+You are supposed to install `three.js` yourself.
+:::
+
+## Vue 3 plugin
+
+You can use Vue3 plugin to auto-import all the components.
+
+```ts
+import { createApp } from "vue";
+import drie from '@janvorisek/drie';
+import App from "./App.vue";
+
+const app = createApp(App);
+app.use(drie);
+app.mount("#app");
+```
+
+## Import what you need
+
+You can import the components as needed in the single file components.
 
 ```vue
 <script setup lang="ts">
@@ -36,20 +58,4 @@ import { PerspectiveCamera, OrbitControls } from "@janvorisek/drie"; // camera
     </Renderer>
   </div>
 </template>
-```
-
-## Vue 3 plugin
-
-You can use Vue3 plugin to auto-import all the components.
-
-Note that tree shaking is not available and the resulting bundle size may be huge.
-
-```ts
-import { createApp } from "vue";
-import { install as installDrie } from '@janvorisek/drie';
-import App from "./App.vue";
-
-const app = createApp(App);
-installDrie(app);
-app.mount("#app");
 ```

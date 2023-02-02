@@ -22,11 +22,11 @@ const members = [
 
 # Drie
 
-Drie is a Vue 3 component library that makes it easy for developers to add 3D rendering to their web applications using the [`three.js`](https://threejs.org/) library. It's written in TypeScript and uses the Composition API.
+Drie is a Vue 3 component library that allows developers to add 3D rendering to their web applications using the [`three.js`](https://threejs.org/) library. It's written in TypeScript and uses the Composition API.
 
-Drie allows for an intuitive and declarative approach to building complex 3D scenes and integrating them into both existing and new Vue projects. Drie aims to be the go-to choice for building 3D web applications with Vue and three.js.
+Drie allows for an intuitive and declarative approach to building complex 3D scenes and integrating them into existing and new Vue projects. As a result, Drie aims to be the go-to choice for building 3D web applications with Vue and three.js.
 
-To start using Drie see the [Getting started](/getting-started) page.
+To start using Drie, see the [Getting started](/getting-started) page.
 
 ## Example
 
