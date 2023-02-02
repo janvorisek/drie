@@ -5,7 +5,7 @@
 <docs>BEGIN_DOCS
   This component makes working with groups of objects easier.
 
-  [Raycasting](/raycasting) may be enabled for group children. When enabled, [events](#events) are fired for corresponding mouse events.
+  [Raycasting](/advanced/raycasting) may be enabled for group children. When enabled, [events](#events) are fired for corresponding mouse events.
 </docs>
 
 <script setup lang="ts">
