@@ -3644,7 +3644,7 @@ const Ii = /* @__PURE__ */ C({
       );
     }
     function a() {
-      if (i.children.length !== 0)
+      if (i.name = e.name, i.children.length !== 0)
         for (const c of i.children[0].children)
           c.castShadow = e.castShadow, c.receiveShadow = e.receiveShadow;
     }
@@ -4019,7 +4019,7 @@ const Fi = /* @__PURE__ */ C({
       );
     }
     function a() {
-      if (i.children.length !== 0)
+      if (i.name = e.name, i.children.length !== 0)
         for (const c of i.children[0].children)
           c.castShadow = e.castShadow, c.receiveShadow = e.receiveShadow;
     }
