@@ -43,6 +43,7 @@ import MeshBasicMaterial from "./Materials/MeshBasicMaterial.vue";
 import MeshLambertMaterial from "./Materials/MeshLambertMaterial.vue";
 import PointsMaterial from "./Materials/PointsMaterial.vue";
 import MeshNormalMaterial from "./Materials/MeshNormalMaterial.vue";
+import MeshStandardMaterial from "./Materials/MeshStandardMaterial.vue";
 
 import AmbientLight from "./Lights/AmbientLight.vue";
 import DirectionalLight from "./Lights/DirectionalLight.vue";
@@ -97,6 +98,7 @@ function install(app: App) {
   app.component("MeshLambertMaterial", MeshLambertMaterial);
   app.component("PointsMaterial", PointsMaterial);
   app.component("MeshNormalMaterial", MeshNormalMaterial);
+  app.component("MeshStandardMaterial", MeshStandardMaterial);
   // Lights
   app.component("AmbientLight", AmbientLight);
   app.component("DirectionalLight", DirectionalLight);
@@ -154,6 +156,7 @@ export {
   MeshLambertMaterial,
   PointsMaterial,
   MeshNormalMaterial,
+  MeshStandardMaterial,
   // Lights
   AmbientLight,
   DirectionalLight,
