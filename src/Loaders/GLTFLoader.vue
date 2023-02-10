@@ -174,6 +174,7 @@ function load() {
 }
 
 function applyProps() {
+  three.name = props.name;
   if (three.children.length === 0) return;
   for (const o of three.children[0].children) {
     o.castShadow = props.castShadow;
