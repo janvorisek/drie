@@ -10,7 +10,7 @@ The GridHelper is an object to define grids. Grids are two-dimensional arrays of
 ### Code
 
 ```vue-html
-<GridHelper :size="10" :division="10" />
+<GridHelper :size="10" :divisions="10" />
 ```
 </docs>
 
