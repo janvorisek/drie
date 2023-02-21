@@ -1,4 +1,4 @@
-import { Group, Intersection, Vector2 } from "three";
+import { AnimationClip, Group, Intersection, Vector2 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Vector3Like } from "../types";
 export interface Props {
@@ -114,7 +114,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
 }, {
     props: any;
     emit: {
-        (event: "load", group: Group): void;
+        (event: "load", group: Group, animations: AnimationClip[]): void;
         (event: "progress", xhr: ProgressEvent<EventTarget>): void;
         (event: "error", error: ErrorEvent): void;
     };

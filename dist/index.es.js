@@ -3633,7 +3633,7 @@ const Ii = /* @__PURE__ */ C({
       s.load(
         e.url,
         function(c) {
-          L(e, "position", i, !1), L(e, "rotation", i, !1), L(e, "scale", i, !1), i.add(c.scene), a(), t("load", c.scene), k.object3DChanged(e.name, i);
+          L(e, "position", i, !1), L(e, "rotation", i, !1), L(e, "scale", i, !1), i.add(c.scene), a(), t("load", c.scene, c.animations), k.object3DChanged(e.name, i);
         },
         function(c) {
           t("progress", c);
