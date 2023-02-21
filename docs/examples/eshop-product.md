@@ -36,7 +36,8 @@ const setVariant = (i) => {
 
 const onLoad = () => {
   if(model.value === null) return;
-  model.value.three.children[0].children[3].material.color.set(activeVariant.value.color)
+  const fabric = model.value.three.children[0].children.find(m => m.name === 'SheenChair_fabric');
+  fabric.material.color.set(activeVariant.value.color)
 }
 
 </script>
@@ -189,9 +190,9 @@ const setVariant = (i) => {
 const onLoad = () => {
   if(model.value === null) return;
   
-  // In our case the fabric mesh is the fourth Mesh loaded from the glTF file
+  // In our case the fabric mesh has a name 'SheenChair_fabric' (in the glTF file)
   // fabricMesh is instance of THREE.Mesh
-  const fabricMesh = model.value.three.children[0].children[3];
+  const fabricMesh = model.value.three.children[0].children.find(m => m.name === 'SheenChair_fabric');
 
   // fabricMesh.material is instance of THREE.Material
   fabricMesh.material.color.set(activeVariant.value.color)
