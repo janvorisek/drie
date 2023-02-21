@@ -2,18 +2,18 @@ import { watch as F, inject as T, onMounted as oe, onUnmounted as we, defineComp
 import { Vector3 as v, Raycaster as $t, Vector2 as U, WebGLRenderer as ys, Scene as _s, Color as V, PerspectiveCamera as Un, OrthographicCamera as Bn, EventDispatcher as Xn, MOUSE as Le, TOUCH as Ze, Quaternion as le, Spherical as fn, Euler as ws, Matrix4 as xt, Object3D as Tt, MeshBasicMaterial as _e, LineBasicMaterial as Pe, CylinderGeometry as ie, BoxGeometry as se, BufferGeometry as B, Float32BufferAttribute as ye, Mesh as x, OctahedronGeometry as yt, Line as Me, SphereGeometry as Yn, TorusGeometry as Je, PlaneGeometry as Vn, DoubleSide as $n, Group as Ue, InstancedMesh as bs, LineLoop as Zn, LineSegments as vt, PointsMaterial as ze, Points as ct, Loader as qn, LoaderUtils as Be, FileLoader as en, SpotLight as Es, PointLight as Kn, DirectionalLight as Qn, sRGBEncoding as Xe, MeshPhysicalMaterial as Ye, TangentSpaceNormalMap as Ms, Interpolant as Ss, TextureLoader as Wn, ImageBitmapLoader as Ts, InterleavedBuffer as vs, InterleavedBufferAttribute as xs, BufferAttribute as lt, LinearFilter as Jn, LinearMipmapLinearFilter as es, RepeatWrapping as Zt, Material as ut, MeshStandardMaterial as At, PropertyBinding as As, SkinnedMesh as Rs, MathUtils as Ls, InterpolateLinear as ts, AnimationClip as Ps, Bone as Cs, Skeleton as Is, TriangleFanDrawMode as ns, NearestFilter as Os, NearestMipmapNearestFilter as ks, LinearMipmapNearestFilter as Ds, NearestMipmapLinearFilter as Hs, ClampToEdgeWrapping as qt, MirroredRepeatWrapping as js, InterpolateDiscrete as Ns, FrontSide as ht, Texture as Kt, TriangleStripDrawMode as Fs, VectorKeyframeTrack as Gs, QuaternionKeyframeTrack as pn, NumberKeyframeTrack as zs, Box3 as ss, Sphere as Us, MeshPhongMaterial as Bs, AxesHelper as Xs, GridHelper as Ys, CircleGeometry as Vs, ConeGeometry as $s, EdgesGeometry as Zs, Curve as qs, RingGeometry as Ks, WireframeGeometry as Qs, LineDashedMaterial as Ws, MeshLambertMaterial as Js, MeshNormalMaterial as eo, AmbientLight as to, HemisphereLight as no } from "three";
 const mn = (r) => r === void 0 ? new v(0, 0, 0) : "x" in r ? new v(r.x, r.y, r.z) : new v(r[0], r[1], r[2]), gn = (r) => r === void 0 ? new U(0, 0) : "x" in r ? new U(r.x, r.y) : new U(r[0], r[1]), yn = (r, n, t) => {
   t[r].isVector3 ? t[r].set(n.x, n.y, n.z) : "isEuler" in t[r] && t[r].setFromVector3(n);
-}, L = (r, n, t, e = !0) => {
+}, L = (r, n, t, e = !0, s) => {
   if (t !== null) {
     if (r[n] !== void 0) {
-      const s = mn(r[n]);
-      yn(n, s, t);
+      const i = mn(r[n]);
+      yn(n, i, t), s && s();
     }
     e && F(
       () => r[n],
       () => {
         if (r[n] !== void 0) {
-          const s = mn(r[n]);
-          yn(n, s, t);
+          const i = mn(r[n]);
+          yn(n, i, t), s && s();
         }
       }
     );
@@ -823,11 +823,11 @@ const xo = {
           t.autoResize && (e.aspect = c.contentRect.width / c.contentRect.height, e.updateProjectionMatrix());
         });
       }).observe(s.value);
-    }), L(t, "position", e), L(t, "up", e), L(t, "lookAt", e);
+    });
     function i() {
       e.name = t.name, t.autoResize || (e.aspect = t.aspect), e.near = t.near, e.far = t.far, e.updateProjectionMatrix();
     }
-    return i(), _(t, "name", i), _(t, "aspect", i), _(t, "near", i), _(t, "far", i), H("parentCamera", e), n({ three: e }), (o, a) => K(o.$slots, "default");
+    return i(), L(t, "position", e, !0, i), L(t, "up", e, !0, i), L(t, "lookAt", e, !0, i), _(t, "name", i), _(t, "aspect", i), _(t, "near", i), _(t, "far", i), H("parentCamera", e), n({ three: e }), (o, a) => K(o.$slots, "default");
   }
 }), Co = {
   name: "OrthographicCamera"
@@ -852,11 +852,11 @@ const xo = {
           e.left = e.bottom * l, e.right = e.top * l, e.updateProjectionMatrix();
         });
       }).observe(s.value);
-    }), L(t, "position", e), L(t, "up", e), L(t, "lookAt", e);
+    });
     function i() {
       e.name = t.name, e.near = t.near, e.far = t.far, e.updateProjectionMatrix();
     }
-    return i(), _(t, "name", i), _(t, "near", i), _(t, "far", i), H("parentCamera", e), n({ three: e }), (o, a) => K(o.$slots, "default");
+    return i(), L(t, "position", e, !0, i), L(t, "up", e, !0, i), L(t, "lookAt", e, !0, i), _(t, "name", i), _(t, "near", i), _(t, "far", i), H("parentCamera", e), n({ three: e }), (o, a) => K(o.$slots, "default");
   }
 }), Sn = { type: "change" }, Ft = { type: "start" }, Tn = { type: "end" };
 class Oo extends Xn {

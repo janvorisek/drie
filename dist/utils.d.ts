@@ -6,7 +6,7 @@ export declare const vector3LikeToArray: (data?: Vector3Like) => number[];
 export declare const setVectorProp: (prop: string, value: Vector3, obj: any) => void;
 export declare const handleVectorProp: (props: {
     [key: string]: any;
-}, prop: string, obj: any, registerWatch?: boolean) => void;
+}, prop: string, obj: any, registerWatch?: boolean, callback?: () => void) => void;
 export declare const setVector2Prop: (prop: string, value: Vector2, obj: any) => void;
 export declare const handleVector2Prop: (props: {
     [key: string]: any;

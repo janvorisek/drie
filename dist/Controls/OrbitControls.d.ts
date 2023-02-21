@@ -3647,7 +3647,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     }, prop: string, fn: () => void) => void;
     readonly handleVectorProp: (props: {
         [key: string]: any;
-    }, prop: string, obj: any, registerWatch?: boolean) => void;
+    }, prop: string, obj: any, registerWatch?: boolean, callback?: (() => void) | undefined) => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     enablePan: {
         type: BooleanConstructor;
