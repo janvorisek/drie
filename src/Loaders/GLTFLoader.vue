@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { provide, watch } from "vue";
 
-import { Group, Intersection, Vector2 } from "three";
+import { AnimationClip, Group, Intersection, Vector2 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 import { Vector3Like } from "../types";
@@ -118,8 +118,9 @@ const emit = defineEmits<{
   /**
    * Emitted when OBJ file is successfuly loaded, parsed and added to the scene.
    * @arg {Group} group An instance of `THREE.Group`
+   * @arg {AnimationClip[]} animations An array of animations
    */
-  (event: "load", group: Group): void;
+  (event: "load", group: Group, animations: AnimationClip[]): void;
 
   /**
    * Emmited on XHR progress
@@ -159,7 +160,7 @@ function load() {
 
       applyProps();
 
-      emit("load", gltf.scene);
+      emit("load", gltf.scene, gltf.animations);
       EventBus.object3DChanged(props.name, three);
     },
     // called when loading is in progresses
