@@ -103,10 +103,6 @@ watch(canvas!, () => {
   myObserver.observe(canvas!.value);
 });
 
-handleVectorProp(props, "position", three);
-handleVectorProp(props, "up", three);
-handleVectorProp(props, "lookAt", three);
-
 function applyProps() {
   three.name = props.name;
 
@@ -120,11 +116,14 @@ function applyProps() {
 
 applyProps();
 
+handleVectorProp(props, "position", three, true, applyProps);
+handleVectorProp(props, "up", three, true, applyProps);
+handleVectorProp(props, "lookAt", three, true, applyProps);
+
 handlePropCallback(props, "name", applyProps);
 handlePropCallback(props, "aspect", applyProps);
 handlePropCallback(props, "near", applyProps);
 handlePropCallback(props, "far", applyProps);
-//watch(props, () => applyProps(props));
 
 provide("parentCamera", three);
 

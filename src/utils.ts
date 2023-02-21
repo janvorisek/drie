@@ -33,13 +33,20 @@ export const setVectorProp = (prop: string, value: Vector3, obj: any) => {
 };
 
 // Handle vector prop
-export const handleVectorProp = (props: { [key: string]: any }, prop: string, obj: any, registerWatch = true) => {
+export const handleVectorProp = (
+  props: { [key: string]: any },
+  prop: string,
+  obj: any,
+  registerWatch = true,
+  callback?: () => void,
+) => {
   if (obj === null) return;
 
   if (props[prop] !== undefined) {
     const position = vector3LikeToVector3(props[prop]);
 
     setVectorProp(prop, position, obj);
+    if (callback) callback();
   }
 
   if (!registerWatch) return;
@@ -51,6 +58,7 @@ export const handleVectorProp = (props: { [key: string]: any }, prop: string, ob
         const position = vector3LikeToVector3(props[prop]);
 
         setVectorProp(prop, position, obj);
+        if (callback) callback();
       }
     },
   );

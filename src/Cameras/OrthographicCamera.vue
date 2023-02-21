@@ -94,10 +94,6 @@ watch(canvas!, () => {
   myObserver.observe(canvas!.value);
 });
 
-handleVectorProp(props, "position", three);
-handleVectorProp(props, "up", three);
-handleVectorProp(props, "lookAt", three);
-
 function applyProps() {
   three.name = props.name;
   three.near = props.near;
@@ -107,6 +103,10 @@ function applyProps() {
 }
 
 applyProps();
+
+handleVectorProp(props, "position", three, true, applyProps);
+handleVectorProp(props, "up", three, true, applyProps);
+handleVectorProp(props, "lookAt", three, true, applyProps);
 
 handlePropCallback(props, "name", applyProps);
 handlePropCallback(props, "near", applyProps);
