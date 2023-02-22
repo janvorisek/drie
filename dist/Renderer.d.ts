@@ -35,6 +35,10 @@ export interface Props {
      */
     onBeforeRender?: () => void;
     /**
+     * Callback to fire after each animation frame is rendered.
+     */
+    onAfterRender?: () => void;
+    /**
      * If set, use shadow maps in the scene.
      */
     shadowMapEnabled?: boolean;
@@ -75,6 +79,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: number;
     };
     onBeforeRender: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => void;
+    };
+    onAfterRender: {
         type: FunctionConstructor;
         required: false;
         default: () => void;
@@ -251,12 +260,12 @@ declare const _sfc_main: import("vue").DefineComponent<{
             getBinding: () => XRWebGLBinding;
             getFrame: () => XRFrame;
             getSession: () => XRSession | null;
-            setSession: (value: XRSession) => Promise<void>;
+            setSession: (value: XRSession | null) => Promise<void>;
             getCamera: () => import("three").WebXRArrayCamera;
             updateCamera: (camera: import("three").PerspectiveCamera) => void;
             setAnimationLoop: (callback: XRFrameRequestCallback | null) => void;
             getFoveation: () => number | undefined;
-            setFoveation: (foveation: number) => void;
+            setFoveation: (value: number) => void;
             getPlanes: () => Set<XRPlane>;
             dispose: () => void;
             addEventListener: <T extends string>(type: T, listener: import("three").EventListener<import("three").Event, T, import("three").WebXRManager>) => void;
@@ -380,7 +389,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             };
         } | null;
         attributes: {
-            [name: string]: import("three").BufferAttribute | import("three").InterleavedBufferAttribute;
+            [name: string]: import("three").BufferAttribute | import("three").InterleavedBufferAttribute | import("three").GLBufferAttribute;
         };
         morphAttributes: {
             [name: string]: (import("three").BufferAttribute | import("three").InterleavedBufferAttribute)[];
@@ -712,8 +721,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
         readonly isBufferGeometry: true;
         getIndex: () => import("three").BufferAttribute | null;
         setIndex: (index: number[] | import("three").BufferAttribute | null) => BufferGeometry;
-        setAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {}), attribute: import("three").BufferAttribute | import("three").InterleavedBufferAttribute) => BufferGeometry;
-        getAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {})) => import("three").BufferAttribute | import("three").InterleavedBufferAttribute;
+        setAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {}), attribute: import("three").BufferAttribute | import("three").InterleavedBufferAttribute | import("three").GLBufferAttribute) => BufferGeometry;
+        getAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {})) => import("three").BufferAttribute | import("three").InterleavedBufferAttribute | import("three").GLBufferAttribute;
         deleteAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {})) => BufferGeometry;
         hasAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {})) => boolean;
         addGroup: (start: number, count: number, materialIndex?: number | undefined) => void;
@@ -792,6 +801,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         polygonOffsetUnits: number;
         precision: "highp" | "mediump" | "lowp" | null;
         premultipliedAlpha: boolean;
+        forceSinglePass: boolean;
         dithering: boolean;
         side: import("three").Side;
         shadowSide: import("three").Side | null;
@@ -1833,6 +1843,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;
@@ -1894,6 +1905,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;
@@ -2816,6 +2828,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;
@@ -2877,6 +2890,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;
@@ -3792,6 +3806,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             polygonOffsetUnits: number;
             precision: "highp" | "mediump" | "lowp" | null;
             premultipliedAlpha: boolean;
+            forceSinglePass: boolean;
             dithering: boolean;
             side: import("three").Side;
             shadowSide: import("three").Side | null;
@@ -3853,6 +3868,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             polygonOffsetUnits: number;
             precision: "highp" | "mediump" | "lowp" | null;
             premultipliedAlpha: boolean;
+            forceSinglePass: boolean;
             dithering: boolean;
             side: import("three").Side;
             shadowSide: import("three").Side | null;
@@ -4949,6 +4965,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;
@@ -5010,6 +5027,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;
@@ -5932,6 +5950,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;
@@ -5993,6 +6012,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;
@@ -6908,6 +6928,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             polygonOffsetUnits: number;
             precision: "highp" | "mediump" | "lowp" | null;
             premultipliedAlpha: boolean;
+            forceSinglePass: boolean;
             dithering: boolean;
             side: import("three").Side;
             shadowSide: import("three").Side | null;
@@ -6969,6 +6990,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             polygonOffsetUnits: number;
             precision: "highp" | "mediump" | "lowp" | null;
             premultipliedAlpha: boolean;
+            forceSinglePass: boolean;
             dithering: boolean;
             side: import("three").Side;
             shadowSide: import("three").Side | null;
@@ -7094,6 +7116,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         required: false;
         default: () => void;
     };
+    onAfterRender: {
+        type: FunctionConstructor;
+        required: false;
+        default: () => void;
+    };
     shadowMapEnabled: {
         type: BooleanConstructor;
         required: false;
@@ -7111,6 +7138,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     height: number;
     frameLimit: number;
     onBeforeRender: Function;
+    onAfterRender: Function;
     shadowMapEnabled: boolean;
     width: number;
 }>;

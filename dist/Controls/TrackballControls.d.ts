@@ -1072,6 +1072,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     polygonOffsetUnits: number;
                     precision: "highp" | "mediump" | "lowp" | null;
                     premultipliedAlpha: boolean;
+                    forceSinglePass: boolean;
                     dithering: boolean;
                     side: import("three").Side;
                     shadowSide: import("three").Side | null;
@@ -1133,6 +1134,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     polygonOffsetUnits: number;
                     precision: "highp" | "mediump" | "lowp" | null;
                     premultipliedAlpha: boolean;
+                    forceSinglePass: boolean;
                     dithering: boolean;
                     side: import("three").Side;
                     shadowSide: import("three").Side | null;
@@ -2055,6 +2057,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     polygonOffsetUnits: number;
                     precision: "highp" | "mediump" | "lowp" | null;
                     premultipliedAlpha: boolean;
+                    forceSinglePass: boolean;
                     dithering: boolean;
                     side: import("three").Side;
                     shadowSide: import("three").Side | null;
@@ -2116,6 +2119,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                     polygonOffsetUnits: number;
                     precision: "highp" | "mediump" | "lowp" | null;
                     premultipliedAlpha: boolean;
+                    forceSinglePass: boolean;
                     dithering: boolean;
                     side: import("three").Side;
                     shadowSide: import("three").Side | null;
@@ -3031,6 +3035,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;
@@ -3092,6 +3097,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
                 polygonOffsetUnits: number;
                 precision: "highp" | "mediump" | "lowp" | null;
                 premultipliedAlpha: boolean;
+                forceSinglePass: boolean;
                 dithering: boolean;
                 side: import("three").Side;
                 shadowSide: import("three").Side | null;

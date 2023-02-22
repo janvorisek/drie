@@ -1,5 +1,5 @@
 import { type Vector3Like } from "../types";
-export declare type Mode = "translate" | "rotate" | "scale";
+export type Mode = "translate" | "rotate" | "scale";
 export interface Props {
     /**
      * The current transformation mode.

@@ -99,7 +99,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
             };
         } | null;
         attributes: {
-            [name: string]: import("three").BufferAttribute | import("three").InterleavedBufferAttribute;
+            [name: string]: import("three").BufferAttribute | import("three").InterleavedBufferAttribute | import("three").GLBufferAttribute;
         };
         morphAttributes: {
             [name: string]: (import("three").BufferAttribute | import("three").InterleavedBufferAttribute)[];
@@ -431,8 +431,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
         readonly isBufferGeometry: true;
         getIndex: () => import("three").BufferAttribute | null;
         setIndex: (index: number[] | import("three").BufferAttribute | null) => BufferGeometry;
-        setAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {}), attribute: import("three").BufferAttribute | import("three").InterleavedBufferAttribute) => BufferGeometry;
-        getAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {})) => import("three").BufferAttribute | import("three").InterleavedBufferAttribute;
+        setAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {}), attribute: import("three").BufferAttribute | import("three").InterleavedBufferAttribute | import("three").GLBufferAttribute) => BufferGeometry;
+        getAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {})) => import("three").BufferAttribute | import("three").InterleavedBufferAttribute | import("three").GLBufferAttribute;
         deleteAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {})) => BufferGeometry;
         hasAttribute: (name: import("three").BuiltinShaderAttributeName | (string & {})) => boolean;
         addGroup: (start: number, count: number, materialIndex?: number | undefined) => void;
