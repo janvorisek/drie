@@ -7080,7 +7080,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     fpsInterval: number;
     setCamera: (newCamera?: string) => void;
     applyProps: () => void;
-    animate: () => void;
+    animate: () => number | undefined;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     alpha: {
         type: BooleanConstructor;
