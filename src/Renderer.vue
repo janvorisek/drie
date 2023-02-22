@@ -76,6 +76,11 @@ export interface Props {
   onBeforeRender?: () => void;
 
   /**
+   * Callback to fire after each animation frame is rendered.
+   */
+  onAfterRender?: () => void;
+
+  /**
    * If set, use shadow maps in the scene.
    */
   shadowMapEnabled?: boolean;
@@ -91,6 +96,8 @@ const props = withDefaults(defineProps<Props>(), {
   autoResize: true,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onBeforeRender: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onAfterRender: () => {},
   antialias: false,
   frameLimit: 60,
   alpha: false,
@@ -173,8 +180,6 @@ onUnmounted(() => {
 });
 
 function animate() {
-  requestAnimationFrame(animate);
-
   if (renderer.value === null) return;
 
   const now = Date.now();
@@ -202,6 +207,10 @@ function animate() {
   }
 
   if (activeCamera.value && renderer) for (const scene of scenes) renderer.value.render(scene, activeCamera.value);
+
+  if (props.onAfterRender) props.onAfterRender();
+
+  requestAnimationFrame(animate);
 }
 
 applyProps();
