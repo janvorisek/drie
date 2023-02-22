@@ -180,13 +180,13 @@ onUnmounted(() => {
 });
 
 function animate() {
-  if (renderer.value === null) return;
+  if (renderer.value === null) return requestAnimationFrame(animate);
 
   const now = Date.now();
   const elapsed = now - then;
 
   if (fpsInterval > -1 && elapsed < fpsInterval) {
-    return;
+    return requestAnimationFrame(animate);
   }
 
   then = now - (elapsed % fpsInterval);
