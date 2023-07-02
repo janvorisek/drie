@@ -54,6 +54,11 @@ export default defineConfig( {
     [
       'script',
       // @ts-expect-error
+      { async: true, src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3761845630657739', crossorigin: "anonymous" }
+    ],
+    [
+      'script',
+      // @ts-expect-error
       { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-7ZLF9801NT' }
     ],
     [
