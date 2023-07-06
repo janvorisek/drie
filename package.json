@@ -57,7 +57,7 @@
     "eslint-plugin-vue": "^9.8.0",
     "flexsearch": "^0.7.31",
     "gh-pages": "5.0.0",
-    "happy-dom": "^9.1.9",
+    "happy-dom": "^10.0.3",
     "husky": "^8.0.2",
     "markdown-it": "^13.0.1",
     "move-cli": "^2.0.0",
